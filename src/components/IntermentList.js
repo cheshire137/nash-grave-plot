@@ -38,8 +38,21 @@ const selectMenuFilter = (values, filter, onChange) => {
   );
 };
 
+const accessibleFilterMethod = (filter, row) => {
+  if (filter.value === 'all') {
+    return true;
+  }
+
+  if (filter.value === 'other') {
+    return typeof row[filter.id] === 'string' && row[filter.id] !== 'yes' &&
+      row[filter.id] !== 'no' && row[filter.id].trim().length > 0;
+  }
+
+  return row[filter.id] === filter.value;
+};
+
 const selectMenuFilterMethod = (filter, row) => {
-  if (filter.value === "all") {
+  if (filter.value === 'all') {
     return true;
   }
 
@@ -77,6 +90,10 @@ class IntermentList extends Component {
     }
 
     return value;
+  }
+
+  accessibleFilter = ({ filter, onChange }) => {
+    return selectMenuFilter(['yes', 'no', 'other'], filter, onChange);
   }
 
   graveyardTypeFilter = ({ filter, onChange }) => {
@@ -173,7 +190,9 @@ class IntermentList extends Component {
               },
               {
                 Header: "Accessible",
-                accessor: "accessible"
+                accessor: "accessible",
+                filterMethod: accessibleFilterMethod,
+                Filter: this.accessibleFilter
               },
               {
                 Header: "Restoration",
