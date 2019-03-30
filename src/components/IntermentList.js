@@ -147,91 +147,91 @@ class IntermentList extends Component {
         defaultFilterMethod={this.filterTable}
         columns={[
           {
-            Header: "Person",
+            Header: 'Person',
             columns: [
               {
-                Header: "Name",
-                accessor: "person",
+                Header: 'Name',
+                accessor: 'person',
                 minWidth: 200
               },
               {
-                Header: "Died",
-                accessor: "deathDate",
+                Header: 'Died',
+                accessor: 'deathDate',
                 minWidth: 130,
                 Cell: this.formatDateCell
               },
               {
-                Header: "Info",
-                accessor: "deceasedInfo"
+                Header: 'Info',
+                accessor: 'deceasedInfo'
               }
             ]
           },
           {
-            Header: "Location",
+            Header: 'Location',
             columns: [
               {
-                Header: "Cemetery",
-                accessor: "cemeteryName",
+                Header: 'Cemetery',
+                accessor: 'cemeteryName',
                 minWidth: 200,
                 filterMethod: selectMenuFilterMethod,
                 Filter: this.cemeteryFilter
               },
               {
-                Header: "Address",
-                accessor: "address",
+                Header: 'Address',
+                accessor: 'address',
                 minWidth: 200
               },
               {
-                Header: "Graveyard Type",
-                accessor: "graveyardType",
+                Header: 'Graveyard Type',
+                accessor: 'graveyardType',
                 minWidth: 130,
                 filterMethod: selectMenuFilterMethod,
                 Filter: this.graveyardTypeFilter
               },
               {
-                Header: "Site History",
-                accessor: "siteHistory"
+                Header: 'Site History',
+                accessor: 'siteHistory'
               },
               {
-                Header: "Notes",
-                accessor: "additionalLocationInfo"
+                Header: 'Notes',
+                accessor: 'additionalLocationInfo'
               }
             ]
           },
           {
-            Header: "Marker/Plot",
+            Header: 'Marker/Plot',
             columns: [
               {
-                Header: "Inscription",
-                accessor: "inscription",
+                Header: 'Inscription',
+                accessor: 'inscription',
                 minWidth: 250
               },
               {
-                Header: "Footstone",
-                accessor: "footstone",
+                Header: 'Footstone',
+                accessor: 'footstone',
                 minWidth: 150
               },
               {
-                Header: "Demarcation",
-                accessor: "demarcation"
+                Header: 'Demarcation',
+                accessor: 'demarcation'
               },
               {
-                Header: "Condition",
-                accessor: "condition"
+                Header: 'Condition',
+                accessor: 'condition'
               },
               {
-                Header: "Accessible",
-                accessor: "accessible",
+                Header: 'Accessible',
+                accessor: 'accessible',
                 filterMethod: accessibleFilterMethod,
                 Filter: this.accessibleFilter
               },
               {
-                Header: "Restoration",
-                accessor: "restoration"
+                Header: 'Restoration',
+                accessor: 'restoration'
               },
               {
-                Header: "Photos",
-                accessor: "gravePhotos",
+                Header: 'Photos',
+                accessor: 'gravePhotos',
                 Cell: this.formatGravePhotos,
                 minWidth: 120,
                 filterMethod: photoFilterMethod,
@@ -240,28 +240,43 @@ class IntermentList extends Component {
             ]
           },
           {
-            Header: "Notes",
-            accessor: "notes",
+            Header: 'Notes',
+            accessor: 'notes',
             minWidth: 300
           },
           {
-            Header: "Survey",
+            Header: 'Parcel Numbers',
             columns: [
               {
-                Header: "Original",
-                accessor: "originalSurvey",
+                Header: 'Tract',
+                accessor: 'tractParcelNumber',
+                minWidth: 130
+              },
+              {
+                Header: 'Cemetery',
+                accessor: 'cemeteryParcelNumber',
+                minWidth: 150
+              }
+            ]
+          },
+          {
+            Header: 'Survey',
+            columns: [
+              {
+                Header: 'Original',
+                accessor: 'originalSurvey',
                 minWidth: 130,
                 Cell: this.formatDateCell
               },
               {
-                Header: "Updates",
-                accessor: "surveyUpdates",
+                Header: 'Updates',
+                accessor: 'surveyUpdates',
                 minWidth: 130,
                 Cell: this.formatDateCell
               },
               {
-                Header: "Current",
-                accessor: "currentSurvey",
+                Header: 'Current',
+                accessor: 'currentSurvey',
                 minWidth: 130,
                 Cell: this.formatDateCell
               }
