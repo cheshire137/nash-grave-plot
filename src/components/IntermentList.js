@@ -13,6 +13,14 @@ const getGraveyardTypes = interments => {
   return Object.keys(types).sort();
 };
 
+const graveyardTypeFilterMethod = (filter, row) => {
+  if (filter.value === "all") {
+    return true;
+  }
+
+  return row[filter.id] === filter.value;
+};
+
 class IntermentList extends Component {
   constructor(props) {
     super(props);
@@ -46,9 +54,27 @@ class IntermentList extends Component {
     return value;
   }
 
+  graveyardTypeFilter = ({ filter, onChange }) => {
+    const graveyardTypes = getGraveyardTypes(this.state.interments);
+
+    return (
+      <select
+        onChange={event => onChange(event.target.value)}
+        style={{ width: "100%" }}
+        value={filter ? filter.value : "all"}
+      >
+        <option value="all">All</option>
+        {
+          graveyardTypes.map(type => (
+            <option value={type} key={type}>{type}</option>
+          ))
+        }
+      </select>
+    );
+  }
+
   render() {
     const { interments } = this.state;
-    const graveyardTypes = getGraveyardTypes(interments);
 
     return (
       <ReactTable
@@ -93,29 +119,8 @@ class IntermentList extends Component {
                 Header: "Graveyard Type",
                 accessor: "graveyardType",
                 minWidth: 130,
-                filterMethod: (filter, row) => {
-                  if (filter.value === "all") {
-                    return true;
-                  }
-                  return row[filter.id] === filter.value;
-                },
-                Filter: ({ filter, onChange }) => (
-                  <select
-                    onChange={event => onChange(event.target.value)}
-                    style={{ width: "100%" }}
-                    value={filter ? filter.value : "all"}
-                  >
-                    <option value="all">All</option>
-                    {
-                      graveyardTypes.map(type => (
-                        <option
-                          value={type}
-                          key={type}
-                        >{type}</option>
-                      ))
-                    }
-                  </select>
-                )
+                filterMethod: graveyardTypeFilterMethod,
+                Filter: this.graveyardTypeFilter
               },
               {
                 Header: "Site History",
