@@ -25,11 +25,13 @@ class IntermentList extends Component {
             columns: [
               {
                 Header: "Name",
-                accessor: "person"
+                accessor: "person",
+                minWidth: 200
               },
               {
                 Header: "Died",
-                accessor: "deathDate"
+                accessor: "deathDate",
+                minWidth: 130
               },
               {
                 Header: "Info",
@@ -42,15 +44,18 @@ class IntermentList extends Component {
             columns: [
               {
                 Header: "Cemetery",
-                accessor: "cemeteryName"
+                accessor: "cemeteryName",
+                minWidth: 200
               },
               {
                 Header: "Address",
-                accessor: "address"
+                accessor: "address",
+                minWidth: 200
               },
               {
                 Header: "Graveyard Type",
-                accessor: "graveyardType"
+                accessor: "graveyardType",
+                minWidth: 200
               },
               {
                 Header: "Site History",
@@ -67,11 +72,13 @@ class IntermentList extends Component {
             columns: [
               {
                 Header: "Inscription",
-                accessor: "inscription"
+                accessor: "inscription",
+                minWidth: 250
               },
               {
                 Header: "Footstone",
-                accessor: "footstone"
+                accessor: "footstone",
+                minWidth: 150
               },
               {
                 Header: "Demarcation",
@@ -93,7 +100,8 @@ class IntermentList extends Component {
           },
           {
             Header: "Notes",
-            accessor: "notes"
+            accessor: "notes",
+            minWidth: 300
           },
           {
             Header: "Survey",
@@ -113,6 +121,8 @@ class IntermentList extends Component {
             ]
           }
         ]}
+        defaultPageSize={100}
+        className="-striped -highlight"
       />
     );
   }
