@@ -3,6 +3,16 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Interment from '../models/Interment';
 
+const getGraveyardTypes = interments => {
+  const types = {};
+  for (const interment of interments) {
+    if (typeof interment.graveyardType === 'string' && interment.graveyardType.trim().length > 0) {
+      types[interment.graveyardType.trim()] = true;
+    }
+  }
+  return Object.keys(types).sort();
+};
+
 class IntermentList extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +48,7 @@ class IntermentList extends Component {
 
   render() {
     const { interments } = this.state;
+    const graveyardTypes = getGraveyardTypes(interments);
 
     return (
       <ReactTable
@@ -81,7 +92,30 @@ class IntermentList extends Component {
               {
                 Header: "Graveyard Type",
                 accessor: "graveyardType",
-                minWidth: 130
+                minWidth: 130,
+                filterMethod: (filter, row) => {
+                  if (filter.value === "all") {
+                    return true;
+                  }
+                  return row[filter.id] === filter.value;
+                },
+                Filter: ({ filter, onChange }) => (
+                  <select
+                    onChange={event => onChange(event.target.value)}
+                    style={{ width: "100%" }}
+                    value={filter ? filter.value : "all"}
+                  >
+                    <option value="all">All</option>
+                    {
+                      graveyardTypes.map(type => (
+                        <option
+                          value={type}
+                          key={type}
+                        >{type}</option>
+                      ))
+                    }
+                  </select>
+                )
               },
               {
                 Header: "Site History",
