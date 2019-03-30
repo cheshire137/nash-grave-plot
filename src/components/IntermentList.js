@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Interment from '../models/Interment';
+import PhotoDisplay from './PhotoDisplay';
 
 const getUniqueValues = (interments, field) => {
   const values = {};
@@ -73,6 +74,16 @@ class IntermentList extends Component {
     const haystack = String(row[filter.id]).toLowerCase();
     const needle = filter.value.toLowerCase();
     return haystack.indexOf(needle) > -1;
+  }
+
+  formatGravePhotos = ({ value }) => {
+    return (
+      <div>
+        {value.map(photo => (
+          <PhotoDisplay {...photo} key={photo.text} />
+        ))}
+      </div>
+    )
   }
 
   formatDateCell = ({ value }) => {
@@ -197,6 +208,12 @@ class IntermentList extends Component {
               {
                 Header: "Restoration",
                 accessor: "restoration"
+              },
+              {
+                Header: "Photos",
+                accessor: "gravePhotos",
+                Cell: this.formatGravePhotos,
+                minWidth: 120
               }
             ]
           },

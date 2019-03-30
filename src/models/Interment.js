@@ -1,4 +1,5 @@
 import NashvilleCemeteries from '../nashville-cemeteries.json';
+import Photo from './Photo';
 
 const interments = [];
 
@@ -88,6 +89,17 @@ const parseGraveyardType = graveyardType => {
   return graveyardType;
 }
 
+const extractGravePhotos = props => {
+  const photos = [];
+  for (let i = 1; i <= 3; i++) {
+    if (typeof props[`Grave Photo ${i}`] === 'string' && props[`Grave Photo ${i}`].length > 0) {
+      const photo = new Photo(i, props[`Grave Photo ${i}`]);
+      photos.push(photo);
+    }
+  }
+  return photos;
+};
+
 class Interment {
   static findAll() {
     if (interments.length < 1) {
@@ -126,12 +138,7 @@ class Interment {
     this.footstone = props.Footstone;
     this.deathDate = parseDateString(props['Death Date']);
     this.inscription = props.Inscription;
-    this.gravePhotos = [];
-    for (let i = 1; i <= 3; i++) {
-      if (typeof props[`Grave Photo ${i}`] === 'string' && props[`Grave Photo ${i}`].length > 0) {
-        this.gravePhotos.push(props[`Grave Photo ${i}`]);
-      }
-    }
+    this.gravePhotos = extractGravePhotos(props);
     this.knownBurials = props['Known Burials'];
     this.sitePhotos = [];
     for (let i = 1; i <= 6; i++) {
