@@ -13,3 +13,10 @@ I'm using node 8.11.3 and npm 6.8.0 on macOS.
 yarn install
 yarn start
 ```
+
+To deploy GitHub Pages site, first modify [package.json](./package.json) to
+change the `homepage` field based on your GitHub URL, then:
+
+```bash
+yarn run deploy
+```
