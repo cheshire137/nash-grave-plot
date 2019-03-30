@@ -5,12 +5,10 @@ class AddressDisplay extends Component {
     const { streetAddress, additionalLocationInfo } = this.props;
 
     return (
-      <div>
+      <div class="constrained-text ws-normal">
         {streetAddress}
         {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
-          <div
-            className="ws-normal"
-          >{additionalLocationInfo}</div>
+          <div>{additionalLocationInfo}</div>
         ) : null}
       </div>
     );

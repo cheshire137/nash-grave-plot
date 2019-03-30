@@ -137,6 +137,14 @@ class IntermentList extends Component {
     return value;
   }
 
+  formatLongText = ({ value }) => {
+    return (
+      <div
+        className="ws-normal constrained-text"
+      >{value}</div>
+    );
+  }
+
   accessibleFilter = ({ filter, onChange }) => {
     return selectMenuFilter(['yes', 'no', 'other'], filter, onChange);
   }
@@ -192,7 +200,8 @@ class IntermentList extends Component {
                 accessor: 'cemeteryName',
                 minWidth: 200,
                 filterMethod: selectMenuFilterMethod,
-                Filter: this.cemeteryFilter
+                Filter: this.cemeteryFilter,
+                Cell: this.formatLongText
               },
               {
                 Header: 'Address',
@@ -220,20 +229,24 @@ class IntermentList extends Component {
               {
                 Header: 'Inscription',
                 accessor: 'inscription',
-                minWidth: 250
+                minWidth: 250,
+                Cell: this.formatLongText
               },
               {
                 Header: 'Footstone',
                 accessor: 'footstone',
-                minWidth: 150
+                minWidth: 150,
+                Cell: this.formatLongText
               },
               {
                 Header: 'Demarcation',
-                accessor: 'demarcation'
+                accessor: 'demarcation',
+                minWidth: 140
               },
               {
                 Header: 'Condition',
-                accessor: 'condition'
+                accessor: 'condition',
+                minWidth: 140
               },
               {
                 Header: 'Accessible',
@@ -258,7 +271,8 @@ class IntermentList extends Component {
           {
             Header: 'Notes',
             accessor: 'notes',
-            minWidth: 300
+            minWidth: 300,
+            Cell: this.formatLongText
           },
           {
             Header: 'Parcel Numbers',
