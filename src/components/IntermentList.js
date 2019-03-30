@@ -55,7 +55,7 @@ class IntermentList extends Component {
               {
                 Header: "Graveyard Type",
                 accessor: "graveyardType",
-                minWidth: 200
+                minWidth: 130
               },
               {
                 Header: "Site History",

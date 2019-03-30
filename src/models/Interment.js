@@ -33,6 +33,23 @@ class Interment {
     this.restoration = props.Restoration;
     this.notes = props.Notes;
     this.graveyardType = props['Graveyard Type'];
+    if (this.graveyardType === 'FAMILY GRAVEYARD') {
+      this.graveyardType = 'family';
+    } else if (this.graveyardType === 'METRO PROPERTY') {
+      this.graveyardType = 'metro property';
+    } else if (this.graveyardType === 'STATE PROPERTY') {
+      this.graveyardType = 'state property';
+    } else if (this.graveyardType === 'STATE BUILDING') {
+      this.graveyardType = 'state building';
+    } else if (this.graveyardType === 'MILITARY GRAVEYARD') {
+      this.graveyardType = 'military';
+    } else if (this.graveyardType === 'HOSPITAL GRAVEYARD') {
+      this.graveyardType = 'hospital';
+    } else if (this.graveyardType === 'CHURCH GRAVEYARD') {
+      this.graveyardType = 'church';
+    } else if (this.graveyardType === 'COMMUNITY GRAVEYARD') {
+      this.graveyardType = 'community';
+    }
     this.currentSurvey = props['Current Survey'];
     this.surveyUpdates = props['Survey Update(s)'];
     this.originalSurvey = props['Original Survey'];
