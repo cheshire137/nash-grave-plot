@@ -48,6 +48,34 @@ const parseDateString = str => {
   return str;
 };
 
+const parseGraveyardType = graveyardType => {
+  if (graveyardType === 'FAMILY GRAVEYARD') {
+    return 'family';
+  }
+  if (graveyardType === 'METRO PROPERTY') {
+    return 'metro property';
+  }
+  if (graveyardType === 'STATE PROPERTY') {
+    return 'state property';
+  }
+  if (graveyardType === 'STATE BUILDING') {
+    return 'state building';
+  }
+  if (graveyardType === 'MILITARY GRAVEYARD') {
+    return 'military';
+  }
+  if (graveyardType === 'HOSPITAL GRAVEYARD') {
+    return 'hospital';
+  }
+  if (graveyardType === 'CHURCH GRAVEYARD') {
+    return 'church';
+  }
+  if (graveyardType === 'COMMUNITY GRAVEYARD') {
+    return 'community';
+  }
+  return graveyardType;
+}
+
 class Interment {
   static findAll() {
     if (interments.length < 1) {
@@ -78,24 +106,7 @@ class Interment {
     this.siteHistory = props['Site History'];
     this.restoration = props.Restoration;
     this.notes = props.Notes;
-    this.graveyardType = props['Graveyard Type'];
-    if (this.graveyardType === 'FAMILY GRAVEYARD') {
-      this.graveyardType = 'family';
-    } else if (this.graveyardType === 'METRO PROPERTY') {
-      this.graveyardType = 'metro property';
-    } else if (this.graveyardType === 'STATE PROPERTY') {
-      this.graveyardType = 'state property';
-    } else if (this.graveyardType === 'STATE BUILDING') {
-      this.graveyardType = 'state building';
-    } else if (this.graveyardType === 'MILITARY GRAVEYARD') {
-      this.graveyardType = 'military';
-    } else if (this.graveyardType === 'HOSPITAL GRAVEYARD') {
-      this.graveyardType = 'hospital';
-    } else if (this.graveyardType === 'CHURCH GRAVEYARD') {
-      this.graveyardType = 'church';
-    } else if (this.graveyardType === 'COMMUNITY GRAVEYARD') {
-      this.graveyardType = 'community';
-    }
+    this.graveyardType = parseGraveyardType(props['Graveyard Type']);
     this.currentSurvey = parseDateString(props['Current Survey']);
     this.surveyUpdates = parseDateString(props['Survey Update(s)']);
     this.originalSurvey = parseDateString(props['Original Survey']);
