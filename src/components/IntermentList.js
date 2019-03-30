@@ -3,6 +3,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Interment from '../models/Interment';
 import PhotoDisplay from './PhotoDisplay';
+import AddressDisplay from './AddressDisplay';
 
 const getUniqueValues = (interments, field) => {
   const values = {};
@@ -76,6 +77,25 @@ const selectMenuFilterMethod = (filter, row) => {
   return row[filter.id] === filter.value;
 };
 
+const fuzzyStringMatch = (needle, haystack) => {
+  return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1;
+};
+
+const filterTableFunc = (filter, row) => {
+  const needle = filter.value;
+  const haystack = String(row[filter.id]);
+
+  return fuzzyStringMatch(needle, haystack);
+};
+
+const addressFilterFunc = (filter, row) => {
+  const needle = filter.value;
+  const address = row[filter.id];
+  const haystack = address.toString();
+
+  return fuzzyStringMatch(needle, haystack);
+};
+
 class IntermentList extends Component {
   constructor(props) {
     super(props);
@@ -86,10 +106,8 @@ class IntermentList extends Component {
     this.setState(prevState => ({ interments: Interment.findAll() }));
   }
 
-  filterTable = (filter, row) => {
-    const haystack = String(row[filter.id]).toLowerCase();
-    const needle = filter.value.toLowerCase();
-    return haystack.indexOf(needle) > -1;
+  formatAddress = ({ value }) => {
+    return <AddressDisplay {...value} />
   }
 
   formatGravePhotos = ({ value }) => {
@@ -144,7 +162,7 @@ class IntermentList extends Component {
       <ReactTable
         data={interments}
         filterable
-        defaultFilterMethod={this.filterTable}
+        defaultFilterMethod={filterTableFunc}
         columns={[
           {
             Header: 'Person',
@@ -179,7 +197,9 @@ class IntermentList extends Component {
               {
                 Header: 'Address',
                 accessor: 'address',
-                minWidth: 200
+                minWidth: 200,
+                Cell: this.formatAddress,
+                filterMethod: addressFilterFunc
               },
               {
                 Header: 'Graveyard Type',
@@ -191,10 +211,6 @@ class IntermentList extends Component {
               {
                 Header: 'Site History',
                 accessor: 'siteHistory'
-              },
-              {
-                Header: 'Notes',
-                accessor: 'additionalLocationInfo'
               }
             ]
           },
