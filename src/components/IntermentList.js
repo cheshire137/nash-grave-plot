@@ -3,17 +3,42 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Interment from '../models/Interment';
 
-const getGraveyardTypes = interments => {
-  const types = {};
+const getUniqueValues = (interments, field) => {
+  const values = {};
   for (const interment of interments) {
-    if (typeof interment.graveyardType === 'string' && interment.graveyardType.trim().length > 0) {
-      types[interment.graveyardType.trim()] = true;
+    if (typeof interment[field] === 'string' && interment[field].trim().length > 0) {
+      values[interment[field].trim()] = true;
     }
   }
-  return Object.keys(types).sort();
+  return Object.keys(values).sort();
 };
 
-const graveyardTypeFilterMethod = (filter, row) => {
+const getGraveyardTypes = interments => {
+  return getUniqueValues(interments, 'graveyardType');
+};
+
+const getCemeteries = interments => {
+  return getUniqueValues(interments, 'cemeteryName');
+};
+
+const selectMenuFilter = (values, filter, onChange) => {
+  return (
+    <select
+      onChange={event => onChange(event.target.value)}
+      style={{ width: "100%" }}
+      value={filter ? filter.value : "all"}
+    >
+      <option value="all">All</option>
+      {
+        values.map(value => (
+          <option value={value} key={value}>{value}</option>
+        ))
+      }
+    </select>
+  );
+};
+
+const selectMenuFilterMethod = (filter, row) => {
   if (filter.value === "all") {
     return true;
   }
@@ -56,21 +81,12 @@ class IntermentList extends Component {
 
   graveyardTypeFilter = ({ filter, onChange }) => {
     const graveyardTypes = getGraveyardTypes(this.state.interments);
+    return selectMenuFilter(graveyardTypes, filter, onChange);
+  }
 
-    return (
-      <select
-        onChange={event => onChange(event.target.value)}
-        style={{ width: "100%" }}
-        value={filter ? filter.value : "all"}
-      >
-        <option value="all">All</option>
-        {
-          graveyardTypes.map(type => (
-            <option value={type} key={type}>{type}</option>
-          ))
-        }
-      </select>
-    );
+  cemeteryFilter = ({ filter, onChange }) => {
+    const cemeteries = getCemeteries(this.state.interments);
+    return selectMenuFilter(cemeteries, filter, onChange);
   }
 
   render() {
@@ -108,7 +124,9 @@ class IntermentList extends Component {
               {
                 Header: "Cemetery",
                 accessor: "cemeteryName",
-                minWidth: 200
+                minWidth: 200,
+                filterMethod: selectMenuFilterMethod,
+                Filter: this.cemeteryFilter
               },
               {
                 Header: "Address",
@@ -119,7 +137,7 @@ class IntermentList extends Component {
                 Header: "Graveyard Type",
                 accessor: "graveyardType",
                 minWidth: 130,
-                filterMethod: graveyardTypeFilterMethod,
+                filterMethod: selectMenuFilterMethod,
                 Filter: this.graveyardTypeFilter
               },
               {
