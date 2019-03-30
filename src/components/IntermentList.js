@@ -193,7 +193,9 @@ class IntermentList extends Component {
               },
               {
                 Header: 'Info',
-                accessor: 'deceasedInfo'
+                accessor: 'deceasedInfo',
+                Cell: this.formatLongText,
+                minWidth: 180
               }
             ]
           },
@@ -224,7 +226,9 @@ class IntermentList extends Component {
               },
               {
                 Header: 'Site History',
-                accessor: 'siteHistory'
+                accessor: 'siteHistory',
+                Cell: this.formatLongText,
+                minWidth: 180
               }
             ]
           },
