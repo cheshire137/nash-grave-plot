@@ -173,15 +173,21 @@ class IntermentList extends Component {
             columns: [
               {
                 Header: "Original",
-                accessor: "originalSurvey"
+                accessor: "originalSurvey",
+                minWidth: 130,
+                Cell: this.formatDateCell
               },
               {
                 Header: "Updates",
-                accessor: "surveyUpdates"
+                accessor: "surveyUpdates",
+                minWidth: 130,
+                Cell: this.formatDateCell
               },
               {
                 Header: "Current",
-                accessor: "currentSurvey"
+                accessor: "currentSurvey",
+                minWidth: 130,
+                Cell: this.formatDateCell
               }
             ]
           }

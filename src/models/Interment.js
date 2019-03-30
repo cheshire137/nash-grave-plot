@@ -96,9 +96,9 @@ class Interment {
     } else if (this.graveyardType === 'COMMUNITY GRAVEYARD') {
       this.graveyardType = 'community';
     }
-    this.currentSurvey = props['Current Survey'];
-    this.surveyUpdates = props['Survey Update(s)'];
-    this.originalSurvey = props['Original Survey'];
+    this.currentSurvey = parseDateString(props['Current Survey']);
+    this.surveyUpdates = parseDateString(props['Survey Update(s)']);
+    this.originalSurvey = parseDateString(props['Original Survey']);
     this.deceasedInfo = props['Deceased Info'];
     this.footstone = props.Footstone;
     this.deathDate = parseDateString(props['Death Date']);
