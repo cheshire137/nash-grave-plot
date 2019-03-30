@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/nash-grave-plot/precache-manifest.fb381a3f228908776f01e4fe619abf81.js"
+  "/nash-grave-plot/precache-manifest.ac1cd38ece54a521b69516a138cb1320.js"
 );
 
 workbox.clientsClaim();
