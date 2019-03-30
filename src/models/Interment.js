@@ -2,6 +2,18 @@ import NashvilleCemeteries from '../nashville-cemeteries.json';
 
 const interments = [];
 
+const parseAccessible = accessible => {
+  if (accessible === 'YES' || accessible === 'Y') {
+    return 'yes';
+  }
+
+  if (accessible === 'NO' || accessible === 'N') {
+    return 'no';
+  }
+
+  return accessible;
+};
+
 const parseMonthDayYearString = str => {
   const regex = /^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/;
   const match = str.match(regex);
@@ -127,7 +139,7 @@ class Interment {
         this.sitePhotos.push(props[`Site Photo ${i}`]);
       }
     }
-    this.accessible = props.Accessible;
+    this.accessible = parseAccessible(props.Accessible);
     this.demarcation = props.Demarcation;
     this.condition = props.Condition;
     this.locale = props.Locale;
