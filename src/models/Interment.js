@@ -2,6 +2,52 @@ import NashvilleCemeteries from '../nashville-cemeteries.json';
 
 const interments = [];
 
+const parseMonthDayYearString = str => {
+  const regex = /^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/;
+  const match = str.match(regex);
+
+  if (match) {
+    const month = parseInt(match[1], 10);
+    const day = parseInt(match[2], 10);
+    const year = parseInt(match[3], 10);
+    return new Date(year, month - 1, day);
+  }
+
+  return null;
+}
+
+const parseYearMonthDayString = str => {
+  const regex = /^(\d\d\d\d)-(\d\d?)-(\d\d?)/;
+  const match = str.match(regex);
+
+  if (match) {
+    const year = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10);
+    const day = parseInt(match[3], 10);
+    return new Date(year, month - 1, day);
+  }
+
+  return null;
+};
+
+const parseDateString = str => {
+  if (typeof str !== 'string' || str.trim().length < 1) {
+    return null;
+  }
+
+  let date = parseMonthDayYearString(str.trim());
+  if (date) {
+    return date;
+  }
+
+  date = parseYearMonthDayString(str.trim());
+  if (date) {
+    return date;
+  }
+
+  return str;
+};
+
 class Interment {
   static findAll() {
     if (interments.length < 1) {
@@ -55,7 +101,7 @@ class Interment {
     this.originalSurvey = props['Original Survey'];
     this.deceasedInfo = props['Deceased Info'];
     this.footstone = props.Footstone;
-    this.deathDate = props['Death Date'];
+    this.deathDate = parseDateString(props['Death Date']);
     this.inscription = props.Inscription;
     this.gravePhotos = [];
     for (let i = 1; i <= 3; i++) {

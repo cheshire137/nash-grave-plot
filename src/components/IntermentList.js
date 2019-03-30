@@ -19,6 +19,23 @@ class IntermentList extends Component {
     return haystack.indexOf(needle) > -1;
   }
 
+  formatDateCell = ({ value }) => {
+    if (value instanceof Date) {
+      const year = value.getFullYear();
+      let month = value.getMonth() + 1;
+      if (month < 10) {
+        month = `0${month}`;
+      }
+      let day = value.getDate();
+      if (day < 10) {
+        day = `0${day}`;
+      }
+      return `${year}-${month}-${day}`;
+    }
+
+    return value;
+  }
+
   render() {
     const { interments } = this.state;
 
@@ -39,7 +56,8 @@ class IntermentList extends Component {
               {
                 Header: "Died",
                 accessor: "deathDate",
-                minWidth: 130
+                minWidth: 130,
+                Cell: this.formatDateCell
               },
               {
                 Header: "Info",
