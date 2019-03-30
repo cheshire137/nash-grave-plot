@@ -4,6 +4,7 @@ import 'react-table/react-table.css';
 import Interment from '../models/Interment';
 import PhotoDisplay from './PhotoDisplay';
 import AddressDisplay from './AddressDisplay';
+import InscriptionDisplay from './InscriptionDisplay';
 
 const getUniqueValues = (interments, field) => {
   const values = {};
@@ -108,6 +109,10 @@ class IntermentList extends Component {
 
   formatAddress = ({ value }) => {
     return <AddressDisplay {...value} />
+  }
+
+  formatInscription = ({ value }) => {
+    return <InscriptionDisplay {...value} />
   }
 
   formatGravePhotos = ({ value }) => {
@@ -229,8 +234,8 @@ class IntermentList extends Component {
               {
                 Header: 'Inscription',
                 accessor: 'inscription',
-                minWidth: 250,
-                Cell: this.formatLongText
+                minWidth: 200,
+                Cell: this.formatInscription
               },
               {
                 Header: 'Footstone',

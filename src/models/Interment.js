@@ -1,6 +1,7 @@
 import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Photo from './Photo';
 import Address from './Address';
+import Inscription from './Inscription';
 
 const interments = [];
 
@@ -129,7 +130,7 @@ class Interment {
     this.deceasedInfo = props['Deceased Info'];
     this.footstone = props.Footstone;
     this.deathDate = parseDateString(props['Death Date']);
-    this.inscription = props.Inscription;
+    this.inscription = new Inscription(props.Inscription);
     this.gravePhotos = extractGravePhotos(props);
     this.knownBurials = props['Known Burials'];
     this.sitePhotos = [];
