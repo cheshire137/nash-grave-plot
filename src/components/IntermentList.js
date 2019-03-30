@@ -52,6 +52,22 @@ const accessibleFilterMethod = (filter, row) => {
   return row[filter.id] === filter.value;
 };
 
+const photoFilterMethod = (filter, row) => {
+  if (filter.value === 'all') {
+    return true;
+  }
+
+  if (filter.value === 'has photo') {
+    return row[filter.id].length > 0;
+  }
+
+  if (filter.value === 'does not have photo') {
+    return row[filter.id].length < 1;
+  }
+
+  return row[filter.id] === filter.value;
+};
+
 const selectMenuFilterMethod = (filter, row) => {
   if (filter.value === 'all') {
     return true;
@@ -105,6 +121,10 @@ class IntermentList extends Component {
 
   accessibleFilter = ({ filter, onChange }) => {
     return selectMenuFilter(['yes', 'no', 'other'], filter, onChange);
+  }
+
+  gravePhotoFilter = ({ filter, onChange }) => {
+    return selectMenuFilter(['has photo', 'does not have photo'], filter, onChange);
   }
 
   graveyardTypeFilter = ({ filter, onChange }) => {
@@ -213,7 +233,9 @@ class IntermentList extends Component {
                 Header: "Photos",
                 accessor: "gravePhotos",
                 Cell: this.formatGravePhotos,
-                minWidth: 120
+                minWidth: 120,
+                filterMethod: photoFilterMethod,
+                Filter: this.gravePhotoFilter
               }
             ]
           },
