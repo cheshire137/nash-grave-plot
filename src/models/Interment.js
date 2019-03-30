@@ -19,9 +19,13 @@ class Interment {
     this.archaeologicalInfo = props['Archaeological Information'];
     this.latitude = props.Latitude;
     this.longitude = props.Longitude;
+    if (this.latitude && this.longitude) {
+      this.geocode = `${this.latitude}, ${this.longitude}`;
+    }
     this.additionalLocationInfo = props['Additional Location Information'];
     this.street = props.Street;
     this.number = props.Number;
+    this.address = [this.number, this.street].filter(info => typeof info === 'string' && info.trim().length > 0).map(info => info.trim()).join(' ');
     this.cemeteryParcelNumber = props['Cemetery Parcel Number'];
     this.tractParcelNumber = props['Tract Parcel Number'];
     this.siteContactInfo = props['Site Contact Info'];
@@ -56,6 +60,18 @@ class Interment {
     this.mapID = props['Map ID'];
     this.alternateCemeteryName = props['Alternate Cemetery Name'];
     this.cemeteryName = props['Cemetery Name'];
+    if (!this.cemeteryName || typeof this.cemeteryName === 'string' && this.cemeteryName.length < 0) {
+      if (typeof this.alternateCemeteryName === 'string' && this.alternateCemeteryName.length > 0) {
+        this.cemeteryName = this.alternateCemeteryName;
+      }
+    }
+    if (!this.address || typeof this.address === 'string' && this.address.length < 1) {
+      if (typeof this.locale === 'string' && this.locale.length > 0) {
+        this.address = this.locale;
+      } else if (typeof this.mappedLocation === 'string' && this.mappedLocation.length > 0) {
+        this.address = this.mappedLocation;
+      }
+    }
   }
 }
 
