@@ -13,12 +13,20 @@ class IntermentList extends Component {
     this.setState(prevState => ({ interments: Interment.findAll() }));
   }
 
+  filterTable = (filter, row) => {
+    const haystack = String(row[filter.id]).toLowerCase();
+    const needle = filter.value.toLowerCase();
+    return haystack.indexOf(needle) > -1;
+  }
+
   render() {
     const { interments } = this.state;
 
     return (
       <ReactTable
         data={interments}
+        filterable
+        defaultFilterMethod={this.filterTable}
         columns={[
           {
             Header: "Person",
