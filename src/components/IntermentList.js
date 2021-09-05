@@ -309,19 +309,13 @@ const IntermentList = () => {
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
           &lt; Previous
         </button>
-        <div>
-          Page{' '}
-          <em>{pageIndex + 1} of {pageOptions.length}</em>
-        </div>
+        <span>Page{' '}<em>{pageIndex + 1} of {pageOptions.length}</em></span>
         <label htmlFor="goToPage">Go to page:</label>
         <input
           id="goToPage"
           type="number"
           defaultValue={pageIndex + 1 || 1}
-          onChange={e => {
-            const page = e.target.value ? Number(e.target.value) - 1 : 0;
-            gotoPage(page);
-          }}
+          onChange={e => gotoPage(e.target.value ? Number(e.target.value) - 1 : 0)}
         />
         <button onClick={() => nextPage()} disabled={!canNextPage}>
           Next &gt;
