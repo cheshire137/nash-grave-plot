@@ -5,9 +5,12 @@ const InscriptionDisplay = ({ text, lines }) => {
     <div class="constrained-text text-center ws-normal">
       {lines.length > 0 ? (
         <div>
-          {lines.map(line => (
-            <div key={line}>{line}</div>
-          ))}
+          {lines.map(line => {
+            const key = '_' + Math.random().toString(36).substr(2, 9);
+            return (
+              <div key={key}>{line}</div>
+            );
+          })}
         </div>
       ) : text}
     </div>
