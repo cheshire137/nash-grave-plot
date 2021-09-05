@@ -1,9 +1,6 @@
-import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Photo from './Photo';
 import Address from './Address';
 import Inscription from './Inscription';
-
-const interments = [];
 
 const parseAccessible = accessible => {
   if (accessible === 'YES' || accessible === 'Y') {
@@ -103,15 +100,6 @@ const extractGravePhotos = props => {
 };
 
 class Interment {
-  static findAll() {
-    if (interments.length < 1) {
-      for (const data of NashvilleCemeteries) {
-        interments.push(new Interment(data))
-      }
-    }
-    return interments;
-  }
-
   constructor(props) {
     this.key = '_' + Math.random().toString(36).substr(2, 9);
     this.person = props.Interment;
