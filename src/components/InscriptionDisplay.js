@@ -2,7 +2,7 @@ import React from 'react';
 
 const InscriptionDisplay = ({ text, lines }) => {
   return (
-    <div class="constrained-text text-center ws-normal">
+    <div className="constrained-text text-center ws-normal">
       {lines.length > 0 ? (
         <>
           {lines.map(line => {
