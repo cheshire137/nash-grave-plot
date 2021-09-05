@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AddressDisplay extends Component {
-  render() {
-    const { streetAddress, additionalLocationInfo } = this.props;
-
-    return (
-      <div class="constrained-text ws-normal">
-        {streetAddress}
-        {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
-          <div>{additionalLocationInfo}</div>
-        ) : null}
-      </div>
-    );
-  }
-}
+const AddressDisplay = ({ streetAddress, additionalLocationInfo }) => {
+  return (
+    <div class="constrained-text ws-normal">
+      {streetAddress}
+      {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
+        <div>{additionalLocationInfo}</div>
+      ) : null}
+    </div>
+  );
+};
 
 export default AddressDisplay;
