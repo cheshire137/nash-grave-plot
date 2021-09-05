@@ -108,152 +108,155 @@ const IntermentList = () => {
     return { fuzzyText: fuzzyTextFilterFn };
   }, []);
 
-  const columns = [
-    {
-      Header: 'Person',
-      columns: [
-        {
-          Header: 'Name',
-          accessor: 'person',
-          minWidth: 200,
-          filter: 'fuzzyText'
-        },
-        {
-          Header: 'Died',
-          accessor: 'deathDate',
-          minWidth: 130,
-          Cell: formatDateCell
-        },
-        {
-          Header: 'Info',
-          accessor: 'deceasedInfo',
-          Cell: formatLongText,
-          minWidth: 180,
-          filter: 'fuzzyText'
-        }
-      ]
-    },
-    {
-      Header: 'Location',
-      columns: [
-        {
-          Header: 'Cemetery',
-          accessor: 'cemeteryName',
-          minWidth: 200,
-          filter: 'includes',
-          Filter: SelectColumnFilter,
-          Cell: formatLongText
-        },
-        {
-          Header: 'Address',
-          accessor: 'address',
-          minWidth: 200,
-          Cell: formatAddress,
-          filter: 'fuzzyText'
-        },
-        {
-          Header: 'Graveyard Type',
-          accessor: 'graveyardType',
-          minWidth: 130,
-          filter: 'includes',
-          Filter: SelectColumnFilter
-        },
-        {
-          Header: 'Site History',
-          accessor: 'siteHistory',
-          Cell: formatLongText,
-          minWidth: 180
-        }
-      ]
-    },
-    {
-      Header: 'Marker/Plot',
-      columns: [
-        {
-          Header: 'Inscription',
-          accessor: 'inscription',
-          minWidth: 200,
-          Cell: formatInscription
-        },
-        {
-          Header: 'Footstone',
-          accessor: 'footstone',
-          minWidth: 150,
-          Cell: formatLongText
-        },
-        {
-          Header: 'Demarcation',
-          accessor: 'demarcation',
-          minWidth: 140
-        },
-        {
-          Header: 'Condition',
-          accessor: 'condition',
-          minWidth: 140
-        },
-        {
-          Header: 'Accessible',
-          accessor: 'accessible',
-          filter: 'includes',
-          Filter: SelectColumnFilter
-        },
-        {
-          Header: 'Restoration',
-          accessor: 'restoration'
-        },
-        {
-          Header: 'Photos',
-          accessor: 'gravePhotos',
-          Cell: formatGravePhotos,
-          minWidth: 120
-        }
-      ]
-    },
-    {
-      Header: 'Notes',
-      accessor: 'notes',
-      minWidth: 300,
-      Cell: formatLongText
-    },
-    {
-      Header: 'Parcel Numbers',
-      columns: [
-        {
-          Header: 'Tract',
-          accessor: 'tractParcelNumber',
-          minWidth: 130
-        },
-        {
-          Header: 'Cemetery',
-          accessor: 'cemeteryParcelNumber',
-          minWidth: 150
-        }
-      ]
-    },
-    {
-      Header: 'Survey',
-      columns: [
-        {
-          Header: 'Original',
-          accessor: 'originalSurvey',
-          minWidth: 130,
-          Cell: formatDateCell
-        },
-        {
-          Header: 'Updates',
-          accessor: 'surveyUpdates',
-          minWidth: 130,
-          Cell: formatDateCell
-        },
-        {
-          Header: 'Current',
-          accessor: 'currentSurvey',
-          minWidth: 130,
-          Cell: formatDateCell
-        }
-      ]
-    }
-  ];
+  const columns = useMemo(() => {
+    return [
+      {
+        Header: 'Person',
+        columns: [
+          {
+            Header: 'Name',
+            accessor: 'person',
+            minWidth: 200,
+            filter: 'fuzzyText'
+          },
+          {
+            Header: 'Died',
+            accessor: 'deathDate',
+            minWidth: 130,
+            Cell: formatDateCell
+          },
+          {
+            Header: 'Info',
+            accessor: 'deceasedInfo',
+            Cell: formatLongText,
+            minWidth: 180,
+            filter: 'fuzzyText'
+          }
+        ]
+      },
+      {
+        Header: 'Location',
+        columns: [
+          {
+            Header: 'Cemetery',
+            accessor: 'cemeteryName',
+            minWidth: 200,
+            filter: 'includes',
+            Filter: SelectColumnFilter,
+            Cell: formatLongText
+          },
+          {
+            Header: 'Address',
+            accessor: 'address',
+            minWidth: 200,
+            Cell: formatAddress,
+            filter: 'fuzzyText'
+          },
+          {
+            Header: 'Graveyard Type',
+            accessor: 'graveyardType',
+            minWidth: 130,
+            filter: 'includes',
+            Filter: SelectColumnFilter
+          },
+          {
+            Header: 'Site History',
+            accessor: 'siteHistory',
+            Cell: formatLongText,
+            minWidth: 180
+          }
+        ]
+      },
+      {
+        Header: 'Marker/Plot',
+        columns: [
+          {
+            Header: 'Inscription',
+            accessor: 'inscription',
+            minWidth: 200,
+            Cell: formatInscription
+          },
+          {
+            Header: 'Footstone',
+            accessor: 'footstone',
+            minWidth: 150,
+            Cell: formatLongText
+          },
+          {
+            Header: 'Demarcation',
+            accessor: 'demarcation',
+            minWidth: 140
+          },
+          {
+            Header: 'Condition',
+            accessor: 'condition',
+            minWidth: 140
+          },
+          {
+            Header: 'Accessible',
+            accessor: 'accessible',
+            filter: 'includes',
+            Filter: SelectColumnFilter
+          },
+          {
+            Header: 'Restoration',
+            accessor: 'restoration'
+          },
+          {
+            Header: 'Photos',
+            accessor: 'gravePhotos',
+            Cell: formatGravePhotos,
+            minWidth: 120
+          }
+        ]
+      },
+      {
+        Header: 'Notes',
+        accessor: 'notes',
+        minWidth: 300,
+        Cell: formatLongText
+      },
+      {
+        Header: 'Parcel Numbers',
+        columns: [
+          {
+            Header: 'Tract',
+            accessor: 'tractParcelNumber',
+            minWidth: 130
+          },
+          {
+            Header: 'Cemetery',
+            accessor: 'cemeteryParcelNumber',
+            minWidth: 150
+          }
+        ]
+      },
+      {
+        Header: 'Survey',
+        columns: [
+          {
+            Header: 'Original',
+            accessor: 'originalSurvey',
+            minWidth: 130,
+            Cell: formatDateCell
+          },
+          {
+            Header: 'Updates',
+            accessor: 'surveyUpdates',
+            minWidth: 130,
+            Cell: formatDateCell
+          },
+          {
+            Header: 'Current',
+            accessor: 'currentSurvey',
+            minWidth: 130,
+            Cell: formatDateCell
+          }
+        ]
+      }
+    ];
+  }, []);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -306,9 +309,9 @@ const IntermentList = () => {
         </tbody>
       </table>
       <div>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          &lt; Previous
-        </button>
+        <button
+          onClick={() => previousPage()} disabled={!canPreviousPage}
+        >&lt; Previous</button>
         <span>Page{' '}<em>{pageIndex + 1} of {pageOptions.length}</em></span>
         <label htmlFor="goToPage">Go to page:</label>
         <input
@@ -317,9 +320,9 @@ const IntermentList = () => {
           defaultValue={pageIndex + 1 || 1}
           onChange={e => gotoPage(e.target.value ? Number(e.target.value) - 1 : 0)}
         />
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next &gt;
-        </button>
+        <button
+          onClick={() => nextPage()} disabled={!canNextPage}
+        >Next &gt;</button>
       </div>
     </>
   );
