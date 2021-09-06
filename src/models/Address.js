@@ -1,19 +1,17 @@
 class Address {
   constructor(props) {
-    this.locale = props.Locale;
-    this.mappedLocation = props['Mapped Location'];
-    this.latitude = props.Latitude;
-    this.longitude = props.Longitude;
+    this.locale = props.locale;
+    this.mappedLocation = props.mapped_location;
+    this.latitude = props.latitude;
+    this.longitude = props.longitude;
     if (this.latitude && this.longitude) {
       this.geocode = `${this.latitude}, ${this.longitude}`;
     }
-    this.additionalLocationInfo = props['Additional Location Information'];
-    this.street = String(props.Street);
-    this.number = String(props.Number);
-    this.streetAddress = [this.number, this.street].
-      filter(info => info.trim().length > 0).
-      map(info => info.trim()).
-      join(' ');
+    this.additionalLocationInfo = props.additional_location_information;
+    this.street = String(props.street);
+    this.number = String(props.number);
+    this.streetAddress = [this.number, this.street].filter(info => info.trim().length > 0)
+      .map(info => info.trim()).join(' ');
   }
 
   toString() {
@@ -26,9 +24,7 @@ class Address {
       String(this.street),
       String(this.number)
     ];
-    return parts.
-      filter(part => part.trim().length > 0).
-      join(' ');
+    return parts.filter(part => part.trim().length > 0).join(' ');
   }
 }
 

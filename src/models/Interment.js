@@ -85,15 +85,17 @@ const parseGraveyardType = graveyardType => {
   if (graveyardType === 'COMMUNITY GRAVEYARD') {
     return 'community';
   }
-  return graveyardType;
+  return graveyardType || '';
 }
 
-const extractGravePhotos = props => {
+const extractPhotos = (props, photoAttrs) => {
   const photos = [];
-  for (let i = 1; i <= 3; i++) {
-    if (typeof props[`Grave Photo ${i}`] === 'string' && props[`Grave Photo ${i}`].length > 0) {
-      const photo = new Photo(i, props[`Grave Photo ${i}`]);
+  let i = 0;
+  for (const attr of photoAttrs) {
+    if (typeof props[attr] === 'string' && props[attr].length > 0) {
+      const photo = new Photo(i, props[attr]);
       photos.push(photo);
+      i++;
     }
   }
   return photos;
@@ -102,37 +104,33 @@ const extractGravePhotos = props => {
 class Interment {
   constructor(props) {
     this.key = '_' + Math.random().toString(36).substr(2, 9);
-    this.person = props.Interment;
-    this.archaeologicalInfo = props['Archaeological Information'];
+    this.person = props.interment;
+    this.archaeologicalInfo = props.archaeological_information;
     this.address = new Address(props);
-    this.cemeteryParcelNumber = props['Cemetery Parcel Number'];
-    this.tractParcelNumber = props['Tract Parcel Number'];
-    this.siteContactInfo = props['Site Contact Info'];
-    this.siteHistory = props['Site History'];
-    this.restoration = props.Restoration;
-    this.notes = props.Notes;
-    this.graveyardType = parseGraveyardType(props['Graveyard Type']);
-    this.currentSurvey = parseDateString(props['Current Survey']);
-    this.surveyUpdates = parseDateString(props['Survey Update(s)']);
-    this.originalSurvey = parseDateString(props['Original Survey']);
-    this.deceasedInfo = props['Deceased Info'];
-    this.footstone = props.Footstone;
-    this.deathDate = parseDateString(props['Death Date']);
-    this.inscription = new Inscription(props.Inscription);
-    this.gravePhotos = extractGravePhotos(props);
-    this.knownBurials = props['Known Burials'];
-    this.sitePhotos = [];
-    for (let i = 1; i <= 6; i++) {
-      if (typeof props[`Site Photo ${i}`] === 'string' && props[`Site Photo ${i}`].length > 0) {
-        this.sitePhotos.push(props[`Site Photo ${i}`]);
-      }
-    }
-    this.accessible = parseAccessible(props.Accessible);
-    this.demarcation = props.Demarcation;
-    this.condition = props.Condition;
-    this.mapID = props['Map ID'];
-    this.alternateCemeteryName = props['Alternate Cemetery Name'];
-    this.cemeteryName = props['Cemetery Name'];
+    this.cemeteryParcelNumber = props.cemetery_parcel_number;
+    this.tractParcelNumber = props.tract_parcel_number;
+    this.siteContactInfo = props.site_contact_info;
+    this.siteHistory = props.site_history;
+    this.restoration = props.restoration;
+    this.notes = props.notes;
+    this.graveyardType = parseGraveyardType(props.graveyard_type);
+    this.currentSurvey = parseDateString(props.current_survey);
+    this.surveyUpdates = parseDateString(props.survey_update_s);
+    this.originalSurvey = parseDateString(props.original_survey);
+    this.deceasedInfo = props.deceased_info;
+    this.footstone = props.footstone;
+    this.deathDate = parseDateString(props.death_date);
+    this.inscription = new Inscription(props.inscription);
+    this.gravePhotos = extractPhotos(props, ['grave_photo_link', 'grave_photo_2', 'grave_photo_3']);
+    this.knownBurials = props.known_burials;
+    this.sitePhotos = extractPhotos(props, ['site_photo_link', 'site_photo_2', 'site_photo_3', 'site_photo_4',
+      'site_photo_5', 'site_photo_6']);
+    this.accessible = parseAccessible(props.accessible);
+    this.demarcation = props.demarcation;
+    this.condition = props.condition;
+    this.mapID = props.map_id;
+    this.alternateCemeteryName = props.alternate_cemetery_name;
+    this.cemeteryName = props.cemetery_name;
     if (!this.cemeteryName || typeof this.cemeteryName === 'string' && this.cemeteryName.length < 0) {
       if (typeof this.alternateCemeteryName === 'string' && this.alternateCemeteryName.length > 0) {
         this.cemeteryName = this.alternateCemeteryName;
