@@ -13,7 +13,8 @@ function SelectColumnFilter({
   const options = React.useMemo(() => {
     const options = new Set()
     preFilteredRows.forEach(row => {
-      const option = row.values[id].replaceAll(/\s+/g, '');
+      const value = row.values[id] || '';
+      const option = value.replaceAll(/\s+/g, '');
       if (option.length > 0) {
         options.add(option);
       }
