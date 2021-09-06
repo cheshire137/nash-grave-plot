@@ -39,7 +39,7 @@ function SelectColumnFilter({
 }
 
 function DefaultColumnFilter({
-  column: { filterValue, setFilter }
+  column: {filterValue, setFilter }
 }) {
   return (
     <input
@@ -51,9 +51,9 @@ function DefaultColumnFilter({
 }
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
-  return matchSorter(rows, filterValue, {keys: [row => row.values[id]]})
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
 }
-fuzzyTextFilterFn.autoRemove = val => !val
+fuzzyTextFilterFn.autoRemove = val => !val;
 
 const IntermentList = () => {
   const data = useMemo(() => NashvilleCemeteries.map(interment => new Interment(interment)), []);
@@ -262,6 +262,7 @@ const IntermentList = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     page,
     prepareRow,
     pageOptions,
@@ -313,7 +314,7 @@ const IntermentList = () => {
         <button
           onClick={() => previousPage()} disabled={!canPreviousPage}
         >&lt; Previous</button>
-        <span>Page{' '}<em>{pageIndex + 1} of {pageOptions.length}</em></span>
+        <span>Page{' '}<em>{pageIndex + 1} of {pageOptions.length}</em>, {rows.length} graves</span>
         <label htmlFor="goToPage">Go to page:</label>
         <input
           id="goToPage"
