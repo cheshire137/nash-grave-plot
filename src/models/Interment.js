@@ -11,7 +11,7 @@ const parseAccessible = accessible => {
     return 'no';
   }
 
-  return accessible;
+  return accessible || '';
 };
 
 const parseMonthDayYearString = str => {
