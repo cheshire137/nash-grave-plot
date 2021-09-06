@@ -1,8 +1,9 @@
 import React from 'react';
+import { Text } from '@primer/components';
 
 const InscriptionDisplay = ({ text, lines }) => {
   return (
-    <div className="constrained-text text-center ws-normal">
+    <Text as="div" whiteSpace="normal" textAlign="center">
       {lines.length > 0 ? (
         <>
           {lines.map(line => {
@@ -13,7 +14,7 @@ const InscriptionDisplay = ({ text, lines }) => {
           })}
         </>
       ) : text}
-    </div>
+    </Text>
   );
 };
 

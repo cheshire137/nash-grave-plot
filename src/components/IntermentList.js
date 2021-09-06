@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useFilters, useTable, usePagination } from 'react-table';
+import { TextInput } from '@primer/components';
 import { matchSorter } from 'match-sorter';
 import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
@@ -42,7 +43,7 @@ function DefaultColumnFilter({
   column: {filterValue, setFilter }
 }) {
   return (
-    <input
+    <TextInput
       value={filterValue || ''}
       onChange={e => setFilter(e.target.value || undefined)}
       placeholder="Filter"

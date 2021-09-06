@@ -1,24 +1,27 @@
 import React from 'react';
+import { BaseStyles, Box, Heading, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
 import './App.css';
 
 const App = () => {
   return (
-    <>
-      <header>
-        <div className="container d-flex flex-items-center flex-justify-between">
-          <h1>NashGravePlot</h1>
-          <h2 className="f6 text-normal">
-            Data from <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
-            >Davidson County Cemetery Survey</a>
-          </h2>
-        </div>
-      </header>
-      <IntermentList />
-    </>
+    <ThemeProvider>
+      <BaseStyles>
+        <header>
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Heading as="h1">NashGravePlot</Heading>
+            <Heading as="h2" fontSize="1" fontWeight="normal">
+              Data from <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
+              >Davidson County Cemetery Survey</a>
+            </Heading>
+          </Box>
+        </header>
+        <IntermentList />
+      </BaseStyles>
+    </ThemeProvider>
   );
 };
 

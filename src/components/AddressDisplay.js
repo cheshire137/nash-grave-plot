@@ -1,13 +1,14 @@
 import React from 'react';
+import { Text } from '@primer/components';
 
 const AddressDisplay = ({ streetAddress, additionalLocationInfo }) => {
   return (
-    <div className="constrained-text ws-normal">
+    <Text as="div" whiteSpace="normal">
       {streetAddress}
       {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
         <div>{additionalLocationInfo}</div>
       ) : null}
-    </div>
+    </Text>
   );
 };
 
