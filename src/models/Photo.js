@@ -19,9 +19,7 @@ const extractUrl = text => {
 
 
 const extractTitle = (number, text, url) => {
-  const cleanedText = text.replace(url, '').
-    replace(/^\s*view\s+/i, '').
-    replace(/\s*\(\s*\)\s*$/, '');
+  const cleanedText = text.replace(url, '').replace(/^\s*view\s+/i, '').replace(/\s*\(\s*\)\s*$/, '');
   return `${cleanedText} ${number}`;
 };
 

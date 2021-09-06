@@ -15,7 +15,7 @@ function SelectColumnFilter({
     preFilteredRows.forEach(row => {
       const value = row.values[id] || '';
       const option = value.replaceAll(/\s+/g, ' ');
-      if (option.length > 0 && option != ' ') {
+      if (option.length > 0 && option !== ' ') {
         options.add(option);
       }
     })

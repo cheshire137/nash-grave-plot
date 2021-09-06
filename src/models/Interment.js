@@ -111,7 +111,7 @@ class Interment {
     this.mapID = props.map_id;
     this.alternateCemeteryName = props.alternate_cemetery_name;
     this.cemeteryName = props.cemetery_name;
-    if (!this.cemeteryName || typeof this.cemeteryName === 'string' && this.cemeteryName.length < 0) {
+    if (!this.cemeteryName || (typeof this.cemeteryName === 'string' && this.cemeteryName.length < 0)) {
       if (typeof this.alternateCemeteryName === 'string' && this.alternateCemeteryName.length > 0) {
         this.cemeteryName = this.alternateCemeteryName;
       }
