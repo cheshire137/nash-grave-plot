@@ -61,31 +61,11 @@ const parseDateString = str => {
 };
 
 const parseGraveyardType = graveyardType => {
-  if (graveyardType === 'FAMILY GRAVEYARD') {
-    return 'family';
+  const lowercase = (graveyardType || '').toLowerCase();
+  if (lowercase.match(/\s+graveyard$/)) {
+    return lowercase.split(/\s+/)[0];
   }
-  if (graveyardType === 'METRO PROPERTY') {
-    return 'metro property';
-  }
-  if (graveyardType === 'STATE PROPERTY') {
-    return 'state property';
-  }
-  if (graveyardType === 'STATE BUILDING') {
-    return 'state building';
-  }
-  if (graveyardType === 'MILITARY GRAVEYARD') {
-    return 'military';
-  }
-  if (graveyardType === 'HOSPITAL GRAVEYARD') {
-    return 'hospital';
-  }
-  if (graveyardType === 'CHURCH GRAVEYARD') {
-    return 'church';
-  }
-  if (graveyardType === 'COMMUNITY GRAVEYARD') {
-    return 'community';
-  }
-  return graveyardType || '';
+  return lowercase;
 }
 
 const extractPhotos = (props, photoAttrs) => {
