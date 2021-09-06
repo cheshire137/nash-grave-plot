@@ -3,15 +3,14 @@ import Address from './Address';
 import Inscription from './Inscription';
 
 const parseAccessible = accessible => {
-  if (accessible === 'YES' || accessible === 'Y') {
+  const lowercase = (accessible || '').toLowerCase();
+  if (lowercase === 'yes' || lowercase === 'y') {
     return 'yes';
   }
-
-  if (accessible === 'NO' || accessible === 'N') {
+  if (lowercase === 'no' || lowercase === 'n') {
     return 'no';
   }
-
-  return accessible || '';
+  return lowercase;
 };
 
 const parseMonthDayYearString = str => {
