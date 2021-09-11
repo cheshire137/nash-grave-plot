@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useFilters, useTable, usePagination } from 'react-table';
-import { TextInput } from '@primer/components';
+import { Dropdown, TextInput } from '@primer/components';
 import { matchSorter } from 'match-sorter';
 import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
@@ -26,16 +26,15 @@ function SelectColumnFilter({
   }, [id, preFilteredRows]);
 
   return (
-    <select
-      value={filterValue}
-      style={{ width: "100%" }}
-      onChange={e => setFilter(e.target.value || undefined)}
-    >
-      <option value="">All</option>
-      {options.map((option, i) => (
-        <option key={i} value={option}>{option}</option>
-      ))}
-    </select>
+    <Dropdown>
+      <Dropdown.Button>{filterValue || "All"}</Dropdown.Button>
+      <Dropdown.Menu direction="se">
+        <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
+        {options.map((option, i) => (
+          <Dropdown.Item key={i} onClick={() => setFilter(option)}>{option}</Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
   )
 }
 
