@@ -1,12 +1,25 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import { Box } from '@primer/components';
 import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 
+const TableHeaderCell = styled(Box).attrs({
+  as: 'th',
+  p: 2
+})`
+  background-color: #f5f5f5;
+`;
+
+const TableCell = styled(Box).attrs({
+  as: 'td',
+  p: 2,
+  verticalAlign: 'top',
+  textAlign: 'center'
+})`
+`;
+
 const TableStyles = styled.div`
-  table thead th {
-    background-color: #f5f5f5;
-  }
 `;
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
@@ -46,10 +59,10 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>
+                <TableHeaderCell {...column.getHeaderProps()}>
                   {column.render('Header')}
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </th>
+                  <Box mt="1">{column.canFilter ? column.render('Filter') : null}</Box>
+                </TableHeaderCell>
               ))}
             </tr>
           ))}
@@ -59,11 +72,7 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
+                {row.cells.map(cell => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
               </tr>
             );
           })}
