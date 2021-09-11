@@ -86,7 +86,6 @@ const IntermentList = () => {
           {
             Header: 'Inscription',
             accessor: 'inscription',
-            minWidth: 200,
             Cell: InscriptionDisplay
           },
           {

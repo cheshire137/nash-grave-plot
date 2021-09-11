@@ -1,24 +1,21 @@
 import React from 'react';
-import LongTextBlock from './LongTextBlock';
+import { Box } from '@primer/components';
+import { ConstrainedTextBlock } from './LongTextBlock';
 import { titleCase } from './TitleCase';
 
-const InscriptionLines = ({ text, lines }) => {
-  return (
-    <LongTextBlock textAlign="center">
-      {lines.length > 0 ? (
-        <>
-          {lines.map(line => {
-            const key = '_' + Math.random().toString(36).substr(2, 9);
-            return (
-              <div key={key}>{titleCase(line)}</div>
-            );
-          })}
-        </>
-      ) : text}
-    </LongTextBlock>
-  );
-};
+const InscriptionLines = ({ text, lines }) => <ConstrainedTextBlock textAlign="center">
+  {lines.length > 0 ? (
+    <>
+      {lines.map(line => {
+        const key = '_' + Math.random().toString(36).substr(2, 9);
+        return (
+          <div key={key}>{titleCase(line)}</div>
+        );
+      })}
+    </>
+  ) : text}
+</ConstrainedTextBlock>;
 
-const InscriptionDisplay = ({ value }) => <InscriptionLines {...value} />;
+const InscriptionDisplay = ({ value }) => <Box minWidth="200px"><InscriptionLines {...value} /></Box>;
 
 export default InscriptionDisplay;

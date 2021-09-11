@@ -3,7 +3,7 @@ import { Text } from '@primer/components';
 import styled from "styled-components";
 import { titleCase } from './TitleCase';
 
-const ConstrainedTextBlock = styled(Text).attrs({
+export const ConstrainedTextBlock = styled(Text).attrs({
   as: 'div'
 })`
   max-height: 7.5em;
