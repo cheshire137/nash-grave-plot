@@ -1,6 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Dropdown } from '@primer/components';
 import { titleCase } from './TitleCase';
+
+const FullWidthDropdown = styled(Dropdown)`
+  width: 100%;
+`;
+
+const FullWidthDropdownButton = styled(Dropdown.Button)`
+  width: 100%;
+`;
 
 function SelectColumnFilter({
   column: {filterValue, setFilter, preFilteredRows, id}
@@ -20,15 +29,15 @@ function SelectColumnFilter({
   }, [id, preFilteredRows]);
 
   return (
-    <Dropdown>
-      <Dropdown.Button>{filterValue ? titleCase(filterValue) : "All"}</Dropdown.Button>
-      <Dropdown.Menu direction="se">
+    <FullWidthDropdown>
+      <FullWidthDropdownButton>{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
+      <Dropdown.Menu direction="s">
         <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
         {options.map((option, i) => (
           <Dropdown.Item key={i} onClick={() => setFilter(option)}>{titleCase(option)}</Dropdown.Item>
         ))}
       </Dropdown.Menu>
-    </Dropdown>
+    </FullWidthDropdown>
   )
 }
 
