@@ -11,6 +11,7 @@ import TextFilter from './TextFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
 import TitleCase from './TitleCase';
+import NameDisplay from './NameDisplay';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
@@ -30,9 +31,8 @@ const IntermentList = () => {
           {
             Header: 'Name',
             accessor: 'person',
-            minWidth: 200,
             filter: 'fuzzyText',
-            Cell: TitleCase
+            Cell: NameDisplay
           },
           {
             Header: 'Died',
