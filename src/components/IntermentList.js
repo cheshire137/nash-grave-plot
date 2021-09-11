@@ -7,6 +7,7 @@ import Interment from '../models/Interment';
 import PhotoDisplay from './PhotoDisplay';
 import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
+import useTextBlock from './TextBlock';
 
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id }
@@ -97,14 +98,6 @@ const IntermentList = () => {
     return value;
   };
 
-  const formatLongText = ({value}) => {
-    return (
-      <div
-        className="ws-normal constrained-text"
-      >{value}</div>
-    );
-  };
-
   const filterTypes = useMemo(() => {
     return { fuzzyText: fuzzyTextFilterFn };
   }, []);
@@ -129,7 +122,7 @@ const IntermentList = () => {
           {
             Header: 'Info',
             accessor: 'deceasedInfo',
-            Cell: formatLongText,
+            Cell: useTextBlock,
             minWidth: 180,
             filter: 'fuzzyText'
           }
@@ -144,7 +137,7 @@ const IntermentList = () => {
             minWidth: 200,
             filter: 'includes',
             Filter: SelectColumnFilter,
-            Cell: formatLongText
+            Cell: useTextBlock
           },
           {
             Header: 'Address',
@@ -163,7 +156,7 @@ const IntermentList = () => {
           {
             Header: 'Site History',
             accessor: 'siteHistory',
-            Cell: formatLongText,
+            Cell: useTextBlock,
             minWidth: 180
           }
         ]
@@ -181,7 +174,7 @@ const IntermentList = () => {
             Header: 'Footstone',
             accessor: 'footstone',
             minWidth: 150,
-            Cell: formatLongText
+            Cell: useTextBlock
           },
           {
             Header: 'Demarcation',
@@ -215,7 +208,7 @@ const IntermentList = () => {
         Header: 'Notes',
         accessor: 'notes',
         minWidth: 300,
-        Cell: formatLongText
+        Cell: useTextBlock
       },
       {
         Header: 'Parcel Numbers',

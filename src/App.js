@@ -1,7 +1,6 @@
 import React from 'react';
 import { BaseStyles, Box, Heading, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
-import './App.css';
 
 const App = () => {
   return (
