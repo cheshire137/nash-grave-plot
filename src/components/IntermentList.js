@@ -119,8 +119,7 @@ const IntermentList = () => {
           {
             Header: 'Photos',
             accessor: 'gravePhotos',
-            Cell: PhotoList,
-            minWidth: 120
+            Cell: PhotoList
           }
         ]
       },
