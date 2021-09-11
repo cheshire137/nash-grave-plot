@@ -3,8 +3,8 @@ import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
-import useAddressDisplay from './AddressDisplay';
-import useInscriptionDisplay from './InscriptionDisplay';
+import AddressDisplay from './AddressDisplay';
+import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
 import TextFilter from './TextFilter';
@@ -64,7 +64,7 @@ const IntermentList = () => {
             Header: 'Address',
             accessor: 'address',
             minWidth: 200,
-            Cell: useAddressDisplay,
+            Cell: AddressDisplay,
             filter: 'fuzzyText'
           },
           {
@@ -89,7 +89,7 @@ const IntermentList = () => {
             Header: 'Inscription',
             accessor: 'inscription',
             minWidth: 200,
-            Cell: useInscriptionDisplay
+            Cell: InscriptionDisplay
           },
           {
             Header: 'Footstone',

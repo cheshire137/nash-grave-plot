@@ -2,7 +2,7 @@ import React from 'react';
 import LongTextBlock from './LongTextBlock';
 import { titleCase } from './TitleCase';
 
-const InscriptionDisplay = ({ text, lines }) => {
+const InscriptionLines = ({ text, lines }) => {
   return (
     <LongTextBlock textAlign="center">
       {lines.length > 0 ? (
@@ -19,6 +19,6 @@ const InscriptionDisplay = ({ text, lines }) => {
   );
 };
 
-const useInscriptionDisplay = ({ value }) => <InscriptionDisplay {...value} />;
+const InscriptionDisplay = ({ value }) => <InscriptionLines {...value} />;
 
-export default useInscriptionDisplay;
+export default InscriptionDisplay;

@@ -2,9 +2,9 @@ import React from 'react';
 import { Text } from '@primer/components';
 import { titleCase } from './TitleCase';
 
-const AddressDisplay = ({ streetAddress, additionalLocationInfo }) => {
+const AddressLines = ({ streetAddress, additionalLocationInfo }) => {
   return (
-    <Text as="div" whiteSpace="normal">
+    <Text as="div">
       {titleCase(streetAddress)}
       {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
         <div>{titleCase(additionalLocationInfo)}</div>
@@ -13,6 +13,6 @@ const AddressDisplay = ({ streetAddress, additionalLocationInfo }) => {
   );
 };
 
-const useAddressDisplay = ({ value }) => <AddressDisplay {...value} />;
+const AddressDisplay = ({ value }) => <AddressLines {...value} />;
 
-export default useAddressDisplay;
+export default AddressDisplay;
