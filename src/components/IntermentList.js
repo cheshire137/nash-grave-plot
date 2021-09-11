@@ -15,6 +15,7 @@ import DiedDateDisplay from './DiedDateDisplay';
 import InfoDisplay from './InfoDisplay';
 import GraveyardTypeDisplay from './GraveyardTypeDisplay';
 import DemarcationDisplay from './DemarcationDisplay';
+import FootstoneDisplay from './FootstoneDisplay';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
@@ -91,8 +92,7 @@ const IntermentList = () => {
           {
             Header: 'Footstone',
             accessor: 'footstone',
-            minWidth: 150,
-            Cell: LongTextBlock
+            Cell: FootstoneDisplay
           },
           {
             Header: 'Demarcation',
