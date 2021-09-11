@@ -20,6 +20,9 @@ const TableCell = styled(Box).attrs({
 `;
 
 const TableStyles = styled.div`
+  tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
 `;
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
