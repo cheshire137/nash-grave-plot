@@ -5,11 +5,12 @@ import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
 import useAddressDisplay from './AddressDisplay';
 import useInscriptionDisplay from './InscriptionDisplay';
-import useTextBlock from './TextBlock';
+import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
 import TextFilter from './TextFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
+import TitleCase from './TitleCase';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
@@ -30,7 +31,8 @@ const IntermentList = () => {
             Header: 'Name',
             accessor: 'person',
             minWidth: 200,
-            filter: 'fuzzyText'
+            filter: 'fuzzyText',
+            Cell: TitleCase
           },
           {
             Header: 'Died',
@@ -41,7 +43,7 @@ const IntermentList = () => {
           {
             Header: 'Info',
             accessor: 'deceasedInfo',
-            Cell: useTextBlock,
+            Cell: LongTextBlock,
             minWidth: 180,
             filter: 'fuzzyText'
           }
@@ -56,7 +58,7 @@ const IntermentList = () => {
             minWidth: 200,
             filter: 'includes',
             Filter: SelectColumnFilter,
-            Cell: useTextBlock
+            Cell: TitleCase
           },
           {
             Header: 'Address',
@@ -75,7 +77,7 @@ const IntermentList = () => {
           {
             Header: 'Site History',
             accessor: 'siteHistory',
-            Cell: useTextBlock,
+            Cell: LongTextBlock,
             minWidth: 180
           }
         ]
@@ -93,7 +95,7 @@ const IntermentList = () => {
             Header: 'Footstone',
             accessor: 'footstone',
             minWidth: 150,
-            Cell: useTextBlock
+            Cell: LongTextBlock
           },
           {
             Header: 'Demarcation',
@@ -113,7 +115,8 @@ const IntermentList = () => {
           },
           {
             Header: 'Restoration',
-            accessor: 'restoration'
+            accessor: 'restoration',
+            Cell: LongTextBlock
           },
           {
             Header: 'Photos',
@@ -127,7 +130,7 @@ const IntermentList = () => {
         Header: 'Notes',
         accessor: 'notes',
         minWidth: 300,
-        Cell: useTextBlock
+        Cell: LongTextBlock
       },
       {
         Header: 'Parcel Numbers',

@@ -1,20 +1,21 @@
 import React from 'react';
-import { TextBlock } from './TextBlock';
+import LongTextBlock from './LongTextBlock';
+import { titleCase } from './TitleCase';
 
 const InscriptionDisplay = ({ text, lines }) => {
   return (
-    <TextBlock textAlign="center">
+    <LongTextBlock textAlign="center">
       {lines.length > 0 ? (
         <>
           {lines.map(line => {
             const key = '_' + Math.random().toString(36).substr(2, 9);
             return (
-              <div key={key}>{line}</div>
+              <div key={key}>{titleCase(line)}</div>
             );
           })}
         </>
       ) : text}
-    </TextBlock>
+    </LongTextBlock>
   );
 };
 
