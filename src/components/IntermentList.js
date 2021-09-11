@@ -62,7 +62,6 @@ const IntermentList = () => {
           {
             Header: 'Address',
             accessor: 'address',
-            minWidth: 200,
             Cell: AddressDisplay,
             filter: 'fuzzyText'
           },
