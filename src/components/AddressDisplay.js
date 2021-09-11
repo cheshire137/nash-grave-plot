@@ -12,4 +12,6 @@ const AddressDisplay = ({ streetAddress, additionalLocationInfo }) => {
   );
 };
 
-export default AddressDisplay;
+const useAddressDisplay = ({value}) => <AddressDisplay {...value} />;
+
+export default useAddressDisplay;

@@ -1,55 +1,15 @@
 import React, { useMemo } from 'react';
 import { useFilters, useTable, usePagination } from 'react-table';
-import { Dropdown, TextInput } from '@primer/components';
 import { matchSorter } from 'match-sorter';
 import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
-import PhotoDisplay from './PhotoDisplay';
-import AddressDisplay from './AddressDisplay';
+import useAddressDisplay from './AddressDisplay';
 import useInscriptionDisplay from './InscriptionDisplay';
 import useTextBlock from './TextBlock';
-
-function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id }
-}) {
-  const options = React.useMemo(() => {
-    const options = new Set()
-    preFilteredRows.forEach(row => {
-      const value = row.values[id] || '';
-      const option = value.replaceAll(/\s+/g, ' ');
-      if (option.length > 0 && option !== ' ') {
-        options.add(option);
-      }
-    })
-    const sortedOptions = [...options.values()];
-    sortedOptions.sort();
-    return sortedOptions;
-  }, [id, preFilteredRows]);
-
-  return (
-    <Dropdown>
-      <Dropdown.Button>{filterValue || "All"}</Dropdown.Button>
-      <Dropdown.Menu direction="se">
-        <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
-        {options.map((option, i) => (
-          <Dropdown.Item key={i} onClick={() => setFilter(option)}>{option}</Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-    </Dropdown>
-  )
-}
-
-function DefaultColumnFilter({
-  column: {filterValue, setFilter }
-}) {
-  return (
-    <TextInput
-      value={filterValue || ''}
-      onChange={e => setFilter(e.target.value || undefined)}
-      placeholder="Filter"
-    />
-  );
-}
+import SelectColumnFilter from './SelectColumnFilter';
+import TextFilter from './TextFilter';
+import DateCellFormatter from './DateCellFormatter';
+import PhotoList from './PhotoList';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
@@ -58,45 +18,8 @@ fuzzyTextFilterFn.autoRemove = val => !val;
 
 const IntermentList = () => {
   const data = useMemo(() => NashvilleCemeteries.map(interment => new Interment(interment)), []);
-
-  const defaultColumn = useMemo(() => ({
-    Filter: DefaultColumnFilter,
-  }), []);
-
-  const formatAddress = ({value}) => {
-    return <AddressDisplay {...value} />
-  };
-
-  const formatGravePhotos = ({value}) => {
-    return (
-      <div>
-        {value.map(photo => (
-          <PhotoDisplay {...photo} key={photo.text} />
-        ))}
-      </div>
-    )
-  };
-
-  const formatDateCell = ({ value }) => {
-    if (value instanceof Date) {
-      const year = value.getFullYear();
-      let month = value.getMonth() + 1;
-      if (month < 10) {
-        month = `0${month}`;
-      }
-      let day = value.getDate();
-      if (day < 10) {
-        day = `0${day}`;
-      }
-      return `${year}-${month}-${day}`;
-    }
-
-    return value;
-  };
-
-  const filterTypes = useMemo(() => {
-    return { fuzzyText: fuzzyTextFilterFn };
-  }, []);
+  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
+  const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const columns = useMemo(() => {
     return [
@@ -113,7 +36,7 @@ const IntermentList = () => {
             Header: 'Died',
             accessor: 'deathDate',
             minWidth: 130,
-            Cell: formatDateCell
+            Cell: DateCellFormatter
           },
           {
             Header: 'Info',
@@ -139,7 +62,7 @@ const IntermentList = () => {
             Header: 'Address',
             accessor: 'address',
             minWidth: 200,
-            Cell: formatAddress,
+            Cell: useAddressDisplay,
             filter: 'fuzzyText'
           },
           {
@@ -195,7 +118,7 @@ const IntermentList = () => {
           {
             Header: 'Photos',
             accessor: 'gravePhotos',
-            Cell: formatGravePhotos,
+            Cell: PhotoList,
             minWidth: 120
           }
         ]
@@ -228,19 +151,19 @@ const IntermentList = () => {
             Header: 'Original',
             accessor: 'originalSurvey',
             minWidth: 130,
-            Cell: formatDateCell
+            Cell: DateCellFormatter
           },
           {
             Header: 'Updates',
             accessor: 'surveyUpdates',
             minWidth: 130,
-            Cell: formatDateCell
+            Cell: DateCellFormatter
           },
           {
             Header: 'Current',
             accessor: 'currentSurvey',
             minWidth: 130,
-            Cell: formatDateCell
+            Cell: DateCellFormatter
           }
         ]
       }
