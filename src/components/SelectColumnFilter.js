@@ -30,7 +30,7 @@ function SelectColumnFilter({
 
   return (
     <FullWidthDropdown>
-      <FullWidthDropdownButton>{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
+      <FullWidthDropdownButton variant="small">{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
       <Dropdown.Menu direction="s">
         <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
         {options.map((option, i) => (

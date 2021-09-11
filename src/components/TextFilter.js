@@ -9,6 +9,8 @@ function TextFilter({
       value={filterValue || ''}
       onChange={e => setFilter(e.target.value || undefined)}
       placeholder="Filter"
+      bg="white"
+      variant="small"
     />
   );
 }
