@@ -17,6 +17,7 @@ import GraveyardTypeDisplay from './GraveyardTypeDisplay';
 import DemarcationDisplay from './DemarcationDisplay';
 import FootstoneDisplay from './FootstoneDisplay';
 import NotesDisplay from './NotesDisplay';
+import ParcelNumberDisplay from './ParcelNumberDisplay';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
@@ -134,12 +135,12 @@ const IntermentList = () => {
           {
             Header: 'Tract',
             accessor: 'tractParcelNumber',
-            minWidth: 130
+            Cell: ParcelNumberDisplay
           },
           {
             Header: 'Cemetery',
             accessor: 'cemeteryParcelNumber',
-            minWidth: 150
+            Cell: ParcelNumberDisplay
           }
         ]
       },
