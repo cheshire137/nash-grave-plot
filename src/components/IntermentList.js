@@ -163,7 +163,7 @@ const IntermentList = () => {
   return <PaginatedTable
     data={data}
     columns={columns}
-    pageSize={20}
+    pageSize={10}
     defaultColumn={defaultColumn}
   />;
 };
