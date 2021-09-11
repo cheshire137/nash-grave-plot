@@ -76,8 +76,7 @@ const IntermentList = () => {
           {
             Header: 'Site History',
             accessor: 'siteHistory',
-            Cell: LongTextBlock,
-            minWidth: 180
+            Cell: InfoDisplay
           }
         ]
       },
