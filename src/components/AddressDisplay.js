@@ -1,17 +1,15 @@
 import React from 'react';
 import { Box } from '@primer/components';
-import { titleCase } from './TitleCase';
+import TitleCase from './TitleCase';
 
-const AddressLines = ({ streetAddress, additionalLocationInfo }) => {
-  return (
-    <Box minWidth="200px">
-      {titleCase(streetAddress)}
-      {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
-        <div>{titleCase(additionalLocationInfo)}</div>
-      ) : null}
+const AddressLines = ({ streetAddress, additionalLocationInfo }) => <Box minWidth="200px">
+  <TitleCase value={streetAddress} />
+  {typeof additionalLocationInfo === 'string' && additionalLocationInfo.length > 0 ? (
+    <Box>
+      <TitleCase value={additionalLocationInfo} />
     </Box>
-  );
-};
+  ) : null}
+</Box>;
 
 const AddressDisplay = ({ value }) => <AddressLines {...value} />;
 
