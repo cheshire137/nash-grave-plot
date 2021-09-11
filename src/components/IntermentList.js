@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import styled from 'styled-components';
 import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 import NashvilleCemeteries from '../nashville-cemeteries.json';
@@ -167,6 +168,12 @@ const IntermentList = () => {
     ];
   }, []);
 
+  const TableStyles = styled.div`
+    table thead th {
+      background-color: #f5f5f5;
+    }
+  `;
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -190,7 +197,7 @@ const IntermentList = () => {
   }, useFilters, usePagination);
 
   return (
-    <>
+    <TableStyles>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -235,7 +242,7 @@ const IntermentList = () => {
           onClick={() => nextPage()} disabled={!canNextPage}
         >Next &gt;</button>
       </div>
-    </>
+    </TableStyles>
   );
 };
 
