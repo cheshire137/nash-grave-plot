@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text } from '@primer/components';
+import { TextBlock } from './TextBlock';
 
 const InscriptionDisplay = ({ text, lines }) => {
   return (
-    <Text as="div" whiteSpace="normal" textAlign="center">
+    <TextBlock textAlign="center">
       {lines.length > 0 ? (
         <>
           {lines.map(line => {
@@ -14,8 +14,10 @@ const InscriptionDisplay = ({ text, lines }) => {
           })}
         </>
       ) : text}
-    </Text>
+    </TextBlock>
   );
 };
 
-export default InscriptionDisplay;
+const useInscriptionDisplay = ({ value }) => <InscriptionDisplay {...value} />;
+
+export default useInscriptionDisplay;

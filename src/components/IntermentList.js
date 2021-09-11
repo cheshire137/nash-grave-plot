@@ -6,7 +6,7 @@ import NashvilleCemeteries from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
 import PhotoDisplay from './PhotoDisplay';
 import AddressDisplay from './AddressDisplay';
-import InscriptionDisplay from './InscriptionDisplay';
+import useInscriptionDisplay from './InscriptionDisplay';
 import useTextBlock from './TextBlock';
 
 function SelectColumnFilter({
@@ -65,10 +65,6 @@ const IntermentList = () => {
 
   const formatAddress = ({value}) => {
     return <AddressDisplay {...value} />
-  };
-
-  const formatInscription = ({value}) => {
-    return <InscriptionDisplay {...value} />
   };
 
   const formatGravePhotos = ({value}) => {
@@ -168,7 +164,7 @@ const IntermentList = () => {
             Header: 'Inscription',
             accessor: 'inscription',
             minWidth: 200,
-            Cell: formatInscription
+            Cell: useInscriptionDisplay
           },
           {
             Header: 'Footstone',
