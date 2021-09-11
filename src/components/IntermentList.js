@@ -103,7 +103,7 @@ const IntermentList = () => {
           {
             Header: 'Condition',
             accessor: 'condition',
-            minWidth: 140
+            Cell: DemarcationDisplay
           },
           {
             Header: 'Accessible',
