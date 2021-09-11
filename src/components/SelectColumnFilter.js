@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown } from '@primer/components';
+import { titleCase } from './TitleCase';
 
 function SelectColumnFilter({
   column: {filterValue, setFilter, preFilteredRows, id}
@@ -20,11 +21,11 @@ function SelectColumnFilter({
 
   return (
     <Dropdown>
-      <Dropdown.Button>{filterValue || "All"}</Dropdown.Button>
+      <Dropdown.Button>{filterValue ? titleCase(filterValue) : "All"}</Dropdown.Button>
       <Dropdown.Menu direction="se">
         <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
         {options.map((option, i) => (
-          <Dropdown.Item key={i} onClick={() => setFilter(option)}>{option}</Dropdown.Item>
+          <Dropdown.Item key={i} onClick={() => setFilter(option)}>{titleCase(option)}</Dropdown.Item>
         ))}
       </Dropdown.Menu>
     </Dropdown>
