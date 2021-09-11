@@ -1,4 +1,3 @@
-import Photo from './Photo';
 import Address from './Address';
 import Inscription from './Inscription';
 
@@ -68,16 +67,7 @@ const parseGraveyardType = graveyardType => {
 }
 
 const extractPhotos = (props, photoAttrs) => {
-  const photos = [];
-  let i = 0;
-  for (const attr of photoAttrs) {
-    if (typeof props[attr] === 'string' && props[attr].length > 0) {
-      const photo = new Photo(i, props[attr]);
-      photos.push(photo);
-      i++;
-    }
-  }
-  return photos;
+  return photoAttrs.map(attr => props[attr]).filter(photoData => photoData);
 };
 
 class Interment {

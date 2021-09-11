@@ -10,7 +10,6 @@ import SelectColumnFilter from './SelectColumnFilter';
 import TextFilter from './TextFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
-import TitleCase from './TitleCase';
 import NameDisplay from './NameDisplay';
 import DiedDateDisplay from './DiedDateDisplay';
 import InfoDisplay from './InfoDisplay';

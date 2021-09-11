@@ -1,16 +1,16 @@
 import React from 'react';
 
-const PhotoDisplay = ({ text, url, title }) => {
+const PhotoDisplay = ({ url, description }) => {
   return (
     <div>
-      {url && title ? (
+      {url && description ? (
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-        >{title}</a>
+        >{description}</a>
       ) : (
-        <span>{text}</span>
+        <span>{url}</span>
       )}
     </div>
   );
