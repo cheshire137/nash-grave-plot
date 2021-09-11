@@ -55,10 +55,9 @@ const IntermentList = () => {
           {
             Header: 'Cemetery',
             accessor: 'cemeteryName',
-            minWidth: 200,
             filter: 'includes',
             Filter: SelectColumnFilter,
-            Cell: TitleCase
+            Cell: NameDisplay
           },
           {
             Header: 'Address',
