@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from '@primer/components';
+import { Box, Text } from '@primer/components';
 
 const prettyDateStr = (date) => {
   const year = date.getFullYear();
@@ -14,12 +14,8 @@ const prettyDateStr = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const DateCellFormatter = ({ value }) => {
-  if (value instanceof Date) {
-    const displayValue = prettyDateStr(value);
-    return <Text whiteSpace="nowrap">{displayValue}</Text>;
-  }
-  return value;
-};
+const DateCellFormatter = ({ value }) => <Box minWidth="130px">
+  {value instanceof Date ? <Text whiteSpace="nowrap">{prettyDateStr(value)}</Text> : value}
+</Box>;
 
 export default DateCellFormatter;

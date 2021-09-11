@@ -151,19 +151,16 @@ const IntermentList = () => {
           {
             Header: 'Original',
             accessor: 'originalSurvey',
-            minWidth: 130,
             Cell: DateCellFormatter
           },
           {
             Header: 'Updates',
             accessor: 'surveyUpdates',
-            minWidth: 130,
             Cell: DateCellFormatter
           },
           {
             Header: 'Current',
             accessor: 'currentSurvey',
-            minWidth: 130,
             Cell: DateCellFormatter
           }
         ]
