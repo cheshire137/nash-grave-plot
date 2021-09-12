@@ -17,9 +17,14 @@ import FootstoneDisplay from './FootstoneDisplay';
 import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import PaginatedTable from './PaginatedTable';
+import IntermentSort from '../models/IntermentSort';
 
 const IntermentList = () => {
-  const data = useMemo(() => NashvilleCemeteries.map(interment => new Interment(interment)), []);
+  const data = useMemo(() => {
+    const interments = NashvilleCemeteries.map(interment => new Interment(interment));
+    interments.sort(IntermentSort);
+    return interments;
+  }, []);
   const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
 
   const columns = useMemo(() => {
