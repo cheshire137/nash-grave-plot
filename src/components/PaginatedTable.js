@@ -6,7 +6,8 @@ import { matchSorter } from 'match-sorter';
 
 const TableHeaderCell = styled(Box).attrs({
   as: 'th',
-  p: 2
+  p: 2,
+  borderBottom: '1px solid #e5e5e5'
 })`
   background-color: #f5f5f5;
 `;
@@ -15,11 +16,15 @@ const TableCell = styled(Box).attrs({
   as: 'td',
   p: 2,
   verticalAlign: 'top',
-  textAlign: 'center'
+  textAlign: 'center',
+  borderBottom: '1px solid #e5e5e5'
 })`
 `;
 
 const TableStyles = styled.div`
+  width: 100%;
+  overflow-x: auto;
+
   tr:nth-child(even) {
     background-color: #f5f5f5;
   }
@@ -51,31 +56,33 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
   }, useFilters, usePagination);
 
   return (
-    <TableStyles>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <TableHeaderCell {...column.getHeaderProps()}>
-                  {column.render('Header')}
-                  <Box mt="1">{column.canFilter ? column.render('Filter') : null}</Box>
-                </TableHeaderCell>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
+    <>
+      <TableStyles>
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <TableHeaderCell {...column.getHeaderProps()}>
+                    {column.render('Header')}
+                    <Box mt="1">{column.canFilter ? column.render('Filter') : null}</Box>
+                  </TableHeaderCell>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </TableStyles>
       <Pagination
         pageCount={pageOptions.length}
         currentPage={pageIndex + 1}
@@ -84,7 +91,7 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
           gotoPage(page - 1);
         }}
       />
-    </TableStyles>
+    </>
   );
 };
 
