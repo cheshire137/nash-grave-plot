@@ -19,6 +19,12 @@ const ConstrainedDropdownMenu = styled(Dropdown.Menu)`
   font-weight: normal;
 `;
 
+const SmallDropdownItem = styled(Dropdown.Item).attrs({
+  px: 2
+})`
+  font-size: 0.9rem;
+`;
+
 function SelectColumnFilter({
   column: {filterValue, setFilter, preFilteredRows, id}
 }) {
@@ -40,9 +46,9 @@ function SelectColumnFilter({
     <FullWidthDropdown>
       <FullWidthDropdownButton variant="small">{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
       <ConstrainedDropdownMenu direction="s">
-        <Dropdown.Item onClick={() => setFilter("")}>All</Dropdown.Item>
+        <SmallDropdownItem onClick={() => setFilter("")}>All</SmallDropdownItem>
         {options.map((option, i) => (
-          <Dropdown.Item key={i} onClick={() => setFilter(option)}>{titleCase(option)}</Dropdown.Item>
+          <SmallDropdownItem key={i} onClick={() => setFilter(option)}>{titleCase(option)}</SmallDropdownItem>
         ))}
       </ConstrainedDropdownMenu>
     </FullWidthDropdown>
