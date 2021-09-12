@@ -24,7 +24,7 @@ const personSort = (a, b) => {
 };
 
 const IntermentSort = (a, b) => {
-  return personSort(a, b) || cemeterySort(a, b);
+  return cemeterySort(a, b) || personSort(a, b);
 };
 
 export default IntermentSort;
