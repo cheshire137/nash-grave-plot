@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { Box } from '@primer/components';
+import { Box, Pagination } from '@primer/components';
 import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 
@@ -37,16 +37,11 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     page,
     prepareRow,
     pageOptions,
     state: {pageIndex},
-    gotoPage,
-    previousPage,
-    nextPage,
-    canPreviousPage,
-    canNextPage
+    gotoPage
   } = useTable({
     columns,
     data,
@@ -81,22 +76,14 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
           })}
         </tbody>
       </table>
-      <div>
-        <button
-          onClick={() => previousPage()} disabled={!canPreviousPage}
-        >&lt; Previous</button>
-        <span>Page{' '}<em>{pageIndex + 1} of {pageOptions.length}</em>, {rows.length} graves</span>
-        <label htmlFor="goToPage">Go to page:</label>
-        <input
-          id="goToPage"
-          type="number"
-          defaultValue={pageIndex + 1 || 1}
-          onChange={e => gotoPage(e.target.value ? Number(e.target.value) - 1 : 0)}
-        />
-        <button
-          onClick={() => nextPage()} disabled={!canNextPage}
-        >Next &gt;</button>
-      </div>
+      <Pagination
+        pageCount={pageOptions.length}
+        currentPage={pageIndex + 1}
+        onPageChange={(e, page) => {
+          e.preventDefault();
+          gotoPage(page - 1);
+        }}
+      />
     </TableStyles>
   );
 };
