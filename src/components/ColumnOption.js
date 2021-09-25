@@ -6,7 +6,7 @@ const ColumnOption = ({ name, value, onToggle }) => {
       <input
         type="checkbox"
         value={value}
-        onChange={() => onToggle(value)}
+        onChange={e => onToggle(e.target.checked)}
       />
       {name}
     </label>
