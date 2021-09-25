@@ -3,6 +3,7 @@ import { Box, ButtonInvisible, Dialog, StyledOcticon, Text } from '@primer/compo
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
 import Column from '../models/Column';
+import LocalStorage from '../models/LocalStorage';
 
 const getEnabledColumns = (enabledColumns, columnValue, isEnabled) => {
   if (isEnabled) {
@@ -32,8 +33,11 @@ const Settings = ({ enabledColumns, setEnabledColumns }) => {
               groupName={groupName}
               columnValues={Column.groups[groupName]}
               enabledColumns={enabledColumns}
-              onColumnToggle={(columnValue, isEnabled) =>
-                setEnabledColumns(getEnabledColumns(enabledColumns, columnValue, isEnabled))}
+              onColumnToggle={(columnValue, isEnabled) => {
+                const newEnabledColumns = getEnabledColumns(enabledColumns, columnValue, isEnabled);
+                LocalStorage.set('enabledColumns', newEnabledColumns);
+                setEnabledColumns(newEnabledColumns);
+              }}
             />)}
           </Text>
         </Box>
