@@ -1,6 +1,7 @@
 import React from 'react';
 import { BaseStyles, Header, Heading, Text, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
+import Settings from './components/Settings';
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
               href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
             >Davidson County Cemetery Survey</Text>
           </Heading>
+          <Header.Item>
+            <Settings />
+          </Header.Item>
         </Header>
         <IntermentList />
       </BaseStyles>
