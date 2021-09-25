@@ -10,8 +10,8 @@ const ColumnOption = ({ name, value, onToggle }) => {
           type="checkbox"
           name="enabledColumns"
           value={value}
-          onChange={e => onToggle(e.target.checked)}
           id={domID}
+          onChange={e => onToggle(value, e.target.checked)}
         />
         <Box as="span" display="inline-block" ml={1}>{name}</Box>
       </FormGroup.Label>
