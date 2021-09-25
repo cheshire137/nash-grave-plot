@@ -51,7 +51,7 @@ class Column {
       'gravePhotos'],
     'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],
     'Survey': ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
-    '': ['notes']
+    'Other': ['notes']
   };
 }
 

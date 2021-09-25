@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Box, ButtonInvisible, Dialog, StyledOcticon } from '@primer/components';
+import { Box, ButtonInvisible, Dialog, StyledOcticon, Text } from '@primer/components';
 import { GearIcon } from '@primer/octicons-react';
+import ColumnGroupOptions from './ColumnGroupOptions';
+import Column from '../models/Column';
 
-const Settings = () => {
+const Settings = ({ setEnabledColumns }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -15,7 +17,14 @@ const Settings = () => {
         aria-labelledby="header-id"
       >
         <Dialog.Header id="header-id">Settings</Dialog.Header>
-        <Box p={3}>
+        <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
+          <Text color="black">
+            {Object.keys(Column.groups).map(groupName => <ColumnGroupOptions
+              key={groupName}
+              groupName={groupName}
+              columnValues={Column.groups[groupName]}
+            />)}
+          </Text>
         </Box>
       </Dialog>
     </>
