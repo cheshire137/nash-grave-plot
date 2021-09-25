@@ -4,7 +4,14 @@ import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
 import Column from '../models/Column';
 
-const Settings = ({ setEnabledColumns }) => {
+const getEnabledColumns = (enabledColumns, columnValue, isEnabled) => {
+  if (isEnabled) {
+    return [...enabledColumns, columnValue];
+  }
+  return enabledColumns.filter(c => c !== columnValue);
+};
+
+const Settings = ({ enabledColumns, setEnabledColumns }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -23,6 +30,9 @@ const Settings = ({ setEnabledColumns }) => {
               key={groupName}
               groupName={groupName}
               columnValues={Column.groups[groupName]}
+              enabledColumns={enabledColumns}
+              onColumnToggle={(columnValue, isEnabled) =>
+                setEnabledColumns(getEnabledColumns(enabledColumns, columnValue, isEnabled))}
             />)}
           </Text>
         </Box>
