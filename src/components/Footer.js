@@ -10,13 +10,26 @@ const Footer = () => {
       borderTopWidth={1}
       borderColor="border.default"
       borderTopStyle="solid"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
     >
-      Data from <Link
+      <Link
         target="_blank"
+        display="inline-block"
+        mr={4}
         muted={true}
         rel="noopener noreferrer"
-        href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
-      >Davidson County Cemetery Survey</Link>
+        href="https://github.com/cheshire137/nash-grave-plot"
+      >View source</Link>
+      <span>
+        Data from <Link
+          target="_blank"
+          muted={true}
+          rel="noopener noreferrer"
+          href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
+        >Davidson County Cemetery Survey</Link>
+      </span>
     </Box>
   );
 };
