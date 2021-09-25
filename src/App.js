@@ -23,7 +23,7 @@ const App = () => {
             >Davidson County Cemetery Survey</Text>
           </Heading>
           <Header.Item>
-            <Settings />
+            <Settings enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
           </Header.Item>
         </Header>
         <IntermentList enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
