@@ -26,7 +26,7 @@ const App = () => {
             <Settings enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
           </Header.Item>
         </Header>
-        <IntermentList enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
+        <IntermentList enabledColumns={enabledColumns} />
       </BaseStyles>
     </ThemeProvider>
   );

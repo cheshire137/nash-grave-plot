@@ -24,7 +24,7 @@ const filterColumns = (enabledColumnNames, relevantColumns) => {
   return relevantColumns.filter(column => enabledColumnNames.includes(column.accessor));
 };
 
-const IntermentList = ({ enabledColumns, setEnabledColumns }) => {
+const IntermentList = ({ enabledColumns }) => {
   const data = useMemo(() => {
     const interments = NashvilleCemeteries.map(interment => new Interment(interment));
     interments.sort(IntermentSort);
