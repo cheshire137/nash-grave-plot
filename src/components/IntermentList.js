@@ -96,7 +96,7 @@ const IntermentList = ({ enabledColumns }) => {
       parcelNumberColumnGroup,
       surveyColumnGroup
     ];
-  }, []);
+  }, [enabledColumns]);
 
   return <PaginatedTable
     data={data}
