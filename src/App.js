@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { BaseStyles, Header, Heading, Text, ThemeProvider } from '@primer/components';
+import { BaseStyles, Box, Header, Heading, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
 import Column from './models/Column';
 import LocalStorage from './models/LocalStorage';
+import Footer from './components/Footer';
 
 const App = () => {
   const savedEnabledColumns = LocalStorage.get('enabledColumns');
@@ -15,20 +16,14 @@ const App = () => {
           <Header.Item full>
             <Heading as="h1">NashGravePlot</Heading>
           </Header.Item>
-          <Heading as="h2" fontSize="1" fontWeight="normal">
-            Data from <Text
-              as="a"
-              target="_blank"
-              color="white"
-              rel="noopener noreferrer"
-              href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
-            >Davidson County Cemetery Survey</Text>
-          </Heading>
           <Header.Item>
             <Settings enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
           </Header.Item>
         </Header>
-        <IntermentList enabledColumns={enabledColumns} />
+        <Box pb={4}>
+          <IntermentList enabledColumns={enabledColumns} />
+        </Box>
+        <Footer />
       </BaseStyles>
     </ThemeProvider>
   );
