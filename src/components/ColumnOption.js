@@ -8,6 +8,7 @@ const ColumnOption = ({ name, value, onToggle }) => {
       <FormGroup.Label fontWeight="normal" htmlFor={domID}>
         <input
           type="checkbox"
+          name="enabledColumns"
           value={value}
           onChange={e => onToggle(e.target.checked)}
           id={domID}
