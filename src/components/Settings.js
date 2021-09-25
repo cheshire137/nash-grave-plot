@@ -26,8 +26,8 @@ const Settings = ({ enabledColumns, setEnabledColumns }) => {
       >
         <Dialog.Header id="header-id">Settings</Dialog.Header>
         <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
-          <Text color="black">
-            <p>Choose which columns to show:</p>
+          <Text color="black" as="div">
+            <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
             {Object.keys(Column.groups).map(groupName => <ColumnGroupOptions
               key={groupName}
               groupName={groupName}

@@ -5,7 +5,7 @@ const ColumnOption = ({ name, value, isEnabled, onToggle }) => {
   const domID = `enabledColumns_${value}`;
   return (
     <FormGroup display="inline-block" my={0} mr={3}>
-      <FormGroup.Label fontWeight="normal" htmlFor={domID}>
+      <FormGroup.Label fontWeight="normal" htmlFor={domID} mb={1}>
         <input
           type="checkbox"
           checked={isEnabled}
