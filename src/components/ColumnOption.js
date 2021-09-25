@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, FormGroup } from '@primer/components';
 
-const ColumnOption = ({ name, value, onToggle }) => {
+const ColumnOption = ({ name, value, isEnabled, onToggle }) => {
   const domID = `enabledColumns_${value}`;
   return (
     <FormGroup display="inline-block" my={0} mr={3}>
       <FormGroup.Label fontWeight="normal" htmlFor={domID}>
         <input
           type="checkbox"
+          checked={isEnabled}
           name="enabledColumns"
           value={value}
           id={domID}
