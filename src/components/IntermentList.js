@@ -67,11 +67,7 @@ const IntermentList = ({ enabledColumns }) => {
   };
 
   const notesColumn = { Header: Column.names.notes, accessor: 'notes', Cell: NotesDisplay };
-  const otherColumnGroup = {
-    Header: '',
-    id: 'other',
-    columns: filterColumns(enabledColumns, [notesColumn])
-  };
+  const otherColumnGroup = { Header: '', id: 'other', columns: filterColumns(enabledColumns, [notesColumn]) };
 
   const tractParcelNumberColumn = { Header: Column.names.tractParcelNumber, accessor: 'tractParcelNumber', Cell: ParcelNumberDisplay };
   const cemeteryParcelNumberColumn = { Header: Column.names.cemeteryParcelNumber, accessor: 'cemeteryParcelNumber',
@@ -93,22 +89,11 @@ const IntermentList = ({ enabledColumns }) => {
   };
 
   const columns = useMemo(() => {
-    return [
-      personColumnGroup,
-      locationColumnGroup,
-      markerColumnGroup,
-      otherColumnGroup,
-      parcelNumberColumnGroup,
-      surveyColumnGroup
-    ];
+    return [personColumnGroup, locationColumnGroup, markerColumnGroup, otherColumnGroup, parcelNumberColumnGroup,
+      surveyColumnGroup];
   }, [enabledColumns]);
 
-  return <PaginatedTable
-    data={data}
-    columns={columns}
-    pageSize={10}
-    defaultColumn={defaultColumn}
-  />;
+  return <PaginatedTable data={data} columns={columns} pageSize={10} defaultColumn={defaultColumn} />;
 };
 
 export default IntermentList;
