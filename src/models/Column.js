@@ -1,5 +1,5 @@
 class Column {
-  static allColumns = [
+  static all = [
     'person',
     'deathDate',
     'deceasedInfo',
@@ -21,7 +21,29 @@ class Column {
     'surveyUpdates',
     'currentSurvey'
   ];
-  static defaultColumns = Column.allColumns;
+  static defaultColumns = Column.all;
+  static names = {
+    'person': 'Name',
+    'deathDate': 'Died',
+    'deceasedInfo': 'Info',
+    'cemeteryName': 'Cemetery',
+    'address': 'Address',
+    'graveyardType': 'Graveyard Type',
+    'siteHistory': 'Site History',
+    'inscription': 'Inscription',
+    'footstone': 'Footstone',
+    'demarcation': 'Demarcation',
+    'condition': 'Condition',
+    'accessible': 'Accessible',
+    'restoration': 'Restoration',
+    'gravePhotos': 'Photos',
+    'notes': 'Notes',
+    'tractParcelNumber': 'Tract',
+    'cemeteryParcelNumber': 'Cemetery',
+    'originalSurvey': 'Original',
+    'surveyUpdates': 'Updates',
+    'currentSurvey': 'Current'
+  };
 }
 
 export default Column;
