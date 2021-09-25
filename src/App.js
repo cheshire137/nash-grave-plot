@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BaseStyles, Header, Heading, Text, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
+import Column from './models/Column';
 
 const App = () => {
+  const [enabledColumns, setEnabledColumns] = useState(Column.defaultColumns);
   return (
     <ThemeProvider>
       <BaseStyles>
@@ -24,7 +26,7 @@ const App = () => {
             <Settings />
           </Header.Item>
         </Header>
-        <IntermentList />
+        <IntermentList enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
       </BaseStyles>
     </ThemeProvider>
   );
