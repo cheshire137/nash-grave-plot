@@ -67,6 +67,11 @@ const IntermentList = ({ enabledColumns }) => {
   };
 
   const notesColumn = { Header: Column.names.notes, accessor: 'notes', Cell: NotesDisplay };
+  const otherColumnGroup = {
+    Header: '',
+    id: 'other',
+    columns: filterColumns(enabledColumns, [notesColumn])
+  };
 
   const tractParcelNumberColumn = { Header: Column.names.tractParcelNumber, accessor: 'tractParcelNumber', Cell: ParcelNumberDisplay };
   const cemeteryParcelNumberColumn = { Header: Column.names.cemeteryParcelNumber, accessor: 'cemeteryParcelNumber',
@@ -92,7 +97,7 @@ const IntermentList = ({ enabledColumns }) => {
       personColumnGroup,
       locationColumnGroup,
       markerColumnGroup,
-      notesColumn,
+      otherColumnGroup,
       parcelNumberColumnGroup,
       surveyColumnGroup
     ];
