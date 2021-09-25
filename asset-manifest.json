@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/nash-grave-plot/static/js/main.2b318e62.chunk.js",
-    "main.js.map": "/nash-grave-plot/static/js/main.2b318e62.chunk.js.map",
+    "main.js": "/nash-grave-plot/static/js/main.e3fa0ef4.chunk.js",
+    "main.js.map": "/nash-grave-plot/static/js/main.e3fa0ef4.chunk.js.map",
     "runtime-main.js": "/nash-grave-plot/static/js/runtime-main.30efa702.js",
     "runtime-main.js.map": "/nash-grave-plot/static/js/runtime-main.30efa702.js.map",
-    "static/js/2.a64b1532.chunk.js": "/nash-grave-plot/static/js/2.a64b1532.chunk.js",
-    "static/js/2.a64b1532.chunk.js.map": "/nash-grave-plot/static/js/2.a64b1532.chunk.js.map",
+    "static/js/2.e4fad1ff.chunk.js": "/nash-grave-plot/static/js/2.e4fad1ff.chunk.js",
+    "static/js/2.e4fad1ff.chunk.js.map": "/nash-grave-plot/static/js/2.e4fad1ff.chunk.js.map",
     "index.html": "/nash-grave-plot/index.html",
-    "static/js/2.a64b1532.chunk.js.LICENSE.txt": "/nash-grave-plot/static/js/2.a64b1532.chunk.js.LICENSE.txt"
+    "static/js/2.e4fad1ff.chunk.js.LICENSE.txt": "/nash-grave-plot/static/js/2.e4fad1ff.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.30efa702.js",
-    "static/js/2.a64b1532.chunk.js",
-    "static/js/main.2b318e62.chunk.js"
+    "static/js/2.e4fad1ff.chunk.js",
+    "static/js/main.e3fa0ef4.chunk.js"
   ]
 }
