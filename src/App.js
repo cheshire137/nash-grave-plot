@@ -3,9 +3,11 @@ import { BaseStyles, Header, Heading, Text, ThemeProvider } from '@primer/compon
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
 import Column from './models/Column';
+import LocalStorage from './models/LocalStorage';
 
 const App = () => {
-  const [enabledColumns, setEnabledColumns] = useState(Column.defaultColumns);
+  const savedEnabledColumns = LocalStorage.get('enabledColumns');
+  const [enabledColumns, setEnabledColumns] = useState(savedEnabledColumns || Column.defaultColumns);
   return (
     <ThemeProvider>
       <BaseStyles>
