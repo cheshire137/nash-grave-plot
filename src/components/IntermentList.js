@@ -67,6 +67,7 @@ const IntermentList = ({ enabledColumns, setEnabledColumns }) => {
   };
 
   const notesColumn = { Header: Column.names.notes, accessor: 'notes', Cell: NotesDisplay };
+
   const tractParcelNumberColumn = { Header: Column.names.tractParcelNumber, accessor: 'tractParcelNumber', Cell: ParcelNumberDisplay };
   const cemeteryParcelNumberColumn = { Header: Column.names.cemeteryParcelNumber, accessor: 'cemeteryParcelNumber',
     Cell: ParcelNumberDisplay };

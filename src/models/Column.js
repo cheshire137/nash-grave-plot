@@ -44,6 +44,15 @@ class Column {
     'surveyUpdates': 'Updates',
     'currentSurvey': 'Current'
   };
+  static groups = {
+    'Person': ['person', 'deathDate', 'deceasedInfo'],
+    'Location': ['cemeteryName', 'address', 'graveyardType', 'siteHistory'],
+    'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
+      'gravePhotos'],
+    'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],
+    'Survey': ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
+    '': ['notes']
+  };
 }
 
 export default Column;
