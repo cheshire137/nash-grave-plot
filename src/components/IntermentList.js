@@ -25,7 +25,7 @@ const filterColumns = (enabledColumnNames, relevantColumns) => {
   return relevantColumns.filter(column => enabledColumnNames.includes(column.accessor));
 };
 
-const IntermentList = ({ enabledColumns, setPageTitle }) => {
+const IntermentList = ({ enabledColumns, setPageTitle, filters }) => {
   const data = useMemo(() => {
     const interments = NashvilleCemeteries.map(interment => new Interment(interment));
     interments.sort(IntermentSort);
@@ -100,6 +100,7 @@ const IntermentList = ({ enabledColumns, setPageTitle }) => {
     pageSize={10}
     defaultColumn={defaultColumn}
     setPageTitle={setPageTitle}
+    filters={filters}
   />;
 };
 

@@ -35,7 +35,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 }
 fuzzyTextFilterFn.autoRemove = val => !val;
 
-const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle }) => {
+const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }) => {
   const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const {
@@ -51,7 +51,7 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle }
   } = useTable({
     columns,
     data,
-    initialState: { pageSize },
+    initialState: { pageSize, filters: filters || [] },
     defaultColumn,
     filterTypes
   }, useFilters, usePagination);

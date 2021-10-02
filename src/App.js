@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/components';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
@@ -6,10 +6,24 @@ import Column from './models/Column';
 import LocalStorage from './models/LocalStorage';
 import Footer from './components/Footer';
 
+const getInitialFilters = () => {
+  const searchQuery = window.location.search;
+  if (!searchQuery || searchQuery.length < 1) {
+    return [];
+  }
+  const keyValuePairs = searchQuery.substring(1).split('&');
+  return keyValuePairs.map(pair => {
+    const [id, encodedValue] = pair.split('=');
+    return { id, value: decodeURIComponent(encodedValue) };
+  });
+};
+
 const App = () => {
   const savedEnabledColumns = LocalStorage.get('enabledColumns');
   const [enabledColumns, setEnabledColumns] = useState(savedEnabledColumns || Column.defaultColumns);
   const [pageTitle, setPageTitle] = useState('');
+  const filters = useMemo(() => getInitialFilters(), []);
+
   return (
     <ThemeProvider>
       <BaseStyles>
@@ -27,7 +41,7 @@ const App = () => {
           </Header.Item>
         </Header>
         <Box pb={4}>
-          <IntermentList enabledColumns={enabledColumns} setPageTitle={setPageTitle} />
+          <IntermentList enabledColumns={enabledColumns} setPageTitle={setPageTitle} filters={filters} />
         </Box>
         <Footer />
       </BaseStyles>
