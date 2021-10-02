@@ -9,7 +9,8 @@ function AddressFilter({
     UpdateUrlFilter('address', newAddress);
     setFilter(newAddress);
   }
-  return <TextFilter column={{ filterValue, setFilter: setFilterAndUpdateUrl }} />;
+  const column = { filterValue, setFilter: setFilterAndUpdateUrl };
+  return <TextFilter column={column} />;
 }
 
 export default AddressFilter;

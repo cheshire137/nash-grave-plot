@@ -7,15 +7,15 @@ import LocalStorage from './models/LocalStorage';
 import Footer from './components/Footer';
 
 const getInitialFilters = () => {
-  const searchQuery = window.location.search;
-  if (!searchQuery || searchQuery.length < 1) {
-    return [];
+  const filters = [];
+  if (window.location.search.length < 1) {
+    return filters;
   }
-  const keyValuePairs = searchQuery.substring(1).split('&');
-  return keyValuePairs.map(pair => {
-    const [id, encodedValue] = pair.split('=');
-    return { id, value: decodeURIComponent(encodedValue) };
-  });
+  const searchParams = new URLSearchParams(window.location.search);
+  for (const [id, value] of searchParams.entries()) {
+    filters.push({ id, value });
+  }
+  return filters;
 };
 
 const App = () => {
