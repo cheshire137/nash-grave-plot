@@ -83,14 +83,16 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
           </tbody>
         </table>
       </TableStyles>
-      <Pagination
-        pageCount={pageOptions.length}
-        currentPage={pageIndex + 1}
-        onPageChange={(e, page) => {
-          e.preventDefault();
-          gotoPage(page - 1);
-        }}
-      />
+      {pageOptions.length > 1 && (
+        <Pagination
+          pageCount={pageOptions.length}
+          currentPage={pageIndex + 1}
+          onPageChange={(e, page) => {
+            e.preventDefault();
+            gotoPage(page - 1);
+          }}
+        />
+      )}
     </>
   );
 };
