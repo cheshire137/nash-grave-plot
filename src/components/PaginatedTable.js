@@ -45,7 +45,7 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, 
     page,
     prepareRow,
     pageOptions,
-    state: {pageIndex},
+    state: { pageIndex },
     gotoPage,
     rows
   } = useTable({
@@ -76,7 +76,9 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, 
                 {headerGroup.headers.map(column => (
                   <TableHeaderCell {...column.getHeaderProps()}>
                     {column.render('Header')}
-                    <Box mt="1">{column.canFilter ? column.render('Filter') : null}</Box>
+                    {column.canFilter && (
+                      <Box mt="1">{column.render('Filter')}</Box>
+                    )}
                   </TableHeaderCell>
                 ))}
               </tr>
