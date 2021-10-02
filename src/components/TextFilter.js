@@ -11,6 +11,7 @@ function TextFilter({
       placeholder="Filter"
       bg="white"
       variant="small"
+      block
     />
   );
 }
