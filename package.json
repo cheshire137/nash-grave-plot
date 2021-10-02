@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://www.3till7.net/nash-grave-plot",
   "dependencies": {
-    "@primer/components": "^28.5.0",
+    "@primer/components": "^30.0.0",
     "@primer/octicons-react": "^15.2.0",
     "gh-pages": "^3.2.3",
     "match-sorter": "^6.3.0",
