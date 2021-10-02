@@ -35,7 +35,7 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 }
 fuzzyTextFilterFn.autoRemove = val => !val;
 
-const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
+const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle }) => {
   const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const {
@@ -46,7 +46,8 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
     prepareRow,
     pageOptions,
     state: {pageIndex},
-    gotoPage
+    gotoPage,
+    rows
   } = useTable({
     columns,
     data,
@@ -54,6 +55,16 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
     defaultColumn,
     filterTypes
   }, useFilters, usePagination);
+
+  const totalPages = pageOptions.length;
+  const totalResults = rows.length;
+  if (totalResults === 1) {
+    setPageTitle('1 result');
+  } else if (totalResults > 1) {
+    setPageTitle(`${totalResults.toLocaleString('en-US')} results`);
+  } else {
+    setPageTitle('No results');
+  }
 
   return (
     <>
@@ -83,9 +94,9 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn }) => {
           </tbody>
         </table>
       </TableStyles>
-      {pageOptions.length > 1 && (
+      {totalPages > 1 && (
         <Pagination
-          pageCount={pageOptions.length}
+          pageCount={totalPages}
           currentPage={pageIndex + 1}
           onPageChange={(e, page) => {
             e.preventDefault();

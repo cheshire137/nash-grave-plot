@@ -24,7 +24,7 @@ const filterColumns = (enabledColumnNames, relevantColumns) => {
   return relevantColumns.filter(column => enabledColumnNames.includes(column.accessor));
 };
 
-const IntermentList = ({ enabledColumns }) => {
+const IntermentList = ({ enabledColumns, setPageTitle }) => {
   const data = useMemo(() => {
     const interments = NashvilleCemeteries.map(interment => new Interment(interment));
     interments.sort(IntermentSort);
@@ -93,7 +93,13 @@ const IntermentList = ({ enabledColumns }) => {
       surveyColumnGroup];
   }, [enabledColumns]);
 
-  return <PaginatedTable data={data} columns={columns} pageSize={10} defaultColumn={defaultColumn} />;
+  return <PaginatedTable
+    data={data}
+    columns={columns}
+    pageSize={10}
+    defaultColumn={defaultColumn}
+    setPageTitle={setPageTitle}
+  />;
 };
 
 export default IntermentList;
