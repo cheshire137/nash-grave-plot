@@ -12,6 +12,7 @@ function TextFilter({
       bg="white"
       variant="small"
       block
+      type="search"
     />
   );
 }
