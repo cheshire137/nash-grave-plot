@@ -6,6 +6,7 @@ import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
 import TextFilter from './TextFilter';
+import AddressFilter from './AddressFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
 import NameDisplay from './NameDisplay';
@@ -43,7 +44,7 @@ const IntermentList = ({ enabledColumns, setPageTitle }) => {
   const cemeteryColumn = { Header: Column.names.cemeteryName, accessor: 'cemeteryName', filter: 'includes',
     Filter: SelectColumnFilter, Cell: NameDisplay };
   const addressColumn = { Header: Column.names.address, accessor: 'address', Cell: AddressDisplay,
-    filter: 'fuzzyText' };
+    filter: 'fuzzyText', Filter: AddressFilter };
   const graveyardTypeColumn = { Header: Column.names.graveyardType, accessor: 'graveyardType', filter: 'includes',
     Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
   const siteHistoryColumn = { Header: Column.names.siteHistory, accessor: 'siteHistory', Cell: InfoDisplay };
