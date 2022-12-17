@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { Box, Pagination } from '@primer/components';
+import { Box, Pagination } from '@primer/react';
 import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 

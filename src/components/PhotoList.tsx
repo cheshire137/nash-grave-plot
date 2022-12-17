@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@primer/components';
+import { Box } from '@primer/react';
 import PhotoDisplay from './PhotoDisplay';
 
 const PhotoList = ({ value }) => <Box minWidth="120px">

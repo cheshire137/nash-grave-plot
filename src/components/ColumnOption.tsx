@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, FormGroup } from '@primer/components';
+import { Box, FormGroup } from '@primer/react';
 
 const ColumnOption = ({ name, value, isEnabled, onToggle }) => {
   const domID = `enabledColumns_${value}`;

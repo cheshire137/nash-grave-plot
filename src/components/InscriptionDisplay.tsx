@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@primer/components';
+import { Box } from '@primer/react';
 import { ConstrainedTextBlock } from './LongTextBlock';
 import { titleCase } from './TitleCase';
 

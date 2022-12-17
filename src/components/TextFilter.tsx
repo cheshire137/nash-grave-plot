@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput } from '@primer/components';
+import { TextInput } from '@primer/react';
 
 function TextFilter({
   column: { filterValue, setFilter }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@primer/components';
+import { Text } from '@primer/react';
 
 export const titleCase = str => str.toLowerCase().split(/\s+/)
   .filter(word => word.length > 0)

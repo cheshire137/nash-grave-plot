@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, ButtonInvisible, Dialog, StyledOcticon, Text } from '@primer/components';
+import { Box, ButtonInvisible, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
 import Column from '../models/Column';

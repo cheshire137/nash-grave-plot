@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@primer/components';
+import { Text } from '@primer/react';
 import styled from "styled-components";
 import { titleCase } from './TitleCase';
 

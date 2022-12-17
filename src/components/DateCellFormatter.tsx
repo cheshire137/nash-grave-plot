@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@primer/components';
+import { Box, Text } from '@primer/react';
 
 const prettyDateStr = (date) => {
   const year = date.getFullYear();

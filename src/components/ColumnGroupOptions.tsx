@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Heading } from '@primer/components';
+import { Box, Heading } from '@primer/react';
 import ColumnOption from './ColumnOption';
 import Column from '../models/Column';
 

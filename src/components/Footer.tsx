@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link } from '@primer/components';
+import { Box, Link } from '@primer/react';
 
 const Footer = () => {
   return (

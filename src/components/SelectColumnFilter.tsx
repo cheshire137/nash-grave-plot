@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Dropdown } from '@primer/components';
+import { Dropdown } from '@primer/react';
 import { titleCase } from './TitleCase';
 
 const FullWidthDropdown = styled(Dropdown)`

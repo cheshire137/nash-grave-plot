@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@primer/components';
+import { Box } from '@primer/react';
 import TitleCase from './TitleCase';
 
 const AddressLines = ({ streetAddress, additionalLocationInfo }) => <Box textAlign="left" minWidth="200px">

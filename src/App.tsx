@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/components';
+import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
 import Column from './models/Column';
