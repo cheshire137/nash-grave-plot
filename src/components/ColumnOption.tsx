@@ -1,23 +1,20 @@
 import React from 'react';
-import { Box, FormGroup } from '@primer/react';
+import { Box, FormControl, Checkbox } from '@primer/react';
 
 const ColumnOption = ({ name, value, isEnabled, onToggle }) => {
   const domID = `enabledColumns_${value}`;
-  return (
-    <FormGroup display="inline-block" my={0} mr={3}>
-      <FormGroup.Label fontWeight="normal" htmlFor={domID} mb={1}>
-        <input
-          type="checkbox"
-          checked={isEnabled}
-          name="enabledColumns"
-          value={value}
-          id={domID}
-          onChange={e => onToggle(value, e.target.checked)}
-        />
-        <Box as="span" display="inline-block" ml={1}>{name}</Box>
-      </FormGroup.Label>
-    </FormGroup>
-  );
+  return <FormControl id={domID} sx={{ display: 'inline-block', mx: 0, mr: 3 }}>
+    <FormControl.Label sx={{ fontWeight: 'normal', mb: 1 }}>
+      <Checkbox
+        checked={isEnabled}
+        name="enabledColumns"
+        value={value}
+        id={domID}
+        onChange={e => onToggle(value, e.target.checked)}
+      />
+      <Box as="span" display="inline-block" ml={1}>{name}</Box>
+    </FormControl.Label>
+  </FormControl>
 };
 
 export default ColumnOption;

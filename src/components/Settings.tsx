@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, ButtonInvisible, Dialog, StyledOcticon, Text } from '@primer/react';
+import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
 import Column from '../models/Column';
@@ -16,9 +16,9 @@ const Settings = ({ enabledColumns, setEnabledColumns }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <ButtonInvisible onClick={() => setIsOpen(true)} title="Settings" aria-label="Settings">
+      <Button variant="invisible" onClick={() => setIsOpen(true)} title="Settings" aria-label="Settings">
         <StyledOcticon icon={GearIcon} size={16} color="white" />
-      </ButtonInvisible>
+      </Button>
       <Dialog
         isOpen={isOpen}
         onDismiss={() => setIsOpen(false)}
