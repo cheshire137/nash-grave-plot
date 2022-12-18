@@ -13,7 +13,7 @@ function TextFilter({
 }: Props) {
   return <TextInput
     value={filterValue || ''}
-    onChange={e => setFilter(e.target.value || undefined)}
+    onChange={e => setFilter(e.target.value)}
     placeholder="Filter"
     sx={{ bg: 'white' }}
     variant="small"
