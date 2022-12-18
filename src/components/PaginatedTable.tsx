@@ -3,23 +3,8 @@ import styled from 'styled-components';
 import { Box, Pagination } from '@primer/react';
 import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
-
-const TableHeaderCell = styled(Box).attrs({
-  as: 'th',
-  p: 2,
-  borderBottom: '1px solid #e5e5e5'
-})`
-  background-color: #f5f5f5;
-`;
-
-const TableCell = styled(Box).attrs({
-  as: 'td',
-  p: 2,
-  verticalAlign: 'top',
-  textAlign: 'center',
-  borderBottom: '1px solid #e5e5e5'
-})`
-`;
+import TableHeaderCell from './TableHeaderCell';
+import TableCell from './TableCell';
 
 const TableStyles = styled.div`
   width: 100%;
@@ -35,7 +20,11 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 }
 fuzzyTextFilterFn.autoRemove = val => !val;
 
-const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }) => {
+interface Props {
+  setPageTitle: (title: string) => void;
+}
+
+const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }: Props) => {
   const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const {

@@ -10,7 +10,11 @@ export const ConstrainedTextBlock = styled(Text).attrs({
   overflow: auto;
 `;
 
-const LongTextBlock = ({ value }) => typeof value === 'string' ? (
+interface Props {
+  value?: string | null;
+}
+
+const LongTextBlock = ({ value }: Props) => typeof value === 'string' ? (
   <ConstrainedTextBlock>{titleCase(value)}</ConstrainedTextBlock>
 ) : null;
 

@@ -1,20 +1,26 @@
 import React from 'react';
 import { Box, Text } from '@primer/react';
 
-const prettyDateStr = (date) => {
+const prettyDateStr = (date: Date) => {
   const year = date.getFullYear();
-  let month = date.getMonth() + 1;
+  const month = date.getMonth() + 1;
+  let monthStr = month.toString();
   if (month < 10) {
-    month = `0${month}`;
+    monthStr = `0${month}`;
   }
-  let day = date.getDate();
+  const day = date.getDate();
+  let dayStr = day.toString();
   if (day < 10) {
-    day = `0${day}`;
+    dayStr = `0${day}`;
   }
-  return `${year}-${month}-${day}`;
+  return `${year}-${monthStr}-${dayStr}`;
 };
 
-const DateCellFormatter = ({ value }) => <Box minWidth="130px">
+interface Props {
+  value?: Date | string;
+}
+
+const DateCellFormatter = ({ value }: Props) => <Box minWidth="130px">
   {value instanceof Date ? <Text whiteSpace="nowrap">{prettyDateStr(value)}</Text> : value}
 </Box>;
 

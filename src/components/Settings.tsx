@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
-import Column from '../models/Column';
+import { AllColumnGroups, Column, ColumnsByColumnGroup } from '../models/Column';
 import LocalStorage from '../models/LocalStorage';
 
-const getEnabledColumns = (enabledColumns, columnValue, isEnabled) => {
+const getEnabledColumns = (enabledColumns: Column[], columnValue: Column, isEnabled: boolean) => {
   if (isEnabled) {
     return [...enabledColumns, columnValue];
   }
   return enabledColumns.filter(c => c !== columnValue);
 };
 
-const Settings = ({ enabledColumns, setEnabledColumns }) => {
+interface Props {
+  enabledColumns: Column[];
+  setEnabledColumns: (enabledColumns: Column[]) => void;
+}
+
+const Settings = ({ enabledColumns, setEnabledColumns }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -28,10 +33,10 @@ const Settings = ({ enabledColumns, setEnabledColumns }) => {
         <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
           <Text color="black" as="div">
             <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
-            {Object.keys(Column.groups).map(groupName => <ColumnGroupOptions
+            {AllColumnGroups.map(groupName => <ColumnGroupOptions
               key={groupName}
               groupName={groupName}
-              columnValues={Column.groups[groupName]}
+              columnValues={ColumnsByColumnGroup[groupName]}
               enabledColumns={enabledColumns}
               onColumnToggle={(columnValue, isEnabled) => {
                 const newEnabledColumns = getEnabledColumns(enabledColumns, columnValue, isEnabled);

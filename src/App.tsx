@@ -2,12 +2,13 @@ import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
-import Column from './models/Column';
+import { Column, AllColumns } from './models/Column';
 import LocalStorage from './models/LocalStorage';
+import Filter from './models/Filter';
 import Footer from './components/Footer';
 
 const getInitialFilters = () => {
-  const filters = [];
+  const filters: Filter[] = [];
   if (window.location.search.length < 1) {
     return filters;
   }
@@ -19,8 +20,8 @@ const getInitialFilters = () => {
 };
 
 const App = () => {
-  const savedEnabledColumns = LocalStorage.get('enabledColumns');
-  const [enabledColumns, setEnabledColumns] = useState(savedEnabledColumns || Column.defaultColumns);
+  const savedEnabledColumns: Column[] = LocalStorage.get('enabledColumns');
+  const [enabledColumns, setEnabledColumns] = useState<Column[]>(savedEnabledColumns || AllColumns);
   const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
 
