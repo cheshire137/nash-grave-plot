@@ -1,12 +1,24 @@
+import React, { useMemo } from 'react';
 import { TableOptions, useTable } from 'react-table';
 import TableStyles from './TableStyles';
+import TableHeaderCell from './TableHeaderCell';
 import Interment from '../models/Interment';
+import { matchSorter } from 'match-sorter';
+import { Box } from '@primer/react';
+import TableCell from './TableCell';
+
+function fuzzyTextFilterFn(rows: any[], id: any, filterValue: any) {
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
+}
+fuzzyTextFilterFn.autoRemove = (val: any) => !val;
 
 interface Props extends TableOptions<Interment> {
   setPageTitle: (title: string) => void;
 }
 
-const Table = ({ columns, data, setPageTitle }: Props) => {
+const Table = ({ columns, data, defaultColumn, setPageTitle, filters }: Props) => {
+  const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -16,6 +28,9 @@ const Table = ({ columns, data, setPageTitle }: Props) => {
   } = useTable({
     columns,
     data,
+    initialState: { filters: filters || [] },
+    defaultColumn,
+    filterTypes,
   });
 
   const totalResults = rows.length;
@@ -31,9 +46,10 @@ const Table = ({ columns, data, setPageTitle }: Props) => {
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => <tr {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map(column => <th {...column.getHeaderProps()}>
+          {headerGroup.headers.map(column => <TableHeaderCell {...column.getHeaderProps()}>
             {column.render('Header')}
-          </th>)}
+            {column.canFilter && <Box mt="1">{column.render('Filter')}</Box>}
+          </TableHeaderCell>)}
         </tr>)}
       </thead>
       <tbody {...getTableBodyProps()}>
@@ -42,9 +58,9 @@ const Table = ({ columns, data, setPageTitle }: Props) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => <td {...cell.getCellProps()}>
+                {row.cells.map(cell => <TableCell {...cell.getCellProps()}>
                   {cell.render('Cell')}
-                </td>)}
+                </TableCell>)}
               </tr>
             );
           },

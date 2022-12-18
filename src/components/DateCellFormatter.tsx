@@ -17,7 +17,7 @@ const prettyDateStr = (date: Date) => {
 };
 
 interface Props {
-  value?: Date | string;
+  value: Date | string | null;
 }
 
 const DateCellFormatter = ({ value }: Props) => <Box minWidth="130px">
