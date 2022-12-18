@@ -115,6 +115,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   return <Table
     data={data}
     columns={columns}
+    setPageTitle={setPageTitle}
   />;
 };
 

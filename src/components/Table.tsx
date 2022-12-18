@@ -1,7 +1,12 @@
 import { TableOptions, useTable } from 'react-table';
 import TableStyles from './TableStyles';
+import Interment from '../models/Interment';
 
-const Table = ({ columns, data }: TableOptions<{}>) => {
+interface Props extends TableOptions<Interment> {
+  setPageTitle: (title: string) => void;
+}
+
+const Table = ({ columns, data, setPageTitle }: Props) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -12,6 +17,15 @@ const Table = ({ columns, data }: TableOptions<{}>) => {
     columns,
     data,
   });
+
+  const totalResults = rows.length;
+  if (totalResults === 1) {
+    setPageTitle('1 result');
+  } else if (totalResults > 1) {
+    setPageTitle(`${totalResults.toLocaleString('en-US')} results`);
+  } else {
+    setPageTitle('No results');
+  }
 
   return <TableStyles>
     <table {...getTableProps()}>
