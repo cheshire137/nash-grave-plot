@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { ActionMenu, ActionList } from '@primer/react';
 import { titleCase } from './TitleCase';
@@ -25,10 +25,19 @@ const SmallDropdownItem = styled(ActionList.Item).attrs({
   font-size: 0.9rem;
 `;
 
+interface Props {
+  column: {
+    filterValue: string;
+    setFilter: (value?: string) => void;
+    preFilteredRows: any[];
+    id: string;
+  };
+}
+
 function SelectColumnFilter({
   column: {filterValue, setFilter, preFilteredRows, id}
-}) {
-  const options = React.useMemo(() => {
+}: Props) {
+  const options: any[] = useMemo(() => {
     const options = new Set()
     preFilteredRows.forEach(row => {
       const value = row.values[id] || '';
@@ -37,7 +46,7 @@ function SelectColumnFilter({
         options.add(option);
       }
     })
-    const sortedOptions = [...options.values()];
+    const sortedOptions: any[] = [...options.values()];
     sortedOptions.sort();
     return sortedOptions;
   }, [id, preFilteredRows]);

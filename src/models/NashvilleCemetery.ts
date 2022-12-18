@@ -1,13 +1,13 @@
 import cemeteriesList from '../nashville-cemeteries.json';
 
 // https://dev.socrata.com/docs/datatypes/url.html#2.1
-type PhotoLink = {
+export type PhotoLink = {
   url: string;
   description: string;
 };
 
 // https://dev.socrata.com/docs/datatypes/location.html#2.1
-type Location = {
+export type Location = {
   latitude: string | null;
   longitude: string | null;
   human_address: {

@@ -6,7 +6,7 @@ interface Props {
   value?: string | null;
 }
 
-const NotesDisplay = ({ value }) => <Box minWidth="300px" textAlign="left">
+const NotesDisplay = ({ value }: Props) => <Box minWidth="300px" textAlign="left">
   <LongTextBlock value={value} />
 </Box>;
 

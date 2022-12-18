@@ -1,7 +1,8 @@
 import Address from './Address';
 import Inscription from './Inscription';
+import { NashvilleCemeteryData, PhotoLink } from './NashvilleCemetery';
 
-const parseAccessible = accessible => {
+const parseAccessible = (accessible?: string | null) => {
   const lowercase = (accessible || '').toLowerCase();
   if (lowercase === 'yes' || lowercase === 'y') {
     return 'yes';
@@ -12,7 +13,7 @@ const parseAccessible = accessible => {
   return lowercase;
 };
 
-const parseMonthDayYearString = str => {
+const parseMonthDayYearString = (str: string) => {
   const regex = /^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/;
   const match = str.match(regex);
 
@@ -26,7 +27,7 @@ const parseMonthDayYearString = str => {
   return null;
 }
 
-const parseYearMonthDayString = str => {
+const parseYearMonthDayString = (str: string) => {
   const regex = /^(\d\d\d\d)-(\d\d?)-(\d\d?)/;
   const match = str.match(regex);
 
@@ -40,7 +41,7 @@ const parseYearMonthDayString = str => {
   return null;
 };
 
-const parseDateString = str => {
+const parseDateString = (str?: string | null) => {
   if (typeof str !== 'string' || str.trim().length < 1) {
     return null;
   }
@@ -58,7 +59,7 @@ const parseDateString = str => {
   return str;
 };
 
-const parseGraveyardType = graveyardType => {
+const parseGraveyardType = (graveyardType?: string | null) => {
   const lowercase = (graveyardType || '').toLowerCase();
   if (lowercase.match(/\s+graveyard$/)) {
     return lowercase.split(/\s+/)[0];
@@ -66,45 +67,44 @@ const parseGraveyardType = graveyardType => {
   return lowercase;
 }
 
-const extractPhotos = (props, photoAttrs) => {
-  return photoAttrs.map(attr => props[attr]).filter(photoData => photoData);
-};
-
 class Interment {
-  constructor(props) {
+  data: NashvilleCemeteryData;
+  key: string;
+  address: Address;
+  graveyardType: string;
+  currentSurvey: Date | string | null;
+  surveyUpdates: Date | string | null;
+  originalSurvey: Date | string | null;
+  deathDate: Date | string | null;
+  gravePhotos: PhotoLink[];
+  sitePhotos: PhotoLink[];
+  accessible: string;
+  cemeteryName: string;
+
+  constructor(props: NashvilleCemeteryData) {
+    this.data = props;
     this.key = '_' + Math.random().toString(36).substr(2, 9);
-    this.person = props.interment;
-    this.archaeologicalInfo = props.archaeological_information;
     this.address = new Address(props);
-    this.cemeteryParcelNumber = props.cemetery_parcel_number;
-    this.tractParcelNumber = props.tract_parcel_number;
-    this.siteContactInfo = props.site_contact_info;
-    this.siteHistory = props.site_history;
-    this.restoration = props.restoration;
-    this.notes = props.notes;
     this.graveyardType = parseGraveyardType(props.graveyard_type);
     this.currentSurvey = parseDateString(props.current_survey);
     this.surveyUpdates = parseDateString(props.survey_update_s);
     this.originalSurvey = parseDateString(props.original_survey);
-    this.deceasedInfo = props.deceased_info;
-    this.footstone = props.footstone;
     this.deathDate = parseDateString(props.death_date);
-    this.inscription = new Inscription(props.inscription);
-    this.gravePhotos = extractPhotos(props, ['grave_photo_link', 'grave_photo_2', 'grave_photo_3']);
-    this.knownBurials = props.known_burials;
-    this.sitePhotos = extractPhotos(props, ['site_photo_link', 'site_photo_2', 'site_photo_3', 'site_photo_4',
-      'site_photo_5', 'site_photo_6']);
+    this.gravePhotos = [props.grave_photo_link, props.grave_photo_2, props.grave_photo_3]
+      .filter(pl => pl).map(pl => pl as PhotoLink);
+    this.sitePhotos = [props.site_photo_link, props.site_photo_2, props.site_photo_3, props.site_photo_4,
+      props.site_photo_5, props.site_photo_6].filter(pl => pl).map(pl => pl as PhotoLink);
     this.accessible = parseAccessible(props.accessible);
-    this.demarcation = props.demarcation;
-    this.condition = props.condition;
-    this.mapID = props.map_id;
-    this.alternateCemeteryName = props.alternate_cemetery_name;
     this.cemeteryName = props.cemetery_name;
     if (!this.cemeteryName || (typeof this.cemeteryName === 'string' && this.cemeteryName.length < 0)) {
-      if (typeof this.alternateCemeteryName === 'string' && this.alternateCemeteryName.length > 0) {
-        this.cemeteryName = this.alternateCemeteryName;
+      if (typeof props.alternate_cemetery_name === 'string' && props.alternate_cemetery_name.length > 0) {
+        this.cemeteryName = props.alternate_cemetery_name;
       }
     }
+  }
+
+  getInscription() {
+    return new Inscription(this.data.inscription);
   }
 }
 

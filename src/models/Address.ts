@@ -1,7 +1,19 @@
+import { NashvilleCemeteryData, Location } from "./NashvilleCemetery";
+
 class Address {
-  constructor(props) {
+  locale: string;
+  mappedLocation: Location;
+  street: string;
+  number: string;
+  geocode: string;
+  streetAddress: string;
+  additionalLocationInfo: string;
+  latitude?: string;
+  longitude?: string;
+
+  constructor(props: NashvilleCemeteryData) {
     this.locale = props.locale || '';
-    this.mappedLocation = props.mapped_location || '';
+    this.mappedLocation = props.mapped_location;
     this.latitude = props.latitude;
     this.longitude = props.longitude;
     if (this.latitude && this.longitude) {

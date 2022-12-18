@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import NashvilleCemeteries from '../nashville-cemeteries.json';
+import { NashvilleCemeteries } from '../models/NashvilleCemetery';
 import Interment from '../models/Interment';
 import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
@@ -20,9 +20,7 @@ import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import PaginatedTable from './PaginatedTable';
 import IntermentSort from '../models/IntermentSort';
-import { Column, ColumnNamesByColumn } from '../models/Column';
-
-type TableColumn = { Header: string, accessor: Column, filter?: string, Filter?: any, id?: string, Cell?: any };
+import { Column, ColumnNamesByColumn, TableColumn, TableColumnGroup } from '../models/Column';
 
 const filterColumns = (enabledColumnNames: Column[], relevantColumns: TableColumn[]) => {
   return relevantColumns.filter(column => enabledColumnNames.includes(column.accessor));
@@ -36,7 +34,7 @@ interface Props {
 
 const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   const data = useMemo(() => {
-    const interments = (NashvilleCemeteries as any[]).map((interment: any) => new Interment(interment));
+    const interments = NashvilleCemeteries.map(cemeteryData => new Interment(cemeteryData));
     interments.sort(IntermentSort);
     return interments;
   }, []);
@@ -45,7 +43,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   const nameColumn: TableColumn = { Header: ColumnNamesByColumn.person, accessor: 'person', filter: 'fuzzyText', Cell: NameDisplay };
   const deathDateColumn: TableColumn = { Header: ColumnNamesByColumn.deathDate, accessor: 'deathDate', Cell: DiedDateDisplay };
   const deceasedInfoColumn: TableColumn = { Header: ColumnNamesByColumn.deceasedInfo, accessor: 'deceasedInfo', Cell: InfoDisplay, filter: 'fuzzyText' };
-  const personColumnGroup = {
+  const personColumnGroup: TableColumnGroup = {
     Header: 'Person',
     columns: filterColumns(enabledColumns, [nameColumn, deathDateColumn, deceasedInfoColumn])
   };
@@ -57,7 +55,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   const graveyardTypeColumn: TableColumn = { Header: ColumnNamesByColumn.graveyardType, accessor: 'graveyardType', filter: 'includes',
     Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
   const siteHistoryColumn: TableColumn = { Header: ColumnNamesByColumn.siteHistory, accessor: 'siteHistory', Cell: InfoDisplay };
-  const locationColumnGroup = {
+  const locationColumnGroup: TableColumnGroup = {
     Header: 'Location',
     columns: filterColumns(enabledColumns, [cemeteryColumn, addressColumn, graveyardTypeColumn, siteHistoryColumn])
   };
@@ -70,19 +68,19 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     Filter: SelectColumnFilter };
   const restorationColumn: TableColumn = { Header: ColumnNamesByColumn.restoration, accessor: 'restoration', Cell: LongTextBlock };
   const photosColumn: TableColumn = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList };
-  const markerColumnGroup = {
+  const markerColumnGroup: TableColumnGroup = {
     Header: 'Marker/Plot',
     columns: filterColumns(enabledColumns, [inscriptionColumn, footstoneColumn, demarcationColumn, conditionColumn,
       accessibleColumn, restorationColumn, photosColumn])
   };
 
   const notesColumn: TableColumn = { Header: ColumnNamesByColumn.notes, accessor: 'notes', Cell: NotesDisplay };
-  const otherColumnGroup: TableColumn = { Header: '', id: 'other', columns: filterColumns(enabledColumns, [notesColumn]) };
+  const otherColumnGroup: TableColumnGroup = { Header: '', id: 'other', columns: filterColumns(enabledColumns, [notesColumn]) };
 
   const tractParcelNumberColumn: TableColumn = { Header: ColumnNamesByColumn.tractParcelNumber, accessor: 'tractParcelNumber', Cell: ParcelNumberDisplay };
   const cemeteryParcelNumberColumn: TableColumn = { Header: ColumnNamesByColumn.cemeteryParcelNumber, accessor: 'cemeteryParcelNumber',
     Cell: ParcelNumberDisplay };
-  const parcelNumberColumnGroup = {
+  const parcelNumberColumnGroup: TableColumnGroup = {
     Header: 'Parcel Numbers',
     columns: filterColumns(enabledColumns, [tractParcelNumberColumn, cemeteryParcelNumberColumn])
   };
@@ -93,7 +91,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     Cell: DateCellFormatter };
   const currentSurveyColumn: TableColumn = { Header: ColumnNamesByColumn.currentSurvey, accessor: 'currentSurvey',
     Cell: DateCellFormatter };
-  const surveyColumnGroup = {
+  const surveyColumnGroup: TableColumnGroup = {
     Header: 'Survey',
     columns: filterColumns(enabledColumns, [originalSurveyColumn, surveyUpdatesColumn, currentSurveyColumn])
   };

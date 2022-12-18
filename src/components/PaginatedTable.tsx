@@ -5,6 +5,9 @@ import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
+import Interment from '../models/Interment';
+import Filter from '../models/Filter';
+import { TableColumnGroup } from '../models/Column';
 
 const TableStyles = styled.div`
   width: 100%;
@@ -15,13 +18,18 @@ const TableStyles = styled.div`
   }
 `;
 
-function fuzzyTextFilterFn(rows, id, filterValue) {
+function fuzzyTextFilterFn(rows: any, id: any, filterValue: string) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
 }
 fuzzyTextFilterFn.autoRemove = val => !val;
 
 interface Props {
   setPageTitle: (title: string) => void;
+  data: Interment[];
+  columns: TableColumnGroup[];
+  pageSize: number;
+  filters: Filter[];
+  defaultColumn: any;
 }
 
 const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }: Props) => {
@@ -74,11 +82,11 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, 
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {page.map(row => {
+            {page.map((row: any) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
+                  {row.cells.map((cell: any) => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
                 </tr>
               );
             })}

@@ -5,7 +5,7 @@ interface Props {
   value?: string | null;
 }
 
-const GraveyardTypeDisplay = ({ value }) => <Box minWidth="130px">
+const GraveyardTypeDisplay = ({ value }: Props) => <Box minWidth="130px">
   <Text textAlign="center" as="div">{value}</Text>
 </Box>;
 

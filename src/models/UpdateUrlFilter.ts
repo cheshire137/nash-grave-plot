@@ -1,4 +1,4 @@
-function UpdateUrlFilter(key, value) {
+function UpdateUrlFilter(key: string, value: string) {
   if (window.history.pushState) {
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set(key, value);

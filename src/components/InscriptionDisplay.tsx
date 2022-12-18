@@ -2,8 +2,14 @@ import React from 'react';
 import { Box } from '@primer/react';
 import { ConstrainedTextBlock } from './LongTextBlock';
 import { titleCase } from './TitleCase';
+import Inscription from '../models/Inscription';
 
-const InscriptionLines = ({ text, lines }) => <ConstrainedTextBlock textAlign="center">
+interface InscriptionLinesProps {
+  text: string;
+  lines: string[];
+}
+
+const InscriptionLines = ({ text, lines }: InscriptionLinesProps) => <ConstrainedTextBlock textAlign="center">
   {lines.length > 0 ? (
     <>
       {lines.map(line => {
@@ -16,6 +22,12 @@ const InscriptionLines = ({ text, lines }) => <ConstrainedTextBlock textAlign="c
   ) : text}
 </ConstrainedTextBlock>;
 
-const InscriptionDisplay = ({ value }) => <Box minWidth="200px"><InscriptionLines {...value} /></Box>;
+interface InscriptionDisplayProps {
+  value: Inscription;
+}
+
+const InscriptionDisplay = ({ value }: InscriptionDisplayProps) => <Box minWidth="200px">
+  <InscriptionLines {...value} />
+</Box>;
 
 export default InscriptionDisplay;

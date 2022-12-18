@@ -68,3 +68,6 @@ export const ColumnsByColumnGroup: { [group in ColumnGroup]: Column[] } = {
   'Survey': ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
   'Other': ['notes']
 };
+
+export type TableColumn = { Header: string, accessor: Column, filter?: string, Filter?: any, id?: string, Cell?: any };
+export type TableColumnGroup = { Header: string, columns: TableColumn[], id?: string };

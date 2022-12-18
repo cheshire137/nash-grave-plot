@@ -1,7 +1,15 @@
 import React from 'react';
 import { Box, FormControl, Checkbox } from '@primer/react';
+import { Column } from '../models/Column';
 
-const ColumnOption = ({ name, value, isEnabled, onToggle }) => {
+interface Props {
+  name: string;
+  value: Column;
+  isEnabled: boolean;
+  onToggle: (value: Column, isEnabled: boolean) => void;
+}
+
+const ColumnOption = ({ name, value, isEnabled, onToggle }: Props) => {
   const domID = `enabledColumns_${value}`;
   return <FormControl id={domID} sx={{ display: 'inline-block', mx: 0, mr: 3 }}>
     <FormControl.Label sx={{ fontWeight: 'normal', mb: 1 }}>
