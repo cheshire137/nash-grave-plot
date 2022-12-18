@@ -5,9 +5,6 @@ import { useFilters, useTable, usePagination } from 'react-table';
 import { matchSorter } from 'match-sorter';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
-import Interment from '../models/Interment';
-import Filter from '../models/Filter';
-import { TableColumnGroup } from '../models/Column';
 
 const TableStyles = styled.div`
   width: 100%;

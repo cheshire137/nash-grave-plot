@@ -18,7 +18,7 @@ import DemarcationDisplay from './DemarcationDisplay';
 import FootstoneDisplay from './FootstoneDisplay';
 import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
-import PaginatedTable from './PaginatedTable';
+import Table from './Table';
 import IntermentSort from '../models/IntermentSort';
 import { Column, ColumnNamesByColumn, TableColumn, TableColumnGroup } from '../models/Column';
 
@@ -101,13 +101,9 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
       surveyColumnGroup];
   }, [enabledColumns]);
 
-  return <PaginatedTable
+  return <Table
     data={data}
     columns={columns}
-    pageSize={10}
-    defaultColumn={defaultColumn}
-    setPageTitle={setPageTitle}
-    filters={filters}
   />;
 };
 
