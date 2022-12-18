@@ -1,20 +1,11 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 import { Box, Pagination } from '@primer/react';
 import { useFilters, useTable, usePagination, TableOptions } from 'react-table';
 import { matchSorter } from 'match-sorter';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
 import Interment from '../models/Interment';
-
-const TableStyles = styled.div`
-  width: 100%;
-  overflow-x: auto;
-
-  tr:nth-child(even) {
-    background-color: #f5f5f5;
-  }
-`;
+import TableStyles from './TableStyles';
 
 function fuzzyTextFilterFn(rows: any[], id: any, filterValue: any) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
