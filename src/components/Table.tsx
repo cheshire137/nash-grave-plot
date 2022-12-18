@@ -1,16 +1,12 @@
-import React, { useMemo, useEffect } from 'react';
-import { TableOptions, useTable, useFilters, usePagination } from 'react-table';
+import React, { useEffect, useMemo } from 'react';
+import { TableOptions, useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import Interment from '../models/Interment';
-import { matchSorter } from 'match-sorter';
 import { Box, Pagination } from '@primer/react';
 import TableCell from './TableCell';
-
-function fuzzyTextFilterFn(rows: any[], id: any, filterValue: any) {
-  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
-}
-fuzzyTextFilterFn.autoRemove = (val: any) => !val;
+import TextFilter from './TextFilter';
+import { fuzzyTextFilter } from '../models/fuzzyTextFilter';
 
 const getPageTitle = (totalResults: number) => {
   if (totalResults === 1) return '1 result';
@@ -18,12 +14,16 @@ const getPageTitle = (totalResults: number) => {
   return 'No results';
 }
 
+const filterTypes = { fuzzyText: fuzzyTextFilter };
+
 interface Props extends TableOptions<Interment> {
   setPageTitle: (title: string) => void;
 }
 
-const Table = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }: Props) => {
-  const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
+const Table = ({ columns, data, pageSize, setPageTitle, filters }: Props) => {
+  const defaultColumn = useMemo<Partial<TableColumn<Interment>>>(() => ({
+    Filter: TextFilter,
+  }), []);
 
   const {
     getTableProps,

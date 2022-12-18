@@ -5,7 +5,6 @@ import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
-import TextFilter from './TextFilter';
 import AddressFilter from './AddressFilter';
 import Filter from '../models/Filter';
 import DateCellFormatter from './DateCellFormatter';
@@ -46,7 +45,6 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     interments.sort(IntermentSort);
     return interments;
   }, []);
-  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
 
   const nameColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.person, accessor: 'person',
     filter: 'fuzzyText', Cell: NameDisplay };
@@ -136,7 +134,6 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     pageSize={10}
     setPageTitle={setPageTitle}
     filters={filters}
-    defaultColumn={defaultColumn}
   />;
 };
 
