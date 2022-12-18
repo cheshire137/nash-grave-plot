@@ -40,11 +40,9 @@ interface Props {
   filters: Filter[];
 }
 
-const limit = 50;
-
 const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   const data = useMemo(() => {
-    const interments = NashvilleCemeteries.slice(0, limit).map(cemeteryData => new Interment(cemeteryData));
+    const interments = NashvilleCemeteries.map(cemeteryData => new Interment(cemeteryData));
     interments.sort(IntermentSort);
     return interments;
   }, []);
@@ -135,6 +133,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   return <Table
     data={data}
     columns={columns}
+    pageSize={10}
     setPageTitle={setPageTitle}
     filters={filters}
     defaultColumn={defaultColumn}

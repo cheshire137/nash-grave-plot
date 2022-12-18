@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { TableOptions, useTable } from 'react-table';
+import { TableOptions, useTable, useFilters, usePagination } from 'react-table';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import Interment from '../models/Interment';
 import { matchSorter } from 'match-sorter';
-import { Box } from '@primer/react';
+import { Box, Pagination } from '@primer/react';
 import TableCell from './TableCell';
 
 function fuzzyTextFilterFn(rows: any[], id: any, filterValue: any) {
@@ -16,23 +16,29 @@ interface Props extends TableOptions<Interment> {
   setPageTitle: (title: string) => void;
 }
 
-const Table = ({ columns, data, defaultColumn, setPageTitle, filters }: Props) => {
+const Table = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }: Props) => {
   const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    page,
     rows,
     prepareRow,
+    pageOptions,
+    state: { pageIndex },
+    gotoPage,
   } = useTable({
     columns,
     data,
-    initialState: { filters: filters || [] },
+    initialState: { pageSize, filters: filters || [] },
     defaultColumn,
     filterTypes,
-  });
+  // }, useFilters, usePagination);
+  }, usePagination);
 
+  const totalPages = pageOptions.length;
   const totalResults = rows.length;
   if (totalResults === 1) {
     setPageTitle('1 result');
@@ -42,32 +48,40 @@ const Table = ({ columns, data, defaultColumn, setPageTitle, filters }: Props) =
     setPageTitle('No results');
   }
 
-  return <TableStyles>
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => <tr {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map(column => <TableHeaderCell {...column.getHeaderProps()}>
-            {column.render('Header')}
-            {column.canFilter && <Box mt="1">{column.render('Filter')}</Box>}
-          </TableHeaderCell>)}
-        </tr>)}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(
-          (row, i) => {
+  return <>
+    <TableStyles>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map(headerGroup => <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => <TableHeaderCell {...column.getHeaderProps()}>
+              {column.render('Header')}
+              {column.canFilter && <Box mt="1">{column.render('Filter')}</Box>}
+            </TableHeaderCell>)}
+          </tr>)}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map(row => {
             prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => <TableCell {...cell.getCellProps()}>
-                  {cell.render('Cell')}
-                </TableCell>)}
-              </tr>
-            );
-          },
-        )}
-      </tbody>
-    </table>
-  </TableStyles>;
+            return <tr {...row.getRowProps()}>
+              {row.cells.map(cell => <TableCell {...cell.getCellProps()}>
+                {cell.render('Cell')}
+              </TableCell>)}
+            </tr>;
+          })}
+        </tbody>
+      </table>
+    </TableStyles>
+    {totalPages > 1 && (
+      <Pagination
+        pageCount={totalPages}
+        currentPage={pageIndex + 1}
+        onPageChange={(e, page) => {
+          e.preventDefault();
+          gotoPage(page - 1);
+        }}
+      />
+    )}
+  </>;
 };
 
 export default Table;
