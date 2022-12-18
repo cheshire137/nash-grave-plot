@@ -68,7 +68,7 @@ const parseGraveyardType = (graveyardType?: string | null) => {
 }
 
 class Interment {
-  data: NashvilleCemeteryData;
+  person: string;
   key: string;
   address: Address;
   graveyardType: string;
@@ -80,11 +80,40 @@ class Interment {
   sitePhotos: PhotoLink[];
   accessible: string;
   cemeteryName: string;
+  archaeologicalInfo?: string;
+  cemeteryParcelNumber?: string;
+  tractParcelNumber: string;
+  siteContactInfo?: string;
+  siteHistory?: string;
+  restoration?: string;
+  notes: string;
+  deceasedInfo: string;
+  footstone?: string;
+  inscription: Inscription;
+  knownBurials: string;
+  demarcation?: string;
+  condition?: string;
+  mapID: string;
+  alternateCemeteryName: string;
 
   constructor(props: NashvilleCemeteryData) {
-    this.data = props;
+    this.footstone = props.footstone;
+    this.alternateCemeteryName = props.alternate_cemetery_name;
     this.key = '_' + Math.random().toString(36).substr(2, 9);
+    this.person = props.interment;
+    this.demarcation = props.demarcation;
+    this.archaeologicalInfo = props.archaeological_information;
     this.address = new Address(props);
+    this.condition = props.condition;
+    this.mapID = props.map_id;
+    this.siteContactInfo = props.site_contact_info;
+    this.tractParcelNumber = props.tract_parcel_number;
+    this.cemeteryParcelNumber = props.cemetery_parcel_number;
+    this.siteHistory = props.site_history;
+    this.restoration = props.restoration;
+    this.notes = props.notes;
+    this.knownBurials = props.known_burials;
+    this.deceasedInfo = props.deceased_info;
     this.graveyardType = parseGraveyardType(props.graveyard_type);
     this.currentSurvey = parseDateString(props.current_survey);
     this.surveyUpdates = parseDateString(props.survey_update_s);
@@ -101,10 +130,7 @@ class Interment {
         this.cemeteryName = props.alternate_cemetery_name;
       }
     }
-  }
-
-  getInscription() {
-    return new Inscription(this.data.inscription);
+    this.inscription = new Inscription(props.inscription);
   }
 }
 
