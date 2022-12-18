@@ -18,21 +18,12 @@ const TableStyles = styled.div`
   }
 `;
 
-function fuzzyTextFilterFn(rows: any, id: any, filterValue: string) {
+function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] });
 }
 fuzzyTextFilterFn.autoRemove = val => !val;
 
-interface Props {
-  setPageTitle: (title: string) => void;
-  data: Interment[];
-  columns: TableColumnGroup[];
-  pageSize: number;
-  filters: Filter[];
-  defaultColumn: any;
-}
-
-const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }: Props) => {
+const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }) => {
   const filterTypes = useMemo(() => ({ fuzzyText: fuzzyTextFilterFn }), []);
 
   const {
@@ -82,11 +73,11 @@ const PaginatedTable = ({ columns, data, pageSize, defaultColumn, setPageTitle, 
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {page.map((row: any) => {
+            {page.map(row => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map((cell: any) => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
+                  {row.cells.map(cell => <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>)}
                 </tr>
               );
             })}
