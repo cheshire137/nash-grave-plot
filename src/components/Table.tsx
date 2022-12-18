@@ -12,6 +12,12 @@ function fuzzyTextFilterFn(rows: any[], id: any, filterValue: any) {
 }
 fuzzyTextFilterFn.autoRemove = (val: any) => !val;
 
+const getPageTitle = (totalResults: number) => {
+  if (totalResults === 1) return '1 result';
+  if (totalResults > 1) return `${totalResults.toLocaleString('en-US')} results`;
+  return 'No results';
+}
+
 interface Props extends TableOptions<Interment> {
   setPageTitle: (title: string) => void;
 }
@@ -40,16 +46,7 @@ const Table = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }
 
   const totalPages = pageOptions.length;
 
-  useEffect(() => {
-    const totalResults = rows.length;
-    if (totalResults === 1) {
-      setPageTitle('1 result');
-    } else if (totalResults > 1) {
-      setPageTitle(`${totalResults.toLocaleString('en-US')} results`);
-    } else {
-      setPageTitle('No results');
-    }
-  }, [rows.length, setPageTitle])
+  useEffect(() => setPageTitle(getPageTitle(rows.length)), [rows.length, setPageTitle])
 
   return <>
     <TableStyles>
