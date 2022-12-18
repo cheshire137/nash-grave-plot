@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { TableOptions, useTable, useFilters, usePagination } from 'react-table';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
@@ -39,14 +39,17 @@ const Table = ({ columns, data, pageSize, defaultColumn, setPageTitle, filters }
   }, usePagination);
 
   const totalPages = pageOptions.length;
-  const totalResults = rows.length;
-  if (totalResults === 1) {
-    setPageTitle('1 result');
-  } else if (totalResults > 1) {
-    setPageTitle(`${totalResults.toLocaleString('en-US')} results`);
-  } else {
-    setPageTitle('No results');
-  }
+
+  useEffect(() => {
+    const totalResults = rows.length;
+    if (totalResults === 1) {
+      setPageTitle('1 result');
+    } else if (totalResults > 1) {
+      setPageTitle(`${totalResults.toLocaleString('en-US')} results`);
+    } else {
+      setPageTitle('No results');
+    }
+  }, [rows.length, setPageTitle])
 
   return <>
     <TableStyles>
