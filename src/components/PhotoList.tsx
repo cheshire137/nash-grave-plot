@@ -1,8 +1,13 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import PhotoDisplay from './PhotoDisplay';
+import { PhotoLink } from '../models/NashvilleCemetery';
 
-const PhotoList = ({ value }) => <Box minWidth="120px">
+interface Props {
+  value: PhotoLink[];
+}
+
+const PhotoList = ({ value }: Props) => <Box minWidth="120px">
   {value.map(photo => {return <PhotoDisplay {...photo} key={photo.url} />})}
 </Box>;
 
