@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
-import { Column, AllColumns } from './models/Column';
+import { IntermentField, AllColumns } from './models/Column';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
@@ -20,8 +20,8 @@ const getInitialFilters = () => {
 };
 
 const App = () => {
-  const savedEnabledColumns: Column[] = LocalStorage.get('enabledColumns');
-  const [enabledColumns, setEnabledColumns] = useState<Column[]>(savedEnabledColumns || AllColumns);
+  const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
+  const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || AllColumns);
   const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
 
@@ -38,11 +38,11 @@ const App = () => {
             </Heading>
           </Header.Item>
           <Header.Item>
-            <Settings enabledColumns={enabledColumns} setEnabledColumns={setEnabledColumns} />
+            <Settings enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
           </Header.Item>
         </Header>
         <Box pb={4}>
-          <IntermentList enabledColumns={enabledColumns} setPageTitle={setPageTitle} filters={filters} />
+          <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />
         </Box>
         <Footer />
       </BaseStyles>

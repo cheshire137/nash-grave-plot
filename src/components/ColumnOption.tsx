@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, FormControl, Checkbox } from '@primer/react';
-import { Column } from '../models/Column';
+import { IntermentField } from '../models/Column';
 
 interface Props {
   name: string;
-  value: Column;
+  value: IntermentField;
   isEnabled: boolean;
-  onToggle: (value: Column, isEnabled: boolean) => void;
+  onToggle: (value: IntermentField, isEnabled: boolean) => void;
 }
 
 const ColumnOption = ({ name, value, isEnabled, onToggle }: Props) => {

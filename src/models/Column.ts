@@ -1,5 +1,5 @@
 export type ColumnGroup = 'Person' | 'Location' | 'Marker/Plot' | 'Parcel Numbers' | 'Survey' | 'Other';
-export type Column = 'person' | 'deathDate' | 'deceasedInfo' | 'cemeteryName' | 'address' | 'graveyardType' |
+export type IntermentField = 'person' | 'deathDate' | 'deceasedInfo' | 'cemeteryName' | 'address' | 'graveyardType' |
   'siteHistory' | 'inscription' | 'footstone' | 'demarcation' | 'condition' | 'accessible' | 'restoration' |
   'gravePhotos' | 'notes' | 'tractParcelNumber' | 'cemeteryParcelNumber' | 'originalSurvey' | 'surveyUpdates' |
   'currentSurvey';
@@ -13,7 +13,7 @@ export const AllColumnGroups: ColumnGroup[] = [
   'Other'
 ];
 
-export const AllColumns: Column[] = [
+export const AllColumns: IntermentField[] = [
   'person',
   'deathDate',
   'deceasedInfo',
@@ -36,7 +36,7 @@ export const AllColumns: Column[] = [
   'currentSurvey'
 ];
 
-export const ColumnNamesByColumn: { [column in Column]: string } = {
+export const ColumnNamesByColumn: { [prop in IntermentField]: string } = {
   'person': 'Name',
   'deathDate': 'Died',
   'deceasedInfo': 'Info',
@@ -59,7 +59,7 @@ export const ColumnNamesByColumn: { [column in Column]: string } = {
   'currentSurvey': 'Current'
 };
 
-export const ColumnsByColumnGroup: { [group in ColumnGroup]: Column[] } = {
+export const ColumnsByColumnGroup: { [group in ColumnGroup]: IntermentField[] } = {
   'Person': ['person', 'deathDate', 'deceasedInfo'],
   'Location': ['cemeteryName', 'address', 'graveyardType', 'siteHistory'],
   'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
