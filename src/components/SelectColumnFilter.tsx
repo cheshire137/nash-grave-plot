@@ -4,13 +4,15 @@ import FullWidthDropdown from './FullWidthDropdown';
 import FullWidthDropdownButton from './FullWidthDropdownButton';
 import ConstrainedDropdownMenu from './ConstrainedDropdownMenu';
 import SmallDropdownItem from './SmallDropdownItem';
+import type { FilterValue, IdType, Row } from 'react-table'
+import { ActionList } from '@primer/react';
 
 interface Props {
   column: {
-    filterValue: string;
-    setFilter: (value?: string) => void;
-    preFilteredRows: any[];
-    id: string;
+    filterValue: FilterValue;
+    setFilter: (value?: FilterValue) => void;
+    preFilteredRows: Row<Record<string, unknown>>[];
+    id: IdType<Record<string, unknown>>;
   };
 }
 
@@ -31,17 +33,17 @@ function SelectColumnFilter({
     return sortedOptions;
   }, [id, preFilteredRows]);
 
-  return (
-    <FullWidthDropdown>
-      <FullWidthDropdownButton variant="small">{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
-      <ConstrainedDropdownMenu>
-        <SmallDropdownItem onClick={() => setFilter("")}>All</SmallDropdownItem>
-        {options.map((option, i) => (
-          <SmallDropdownItem key={i} onClick={() => setFilter(option)}>{titleCase(option)}</SmallDropdownItem>
-        ))}
-      </ConstrainedDropdownMenu>
-    </FullWidthDropdown>
-  )
+  return <FullWidthDropdown>
+    <FullWidthDropdownButton variant="small">{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
+    <ConstrainedDropdownMenu>
+      <ActionList>
+        <SmallDropdownItem onSelect={() => setFilter("")}>All</SmallDropdownItem>
+        {options.map((option, i) => <SmallDropdownItem key={`${i}-${option}`} onSelect={() => setFilter(option)}>
+          {titleCase(option)}
+        </SmallDropdownItem>)}
+      </ActionList>
+    </ConstrainedDropdownMenu>
+  </FullWidthDropdown>;
 }
 
 export default SelectColumnFilter;
