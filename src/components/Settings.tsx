@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
-import { AllColumnGroups } from '../models/Column';
 import LocalStorage from '../models/LocalStorage';
 import type IntermentField from '../types/IntermentField';
+import type IntermentFieldGroup from '../types/IntermentFieldGroup';
+
+const allIntermentFieldGroups: IntermentFieldGroup[] = ['Person', 'Location', 'Marker/Plot', 'Parcel Numbers',
+  'Survey', 'Other'];
 
 const getEnabledColumns = (enabledFields: IntermentField[], columnValue: IntermentField, isEnabled: boolean) => {
   if (isEnabled) {
@@ -33,7 +36,7 @@ const Settings = ({ enabledFields, setEnabledFields }: Props) => {
       <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
         <Text color="black" as="div">
           <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
-          {AllColumnGroups.map(groupName => <ColumnGroupOptions
+          {allIntermentFieldGroups.map(groupName => <ColumnGroupOptions
             key={groupName}
             groupName={groupName}
             enabledFields={enabledFields}
