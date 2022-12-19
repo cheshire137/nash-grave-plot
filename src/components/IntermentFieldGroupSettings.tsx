@@ -20,7 +20,7 @@ interface Props {
   toggleFieldEnabled: (intermentField: IntermentField, isEnabled: boolean) => void;
 }
 
-const ColumnGroupOptions = ({ group, enabledFields, toggleFieldEnabled }: Props) => <CheckboxGroup sx={{ mb: 3 }}>
+const IntermentFieldGroupSettings = ({ group, enabledFields, toggleFieldEnabled }: Props) => <CheckboxGroup sx={{ mb: 3 }}>
   <CheckboxGroup.Label>{group}</CheckboxGroup.Label>
   {intermentFieldsByGroup[group].map(intermentField => <FormControl key={intermentField}>
     <Checkbox checked={enabledFields.includes(intermentField)}
@@ -32,4 +32,4 @@ const ColumnGroupOptions = ({ group, enabledFields, toggleFieldEnabled }: Props)
   </FormControl>)}
 </CheckboxGroup>;
 
-export default ColumnGroupOptions;
+export default IntermentFieldGroupSettings;

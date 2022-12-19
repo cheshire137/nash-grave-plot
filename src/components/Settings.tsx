@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
-import ColumnGroupOptions from './ColumnGroupOptions';
+import IntermentFieldGroupSettings from './IntermentFieldGroupSettings';
 import LocalStorage from '../models/LocalStorage';
 import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
@@ -36,7 +36,7 @@ const Settings = ({ enabledFields, setEnabledFields }: Props) => {
       <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
         <Text color="black" as="div">
           <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
-          {allIntermentFieldGroups.map(group => <ColumnGroupOptions
+          {allIntermentFieldGroups.map(group => <IntermentFieldGroupSettings
             key={group}
             group={group}
             enabledFields={enabledFields}
