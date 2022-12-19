@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import TitleCase from './TitleCase';
+import type { CellProps } from 'react-table';
 
 interface AddressLinesProps {
   streetAddress: string;
@@ -16,10 +17,6 @@ const AddressLines = ({ streetAddress, additionalLocationInfo }: AddressLinesPro
   ) : null}
 </Box>;
 
-interface AddressDisplayProps {
-  value: AddressLinesProps;
-}
-
-const AddressDisplay = ({ value }: AddressDisplayProps) => <AddressLines {...value} />;
+const AddressDisplay = ({ value }: CellProps<Record<string, unknown>>) => <AddressLines {...value} />;
 
 export default AddressDisplay;

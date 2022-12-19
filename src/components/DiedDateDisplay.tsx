@@ -1,11 +1,10 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import DateCellFormatter from './DateCellFormatter';
+import type { CellProps } from 'react-table';
 
-interface Props {
-  value: Date | string | null;
-}
-
-const DiedDateDisplay = ({ value }: Props) => <Box minWidth="130px"><DateCellFormatter value={value} /></Box>;
+const DiedDateDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="130px">
+  <DateCellFormatter {...value} />
+</Box>;
 
 export default DiedDateDisplay;

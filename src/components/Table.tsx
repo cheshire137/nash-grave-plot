@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { TableOptions, useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
-import Interment from '../models/Interment';
 import { Box, Pagination } from '@primer/react';
 import TableCell from './TableCell';
 import TextFilter from './TextFilter';
@@ -16,14 +15,12 @@ const getPageTitle = (totalResults: number) => {
 
 const filterTypes = { fuzzyText: fuzzyTextFilter };
 
-interface Props extends TableOptions<Interment> {
+interface Props extends TableOptions<Record<string, unknown>> {
   setPageTitle: (title: string) => void;
 }
 
 const Table = ({ columns, data, pageSize, setPageTitle, filters }: Props) => {
-  const defaultColumn = useMemo<Partial<TableColumn<Interment>>>(() => ({
-    Filter: TextFilter,
-  }), []);
+  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
 
   const {
     getTableProps,
@@ -41,8 +38,8 @@ const Table = ({ columns, data, pageSize, setPageTitle, filters }: Props) => {
     initialState: { pageSize, filters: filters || [] },
     defaultColumn,
     filterTypes,
-  // }, useFilters, usePagination);
-  }, usePagination);
+  }, useFilters, usePagination);
+  // }, usePagination);
 
   const totalPages = pageOptions.length;
 

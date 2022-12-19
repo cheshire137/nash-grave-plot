@@ -1,20 +1,9 @@
 import React from 'react';
-import { Text } from '@primer/react';
-import styled from "styled-components";
 import { titleCase } from './TitleCase';
+import type { CellProps } from 'react-table';
+import ConstrainedTextBlock from './ConstrainedTextBlock';
 
-export const ConstrainedTextBlock = styled(Text).attrs({
-  as: 'div'
-})`
-  max-height: 7.5em;
-  overflow: auto;
-`;
-
-interface Props {
-  value?: string | null;
-}
-
-const LongTextBlock = ({ value }: Props) => typeof value === 'string' ? (
+const LongTextBlock = ({ value }: CellProps<Record<string, unknown>>) => typeof value === 'string' ? (
   <ConstrainedTextBlock>{titleCase(value)}</ConstrainedTextBlock>
 ) : null;
 

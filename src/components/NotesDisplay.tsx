@@ -1,12 +1,9 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import LongTextBlock from './LongTextBlock';
+import type { CellProps } from 'react-table';
 
-interface Props {
-  value?: string | null;
-}
-
-const NotesDisplay = ({ value }: Props) => <Box minWidth="300px" textAlign="left">
+const NotesDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="300px" textAlign="left">
   <LongTextBlock value={value} />
 </Box>;
 

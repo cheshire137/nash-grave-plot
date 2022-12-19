@@ -1,11 +1,10 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import TitleCase from './TitleCase';
+import type { CellProps } from 'react-table';
 
-interface Props {
-  value?: string;
-}
-
-const DemarcationDisplay = ({ value }: Props) => <Box minWidth="140px"><TitleCase value={value} /></Box>;
+const DemarcationDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="140px">
+  <TitleCase value={value} />
+</Box>;
 
 export default DemarcationDisplay;

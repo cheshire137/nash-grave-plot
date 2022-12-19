@@ -1,11 +1,10 @@
 import React from 'react';
 import { Box } from '@primer/react';
 import LongTextBlock from './LongTextBlock';
+import type { CellProps } from 'react-table';
 
-interface Props {
-  value?: string;
-}
-
-const FootstoneDisplay = ({ value }: Props) => <Box minWidth="150px"><LongTextBlock value={value} /></Box>;
+const FootstoneDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="150px">
+  <LongTextBlock {...value} />
+</Box>;
 
 export default FootstoneDisplay;

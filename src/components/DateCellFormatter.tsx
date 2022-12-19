@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Text } from '@primer/react';
+import type { CellProps } from 'react-table';
 
 const prettyDateStr = (date: Date) => {
   const year = date.getFullYear();
@@ -16,11 +17,7 @@ const prettyDateStr = (date: Date) => {
   return `${year}-${monthStr}-${dayStr}`;
 };
 
-interface Props {
-  value: Date | string | null;
-}
-
-const DateCellFormatter = ({ value }: Props) => <Box minWidth="130px">
+const DateCellFormatter = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="130px">
   {value instanceof Date ? <Text whiteSpace="nowrap">{prettyDateStr(value)}</Text> : value}
 </Box>;
 

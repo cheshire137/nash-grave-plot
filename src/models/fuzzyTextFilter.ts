@@ -2,10 +2,10 @@ import { matchSorter } from 'match-sorter';
 import { FilterValue, IdType, Row } from 'react-table';
 
 export function fuzzyTextFilter<T extends Record<string, unknown>>(
-  rows: Array<Row<T>>,
-  id: Array<IdType<T>>,
+  rows: Row<T>[],
+  id: IdType<T>[],
   filterValue: FilterValue
-): Array<Row<T>> {
+): Row<T>[] {
   return matchSorter(rows, filterValue, {
     keys: [(row: Row<T>) => row.values[id[0]]],
   });

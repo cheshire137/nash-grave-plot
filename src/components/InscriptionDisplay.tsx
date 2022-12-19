@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@primer/react';
 import { ConstrainedTextBlock } from './LongTextBlock';
 import { titleCase } from './TitleCase';
-import Inscription from '../models/Inscription';
+import type { CellProps } from 'react-table';
 
 interface InscriptionLinesProps {
   text: string;
@@ -22,11 +22,7 @@ const InscriptionLines = ({ text, lines }: InscriptionLinesProps) => <Constraine
   ) : text}
 </ConstrainedTextBlock>;
 
-interface InscriptionDisplayProps {
-  value: Inscription;
-}
-
-const InscriptionDisplay = ({ value }: InscriptionDisplayProps) => <Box minWidth="200px">
+const InscriptionDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="200px">
   <InscriptionLines {...value} />
 </Box>;
 

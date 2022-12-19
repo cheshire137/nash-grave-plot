@@ -23,7 +23,7 @@ import IntermentSort from '../models/IntermentSort';
 import { Column, ColumnNamesByColumn } from '../models/Column';
 import { Column as TableColumn, ColumnGroup as TableColumnGroup } from 'react-table';
 
-const filterColumns = (enabledColumns: Column[], relevantColumns: TableColumn<Interment>[]) => {
+const filterColumns = (enabledColumns: Column[], relevantColumns: TableColumn<Record<string, unknown>>[]) => {
   const enabledColumnNames: string[] = enabledColumns;
   return relevantColumns.filter(column => {
     if (typeof column.accessor === 'string') {
@@ -46,71 +46,71 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     return interments;
   }, []);
 
-  const nameColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.person, accessor: 'person',
+  const nameColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.person, accessor: 'person',
     filter: 'fuzzyText', Cell: NameDisplay };
-  const deathDateColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.deathDate, accessor: 'deathDate',
+  const deathDateColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.deathDate, accessor: 'deathDate',
     Cell: DiedDateDisplay };
-  const deceasedInfoColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.deceasedInfo,
+  const deceasedInfoColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.deceasedInfo,
     accessor: 'deceasedInfo', Cell: InfoDisplay, filter: 'fuzzyText' };
-  const personColumnGroup: TableColumnGroup<Interment> = {
+  const personColumnGroup: TableColumnGroup<Record<string, unknown>> = {
     Header: 'Person',
     columns: filterColumns(enabledColumns, [nameColumn, deathDateColumn, deceasedInfoColumn])
   };
 
-  const cemeteryColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.cemeteryName, accessor: 'cemeteryName',
+  const cemeteryColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.cemeteryName, accessor: 'cemeteryName',
     filter: 'includes', Filter: SelectColumnFilter, Cell: NameDisplay };
-  const addressColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.address, accessor: 'address',
+  const addressColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.address, accessor: 'address',
     Cell: AddressDisplay, filter: 'fuzzyText', Filter: AddressFilter };
-  const graveyardTypeColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.graveyardType,
+  const graveyardTypeColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.graveyardType,
     accessor: 'graveyardType', filter: 'includes', Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
-  const siteHistoryColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.siteHistory,
+  const siteHistoryColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.siteHistory,
     accessor: 'siteHistory', Cell: InfoDisplay };
-  const locationColumnGroup: TableColumnGroup<Interment> = {
+  const locationColumnGroup: TableColumnGroup<Record<string, unknown>> = {
     Header: 'Location',
     columns: filterColumns(enabledColumns, [cemeteryColumn, addressColumn, graveyardTypeColumn, siteHistoryColumn])
   };
 
-  const inscriptionColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.inscription,
+  const inscriptionColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.inscription,
     accessor: 'inscription', Cell: InscriptionDisplay };
-  const footstoneColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.footstone, accessor: 'footstone',
+  const footstoneColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.footstone, accessor: 'footstone',
     Cell: FootstoneDisplay };
-  const demarcationColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.demarcation,
+  const demarcationColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.demarcation,
     accessor: 'demarcation', Cell: DemarcationDisplay };
-  const conditionColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.condition, accessor: 'condition',
+  const conditionColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.condition, accessor: 'condition',
     Cell: DemarcationDisplay };
-  const accessibleColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.accessible, accessor: 'accessible',
+  const accessibleColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.accessible, accessor: 'accessible',
     filter: 'includes', Filter: SelectColumnFilter };
-  const restorationColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.restoration,
+  const restorationColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.restoration,
     accessor: 'restoration', Cell: LongTextBlock };
-  const photosColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos',
+  const photosColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos',
     Cell: PhotoList };
-  const markerColumnGroup: TableColumnGroup<Interment> = {
+  const markerColumnGroup: TableColumnGroup<Record<string, unknown>> = {
     Header: 'Marker/Plot',
     columns: filterColumns(enabledColumns, [inscriptionColumn, footstoneColumn, demarcationColumn, conditionColumn,
       accessibleColumn, restorationColumn, photosColumn])
   };
 
-  const notesColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.notes, accessor: 'notes',
+  const notesColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.notes, accessor: 'notes',
     Cell: NotesDisplay };
-  const otherColumnGroup: TableColumnGroup<Interment> = { Header: '', id: 'other',
+  const otherColumnGroup: TableColumnGroup<Record<string, unknown>> = { Header: '', id: 'other',
     columns: filterColumns(enabledColumns, [notesColumn]) };
 
-  const tractParcelNumberColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.tractParcelNumber,
+  const tractParcelNumberColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.tractParcelNumber,
     accessor: 'tractParcelNumber', Cell: ParcelNumberDisplay };
-  const cemeteryParcelNumberColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.cemeteryParcelNumber,
+  const cemeteryParcelNumberColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.cemeteryParcelNumber,
     accessor: 'cemeteryParcelNumber', Cell: ParcelNumberDisplay };
-  const parcelNumberColumnGroup: TableColumnGroup<Interment> = {
+  const parcelNumberColumnGroup: TableColumnGroup<Record<string, unknown>> = {
     Header: 'Parcel Numbers',
     columns: filterColumns(enabledColumns, [tractParcelNumberColumn, cemeteryParcelNumberColumn])
   };
 
-  const originalSurveyColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.originalSurvey,
+  const originalSurveyColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.originalSurvey,
     accessor: 'originalSurvey', Cell: DateCellFormatter };
-  const surveyUpdatesColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.surveyUpdates,
+  const surveyUpdatesColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.surveyUpdates,
     accessor: 'surveyUpdates', Cell: DateCellFormatter };
-  const currentSurveyColumn: TableColumn<Interment> = { Header: ColumnNamesByColumn.currentSurvey,
+  const currentSurveyColumn: TableColumn<Record<string, unknown>> = { Header: ColumnNamesByColumn.currentSurvey,
     accessor: 'currentSurvey', Cell: DateCellFormatter };
-  const surveyColumnGroup: TableColumnGroup<Interment> = {
+  const surveyColumnGroup: TableColumnGroup<Record<string, unknown>> = {
     Header: 'Survey',
     columns: filterColumns(enabledColumns, [originalSurveyColumn, surveyUpdatesColumn, currentSurveyColumn])
   };
