@@ -36,9 +36,9 @@ const Settings = ({ enabledFields, setEnabledFields }: Props) => {
       <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
         <Text color="black" as="div">
           <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
-          {allIntermentFieldGroups.map(groupName => <ColumnGroupOptions
-            key={groupName}
-            groupName={groupName}
+          {allIntermentFieldGroups.map(group => <ColumnGroupOptions
+            key={group}
+            group={group}
             enabledFields={enabledFields}
             toggleFieldEnabled={(intermentField, isEnabled) => {
               const newEnabledFields = getEnabledColumns(enabledFields, intermentField, isEnabled);
