@@ -7,7 +7,7 @@ const parseAccessible = (accessible?: string | null) => {
     return 'no';
   }
   if (lowercase.trim().length > 0) return lowercase;
-  return null;
+  return '';
 };
 
 export default parseAccessible;

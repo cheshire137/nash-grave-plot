@@ -17,7 +17,7 @@ class Interment {
   deathDate: Date | string | null;
   gravePhotos: PhotoLink[];
   sitePhotos: PhotoLink[];
-  accessible: string | null;
+  accessible: string;
   cemeteryName: string;
   archaeologicalInfo: string | null;
   cemeteryParcelNumber: string | null;

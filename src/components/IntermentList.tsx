@@ -67,14 +67,11 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
       columns: filterColumns(enabledColumns, [nameColumn, deathDateColumn, deceasedInfoColumn]) };
 
     const cemeteryColumn = { Header: ColumnNamesByColumn.cemeteryName, accessor: 'cemeteryName', filter: 'includes',
-      // Filter: SelectColumnFilter,
-      Cell: NameDisplay };
+      Filter: SelectColumnFilter, Cell: NameDisplay };
     const addressColumn = { Header: ColumnNamesByColumn.address, accessor: 'address', Cell: AddressDisplay,
       filter: 'fuzzyText', Filter: AddressFilter };
     const graveyardTypeColumn = { Header: ColumnNamesByColumn.graveyardType, accessor: 'graveyardType',
-      filter: 'includes',
-      Filter: SelectColumnFilter,
-      Cell: GraveyardTypeDisplay };
+      filter: 'includes', Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
     const siteHistoryColumn = { Header: ColumnNamesByColumn.siteHistory, accessor: 'siteHistory', Cell: InfoDisplay };
     const locationColumnGroup = { Header: 'Location', columns: filterColumns(enabledColumns, [cemeteryColumn,
       addressColumn, graveyardTypeColumn, siteHistoryColumn]) };
@@ -87,8 +84,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     const conditionColumn = { Header: ColumnNamesByColumn.condition, accessor: 'condition',
       Cell: DemarcationDisplay };
     const accessibleColumn = { Header: ColumnNamesByColumn.accessible, accessor: 'accessible', filter: 'includes',
-      // Filter: SelectColumnFilter,
-    };
+      Filter: SelectColumnFilter };
     const restorationColumn = { Header: ColumnNamesByColumn.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
     const photosColumn = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList };
