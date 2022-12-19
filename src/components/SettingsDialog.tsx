@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
+import { Box, IconButton, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings';
 import LocalStorage from '../models/LocalStorage';
@@ -9,11 +9,9 @@ import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 const allIntermentFieldGroups: IntermentFieldGroup[] = ['Person', 'Location', 'Marker/Plot', 'Parcel Numbers',
   'Survey', 'Other'];
 
-const getEnabledColumns = (enabledFields: IntermentField[], columnValue: IntermentField, isEnabled: boolean) => {
-  if (isEnabled) {
-    return [...enabledFields, columnValue];
-  }
-  return enabledFields.filter(c => c !== columnValue);
+const getEnabledColumns = (enabledFields: IntermentField[], intermentField: IntermentField, isEnabled: boolean) => {
+  if (isEnabled) return [...enabledFields, intermentField];
+  return enabledFields.filter(c => c !== intermentField);
 };
 
 interface Props {
@@ -21,12 +19,14 @@ interface Props {
   setEnabledFields: (enabledFields: IntermentField[]) => void;
 }
 
-const Settings = ({ enabledFields, setEnabledFields }: Props) => {
+const SettingsDialog = ({ enabledFields, setEnabledFields }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return <>
-    <Button variant="invisible" onClick={() => setIsOpen(true)} title="Settings" aria-label="Settings">
-      <StyledOcticon icon={GearIcon} size={16} color="white" />
-    </Button>
+    <IconButton
+      icon={GearIcon}
+      onClick={() => setIsOpen(true)}
+      aria-label="Settings"
+    />
     <Dialog
       isOpen={isOpen}
       onDismiss={() => setIsOpen(false)}
@@ -52,4 +52,4 @@ const Settings = ({ enabledFields, setEnabledFields }: Props) => {
   </>;
 };
 
-export default Settings;
+export default SettingsDialog;

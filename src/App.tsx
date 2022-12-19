@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
-import Settings from './components/Settings';
+import SettingsDialog from './components/SettingsDialog';
 import type IntermentField from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
@@ -38,13 +38,16 @@ const App = () => {
           <Header.Item full>
             <Heading as="h1">
               NashGravePlot
-              {pageTitle.length > 0 && (
-                <Text color="fade.white50" ml={4} display="inline-block" fontWeight="normal" fontSize="3">{pageTitle}</Text>
-              )}
+              {pageTitle.length > 0 && <Text
+                ml={4}
+                display="inline-block"
+                fontWeight="normal"
+                fontSize="3"
+              >{pageTitle}</Text>}
             </Heading>
           </Header.Item>
           <Header.Item>
-            <Settings enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
+            <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
           </Header.Item>
         </Header>
         <Box pb={4}>
