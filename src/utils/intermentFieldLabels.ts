@@ -1,7 +1,7 @@
 import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 
-export const ColumnNamesByColumn: { [prop in IntermentField]: string } = {
+export const intermentFieldLabels: { [intermentField in IntermentField]: string } = {
   'person': 'Name',
   'deathDate': 'Died',
   'deceasedInfo': 'Info',
