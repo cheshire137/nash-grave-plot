@@ -9,7 +9,7 @@ import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
-import PresenceColumnFilter from './PresenceColumnFilter';
+import PhotoColumnFilter from './PhotoColumnFilter';
 import AddressFilter from './AddressFilter';
 import Filter from '../models/Filter';
 import TextFilter from './TextFilter';
@@ -90,7 +90,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     const restorationColumn = { Header: ColumnNamesByColumn.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
     const photosColumn = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList,
-      Filter: PresenceColumnFilter, filter: 'minArrayLength' };
+      Filter: PhotoColumnFilter, filter: 'minArrayLength' };
     const markerColumnGroup = { Header: 'Marker/Plot', columns: filterColumns(enabledColumns, [inscriptionColumn,
       footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, photosColumn]) };
 

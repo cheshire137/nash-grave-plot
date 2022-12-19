@@ -9,13 +9,13 @@ interface Props {
   };
 }
 
-function PresenceColumnFilter({
+function PhotoColumnFilter({
   column: { setFilter }
 }: Props) {
-  return <FormControl>
+  return <FormControl sx={{ alignItems: 'center' }}>
     <Checkbox onChange={e => setFilter(e.target.checked ? 1 : 0)} />
-    <FormControl.Label>Any</FormControl.Label>
+    <FormControl.Label>Has photo</FormControl.Label>
   </FormControl>;
 }
 
-export default PresenceColumnFilter;
+export default PhotoColumnFilter;
