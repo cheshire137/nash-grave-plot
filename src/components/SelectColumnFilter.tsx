@@ -1,29 +1,9 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
-import { ActionMenu, ActionList } from '@primer/react';
 import { titleCase } from './TitleCase';
-
-const FullWidthDropdown = styled(ActionMenu)`
-  width: 100%;
-`;
-
-const FullWidthDropdownButton = styled(ActionMenu.Button)`
-  width: 100%;
-`;
-
-const ConstrainedDropdownMenu = styled(ActionMenu.Overlay)`
-  width: 100%;
-  max-height: 50vh;
-  overflow: auto;
-  text-align: left;
-  font-weight: normal;
-`;
-
-const SmallDropdownItem = styled(ActionList.Item).attrs({
-  px: 2
-})`
-  font-size: 0.9rem;
-`;
+import FullWidthDropdown from './FullWidthDropdown';
+import FullWidthDropdownButton from './FullWidthDropdownButton';
+import ConstrainedDropdownMenu from './ConstrainedDropdownMenu';
+import SmallDropdownItem from './SmallDropdownItem';
 
 interface Props {
   column: {
