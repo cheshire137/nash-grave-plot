@@ -9,6 +9,7 @@ import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SelectColumnFilter from './SelectColumnFilter';
+import PresenceColumnFilter from './PresenceColumnFilter';
 import AddressFilter from './AddressFilter';
 import Filter from '../models/Filter';
 import TextFilter from './TextFilter';
@@ -26,10 +27,11 @@ import IntermentSort from '../models/IntermentSort';
 import { Column, ColumnNamesByColumn } from '../models/Column';
 import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
+import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
 import { Box, Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 
-const filterTypes = { fuzzyText: fuzzyTextFilter };
+const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
 const filterColumns = (enabledColumns: Column[], relevantColumns: TableColumn[]) => {
   const enabledColumnNames: string[] = enabledColumns;
@@ -87,7 +89,8 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
       Filter: SelectColumnFilter };
     const restorationColumn = { Header: ColumnNamesByColumn.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
-    const photosColumn = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList };
+    const photosColumn = { Header: ColumnNamesByColumn.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList,
+      Filter: PresenceColumnFilter, filter: 'minArrayLength' };
     const markerColumnGroup = { Header: 'Marker/Plot', columns: filterColumns(enabledColumns, [inscriptionColumn,
       footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, photosColumn]) };
 
