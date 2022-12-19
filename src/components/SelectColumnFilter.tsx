@@ -1,11 +1,7 @@
 import React, { useMemo } from 'react';
 import titleCaseify from '../utils/titleCaseify';
-import FullWidthDropdown from './FullWidthDropdown';
-import FullWidthDropdownButton from './FullWidthDropdownButton';
-import ConstrainedDropdownMenu from './ConstrainedDropdownMenu';
-import SmallDropdownItem from './SmallDropdownItem';
 import type { FilterValue, IdType, Row } from 'react-table'
-import { ActionList } from '@primer/react';
+import { FormControl, Select } from '@primer/react';
 
 interface Props {
   column: {
@@ -17,33 +13,24 @@ interface Props {
 }
 
 function SelectColumnFilter({
-  column: {filterValue, setFilter, preFilteredRows, id}
+  column: {setFilter, preFilteredRows, id}
 }: Props) {
-  const options: any[] = useMemo(() => {
-    const options = new Set()
-    preFilteredRows.forEach(row => {
-      const value = row.values[id] || '';
-      const option = value.replaceAll(/\s+/g, ' ');
-      if (option.length > 0 && option !== ' ') {
-        options.add(option);
-      }
-    })
-    const sortedOptions: any[] = [...options.values()];
-    sortedOptions.sort();
-    return sortedOptions;
+  const options = useMemo(() => {
+    return [...preFilteredRows.reduce((memo, row) => {
+      const value = row.values[id];
+      return memo.add(value);
+    }, new Set<string>()).values()];
   }, [id, preFilteredRows]);
 
-  return <FullWidthDropdown>
-    <FullWidthDropdownButton variant="small">{filterValue ? titleCaseify(filterValue) : "All"}</FullWidthDropdownButton>
-    <ConstrainedDropdownMenu>
-      <ActionList>
-        <SmallDropdownItem onSelect={() => setFilter("")}>All</SmallDropdownItem>
-        {options.map((option, i) => <SmallDropdownItem key={`${i}-${option}`} onSelect={() => setFilter(option)}>
-          {titleCaseify(option)}
-        </SmallDropdownItem>)}
-      </ActionList>
-    </ConstrainedDropdownMenu>
-  </FullWidthDropdown>;
+  return <FormControl>
+    <FormControl.Label></FormControl.Label>
+    <Select onChange={e => setFilter(e.target.value)}>
+      <Select.Option value="">All</Select.Option>
+      {options.map((option, i) => <Select.Option key={`${i}-${option}`} value={option}>
+        {titleCaseify(option)}
+      </Select.Option>)}
+    </Select>
+  </FormControl>;
 }
 
 export default SelectColumnFilter;

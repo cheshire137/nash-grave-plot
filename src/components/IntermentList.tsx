@@ -30,7 +30,6 @@ import { Box, Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter };
-const NashvilleCemeteries = cemeteriesList as NashvilleCemeteryData[];
 
 const filterColumns = (enabledColumns: Column[], relevantColumns: TableColumn[]) => {
   const enabledColumnNames: string[] = enabledColumns;
@@ -50,7 +49,7 @@ interface Props {
 
 const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
   const data = useMemo(() => {
-    const interments = NashvilleCemeteries.map(cemeteryData => new Interment(cemeteryData));
+    const interments = (cemeteriesList as NashvilleCemeteryData[]).map(data => new Interment(data));
     interments.sort(IntermentSort);
     return interments;
   }, []);
@@ -74,7 +73,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
       filter: 'fuzzyText', Filter: AddressFilter };
     const graveyardTypeColumn = { Header: ColumnNamesByColumn.graveyardType, accessor: 'graveyardType',
       filter: 'includes',
-      // Filter: SelectColumnFilter,
+      Filter: SelectColumnFilter,
       Cell: GraveyardTypeDisplay };
     const siteHistoryColumn = { Header: ColumnNamesByColumn.siteHistory, accessor: 'siteHistory', Cell: InfoDisplay };
     const locationColumnGroup = { Header: 'Location', columns: filterColumns(enabledColumns, [cemeteryColumn,
