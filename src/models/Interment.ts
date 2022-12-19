@@ -1,71 +1,9 @@
 import Address from './Address';
 import Inscription from './Inscription';
 import { NashvilleCemeteryData, PhotoLink } from './NashvilleCemetery';
-
-const parseAccessible = (accessible?: string | null) => {
-  const lowercase = (accessible || '').toLowerCase();
-  if (lowercase === 'yes' || lowercase === 'y') {
-    return 'yes';
-  }
-  if (lowercase === 'no' || lowercase === 'n') {
-    return 'no';
-  }
-  return lowercase;
-};
-
-const parseMonthDayYearString = (str: string) => {
-  const regex = /^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/;
-  const match = str.match(regex);
-
-  if (match) {
-    const month = parseInt(match[1], 10);
-    const day = parseInt(match[2], 10);
-    const year = parseInt(match[3], 10);
-    return new Date(year, month - 1, day);
-  }
-
-  return null;
-}
-
-const parseYearMonthDayString = (str: string) => {
-  const regex = /^(\d\d\d\d)-(\d\d?)-(\d\d?)/;
-  const match = str.match(regex);
-
-  if (match) {
-    const year = parseInt(match[1], 10);
-    const month = parseInt(match[2], 10);
-    const day = parseInt(match[3], 10);
-    return new Date(year, month - 1, day);
-  }
-
-  return null;
-};
-
-const parseDateString = (str?: string | null) => {
-  if (typeof str !== 'string' || str.trim().length < 1) {
-    return null;
-  }
-
-  let date = parseMonthDayYearString(str.trim());
-  if (date) {
-    return date;
-  }
-
-  date = parseYearMonthDayString(str.trim());
-  if (date) {
-    return date;
-  }
-
-  return str;
-};
-
-const parseGraveyardType = (graveyardType?: string | null) => {
-  const lowercase = (graveyardType || '').toLowerCase();
-  if (lowercase.match(/\s+graveyard$/)) {
-    return lowercase.split(/\s+/)[0];
-  }
-  return lowercase;
-}
+import parseDateString from './parseDateString';
+import parseGraveyardType from './parseGraveyardType';
+import parseAccessible from './parseAccessible';
 
 class Interment {
   person: string;
