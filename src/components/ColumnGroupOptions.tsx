@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Heading } from '@primer/react';
-import ColumnOption from './ColumnOption';
+import { CheckboxGroup, FormControl, Checkbox } from '@primer/react';
 import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 import { intermentFieldLabels } from '../utils/intermentFieldLabels';
@@ -21,15 +20,16 @@ interface Props {
   toggleFieldEnabled: (intermentField: IntermentField, isEnabled: boolean) => void;
 }
 
-const ColumnGroupOptions = ({ group, enabledFields, toggleFieldEnabled }: Props) => <Box mb={3}>
-  <Heading sx={{ fontSize: 1, mb: 2 }}>{group}</Heading>
-  {intermentFieldsByGroup[group].map(intermentField => <ColumnOption
-    key={`${group}-${intermentField}`}
-    name={intermentFieldLabels[intermentField]}
-    value={intermentField}
-    isEnabled={enabledFields.includes(intermentField)}
-    onToggle={toggleFieldEnabled}
-  />)}
-</Box>;
+const ColumnGroupOptions = ({ group, enabledFields, toggleFieldEnabled }: Props) => <CheckboxGroup sx={{ mb: 3 }}>
+  <CheckboxGroup.Label>{group}</CheckboxGroup.Label>
+  {intermentFieldsByGroup[group].map(intermentField => <FormControl key={intermentField}>
+    <Checkbox checked={enabledFields.includes(intermentField)}
+      name="enabledColumns"
+      value={intermentField}
+      onChange={e => toggleFieldEnabled(intermentField, e.target.checked)}
+    />
+    <FormControl.Label>{intermentFieldLabels[intermentField]}</FormControl.Label>
+  </FormControl>)}
+</CheckboxGroup>;
 
 export default ColumnGroupOptions;
