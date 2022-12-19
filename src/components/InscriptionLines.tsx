@@ -1,5 +1,5 @@
 import React from 'react';
-import { titleCase } from './TitleCase';
+import titleCaseify from '../models/titleCaseify';
 import ConstrainedTextBlock from './ConstrainedTextBlock';
 
 interface Props {
@@ -12,9 +12,7 @@ const InscriptionLines = ({ text, lines }: Props) => <ConstrainedTextBlock textA
     <>
       {lines.map(line => {
         const key = '_' + Math.random().toString(36).substr(2, 9);
-        return (
-          <div key={key}>{titleCase(line)}</div>
-        );
+        return <div key={key}>{titleCaseify(line)}</div>;
       })}
     </>
   ) : text}

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { titleCase } from './TitleCase';
+import titleCaseify from '../models/titleCaseify';
 import FullWidthDropdown from './FullWidthDropdown';
 import FullWidthDropdownButton from './FullWidthDropdownButton';
 import ConstrainedDropdownMenu from './ConstrainedDropdownMenu';
@@ -34,12 +34,12 @@ function SelectColumnFilter({
   }, [id, preFilteredRows]);
 
   return <FullWidthDropdown>
-    <FullWidthDropdownButton variant="small">{filterValue ? titleCase(filterValue) : "All"}</FullWidthDropdownButton>
+    <FullWidthDropdownButton variant="small">{filterValue ? titleCaseify(filterValue) : "All"}</FullWidthDropdownButton>
     <ConstrainedDropdownMenu>
       <ActionList>
         <SmallDropdownItem onSelect={() => setFilter("")}>All</SmallDropdownItem>
         {options.map((option, i) => <SmallDropdownItem key={`${i}-${option}`} onSelect={() => setFilter(option)}>
-          {titleCase(option)}
+          {titleCaseify(option)}
         </SmallDropdownItem>)}
       </ActionList>
     </ConstrainedDropdownMenu>
