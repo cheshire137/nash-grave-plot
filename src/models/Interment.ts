@@ -10,7 +10,7 @@ class Interment {
   person: string;
   key: string;
   address: Address;
-  graveyardType: string | null;
+  graveyardType: string;
   currentSurvey: Date | string | null;
   surveyUpdates: Date | string | null;
   originalSurvey: Date | string | null;

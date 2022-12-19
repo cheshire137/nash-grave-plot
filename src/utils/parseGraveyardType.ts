@@ -4,7 +4,7 @@ const parseGraveyardType = (graveyardType?: string | null) => {
     return lowercase.split(/\s+/)[0];
   }
   if (lowercase.length > 0) return lowercase;
-  return null;
+  return 'unspecified';
 }
 
 export default parseGraveyardType;

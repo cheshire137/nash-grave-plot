@@ -18,7 +18,10 @@ function SelectColumnFilter({
   const options = useMemo(() => {
     return [...preFilteredRows.reduce((memo, row) => {
       const value = row.values[id];
-      return memo.add(value);
+      if (typeof value === 'string' && value !== '') {
+        return memo.add(value);
+      }
+      return memo;
     }, new Set<string>()).values()];
   }, [id, preFilteredRows]);
 
