@@ -1,6 +1,6 @@
 import { matchSorter } from 'match-sorter';
 import { FilterValue, IdType, Row } from 'react-table';
-import Interment from './Interment';
+import Interment from '../models/Interment';
 
 export function fuzzyTextFilter(
   rows: Row<Interment>[],

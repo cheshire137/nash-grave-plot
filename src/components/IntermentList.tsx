@@ -24,9 +24,9 @@ import ParcelNumberDisplay from './ParcelNumberDisplay';
 import IntermentSort from '../models/IntermentSort';
 import { Column, ColumnNamesByColumn } from '../models/Column';
 import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
-import { fuzzyTextFilter } from '../models/fuzzyTextFilter';
+import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { Box, Pagination } from '@primer/react';
-import getPageTitleForResults from '../models/getPageTitleForResults';
+import getPageTitleForResults from '../utils/getPageTitleForResults';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter };
 

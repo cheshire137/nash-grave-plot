@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import titleCaseify from '../models/titleCaseify';
+import titleCaseify from '../utils/titleCaseify';
 import FullWidthDropdown from './FullWidthDropdown';
 import FullWidthDropdownButton from './FullWidthDropdownButton';
 import ConstrainedDropdownMenu from './ConstrainedDropdownMenu';

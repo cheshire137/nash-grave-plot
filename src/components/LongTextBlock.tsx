@@ -1,5 +1,5 @@
 import React from 'react';
-import titleCaseify from '../models/titleCaseify';
+import titleCaseify from '../utils/titleCaseify';
 import type { CellProps } from 'react-table';
 import ConstrainedTextBlock from './ConstrainedTextBlock';
 
