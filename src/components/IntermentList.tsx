@@ -26,12 +26,7 @@ import { Column, ColumnNamesByColumn } from '../models/Column';
 import { useTable, useFilters, usePagination, Column as TableColumn, ColumnGroup as TableColumnGroup } from 'react-table';
 import { fuzzyTextFilter } from '../models/fuzzyTextFilter';
 import { Box, Pagination } from '@primer/react';
-
-const getPageTitle = (totalResults: number) => {
-  if (totalResults === 1) return '1 result';
-  if (totalResults > 1) return `${totalResults.toLocaleString('en-US')} results`;
-  return 'No results';
-}
+import getPageTitleForResults from '../models/getPageTitleForResults';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter };
 
@@ -135,7 +130,7 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
 
   const totalPages = pageOptions.length;
 
-  useEffect(() => setPageTitle(getPageTitle(rows.length)), [rows.length, setPageTitle])
+  useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
 
   return <>
     <TableStyles>
