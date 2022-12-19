@@ -2,10 +2,11 @@ import React from 'react';
 import { Box, Heading } from '@primer/react';
 import ColumnOption from './ColumnOption';
 import type { IntermentField } from '../types/IntermentField';
-import { ColumnGroup, ColumnNamesByColumn, ColumnsByColumnGroup } from '../models/Column';
+import type IntermentFieldGroup from '../types/IntermentFieldGroup';
+import { ColumnNamesByColumn, ColumnsByColumnGroup } from '../models/Column';
 
 interface Props {
-  groupName: ColumnGroup;
+  groupName: IntermentFieldGroup;
   enabledFields: IntermentField[];
   toggleFieldEnabled: (intermentField: IntermentField, isEnabled: boolean) => void;
 }

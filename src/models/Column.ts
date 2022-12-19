@@ -1,8 +1,7 @@
 import type { IntermentField } from '../types/IntermentField';
+import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 
-export type ColumnGroup = 'Person' | 'Location' | 'Marker/Plot' | 'Parcel Numbers' | 'Survey' | 'Other';
-
-export const AllColumnGroups: ColumnGroup[] = [
+export const AllColumnGroups: IntermentFieldGroup[] = [
   'Person',
   'Location',
   'Marker/Plot',
@@ -34,7 +33,7 @@ export const ColumnNamesByColumn: { [prop in IntermentField]: string } = {
   'currentSurvey': 'Current'
 };
 
-export const ColumnsByColumnGroup: { [group in ColumnGroup]: IntermentField[] } = {
+export const ColumnsByColumnGroup: { [group in IntermentFieldGroup]: IntermentField[] } = {
   'Person': ['person', 'deathDate', 'deceasedInfo'],
   'Location': ['cemeteryName', 'address', 'graveyardType', 'siteHistory'],
   'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
