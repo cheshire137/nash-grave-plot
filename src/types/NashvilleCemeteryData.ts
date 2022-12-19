@@ -1,5 +1,5 @@
-import Location from './Location';
-import PhotoLink from './PhotoLink';
+import type Location from './Location';
+import type PhotoLink from './PhotoLink';
 
 // https://dev.socrata.com/foundry/data.nashville.gov/ttqg-mpiz
 type NashvilleCemeteryData = {
