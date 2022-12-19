@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box } from '@primer/react';
-import { ConstrainedTextBlock } from './LongTextBlock';
 import { titleCase } from './TitleCase';
 import type { CellProps } from 'react-table';
+import ConstrainedTextBlock from './ConstrainedTextBlock';
+
 
 interface InscriptionLinesProps {
   text: string;
