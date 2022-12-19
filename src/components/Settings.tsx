@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Box, Button, Dialog, StyledOcticon, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
-import { AllColumnGroups, IntermentField } from '../models/Column';
+import { AllColumnGroups } from '../models/Column';
 import LocalStorage from '../models/LocalStorage';
+import type { IntermentField } from '../types/IntermentField';
 
 const getEnabledColumns = (enabledFields: IntermentField[], columnValue: IntermentField, isEnabled: boolean) => {
   if (isEnabled) {

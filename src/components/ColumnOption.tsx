@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, FormControl, Checkbox } from '@primer/react';
-import { IntermentField } from '../models/Column';
+import type { IntermentField } from '../types/IntermentField';
 
 interface Props {
   name: string;

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
-import { IntermentField, AllColumns } from './models/Column';
+import type { IntermentField } from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
@@ -19,9 +19,15 @@ const getInitialFilters = () => {
   return filters;
 };
 
+
+const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemeteryName', 'address',
+  'graveyardType', 'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
+  'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey', 'surveyUpdates',
+  'currentSurvey'];
+
 const App = () => {
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
-  const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || AllColumns);
+  const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
   const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
 
