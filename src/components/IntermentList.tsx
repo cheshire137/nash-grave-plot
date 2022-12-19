@@ -52,7 +52,9 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
     interments.sort(IntermentSort);
     return interments;
   }, []);
-  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
+  const defaultColumn = useMemo(() => ({
+    Filter: TextFilter,
+  }), []);
 
   const nameColumn = { Header: ColumnNamesByColumn.person, accessor: 'person', filter: 'fuzzyText',
     Cell: NameDisplay };
@@ -155,16 +157,14 @@ const IntermentList = ({ enabledColumns, setPageTitle, filters }: Props) => {
         </tbody>
       </table>
     </TableStyles>
-    {totalPages > 1 && (
-      <Pagination
-        pageCount={totalPages}
-        currentPage={pageIndex + 1}
-        onPageChange={(e, page) => {
-          e.preventDefault();
-          gotoPage(page - 1);
-        }}
-      />
-    )}
+    {totalPages > 1 && <Pagination
+      pageCount={totalPages}
+      currentPage={pageIndex + 1}
+      onPageChange={(e, page) => {
+        e.preventDefault();
+        gotoPage(page - 1);
+      }}
+    />}
   </>;
 };
 
