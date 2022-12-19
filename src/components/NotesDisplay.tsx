@@ -4,7 +4,7 @@ import LongTextBlock from './LongTextBlock';
 import type { CellProps } from 'react-table';
 
 const NotesDisplay = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="300px" textAlign="left">
-  <LongTextBlock value={value} />
+  <LongTextBlock {...value} />
 </Box>;
 
 export default NotesDisplay;
