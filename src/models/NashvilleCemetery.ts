@@ -21,7 +21,7 @@ export type Location = {
 // https://dev.socrata.com/foundry/data.nashville.gov/ttqg-mpiz
 export type NashvilleCemeteryData = {
   cemetery_name: string;
-  alternate_cemetery_name: string;
+  alternate_cemetery_name?: string;
   map_id: string;
   locale: string;
   condition?: string;
@@ -41,7 +41,7 @@ export type NashvilleCemeteryData = {
   inscription: string;
   death_date: string;
   footstone?: string;
-  deceased_info: string;
+  deceased_info?: string;
   original_survey: string;
   survey_update_s: string;
   current_survey: string;
@@ -58,7 +58,7 @@ export type NashvilleCemeteryData = {
   latitude?: string;
   longitude?: string;
   archaeological_information?: string;
-  mapped_location: Location;
+  mapped_location?: Location;
 };
 
 export const NashvilleCemeteries = cemeteriesList as NashvilleCemeteryData[];
