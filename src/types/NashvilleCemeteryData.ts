@@ -1,25 +1,8 @@
-import cemeteriesList from '../nashville-cemeteries.json';
-
-// https://dev.socrata.com/docs/datatypes/url.html#2.1
-export type PhotoLink = {
-  url: string;
-  description: string;
-};
-
-// https://dev.socrata.com/docs/datatypes/location.html#2.1
-export type Location = {
-  latitude: string | null;
-  longitude: string | null;
-  human_address: {
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-  } | null;
-};
+import Location from './Location';
+import PhotoLink from './PhotoLink';
 
 // https://dev.socrata.com/foundry/data.nashville.gov/ttqg-mpiz
-export type NashvilleCemeteryData = {
+type NashvilleCemeteryData = {
   cemetery_name: string;
   alternate_cemetery_name?: string;
   map_id: string;
@@ -61,4 +44,4 @@ export type NashvilleCemeteryData = {
   mapped_location?: Location;
 };
 
-export const NashvilleCemeteries = cemeteriesList as NashvilleCemeteryData[];
+export default NashvilleCemeteryData;

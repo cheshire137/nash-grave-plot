@@ -1,9 +1,10 @@
 import Address from './Address';
 import Inscription from './Inscription';
-import { NashvilleCemeteryData, PhotoLink } from './NashvilleCemetery';
 import parseDateString from '../utils/parseDateString';
 import parseGraveyardType from '../utils/parseGraveyardType';
 import parseAccessible from '../utils/parseAccessible';
+import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
+import type PhotoLink from '../types/PhotoLink';
 
 class Interment {
   person: string;

@@ -2,7 +2,8 @@ import React, { useEffect, useMemo } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
-import { NashvilleCemeteries } from '../models/NashvilleCemetery';
+import NashvilleCemeteryData from '../types/NashvilleCemeteryData';
+import cemeteriesList from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
 import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
@@ -29,6 +30,7 @@ import { Box, Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter };
+const NashvilleCemeteries = cemeteriesList as NashvilleCemeteryData[];
 
 const filterColumns = (enabledColumns: Column[], relevantColumns: TableColumn[]) => {
   const enabledColumnNames: string[] = enabledColumns;

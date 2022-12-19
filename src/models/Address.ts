@@ -1,4 +1,5 @@
-import { NashvilleCemeteryData, Location } from "./NashvilleCemetery";
+import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
+import type Location from '../types/Location';
 
 class Address {
   locale: string;
