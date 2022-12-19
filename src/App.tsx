@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import Settings from './components/Settings';
-import type { IntermentField } from './types/IntermentField';
+import type IntermentField from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';

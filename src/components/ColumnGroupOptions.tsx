@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading } from '@primer/react';
 import ColumnOption from './ColumnOption';
-import type { IntermentField } from '../types/IntermentField';
+import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 import { ColumnNamesByColumn, ColumnsByColumnGroup } from '../models/Column';
 

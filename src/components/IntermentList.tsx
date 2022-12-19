@@ -25,7 +25,7 @@ import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import IntermentSort from '../models/IntermentSort';
 import { ColumnNamesByColumn } from '../models/Column';
-import type { IntermentField } from '../types/IntermentField';
+import type IntermentField from '../types/IntermentField';
 import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';

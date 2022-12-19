@@ -1,4 +1,4 @@
-import type { IntermentField } from '../types/IntermentField';
+import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
 
 export const AllColumnGroups: IntermentFieldGroup[] = [

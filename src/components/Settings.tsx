@@ -4,7 +4,7 @@ import { GearIcon } from '@primer/octicons-react';
 import ColumnGroupOptions from './ColumnGroupOptions';
 import { AllColumnGroups } from '../models/Column';
 import LocalStorage from '../models/LocalStorage';
-import type { IntermentField } from '../types/IntermentField';
+import type IntermentField from '../types/IntermentField';
 
 const getEnabledColumns = (enabledFields: IntermentField[], columnValue: IntermentField, isEnabled: boolean) => {
   if (isEnabled) {
