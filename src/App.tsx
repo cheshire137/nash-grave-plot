@@ -36,8 +36,8 @@ const App = () => {
       <BaseStyles>
         <Header>
           <Header.Item full>
-            <Heading as="h1">
-              NashGravePlot
+            <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
+              <Header.Link href="">NashGravePlot</Header.Link>
               {pageTitle.length > 0 && <Text
                 ml={4}
                 display="inline-block"
