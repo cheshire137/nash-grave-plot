@@ -2,6 +2,6 @@ import React from 'react';
 import type { CellProps } from 'react-table';
 import AddressLines from './AddressLines';
 
-const AddressDisplay = ({ value }: CellProps<Record<string, unknown>>) => <AddressLines {...value} />;
+const AddressDisplay = (props: CellProps<Record<string, unknown>>) => <AddressLines {...props} />;
 
 export default AddressDisplay;

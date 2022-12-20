@@ -23,7 +23,10 @@ class Address {
     if (this.latitude && this.longitude) {
       this.geocode = `${this.latitude}, ${this.longitude}`;
     }
-    this.additionalLocationInfo = props.additional_location_information || null;
+    this.additionalLocationInfo = null;
+    if (props.additional_location_information && props.additional_location_information.trim().length > 0) {
+      this.additionalLocationInfo = props.additional_location_information.trim();
+    }
     this.street = props.street || '';
     this.number = props.number || '';
     this.streetAddress = [this.number, this.street].filter(info => info.trim().length > 0)
