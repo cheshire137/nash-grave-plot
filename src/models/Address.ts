@@ -39,6 +39,20 @@ class Address {
     }
     return parts.filter(part => part && part.trim().length > 0).join(' ');
   }
+
+  getMapsUrl() {
+    let query: string;
+    if (this.latitude && this.longitude) {
+      query = `${this.latitude},${this.longitude}`;
+    } else {
+      query = `${this.streetAddress} Nashville, TN USA`;
+    }
+    let url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    if (this.additionalLocationInfo) {
+      url += `&query_place_id=${encodeURIComponent(this.additionalLocationInfo)}`;
+    }
+    return url;
+  }
 }
 
 export default Address;
