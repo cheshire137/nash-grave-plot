@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TextInput, FormControl, IconButton, Popover } from '@primer/react';
+import { TextInput, FormControl, IconButton } from '@primer/react';
 import { FilterIcon } from '@primer/octicons-react';
+import FilterPopover from './FilterPopover';
 
 interface Props {
   column: {
@@ -21,7 +22,7 @@ function TextFilter({
 
   return <>
     <IconButton aria-label="Change filter" variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
-    <Popover open={isOpen} caret="top">
+    <FilterPopover open={isOpen}>
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
         <TextInput
@@ -36,7 +37,7 @@ function TextFilter({
           autoFocus={isOpen}
         />
       </FormControl>
-    </Popover>
+    </FilterPopover>
   </>;
 }
 
