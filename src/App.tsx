@@ -6,6 +6,7 @@ import type IntermentField from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
+import { WindowContextProvider } from './components/WindowContext';
 
 const getInitialFilters = () => {
   const filters: Filter[] = [];
@@ -34,26 +35,28 @@ const App = () => {
   return (
     <ThemeProvider>
       <BaseStyles>
-        <Header>
-          <Header.Item full>
-            <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
-              <Header.Link href="">NashGravePlot</Header.Link>
-              {pageTitle.length > 0 && <Text
-                ml={4}
-                display="inline-block"
-                fontWeight="normal"
-                fontSize="3"
-              >{pageTitle}</Text>}
-            </Heading>
-          </Header.Item>
-          <Header.Item>
-            <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
-          </Header.Item>
-        </Header>
-        <Box pb={4} fontSize="2">
-          <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />
-        </Box>
-        <Footer />
+        <WindowContextProvider>
+          <Header>
+            <Header.Item full>
+              <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
+                <Header.Link href="">NashGravePlot</Header.Link>
+                {pageTitle.length > 0 && <Text
+                  ml={4}
+                  display="inline-block"
+                  fontWeight="normal"
+                  fontSize="3"
+                >{pageTitle}</Text>}
+              </Heading>
+            </Header.Item>
+            <Header.Item>
+              <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
+            </Header.Item>
+          </Header>
+          <Box pb={4} fontSize="2">
+            <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />
+          </Box>
+          <Footer />
+        </WindowContextProvider>
       </BaseStyles>
     </ThemeProvider>
   );

@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 export type WindowContextProps = {
   clientHeight: number;
   clientWidth: number;
 };
-export const WindowContext = React.createContext<WindowContextProps>({ clientHeight: 0, clientWidth: 0, });
+export const WindowContext = React.createContext<WindowContextProps>({ clientHeight: 0, clientWidth: 0 });
 interface Props {
   children: React.ReactNode;
 }
