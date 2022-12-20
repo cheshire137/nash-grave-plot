@@ -4,8 +4,7 @@ const parseYearMonthDayString = (str: string) => {
   const matches = str.match(/^(?<year>\d\d\d\d)-(?<month>\d\d?)-(?<day>\d\d?)/);
 
   if (matches && matches.groups) {
-    let year = parseInt(matches.groups.year, 10);
-    if (year < 1000) year += 1000; // handle strings like '962/02/03'
+    const year = parseInt(matches.groups.year, 10);
     const month = parseInt(matches.groups.month, 10);
     const day = parseInt(matches.groups.day, 10);
     return new Date(year, month - 1, day);
