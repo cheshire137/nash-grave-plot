@@ -1,11 +1,14 @@
 function UpdateUrlFilter(key: string, value: string) {
   if (window.history.pushState) {
     const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set(key, value);
-    const newUrlSearch = `?${searchParams.toString()}`;
-    if (newUrlSearch !== '?' && window.location.search !== newUrlSearch) {
-      window.history.pushState({}, '', newUrlSearch);
+    if (value.length > 0) {
+      searchParams.set(key, value);
+    } else {
+      searchParams.delete(key);
     }
+    const url = new URL(window.location.href);
+    url.search = searchParams.toString();
+    window.history.pushState({}, '', url.toString());
   }
 }
 
