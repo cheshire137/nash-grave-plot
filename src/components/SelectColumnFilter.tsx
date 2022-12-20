@@ -37,7 +37,7 @@ function SelectColumnFilter({
     <Popover open={isOpen} caret="top">
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
-        <Select onChange={e => setFilter(e.target.value)} onBlur={() => setIsOpen(false)}>
+        <Select ref={selectRef} onChange={e => setFilter(e.target.value)} onBlur={() => setIsOpen(false)}>
           <Select.Option value="">All</Select.Option>
           {options.map((option, i) => <Select.Option key={`${i}-${option}`} value={option}>
             {titleCaseify(option)}
