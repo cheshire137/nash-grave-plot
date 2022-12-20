@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useContext } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
@@ -29,8 +29,9 @@ import type IntermentField from '../types/IntermentField';
 import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
-import { Box, Pagination } from '@primer/react';
+import { Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
+import { WindowContext } from './WindowContext';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -59,6 +60,9 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
   const defaultColumn = useMemo(() => ({
     Filter: TextFilter,
   }), []);
+  const tableBodyRef = useRef<HTMLTableSectionElement>(null);
+  const paginationRef = useRef<HTMLDivElement>(null);
+  const { clientHeight: viewportHeight } = useContext(WindowContext);
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
@@ -126,8 +130,9 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
     rows,
     prepareRow,
     pageOptions,
-    state: { pageIndex },
+    state: { pageIndex, pageSize },
     gotoPage,
+    setPageSize,
   } = useTable<Interment>({
     columns,
     data,
@@ -140,6 +145,45 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
 
+  useEffect(() => {
+    if (tableBodyRef && tableBodyRef.current) {
+      console.log('window height is now', viewportHeight, 'px');
+      const tbody = tableBodyRef.current;
+      const rows = tbody.querySelectorAll('tr');
+      if (rows.length < 1) return;
+
+      const rect = tbody.getBoundingClientRect();
+      let availableHeight = viewportHeight - rect.top;
+      if (paginationRef && paginationRef.current) availableHeight -= paginationRef.current.clientHeight;
+
+      if (rect.height > availableHeight) { // need to reduce page size
+        let newPageSize = 1;
+        let totalRowHeight = rows[0].clientHeight;
+        while (totalRowHeight < availableHeight) {
+          const nextRow = rows[newPageSize];
+          if (!nextRow) break;
+
+          const rowHeight = nextRow.clientHeight;
+          if (totalRowHeight + rowHeight > availableHeight) break;
+
+          totalRowHeight += rowHeight;
+          newPageSize++;
+        }
+
+        if (newPageSize != pageSize) {
+          console.log(newPageSize, 'rows takes', totalRowHeight, 'px');
+          setPageSize(newPageSize);
+        }
+      } else if (rect.height < availableHeight) { // might be able to increase page size
+        const rowHeights = Array.from(rows).map(row => row.clientHeight);
+        const avgRowHeight = rowHeights.reduce((a, b) => a + b, 0) / rowHeights.length;
+        const heightDiff = availableHeight - rect.height;
+        const rowsToAdd = Math.floor(heightDiff / avgRowHeight);
+        setPageSize(pageSize + rowsToAdd);
+      }
+    }
+  }, [tableBodyRef, paginationRef, viewportHeight, pageSize, setPageSize])
+
   return <>
     <TableStyles>
       <table {...getTableProps()}>
@@ -151,7 +195,7 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
             </TableHeaderCell>)}
           </tr>)}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody ref={tableBodyRef} {...getTableBodyProps()}>
           {page.map(row => {
             prepareRow(row);
             return <tr {...row.getRowProps()}>
@@ -163,14 +207,15 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
         </tbody>
       </table>
     </TableStyles>
-    {totalPages > 1 && <Pagination
-      pageCount={totalPages}
-      currentPage={pageIndex + 1}
-      onPageChange={(e, page) => {
-        e.preventDefault();
-        gotoPage(page - 1);
-      }}
-    />}
+    {totalPages > 1 && <div ref={paginationRef}>
+      <Pagination pageCount={totalPages}
+        currentPage={pageIndex + 1}
+        onPageChange={(e, page) => {
+          e.preventDefault();
+          gotoPage(page - 1);
+        }}
+      />
+    </div>}
   </>;
 };
 
