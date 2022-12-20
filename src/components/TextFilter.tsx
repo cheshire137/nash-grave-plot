@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TextInput, FormControl, IconButton } from '@primer/react';
-import { FilterIcon } from '@primer/octicons-react';
+import { TextInput, FormControl } from '@primer/react';
 import FilterPopover from './FilterPopover';
+import FilterButton from './FilterButton';
 
 interface Props {
   column: {
@@ -21,7 +21,7 @@ function TextFilter({
   }, [isOpen, inputRef]);
 
   return <>
-    <IconButton aria-label="Change filter" variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
+    <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     <FilterPopover open={isOpen}>
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>

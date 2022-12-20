@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import type { FilterValue } from 'react-table'
-import { FormControl, IconButton, Checkbox } from '@primer/react';
-import { FilterIcon } from '@primer/octicons-react';
+import { FormControl, Checkbox } from '@primer/react';
 import FilterPopover from './FilterPopover';
+import FilterButton from './FilterButton';
 
 interface Props {
   column: {
@@ -21,7 +21,7 @@ function PhotoColumnFilter({
   }, [isOpen, inputRef]);
 
   return <>
-    <IconButton aria-label="Change filter" variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
+    <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     <FilterPopover open={isOpen} sx={{ px: 3 }}>
       <FormControl sx={{ alignItems: 'center' }}>
         <Checkbox

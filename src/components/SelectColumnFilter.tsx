@@ -1,9 +1,9 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import titleCaseify from '../utils/titleCaseify';
 import type { FilterValue, IdType, Row } from 'react-table'
-import { FormControl, IconButton, Select } from '@primer/react';
-import { FilterIcon } from '@primer/octicons-react';
+import { FormControl, Select } from '@primer/react';
 import FilterPopover from './FilterPopover';
+import FilterButton from './FilterButton';
 
 interface Props {
   column: {
@@ -34,7 +34,7 @@ function SelectColumnFilter({
   }, [isOpen, selectRef]);
 
   return <>
-    <IconButton aria-label="Change filter" variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
+    <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     <FilterPopover open={isOpen}>
       <FormControl sx={{ width: '100%' }}>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
