@@ -33,7 +33,7 @@ function SelectColumnFilter({
   }, [isOpen, selectRef]);
 
   return <>
-    <IconButton variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
+    <IconButton aria-label="Change filter" variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
     <Popover open={isOpen} caret="top">
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
