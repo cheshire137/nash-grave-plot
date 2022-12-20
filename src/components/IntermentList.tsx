@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useContext } from 'react';
+import React, { useEffect, useMemo, useRef, useContext, useState } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
@@ -63,6 +63,7 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const { clientHeight: viewportHeight } = useContext(WindowContext);
+  const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0);
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
@@ -147,18 +148,26 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
 
   useEffect(() => {
     if (tableBodyRef && tableBodyRef.current) {
-      console.log('window height is now', viewportHeight, 'px');
       const tbody = tableBodyRef.current;
       const rows = tbody.querySelectorAll('tr');
       if (rows.length < 1) return;
 
       const rect = tbody.getBoundingClientRect();
+      let targetAreaHeight = rect.height;
       let availableHeight = viewportHeight - rect.top;
-      if (paginationRef && paginationRef.current) availableHeight -= paginationRef.current.clientHeight;
+      let spaceBetweenPaginationAndTable = 0;
+      let paginationHeight = 0;
+      if (paginationRef && paginationRef.current) {
+        const paginationRect = paginationRef.current.getBoundingClientRect();
+        spaceBetweenPaginationAndTable += paginationRect.top - rect.bottom;
+        paginationHeight = paginationRect.height;
+        targetAreaHeight += paginationHeight + spaceBetweenPaginationAndTable;
+        availableHeight -= paginationHeight - spaceBetweenPaginationAndTable;
+      }
 
-      if (rect.height > availableHeight) { // need to reduce page size
+      if (targetAreaHeight > availableHeight) { // need to reduce page size
         let newPageSize = 1;
-        let totalRowHeight = rows[0].clientHeight;
+        let totalRowHeight = rows[0].clientHeight + spaceBetweenPaginationAndTable + paginationHeight;
         while (totalRowHeight < availableHeight) {
           const nextRow = rows[newPageSize];
           if (!nextRow) break;
@@ -171,15 +180,19 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
         }
 
         if (newPageSize != pageSize) {
-          console.log(newPageSize, 'rows takes', totalRowHeight, 'px');
+          setViewportHeightAtLastPageSizeChange(viewportHeight);
           setPageSize(newPageSize);
         }
-      } else if (rect.height < availableHeight) { // might be able to increase page size
+      } else if (targetAreaHeight < availableHeight && viewportHeightAtLastPageSizeChange !== viewportHeight) { // might be able to increase page size
         const rowHeights = Array.from(rows).map(row => row.clientHeight);
         const avgRowHeight = rowHeights.reduce((a, b) => a + b, 0) / rowHeights.length;
-        const heightDiff = availableHeight - rect.height;
+        const heightDiff = availableHeight - targetAreaHeight;
         const rowsToAdd = Math.floor(heightDiff / avgRowHeight);
-        setPageSize(pageSize + rowsToAdd);
+
+        if (rowsToAdd > 0) {
+          setViewportHeightAtLastPageSizeChange(viewportHeight);
+          setPageSize(pageSize + rowsToAdd);
+        }
       }
     }
   }, [tableBodyRef, paginationRef, viewportHeight, pageSize, setPageSize])
