@@ -50,7 +50,7 @@ const App = () => {
             <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
           </Header.Item>
         </Header>
-        <Box pb={4}>
+        <Box pb={4} fontSize="2">
           <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />
         </Box>
         <Footer />

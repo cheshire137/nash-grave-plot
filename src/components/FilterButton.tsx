@@ -9,6 +9,7 @@ interface Props {
 const FilterButton = (props: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { isOpen, ...rest } = props;
   return <IconButton
+    size="small"
     aria-label="Change filter"
     variant={isOpen ? 'default' : 'invisible'}
     icon={FilterIcon}
