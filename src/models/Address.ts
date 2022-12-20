@@ -3,7 +3,6 @@ import type Location from '../types/Location';
 
 class Address {
   locale: string;
-  mappedLocation: Location | null;
   street: string;
   number: string;
   geocode: string | null;
@@ -14,9 +13,12 @@ class Address {
 
   constructor(props: NashvilleCemeteryData) {
     this.locale = props.locale;
-    this.mappedLocation = props.mapped_location || null;
     this.latitude = props.latitude || null;
     this.longitude = props.longitude || null;
+    if (props.mapped_location) {
+      if (props.mapped_location.latitude && !this.latitude) this.latitude = props.mapped_location.latitude;
+      if (props.mapped_location.longitude && !this.longitude) this.longitude = props.mapped_location.longitude;
+    }
     this.geocode = null;
     if (this.latitude && this.longitude) {
       this.geocode = `${this.latitude}, ${this.longitude}`;
