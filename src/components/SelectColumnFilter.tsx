@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import titleCaseify from '../utils/titleCaseify';
 import type { FilterValue, IdType, Row } from 'react-table'
-import { FormControl, Select } from '@primer/react';
+import { TextInput, FormControl, IconButton, Popover, Select } from '@primer/react';
+import { FilterIcon } from '@primer/octicons-react';
 
 interface Props {
   column: {
@@ -15,6 +16,8 @@ interface Props {
 function SelectColumnFilter({
   column: {setFilter, preFilteredRows, id}
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectRef = useRef<HTMLSelectElement>(null);
   const options = useMemo(() => {
     return [...preFilteredRows.reduce((memo, row) => {
       const value = row.values[id];
@@ -25,15 +28,24 @@ function SelectColumnFilter({
     }, new Set<string>()).values()];
   }, [id, preFilteredRows]);
 
-  return <FormControl>
-    <FormControl.Label></FormControl.Label>
-    <Select onChange={e => setFilter(e.target.value)}>
-      <Select.Option value="">All</Select.Option>
-      {options.map((option, i) => <Select.Option key={`${i}-${option}`} value={option}>
-        {titleCaseify(option)}
-      </Select.Option>)}
-    </Select>
-  </FormControl>;
+  useEffect(() => {
+    if (isOpen && selectRef.current) selectRef.current.focus();
+  }, [isOpen, selectRef]);
+
+  return <>
+    <IconButton variant="invisible" icon={FilterIcon} onClick={() => setIsOpen(!isOpen)} />
+    <Popover open={isOpen} caret="top">
+      <FormControl>
+        <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
+        <Select onChange={e => setFilter(e.target.value)} onBlur={() => setIsOpen(false)}>
+          <Select.Option value="">All</Select.Option>
+          {options.map((option, i) => <Select.Option key={`${i}-${option}`} value={option}>
+            {titleCaseify(option)}
+          </Select.Option>)}
+        </Select>
+      </FormControl>
+    </Popover>
+  </>;
 }
 
 export default SelectColumnFilter;
