@@ -147,7 +147,7 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
           {headerGroups.map(headerGroup => <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => <TableHeaderCell {...column.getHeaderProps()}>
               {column.render('Header')}
-              {column.canFilter && column.Filter && <Box mt="1">{column.render('Filter')}</Box>}
+              {column.canFilter && column.Filter && <>{column.render('Filter')}</>}
             </TableHeaderCell>)}
           </tr>)}
         </thead>
