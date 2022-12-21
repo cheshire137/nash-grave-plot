@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 export type PageContextProps = {
   pageTitle: string;
@@ -24,6 +24,14 @@ export const PageContextProvider = ({ children }: Props) => {
 
   const setPageTitle = useCallback((title: string) => _setPageTitle(title), [_setPageTitle]);
   const setHeaderItems = useCallback((items: React.ReactNode[]) => _setHeaderItems(items), [_setHeaderItems]);
+
+  useEffect(() => {
+    if (pageTitle.length > 0) {
+      document.title = `NashGravePlot - ${pageTitle}`;
+    } else {
+      document.title = 'NashGravePlot';
+    }
+  }, [pageTitle])
 
   return <PageContext.Provider value={{ pageTitle, setPageTitle, headerItems, setHeaderItems }}>
     {children}
