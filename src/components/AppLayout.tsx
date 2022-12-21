@@ -28,7 +28,7 @@ const AppLayout = ({ children }: Props) => {
           <TabNav.Link href="/" selected>Data</TabNav.Link>
         </TabNav>
       </Header.Item>
-      {headerItems.map(headerItem => <Header.Item>{headerItem}</Header.Item>)}
+      {headerItems.map(headerItem => <Header.Item key={JSON.stringify(headerItem)}>{headerItem}</Header.Item>)}
     </Header>
     <Box pb={4} fontSize="2">{children}</Box>
     <Footer />

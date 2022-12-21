@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { BaseStyles, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
-import type IntermentField from './types/IntermentField';
-import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import { WindowContextProvider } from './contexts/WindowContext';
 import { CemeteryDataContextProvider } from './contexts/CemeteryDataContext';
@@ -23,20 +21,12 @@ const getInitialFilters = () => {
   return filters;
 };
 
-
-const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemeteryName', 'address',
-  'graveyardType', 'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
-  'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey', 'surveyUpdates',
-  'currentSurvey'];
-
 const App = () => {
-  const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
-  const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
   const filters = useMemo(() => getInitialFilters(), []);
   const routes = [
     {
       path: '/',
-      element: <IntermentList enabledIntermentFields={enabledFields} filters={filters} />,
+      element: <IntermentList filters={filters} />,
       errorElement: <ErrorPage />,
     },
   ];
