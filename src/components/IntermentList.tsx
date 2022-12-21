@@ -23,7 +23,7 @@ import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import { intermentFieldLabels } from '../utils/intermentFieldLabels';
 import type IntermentField from '../types/IntermentField';
-import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
+import { useTable, useFilters, usePagination, Column } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
 import { Pagination } from '@primer/react';
@@ -37,7 +37,7 @@ import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
-const filterColumns = (enabledFields: IntermentField[], relevantColumns: TableColumn[]) => {
+const filterColumns = (enabledFields: IntermentField[], relevantColumns: Column[]) => {
   const enabledPropStrs: string[] = enabledFields;
   return relevantColumns.filter(column => {
     if (typeof column.accessor === 'string') {
