@@ -11,7 +11,7 @@ const AppLayout = () => {
     <Header>
       <Header.Item full sx={{ display: 'flex', alignItems: 'baseline' }}>
         <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
-          <Header.Link href="">NashGravePlot</Header.Link>
+          <Header.Link href={useHref('/')}>NashGravePlot</Header.Link>
         </Heading>
         {pageTitle && pageTitle.length > 0 && <Heading
           as="h2"
