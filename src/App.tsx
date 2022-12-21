@@ -7,6 +7,7 @@ import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
 import { WindowContextProvider } from './components/WindowContext';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const getInitialFilters = () => {
   const filters: Filter[] = [];
@@ -32,6 +33,13 @@ const App = () => {
   const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />,
+    },
+  ]);
+
   return (
     <ThemeProvider>
       <BaseStyles>
@@ -53,7 +61,7 @@ const App = () => {
             </Header.Item>
           </Header>
           <Box pb={4} fontSize="2">
-            <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />
+            <RouterProvider router={router} />
           </Box>
           <Footer />
         </WindowContextProvider>
