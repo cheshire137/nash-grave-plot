@@ -18,13 +18,17 @@ const PhotoGallery = () => {
       return { src, caption, alt: caption, width: 200, height: 200 };
     });
   }, [interments]);
+  const totalImages = imageData.length;
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 12;
   const endIndex = Math.min(imageData.length, currentPage * perPage);
   const startIndex = Math.max(0, endIndex - perPage);
   const totalPages = Math.ceil(imageData.length / perPage);
 
-  useEffect(() => setPageTitle('Photo gallery'), [setPageTitle]);
+  useEffect(() => {
+    const units = totalImages === 1 ? 'photo' : 'photos';
+    setPageTitle(`${totalImages} ${units}`);
+  }, [setPageTitle, totalImages]);
 
   return <>
     <Masonry columnsCount={4} gutter="10px">
