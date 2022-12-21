@@ -33,6 +33,7 @@ import { WindowContext } from '../contexts/WindowContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 import { PageContext } from '../contexts/PageContext';
 import LocalStorage from '../models/LocalStorage';
+import getInitialFilters from '../utils/getInitialFilters';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -51,11 +52,7 @@ const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'ce
   'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey', 'surveyUpdates',
   'currentSurvey'];
 
-interface Props {
-  filters: Filter[];
-}
-
-const IntermentList = ({ filters }: Props) => {
+const IntermentList = () => {
   const defaultColumn = useMemo(() => ({
     Filter: TextFilter,
   }), []);
@@ -67,6 +64,7 @@ const IntermentList = ({ filters }: Props) => {
   const { setPageTitle, setHeaderItems } = useContext(PageContext);
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
+  const filters = useMemo(() => getInitialFilters(), []);
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
