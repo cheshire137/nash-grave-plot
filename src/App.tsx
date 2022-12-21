@@ -8,6 +8,7 @@ import Filter from './models/Filter';
 import Footer from './components/Footer';
 import { WindowContextProvider } from './components/WindowContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from './components/ErrorPage';
 
 const getInitialFilters = () => {
   const filters: Filter[] = [];
@@ -35,8 +36,9 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />,
+      errorElement: <ErrorPage />,
     },
   ]);
 
