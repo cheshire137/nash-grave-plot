@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Header, Heading, Box } from '@primer/react';
 import Footer from './Footer';
 import { PageContext } from '../contexts/PageContext';
-import { useHref, Outlet } from 'react-router-dom';
+import { useHref, Outlet, useLocation } from 'react-router-dom';
 
 const AppLayout = () => {
   const { pageTitle, headerItems } = useContext(PageContext);
+  const { pathname } = useLocation();
 
   return <>
     <Header>
@@ -17,7 +18,13 @@ const AppLayout = () => {
           as="h2"
           sx={{ fontWeight: 'normal', fontSize: 3, mx: 4 }}
         >{pageTitle}</Heading>}
-        <Header.Link href={useHref('/')}>Data</Header.Link>
+        <Header.Link sx={{
+          borderBottom: pathname === '/' ? '1px solid' : null,
+        }} href={useHref('/')}>Data</Header.Link>
+        <Header.Link sx={{
+          ml: 4,
+          borderBottom: pathname === '/photos' ? '1px solid' : null,
+        }} href={useHref('/photos')}>Photos</Header.Link>
       </Header.Item>
       {headerItems.map(headerItem => <Header.Item key={JSON.stringify(headerItem)}>{headerItem}</Header.Item>)}
     </Header>
