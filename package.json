@@ -6,6 +6,7 @@
   "dependencies": {
     "@primer/octicons-react": "^17.9.0",
     "@primer/react": "^35.15.0",
+    "@types/react-router-dom": "^5.3.3",
     "gh-pages": "^3.2.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
