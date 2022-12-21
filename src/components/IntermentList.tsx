@@ -10,7 +10,6 @@ import SettingsDialog from './SettingsDialog';
 import SelectColumnFilter from './SelectColumnFilter';
 import PhotoColumnFilter from './PhotoColumnFilter';
 import AddressFilter from './AddressFilter';
-import Filter from '../models/Filter';
 import TextFilter from './TextFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
@@ -34,6 +33,7 @@ import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 import { PageContext } from '../contexts/PageContext';
 import LocalStorage from '../models/LocalStorage';
 import getInitialFilters from '../utils/getInitialFilters';
+import { useSearchParams } from 'react-router-dom';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -64,7 +64,8 @@ const IntermentList = () => {
   const { setPageTitle, setHeaderItems } = useContext(PageContext);
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
-  const filters = useMemo(() => getInitialFilters(), []);
+  const [searchParams] = useSearchParams();
+  const filters = useMemo(() => getInitialFilters(searchParams), [searchParams]);
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
