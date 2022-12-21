@@ -2,12 +2,9 @@ import React, { useContext } from 'react';
 import { Header, Text, Heading, Box, TabNav } from '@primer/react';
 import Footer from './Footer';
 import { PageContext } from '../contexts/PageContext';
+import { useHref, Outlet } from 'react-router-dom';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-const AppLayout = ({ children }: Props) => {
+const AppLayout = () => {
   const { pageTitle, headerItems } = useContext(PageContext);
 
   return <>
@@ -25,12 +22,12 @@ const AppLayout = ({ children }: Props) => {
       </Header.Item>
       <Header.Item full>
         <TabNav aria-label="Main navigation">
-          <TabNav.Link href="/" selected>Data</TabNav.Link>
+          <TabNav.Link href={useHref('/')} selected>Data</TabNav.Link>
         </TabNav>
       </Header.Item>
       {headerItems.map(headerItem => <Header.Item key={JSON.stringify(headerItem)}>{headerItem}</Header.Item>)}
     </Header>
-    <Box pb={4} fontSize="2">{children}</Box>
+    <Box pb={4} fontSize="2"><Outlet /></Box>
     <Footer />
   </>;
 };

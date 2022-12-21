@@ -4,28 +4,23 @@ import IntermentList from './components/IntermentList';
 import { WindowContextProvider } from './contexts/WindowContext';
 import { CemeteryDataContextProvider } from './contexts/CemeteryDataContext';
 import { PageContextProvider } from './contexts/PageContext';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 import AppLayout from './components/AppLayout';
 
 const App = () => {
-  const routes = [
-    {
-      path: '/',
-      element: <IntermentList />,
-      errorElement: <ErrorPage />,
-    },
-  ];
-  const router = createBrowserRouter(routes, { basename: '/nash-grave-plot' });
+  const router = createBrowserRouter(createRoutesFromElements(
+    <Route element={<AppLayout />}>
+      <Route path="/" element={<IntermentList />} errorElement={<ErrorPage />} />
+    </Route>
+  ), { basename: '/nash-grave-plot' });
 
   return <ThemeProvider>
     <BaseStyles>
       <WindowContextProvider>
         <CemeteryDataContextProvider>
           <PageContextProvider>
-            <AppLayout>
-              <RouterProvider router={router} />
-            </AppLayout>
+            <RouterProvider router={router} />
           </PageContextProvider>
         </CemeteryDataContextProvider>
       </WindowContextProvider>
