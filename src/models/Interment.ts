@@ -77,6 +77,17 @@ class Interment {
     return totalPhotos > 0;
   }
 
+  getPhotoCaptionsByUrl() {
+    const result: { [url: string]: string } = {};
+    for (const photoLink of this.gravePhotos) {
+      result[photoLink.url] = this.graveCaption();
+    }
+    for (const photoLink of this.sitePhotos) {
+      result[photoLink.url] = this.siteCaption();
+    }
+    return result;
+  }
+
   graveCaption() {
     return `${this.person} in ${this.cemeteryName}, ${this.address.toString()}`;
   }
