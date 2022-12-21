@@ -19,7 +19,7 @@ const PhotoGallery = () => {
     });
   }, [interments]);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 10;
+  const perPage = 12;
   const endIndex = Math.min(imageData.length, currentPage * perPage);
   const startIndex = Math.max(0, endIndex - perPage);
   const totalPages = Math.ceil(imageData.length / perPage);
@@ -27,7 +27,7 @@ const PhotoGallery = () => {
   useEffect(() => setPageTitle('Photo gallery'), [setPageTitle]);
 
   return <>
-    <Masonry columnsCount={3} gutter="10px">
+    <Masonry columnsCount={4} gutter="10px">
       {imageData.slice(startIndex, endIndex).map(image => <img
         key={image.src}
         src={image.src}
