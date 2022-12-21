@@ -71,6 +71,11 @@ class Interment {
     }
     this.inscription = new Inscription(props.inscription);
   }
+
+  hasPhotos() {
+    const totalPhotos = this.gravePhotos.length + this.sitePhotos.length;
+    return totalPhotos > 0;
+  }
 }
 
 export default Interment;
