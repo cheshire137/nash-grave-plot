@@ -80,6 +80,10 @@ class Interment {
   graveCaption() {
     return `${this.person} in ${this.cemeteryName}, ${this.address.toString()}`;
   }
+
+  siteCaption() {
+    return `${this.cemeteryName} at ${this.address.toString()}`;
+  }
 }
 
 export default Interment;
