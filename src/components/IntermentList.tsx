@@ -246,7 +246,7 @@ const IntermentList = () => {
         hrefBuilder={page => {
           // Can't seem to use React Router's useHref in here, so preserve the base path manually:
           const newSuffix = getPagePath(page);
-          const currentPath = window.location.pathname.replace(/\/*$/, '');
+          const currentPath = window.location.hash.replace(/\/*$/, '');
           const index = currentPath.indexOf('/page/');
           if (index > -1) return `${currentPath.substring(0, index)}${newSuffix}`;
           return `${currentPath}${newSuffix}`;
