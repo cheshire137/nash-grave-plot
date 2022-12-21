@@ -146,6 +146,7 @@ const IntermentList = () => {
     filterTypes,
   }, useFilters, usePagination);
   const totalPages = pageOptions.length;
+  const getPagePath = (pageNumber: number) => pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`;
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
 
@@ -240,11 +241,11 @@ const IntermentList = () => {
           e.preventDefault();
           const newPageIndex = page - 1;
           gotoPage(newPageIndex);
-          navigate(`/page/${page}?page_size=${pageSize}`);
+          navigate(getPagePath(page));
         }}
         hrefBuilder={page => {
           // Can't seem to use React Router's useHref in here, so preserve the base path manually:
-          const newSuffix = `/page/${page}?page_size=${pageSize}`;
+          const newSuffix = getPagePath(page);
           const index = window.location.pathname.indexOf('/page/');
           if (index > -1) {
             return `${window.location.pathname.substring(0, index)}${newSuffix}`;
