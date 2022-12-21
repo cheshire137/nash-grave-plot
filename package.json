@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
+    "react-grid-gallery": "^1.0.0",
     "react-router-dom": "^6.6.0",
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
