@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { BaseStyles, Box, Header, Heading, Text, ThemeProvider } from '@primer/react';
+import { BaseStyles, Box, Header, Heading, Text, ThemeProvider, TabNav } from '@primer/react';
 import IntermentList from './components/IntermentList';
 import SettingsDialog from './components/SettingsDialog';
 import type IntermentField from './types/IntermentField';
@@ -48,8 +48,8 @@ const App = () => {
       <BaseStyles>
         <WindowContextProvider>
           <CemeteryDataContextProvider>
-            <Header>
-              <Header.Item full>
+            <Header sx={{ pb: 0 }}>
+              <Header.Item>
                 <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
                   <Header.Link href="">NashGravePlot</Header.Link>
                   {pageTitle.length > 0 && <Text
@@ -59,6 +59,11 @@ const App = () => {
                     fontSize="3"
                   >{pageTitle}</Text>}
                 </Heading>
+              </Header.Item>
+              <Header.Item full>
+                <TabNav aria-label="Main navigation">
+                  <TabNav.Link href="/" selected>Data</TabNav.Link>
+                </TabNav>
               </Header.Item>
               <Header.Item>
                 <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
