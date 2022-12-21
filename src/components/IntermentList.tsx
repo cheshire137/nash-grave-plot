@@ -6,6 +6,7 @@ import Interment from '../models/Interment';
 import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
+import SettingsDialog from './SettingsDialog';
 import SelectColumnFilter from './SelectColumnFilter';
 import PhotoColumnFilter from './PhotoColumnFilter';
 import AddressFilter from './AddressFilter';
@@ -30,6 +31,7 @@ import { Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 import { WindowContext } from '../contexts/WindowContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
+import { PageContext } from '../contexts/PageContext';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -45,11 +47,10 @@ const filterColumns = (enabledIntermentFields: IntermentField[], relevantColumns
 
 interface Props {
   enabledIntermentFields: IntermentField[];
-  setPageTitle: (title: string) => void;
   filters: Filter[];
 }
 
-const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props) => {
+const IntermentList = ({ enabledIntermentFields, filters }: Props) => {
   const defaultColumn = useMemo(() => ({
     Filter: TextFilter,
   }), []);
@@ -58,6 +59,7 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
   const { clientHeight: viewportHeight } = useContext(WindowContext);
   const { interments } = useContext(CemeteryDataContext);
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0);
+  const { setPageTitle, setHeaderItems } = useContext(PageContext);
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
@@ -139,6 +141,12 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
   const totalPages = pageOptions.length;
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
+
+  // useEffect(() => {
+  //   setHeaderItems([
+  //     <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
+  //   ])
+  // }, [])
 
   useEffect(() => {
     if (!tableBodyRef || !tableBodyRef.current) return;

@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from 'react';
-import { BaseStyles, Box, Header, Heading, Text, ThemeProvider, TabNav } from '@primer/react';
+import { BaseStyles, ThemeProvider } from '@primer/react';
 import IntermentList from './components/IntermentList';
-import SettingsDialog from './components/SettingsDialog';
 import type IntermentField from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
-import Footer from './components/Footer';
 import { WindowContextProvider } from './contexts/WindowContext';
 import { CemeteryDataContextProvider } from './contexts/CemeteryDataContext';
+import { PageContextProvider } from './contexts/PageContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
+import AppLayout from './components/AppLayout';
 
 const getInitialFilters = () => {
   const filters: Filter[] = [];
@@ -32,50 +32,29 @@ const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'ce
 const App = () => {
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
-  const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
   const routes = [
     {
       path: '/',
-      element: <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />,
+      element: <IntermentList enabledIntermentFields={enabledFields} filters={filters} />,
       errorElement: <ErrorPage />,
     },
   ];
   const router = createBrowserRouter(routes, { basename: '/nash-grave-plot' });
 
-  return (
-    <ThemeProvider>
-      <BaseStyles>
-        <WindowContextProvider>
-          <CemeteryDataContextProvider>
-            <Header sx={{ pb: 0 }}>
-              <Header.Item>
-                <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
-                  <Header.Link href="">NashGravePlot</Header.Link>
-                  {pageTitle.length > 0 && <Text
-                    ml={4}
-                    display="inline-block"
-                    fontWeight="normal"
-                    fontSize="3"
-                  >{pageTitle}</Text>}
-                </Heading>
-              </Header.Item>
-              <Header.Item full>
-                <TabNav aria-label="Main navigation">
-                  <TabNav.Link href="/" selected>Data</TabNav.Link>
-                </TabNav>
-              </Header.Item>
-              <Header.Item>
-                <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
-              </Header.Item>
-            </Header>
-            <Box pb={4} fontSize="2"><RouterProvider router={router} /></Box>
-            <Footer />
-          </CemeteryDataContextProvider>
-        </WindowContextProvider>
-      </BaseStyles>
-    </ThemeProvider>
-  );
+  return <ThemeProvider>
+    <BaseStyles>
+      <WindowContextProvider>
+        <CemeteryDataContextProvider>
+          <PageContextProvider>
+            <AppLayout>
+              <RouterProvider router={router} />
+            </AppLayout>
+          </PageContextProvider>
+        </CemeteryDataContextProvider>
+      </WindowContextProvider>
+    </BaseStyles>
+  </ThemeProvider>;
 };
 
 export default App;
