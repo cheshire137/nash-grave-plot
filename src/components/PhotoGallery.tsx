@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { PageContext } from '../contexts/PageContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
-import { Gallery, Image } from 'react-grid-gallery';
+import Masonry from 'react-responsive-masonry';
 
 const PhotoGallery = () => {
   const { interments } = useContext(CemeteryDataContext);
   const { setPageTitle } = useContext(PageContext);
-  const imageData: Image[] = useMemo(() => {
+  const imageData = useMemo(() => {
     const intermentsWithPhotos = interments.filter(interment => interment.hasPhotos());
     let photoCaptionsByUrl: { [url: string]: string } = {};
     for (const interment of intermentsWithPhotos) {
@@ -20,7 +20,14 @@ const PhotoGallery = () => {
 
   useEffect(() => setPageTitle('Photo gallery'), [setPageTitle]);
 
-  return <Gallery enableImageSelection={false} images={imageData.slice(0, 10)} />;
+  return <Masonry columnsCount={3} gutter="10px">
+    {imageData.slice(0, 10).map(image => <img
+      key={image.src}
+      src={image.src}
+      alt={image.alt}
+      style={{ width: '100%', display: 'block' }}
+    />)}
+  </Masonry>;
 };
 
 export default PhotoGallery;
