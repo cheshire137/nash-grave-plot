@@ -31,7 +31,7 @@ import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
 import { Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
-import { WindowContext } from './WindowContext';
+import { WindowContext } from '../contexts/WindowContext';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 

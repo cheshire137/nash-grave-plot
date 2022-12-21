@@ -6,7 +6,7 @@ import type IntermentField from './types/IntermentField';
 import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
-import { WindowContextProvider } from './components/WindowContext';
+import { WindowContextProvider } from './contexts/WindowContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 
