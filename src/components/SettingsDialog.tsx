@@ -5,6 +5,7 @@ import IntermentFieldGroupSettings from './IntermentFieldGroupSettings';
 import LocalStorage from '../models/LocalStorage';
 import type IntermentField from '../types/IntermentField';
 import type IntermentFieldGroup from '../types/IntermentFieldGroup';
+import HeaderIconButton from './HeaderIconButton';
 
 const allIntermentFieldGroups: IntermentFieldGroup[] = ['Person', 'Location', 'Marker/Plot', 'Parcel Numbers',
   'Survey', 'Other'];
@@ -22,16 +23,8 @@ interface Props {
 const SettingsDialog = ({ enabledFields, setEnabledFields }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return <>
-    <IconButton
-      icon={GearIcon}
-      onClick={() => setIsOpen(true)}
-      aria-label="Settings"
-    />
-    <Dialog
-      isOpen={isOpen}
-      onDismiss={() => setIsOpen(false)}
-      aria-labelledby="header-id"
-    >
+    <HeaderIconButton icon={GearIcon} onClick={() => setIsOpen(true)} aria-label="Settings" />
+    <Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)} aria-labelledby="header-id">
       <Dialog.Header id="header-id">Settings</Dialog.Header>
       <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
         <Text color="black" as="div">
