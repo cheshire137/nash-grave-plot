@@ -141,52 +141,56 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
 
   useEffect(() => {
-    if (tableBodyRef && tableBodyRef.current) {
-      const tbody = tableBodyRef.current;
-      const rows = tbody.querySelectorAll('tr');
-      if (rows.length < 1) return;
+    if (!tableBodyRef || !tableBodyRef.current) return;
 
-      const rect = tbody.getBoundingClientRect();
-      let targetAreaHeight = rect.height;
-      let availableHeight = viewportHeight - rect.top;
-      let spaceBetweenPaginationAndTable = 0;
-      let paginationHeight = 0;
-      if (paginationRef && paginationRef.current) {
-        const paginationRect = paginationRef.current.getBoundingClientRect();
-        spaceBetweenPaginationAndTable += paginationRect.top - rect.bottom;
-        paginationHeight = paginationRect.height;
-        targetAreaHeight += paginationHeight + spaceBetweenPaginationAndTable;
-        availableHeight -= paginationHeight - spaceBetweenPaginationAndTable;
+    const tbody = tableBodyRef.current;
+    const rows = tbody.querySelectorAll('tr');
+    if (rows.length < 1) return;
+
+    const tbodyRect = tbody.getBoundingClientRect();
+    let targetAreaHeight = tbodyRect.height;
+    let availableHeight = viewportHeight - tbodyRect.top;
+    let spaceBetweenPaginationAndTable = 0;
+    let paginationHeight = 0;
+    if (paginationRef && paginationRef.current) {
+      const paginationRect = paginationRef.current.getBoundingClientRect();
+      spaceBetweenPaginationAndTable += paginationRect.top - tbodyRect.bottom;
+      paginationHeight = paginationRect.height;
+      targetAreaHeight += paginationHeight + spaceBetweenPaginationAndTable;
+      availableHeight -= paginationHeight - spaceBetweenPaginationAndTable;
+    }
+
+    // need to reduce page size:
+    if (targetAreaHeight > availableHeight) {
+      let newPageSize = 1;
+      let totalRowHeight = rows[0].clientHeight + spaceBetweenPaginationAndTable + paginationHeight;
+
+      while (totalRowHeight < availableHeight) {
+        const nextRow = rows[newPageSize];
+        if (!nextRow) break;
+
+        const rowHeight = nextRow.clientHeight;
+        if (totalRowHeight + rowHeight > availableHeight) break;
+
+        totalRowHeight += rowHeight;
+        newPageSize++;
       }
 
-      if (targetAreaHeight > availableHeight) { // need to reduce page size
-        let newPageSize = 1;
-        let totalRowHeight = rows[0].clientHeight + spaceBetweenPaginationAndTable + paginationHeight;
-        while (totalRowHeight < availableHeight) {
-          const nextRow = rows[newPageSize];
-          if (!nextRow) break;
+      if (newPageSize != pageSize) {
+        setViewportHeightAtLastPageSizeChange(viewportHeight);
+        setPageSize(newPageSize);
+      }
 
-          const rowHeight = nextRow.clientHeight;
-          if (totalRowHeight + rowHeight > availableHeight) break;
+    // might be able to increase page size:
+    } else if (targetAreaHeight < availableHeight && viewportHeightAtLastPageSizeChange !== viewportHeight) {
+      const rowHeights = Array.from(rows).map(row => row.clientHeight);
+      const avgRowHeight = rowHeights.reduce((a, b) => a + b, 0) / rowHeights.length;
+      const heightDiff = availableHeight - targetAreaHeight;
+      const rowsToAdd = Math.floor(heightDiff / avgRowHeight);
 
-          totalRowHeight += rowHeight;
-          newPageSize++;
-        }
-
-        if (newPageSize != pageSize) {
-          setViewportHeightAtLastPageSizeChange(viewportHeight);
-          setPageSize(newPageSize);
-        }
-      } else if (targetAreaHeight < availableHeight && viewportHeightAtLastPageSizeChange !== viewportHeight) { // might be able to increase page size
-        const rowHeights = Array.from(rows).map(row => row.clientHeight);
-        const avgRowHeight = rowHeights.reduce((a, b) => a + b, 0) / rowHeights.length;
-        const heightDiff = availableHeight - targetAreaHeight;
-        const rowsToAdd = Math.floor(heightDiff / avgRowHeight);
-
-        if (rowsToAdd > 0) {
-          setViewportHeightAtLastPageSizeChange(viewportHeight);
-          setPageSize(pageSize + rowsToAdd);
-        }
+      if (rowsToAdd > 0) {
+        setViewportHeightAtLastPageSizeChange(viewportHeight);
+        setPageSize(pageSize + rowsToAdd);
       }
     }
   }, [tableBodyRef, paginationRef, viewportHeight, pageSize, setPageSize])
