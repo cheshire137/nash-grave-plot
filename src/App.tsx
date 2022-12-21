@@ -12,6 +12,7 @@ const App = () => {
   const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<AppLayout />}>
       <Route path="/" element={<IntermentList />} errorElement={<ErrorPage />} />
+      <Route path="/page/:initialPageNumberStr" element={<IntermentList />} errorElement={<ErrorPage />} />
     </Route>
   ), { basename: '/nash-grave-plot' });
 

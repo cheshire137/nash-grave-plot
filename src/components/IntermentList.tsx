@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useContext, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useContext, useState, useCallback } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
@@ -33,7 +33,7 @@ import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 import { PageContext } from '../contexts/PageContext';
 import LocalStorage from '../models/LocalStorage';
 import getInitialFilters from '../utils/getInitialFilters';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -53,9 +53,7 @@ const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'ce
   'currentSurvey'];
 
 const IntermentList = () => {
-  const defaultColumn = useMemo(() => ({
-    Filter: TextFilter,
-  }), []);
+  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const { clientHeight: viewportHeight } = useContext(WindowContext);
@@ -64,8 +62,12 @@ const IntermentList = () => {
   const { setPageTitle, setHeaderItems } = useContext(PageContext);
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
+  const { initialPageNumberStr } = useParams();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const filters = useMemo(() => getInitialFilters(searchParams), [searchParams]);
+  const initialPageIndex = initialPageNumberStr ? parseInt(initialPageNumberStr) - 1 : 0;
+  const initialPageSize = searchParams.get('page_size') ? parseInt(searchParams.get('page_size')!) : 10;
 
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
@@ -139,11 +141,10 @@ const IntermentList = () => {
   } = useTable<Interment>({
     columns,
     data: interments,
-    initialState: { pageSize: 10, filters: filters || [] },
+    initialState: { pageIndex: initialPageIndex, pageSize: initialPageSize, filters: filters || [] },
     defaultColumn,
     filterTypes,
   }, useFilters, usePagination);
-
   const totalPages = pageOptions.length;
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
@@ -237,7 +238,18 @@ const IntermentList = () => {
         currentPage={pageIndex + 1}
         onPageChange={(e, page) => {
           e.preventDefault();
-          gotoPage(page - 1);
+          const newPageIndex = page - 1;
+          gotoPage(newPageIndex);
+          navigate(`/page/${page}?page_size=${pageSize}`);
+        }}
+        hrefBuilder={page => {
+          // Can't seem to use React Router's useHref in here, so preserve the base path manually:
+          const newSuffix = `/page/${page}?page_size=${pageSize}`;
+          const index = window.location.pathname.indexOf('/page/');
+          if (index > -1) {
+            return `${window.location.pathname.substring(0, index)}${newSuffix}`;
+          }
+          return `${window.location.pathname}${newSuffix}`;
         }}
       />
     </div>}
