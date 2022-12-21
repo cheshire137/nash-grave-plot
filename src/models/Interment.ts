@@ -76,6 +76,10 @@ class Interment {
     const totalPhotos = this.gravePhotos.length + this.sitePhotos.length;
     return totalPhotos > 0;
   }
+
+  graveCaption() {
+    return `${this.person} in ${this.cemeteryName}, ${this.address.toString()}`;
+  }
 }
 
 export default Interment;
