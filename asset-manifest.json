@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/nash-grave-plot/static/js/main.d4253bc1.js",
+    "main.js": "/nash-grave-plot/static/js/main.25c57ef2.js",
     "index.html": "/nash-grave-plot/index.html",
-    "main.d4253bc1.js.map": "/nash-grave-plot/static/js/main.d4253bc1.js.map"
+    "main.25c57ef2.js.map": "/nash-grave-plot/static/js/main.25c57ef2.js.map"
   },
   "entrypoints": [
-    "static/js/main.d4253bc1.js"
+    "static/js/main.25c57ef2.js"
   ]
 }
