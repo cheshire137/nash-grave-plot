@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useContext, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useRef, useContext, useState } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
@@ -192,7 +192,7 @@ const IntermentList = () => {
         newPageSize++;
       }
 
-      if (newPageSize != pageSize) {
+      if (newPageSize !== pageSize) {
         setViewportHeightAtLastPageSizeChange(viewportHeight);
         setPageSize(newPageSize);
       }
@@ -209,7 +209,7 @@ const IntermentList = () => {
         setPageSize(pageSize + rowsToAdd);
       }
     }
-  }, [tableBodyRef, paginationRef, viewportHeight, pageSize, setPageSize])
+  }, [tableBodyRef, paginationRef, viewportHeightAtLastPageSizeChange, viewportHeight, pageSize, setPageSize])
 
   return <>
     <TableStyles>
