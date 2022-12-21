@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useRef, useContext, useState } from 'react';
 import TableStyles from './TableStyles';
 import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
-import NashvilleCemeteryData from '../types/NashvilleCemeteryData';
-import cemeteriesList from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
 import AddressDisplay from './AddressDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
@@ -23,7 +21,6 @@ import DemarcationDisplay from './DemarcationDisplay';
 import FootstoneDisplay from './FootstoneDisplay';
 import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
-import IntermentSort from '../models/IntermentSort';
 import { intermentFieldLabels } from '../utils/intermentFieldLabels';
 import type IntermentField from '../types/IntermentField';
 import { useTable, useFilters, usePagination, Column as TableColumn } from 'react-table';
@@ -32,6 +29,7 @@ import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
 import { Pagination } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 import { WindowContext } from '../contexts/WindowContext';
+import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 
 const filterTypes = { fuzzyText: fuzzyTextFilter, minArrayLength: minArrayLengthFilter };
 
@@ -52,17 +50,13 @@ interface Props {
 }
 
 const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props) => {
-  const data = useMemo(() => {
-    const interments = (cemeteriesList as NashvilleCemeteryData[]).map(data => new Interment(data));
-    interments.sort(IntermentSort);
-    return interments;
-  }, []);
   const defaultColumn = useMemo(() => ({
     Filter: TextFilter,
   }), []);
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const { clientHeight: viewportHeight } = useContext(WindowContext);
+  const { interments } = useContext(CemeteryDataContext);
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0);
 
   const columns = useMemo(() => {
@@ -136,7 +130,7 @@ const IntermentList = ({ enabledIntermentFields, setPageTitle, filters }: Props)
     setPageSize,
   } = useTable<Interment>({
     columns,
-    data,
+    data: interments,
     initialState: { pageSize: 10, filters: filters || [] },
     defaultColumn,
     filterTypes,

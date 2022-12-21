@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 export type WindowContextProps = {
   clientHeight: number;
   clientWidth: number;
@@ -7,6 +7,7 @@ export const WindowContext = React.createContext<WindowContextProps>({ clientHei
 interface Props {
   children: React.ReactNode;
 }
+
 // See https://medium.com/@christian_maehler/handle-window-resizing-with-a-react-context-4392b47285e4
 export const WindowContextProvider = ({ children }: Props) => {
   const getVh = useCallback(() => {

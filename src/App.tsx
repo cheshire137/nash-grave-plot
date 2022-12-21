@@ -7,6 +7,7 @@ import LocalStorage from './models/LocalStorage';
 import Filter from './models/Filter';
 import Footer from './components/Footer';
 import { WindowContextProvider } from './contexts/WindowContext';
+import { CemeteryDataContextProvider } from './contexts/CemeteryDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 
@@ -46,26 +47,26 @@ const App = () => {
     <ThemeProvider>
       <BaseStyles>
         <WindowContextProvider>
-          <Header>
-            <Header.Item full>
-              <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
-                <Header.Link href="">NashGravePlot</Header.Link>
-                {pageTitle.length > 0 && <Text
-                  ml={4}
-                  display="inline-block"
-                  fontWeight="normal"
-                  fontSize="3"
-                >{pageTitle}</Text>}
-              </Heading>
-            </Header.Item>
-            <Header.Item>
-              <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
-            </Header.Item>
-          </Header>
-          <Box pb={4} fontSize="2">
-            <RouterProvider router={router} />
-          </Box>
-          <Footer />
+          <CemeteryDataContextProvider>
+            <Header>
+              <Header.Item full>
+                <Heading as="h1" sx={{ display: 'flex', alignItems: 'baseline' }}>
+                  <Header.Link href="">NashGravePlot</Header.Link>
+                  {pageTitle.length > 0 && <Text
+                    ml={4}
+                    display="inline-block"
+                    fontWeight="normal"
+                    fontSize="3"
+                  >{pageTitle}</Text>}
+                </Heading>
+              </Header.Item>
+              <Header.Item>
+                <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
+              </Header.Item>
+            </Header>
+            <Box pb={4} fontSize="2"><RouterProvider router={router} /></Box>
+            <Footer />
+          </CemeteryDataContextProvider>
         </WindowContextProvider>
       </BaseStyles>
     </ThemeProvider>
