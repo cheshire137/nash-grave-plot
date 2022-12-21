@@ -1,6 +1,6 @@
 import React from 'react';
 import TextFilter from './TextFilter';
-import UpdateUrlFilter from '../models/UpdateUrlFilter';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
   column: {
@@ -12,8 +12,13 @@ interface Props {
 function AddressFilter({
   column: { filterValue, setFilter }
 }: Props) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const setFilterAndUpdateUrl = (newAddress?: string) => {
-    UpdateUrlFilter('address', newAddress || '');
+    if (newAddress && newAddress.length > 0) {
+      setSearchParams({ address: newAddress });
+    } else {
+      setSearchParams({});
+    }
     setFilter(newAddress);
   }
   const column = { filterValue, setFilter: setFilterAndUpdateUrl };
