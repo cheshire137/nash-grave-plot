@@ -33,14 +33,14 @@ const App = () => {
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
   const [pageTitle, setPageTitle] = useState('');
   const filters = useMemo(() => getInitialFilters(), []);
-
-  const router = createBrowserRouter([
+  const routes = [
     {
       path: '/',
       element: <IntermentList enabledIntermentFields={enabledFields} setPageTitle={setPageTitle} filters={filters} />,
       errorElement: <ErrorPage />,
     },
-  ]);
+  ];
+  const router = createBrowserRouter(routes, { basename: '/nash-grave-plot' });
 
   return (
     <ThemeProvider>
