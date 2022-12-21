@@ -238,18 +238,16 @@ const IntermentList = () => {
       <Pagination pageCount={totalPages}
         currentPage={pageIndex + 1}
         onPageChange={(e, page) => {
+          // Don't actually load the link on click, that does a full page load:
           e.preventDefault();
+
           const newPageIndex = page - 1;
           gotoPage(newPageIndex);
           navigate(getPagePath(page));
         }}
         hrefBuilder={page => {
           // Can't seem to use React Router's useHref in here, so preserve the base path manually:
-          const newSuffix = getPagePath(page);
-          const currentPath = window.location.hash.replace(/\/*$/, '');
-          const index = currentPath.indexOf('/page/');
-          if (index > -1) return `${currentPath.substring(0, index)}${newSuffix}`;
-          return `${currentPath}${newSuffix}`;
+          return `${window.location.pathname}#${getPagePath(page) }`;
         }}
       />
     </div>}
