@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { TextInput, FormControl } from '@primer/react';
 import FilterPopover from './FilterPopover';
 import FilterButton from './FilterButton';
+import debounce from 'lodash.debounce';
 
 interface Props {
   column: {
@@ -15,10 +16,19 @@ function TextFilter({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [value, setValue] = useState(filterValue || '');
+  const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) inputRef.current.focus();
   }, [isOpen, inputRef]);
+
+  // Stop the invocation of the debounced function after unmounting:
+  useEffect(() => {
+    return () => {
+      debouncedSetFilter.cancel();
+    };
+  }, [debouncedSetFilter]);
 
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
@@ -26,9 +36,15 @@ function TextFilter({
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
         <TextInput
-          value={filterValue || ''}
-          onChange={e => setFilter(e.target.value)}
-          onBlur={() => setIsOpen(false)}
+          value={value}
+          onChange={e => {
+            setValue(e.target.value);
+            debouncedSetFilter(e.target.value);
+          }}
+          onBlur={() => {
+            setIsOpen(false);
+            setFilter(value);
+          }}
           placeholder="Filter rows"
           variant="small"
           block
