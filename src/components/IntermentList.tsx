@@ -59,7 +59,7 @@ const IntermentList = () => {
   const { clientHeight: viewportHeight } = useContext(WindowContext);
   const { interments } = useContext(CemeteryDataContext);
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0);
-  const { setPageTitle, setHeaderItems } = useContext(PageContext);
+  const { setPageTitle, setHeaderItems, setPadding } = useContext(PageContext);
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
   const { initialPageNumberStr } = useParams();
@@ -149,6 +149,8 @@ const IntermentList = () => {
   const getPagePath = (pageNumber: number) => pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`;
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
+
+  useEffect(() => setPadding('none'), [setPadding]);
 
   useEffect(() => {
     setHeaderItems([

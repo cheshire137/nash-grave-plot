@@ -6,7 +6,7 @@ import { Pagination } from '@primer/react';
 
 const PhotoGallery = () => {
   const { interments } = useContext(CemeteryDataContext);
-  const { setPageTitle } = useContext(PageContext);
+  const { setPageTitle, setPadding } = useContext(PageContext);
   const imageData = useMemo(() => {
     const intermentsWithPhotos = interments.filter(interment => interment.hasPhotos());
     let photoCaptionsByUrl: { [url: string]: string } = {};
@@ -29,6 +29,8 @@ const PhotoGallery = () => {
     const units = totalImages === 1 ? 'photo' : 'photos';
     setPageTitle(`${totalImages} ${units}`);
   }, [setPageTitle, totalImages]);
+
+  useEffect(() => setPadding('normal'), [setPadding]);
 
   return <>
     <Masonry columnsCount={4} gutter="10px">

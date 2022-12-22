@@ -8,6 +8,7 @@ import { PageContextProvider } from './contexts/PageContext';
 import { createHashRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 import AppLayout from './components/AppLayout';
+import AboutPage from './components/AboutPage';
 
 const App = () => {
   const router = createHashRouter(createRoutesFromElements(
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/" element={<IntermentList />} errorElement={<ErrorPage />} />
       <Route path="/page/:initialPageNumberStr" element={<IntermentList />} errorElement={<ErrorPage />} />
       <Route path="/photos" element={<PhotoGallery />} errorElement={<ErrorPage />} />
+      <Route path="/about" element={<AboutPage />} errorElement={<ErrorPage />} />
     </Route>
   ));
 
