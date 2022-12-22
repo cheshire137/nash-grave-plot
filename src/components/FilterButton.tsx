@@ -13,6 +13,7 @@ const FilterButton = (props: Props & ButtonHTMLAttributes<HTMLButtonElement>) =>
     aria-label="Change filter"
     variant={isOpen ? 'default' : 'invisible'}
     icon={FilterIcon}
+    title="Change filter"
     {...rest}
   />;
 };

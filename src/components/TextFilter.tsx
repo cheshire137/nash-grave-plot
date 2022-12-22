@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { TextInput, FormControl } from '@primer/react';
 import FilterPopover from './FilterPopover';
 import FilterButton from './FilterButton';
+import ClearFilterButton from './ClearFilterButton';
 import debounce from 'lodash.debounce';
 
 interface Props {
@@ -16,8 +17,10 @@ function TextFilter({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState(filterValue || '');
+  const [value, setValue] = useState('');
   const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter]);
+
+  useEffect(() => setValue(filterValue || ''), [filterValue]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) inputRef.current.focus();
@@ -32,6 +35,7 @@ function TextFilter({
 
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
     <FilterPopover open={isOpen}>
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>

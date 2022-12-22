@@ -3,15 +3,17 @@ import type { FilterValue } from 'react-table'
 import { FormControl, Checkbox } from '@primer/react';
 import FilterPopover from './FilterPopover';
 import FilterButton from './FilterButton';
+import ClearFilterButton from './ClearFilterButton';
 
 interface Props {
   column: {
+    filterValue: FilterValue;
     setFilter: (value?: FilterValue) => void;
   };
 }
 
 function PhotoColumnFilter({
-  column: { setFilter }
+  column: { setFilter, filterValue }
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,6 +24,7 @@ function PhotoColumnFilter({
 
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
     <FilterPopover open={isOpen} sx={{ px: 3 }}>
       <FormControl sx={{ alignItems: 'center' }}>
         <Checkbox

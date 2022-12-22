@@ -4,6 +4,7 @@ import type { FilterValue, IdType, Row } from 'react-table'
 import { FormControl, Select } from '@primer/react';
 import FilterPopover from './FilterPopover';
 import FilterButton from './FilterButton';
+import ClearFilterButton from './ClearFilterButton';
 
 interface Props {
   column: {
@@ -15,7 +16,7 @@ interface Props {
 }
 
 function SelectColumnFilter({
-  column: {setFilter, preFilteredRows, id}
+  column: { filterValue, setFilter, preFilteredRows, id }
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -35,6 +36,7 @@ function SelectColumnFilter({
 
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
     <FilterPopover open={isOpen}>
       <FormControl sx={{ width: '100%' }}>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
