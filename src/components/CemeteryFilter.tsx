@@ -38,6 +38,9 @@ function CemeteryFilter({
     }, new Set<string>()).values()];
   }, [id, preFilteredRows]);
   const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter]);
+  const anyFilterSet = filterValue && (
+    typeof filterValue.graveyardType === 'string' || typeof filterValue.name === 'string'
+  ) && (filterValue?.graveyardType !== '' || filterValue?.name !== '');
 
   useEffect(() => setName(filterValue?.name || ''), [filterValue?.name]);
   useEffect(() => setGraveyardType(filterValue?.graveyardType || ''), [filterValue?.graveyardType]);
@@ -55,7 +58,7 @@ function CemeteryFilter({
 
   return <Box display="inline-block" ref={containerRef}>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-    {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
+    {anyFilterSet && <ClearFilterButton onClick={() => setFilter()} />}
     <FilterPopover open={isOpen} sx={{ p: 3 }}>
       <FormControl sx={{ width: '100%' }}>
         <FormControl.Label>Graveyard type:</FormControl.Label>
