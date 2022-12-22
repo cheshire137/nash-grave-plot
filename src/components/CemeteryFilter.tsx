@@ -38,9 +38,10 @@ function CemeteryFilter({
     }, new Set<string>()).values()];
   }, [id, preFilteredRows]);
   const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter]);
-  const anyFilterSet = filterValue && (
-    typeof filterValue.graveyardType === 'string' || typeof filterValue.name === 'string'
-  ) && (filterValue?.graveyardType !== '' || filterValue?.name !== '');
+  const graveyardTypeFilterSet = filterValue && typeof filterValue.graveyardType === 'string' &&
+    filterValue?.graveyardType !== '';
+  const nameFilterSet = filterValue && typeof filterValue.name === 'string' &&
+    filterValue?.name !== '';
 
   useEffect(() => setName(filterValue?.name || ''), [filterValue?.name]);
   useEffect(() => setGraveyardType(filterValue?.graveyardType || ''), [filterValue?.graveyardType]);
@@ -56,11 +57,11 @@ function CemeteryFilter({
     };
   }, [debouncedSetFilter]);
 
-  return <Box display="inline-block" ref={containerRef}>
+  return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-    {anyFilterSet && <ClearFilterButton onClick={() => setFilter()} />}
+    {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
     <FilterPopover open={isOpen} sx={{ p: 3 }}>
-      <FormControl sx={{ width: '100%' }}>
+      <FormControl sx={{ display: 'inline-block' }}>
         <FormControl.Label>Graveyard type:</FormControl.Label>
         <Select ref={graveyardTypeSelectRef}
           onChange={e => setFilter({ name, graveyardType: e.target.value })}
@@ -72,8 +73,9 @@ function CemeteryFilter({
             value={graveyardType}
           >{titleCaseify(graveyardType)}</Select.Option>)}
         </Select>
+        {graveyardTypeFilterSet && <ClearFilterButton onClick={() => setFilter({ name })} />}
       </FormControl>
-      <FormControl>
+      <FormControl sx={{ mt: 3 }}>
         <FormControl.Label>Cemetery name:</FormControl.Label>
         <TextInput
           value={name || ''}
