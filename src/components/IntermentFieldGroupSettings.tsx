@@ -6,7 +6,7 @@ import { intermentFieldLabels } from '../utils/intermentFieldLabels';
 
 const intermentFieldsByGroup: { [group in IntermentFieldGroup]: IntermentField[] } = {
   'Person': ['person', 'deathDate', 'deceasedInfo'],
-  'Location': ['cemeteryName', 'address', 'graveyardType', 'siteHistory', 'sitePhotos'],
+  'Location': ['cemetery', 'address', 'graveyardType', 'siteHistory'],
   'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
     'gravePhotos'],
   'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],

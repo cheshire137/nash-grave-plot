@@ -5,10 +5,10 @@ import AddressMapLink from './AddressMapLink';
 import Address from '../models/Address';
 
 interface Props {
-  value: Address;
+  address: Address;
 }
 
-const AddressLines = ({ value: address }: Props) => <Box textAlign="left" minWidth="200px">
+const AddressLines = ({ address }: Props) => <Box textAlign="left" minWidth="200px">
   <AddressMapLink address={address}>
     <TitleCase value={address.streetAddress} />
   </AddressMapLink>

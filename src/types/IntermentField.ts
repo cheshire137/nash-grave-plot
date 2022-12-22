@@ -1,5 +1,5 @@
-type IntermentField = 'person' | 'deathDate' | 'deceasedInfo' | 'cemeteryName' | 'address' | 'graveyardType' |
+type IntermentField = 'person' | 'deathDate' | 'deceasedInfo' | 'cemetery' | 'address' | 'graveyardType' |
   'siteHistory' | 'inscription' | 'footstone' | 'demarcation' | 'condition' | 'accessible' | 'restoration' |
   'gravePhotos' | 'notes' | 'tractParcelNumber' | 'cemeteryParcelNumber' | 'originalSurvey' | 'surveyUpdates' |
-  'currentSurvey' | 'sitePhotos';
+  'currentSurvey';
 export default IntermentField;

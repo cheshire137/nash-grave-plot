@@ -1,9 +1,8 @@
-import Interment from "./Interment";
+import Interment from './Interment';
+import Cemetery from './Cemetery';
 
-const cemeterySort = (a: Interment, b: Interment) => {
-  const cemeteryA = a.cemeteryName;
-  const cemeteryB = b.cemeteryName;
-  return cemeteryA.localeCompare(cemeteryB);
+const cemeterySort = (a: Cemetery, b: Cemetery) => {
+  return a.name.localeCompare(b.name);
 };
 
 const normalizePerson = (person?: string | null) => {
@@ -26,7 +25,7 @@ const personSort = (a: Interment, b: Interment) => {
 };
 
 const IntermentSort = (a: Interment, b: Interment) => {
-  return cemeterySort(a, b) || personSort(a, b);
+  return cemeterySort(a.cemetery, b.cemetery) || personSort(a, b);
 };
 
 export default IntermentSort;

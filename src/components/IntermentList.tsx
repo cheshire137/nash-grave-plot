@@ -4,6 +4,7 @@ import TableHeaderCell from './TableHeaderCell';
 import TableCell from './TableCell';
 import Interment from '../models/Interment';
 import AddressDisplay from './AddressDisplay';
+import CemeteryDisplay from './CemeteryDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SettingsDialog from './SettingsDialog';
@@ -47,8 +48,8 @@ const filterColumns = (enabledFields: IntermentField[], relevantColumns: Column[
   });
 };
 
-const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemeteryName', 'address',
-  'graveyardType', 'siteHistory', 'sitePhotos', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible',
+const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemetery', 'address',
+  'graveyardType', 'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible',
   'restoration', 'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey',
   'surveyUpdates', 'currentSurvey'];
 
@@ -78,18 +79,14 @@ const IntermentList = () => {
     const personColumnGroup = { Header: 'Person',
       columns: filterColumns(enabledFields, [nameColumn, deathDateColumn, deceasedInfoColumn]) };
 
-    const cemeteryColumn = { Header: intermentFieldLabels.cemeteryName, accessor: 'cemeteryName', filter: 'includes',
-      Filter: SelectColumnFilter, Cell: NameDisplay };
-    const addressColumn = { Header: intermentFieldLabels.address, accessor: 'address', Cell: AddressDisplay,
-      filter: 'fuzzyText', Filter: AddressFilter };
-    const graveyardTypeColumn = { Header: intermentFieldLabels.graveyardType, accessor: 'graveyardType',
-      filter: 'includes', Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
+    const cemeteryColumn = { Header: intermentFieldLabels.cemetery, accessor: 'cemetery', filter: 'includes',
+      Filter: SelectColumnFilter, Cell: CemeteryDisplay, id: 'cemetery' };
+    const addressColumn = { Header: intermentFieldLabels.address, accessor: 'cemetery',
+      Cell: AddressDisplay, filter: 'fuzzyText', Filter: AddressFilter, id: 'address' };
     const siteHistoryColumn = { Header: intermentFieldLabels.siteHistory, accessor: 'siteHistory',
       Cell: InfoDisplay };
-    const sitePhotosColumn = { Header: intermentFieldLabels.sitePhotos, accessor: 'sitePhotos', Cell: PhotoList,
-      Filter: PhotoColumnFilter, filter: 'minArrayLength' };
     const locationColumnGroup = { Header: 'Location', columns: filterColumns(enabledFields, [cemeteryColumn,
-      addressColumn, graveyardTypeColumn, siteHistoryColumn, sitePhotosColumn]) };
+      addressColumn, siteHistoryColumn]) };
 
     const inscriptionColumn = { Header: intermentFieldLabels.inscription, accessor: 'inscription',
       Cell: InscriptionDisplay };

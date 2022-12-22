@@ -2,9 +2,12 @@ import React from 'react';
 import { Box } from '@primer/react';
 import PhotoDisplay from './PhotoDisplay';
 import type PhotoLink from '../types/PhotoLink';
-import type { CellProps } from 'react-table';
 
-const PhotoList = ({ value }: CellProps<Record<string, unknown>>) => <Box minWidth="120px">
+interface Props {
+  value: PhotoLink[];
+}
+
+const PhotoList = ({ value }: Props) => <Box minWidth="120px">
   {value.map((photo: PhotoLink) => <PhotoDisplay {...photo} key={photo.url} />)}
 </Box>;
 
