@@ -3,6 +3,7 @@ import { PageContext } from '../contexts/PageContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 import Masonry from 'react-responsive-masonry';
 import { Pagination, PageLayout } from '@primer/react';
+import getPageTitleForResults from '../utils/getPageTitleForResults';
 
 const PhotoGallery = () => {
   const { interments } = useContext(CemeteryDataContext);
@@ -25,10 +26,7 @@ const PhotoGallery = () => {
   const startIndex = Math.max(0, endIndex - perPage);
   const totalPages = Math.ceil(imageData.length / perPage);
 
-  useEffect(() => {
-    const units = totalImages === 1 ? 'photo' : 'photos';
-    setPageTitle(`${totalImages} ${units}`);
-  }, [setPageTitle, totalImages]);
+  useEffect(() => setPageTitle(getPageTitleForResults(totalImages, 'photo', 'photos')), [setPageTitle, totalImages]);
 
   return <PageLayout.Content padding="none" sx={{ fontSize: 2 }}>
     <Masonry columnsCount={4} gutter="10px">

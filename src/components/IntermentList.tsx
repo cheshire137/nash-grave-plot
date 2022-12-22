@@ -148,7 +148,8 @@ const IntermentList = () => {
   const totalPages = pageOptions.length;
   const getPagePath = (pageNumber: number) => pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`;
 
-  useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
+  useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')),
+    [rows.length, setPageTitle])
 
   useEffect(() => {
     setHeaderItems([
