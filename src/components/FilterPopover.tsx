@@ -6,8 +6,6 @@ const FilterPopover = styled(Popover).attrs({
 })`
   background-color: ${themeGet('colors.canvas.default')};
   border-color: ${themeGet('colors.border.default')};
-  padding-top: ${themeGet('space.1')};
-  padding-bottom: ${themeGet('space.1')};
   border: ${themeGet('borderWidths.1')} solid ${themeGet('colors.border.default')};
   border-radius: ${themeGet('radii.2')};
   min-width: 100%;
