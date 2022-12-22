@@ -2,10 +2,8 @@ import React from 'react';
 import { Box, Link } from '@primer/react';
 
 const Footer = () => <Box
-  textAlign="center"
   display="flex"
   alignItems="center"
-  justifyContent="center"
   sx={{ fontSize: 1 }}
 >
   <Link
