@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { PageContext } from '../contexts/PageContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
 import Masonry from 'react-responsive-masonry';
-import { Pagination } from '@primer/react';
+import { Pagination, PageLayout } from '@primer/react';
 
 const PhotoGallery = () => {
   const { interments } = useContext(CemeteryDataContext);
-  const { setPageTitle, setPadding } = useContext(PageContext);
+  const { setPageTitle } = useContext(PageContext);
   const imageData = useMemo(() => {
     const intermentsWithPhotos = interments.filter(interment => interment.hasPhotos());
     let photoCaptionsByUrl: { [url: string]: string } = {};
@@ -30,9 +30,7 @@ const PhotoGallery = () => {
     setPageTitle(`${totalImages} ${units}`);
   }, [setPageTitle, totalImages]);
 
-  useEffect(() => setPadding('normal'), [setPadding]);
-
-  return <>
+  return <PageLayout.Content padding="none" sx={{ fontSize: 2 }}>
     <Masonry columnsCount={4} gutter="10px">
       {imageData.slice(startIndex, endIndex).map(image => <img
         key={image.src}
@@ -48,7 +46,7 @@ const PhotoGallery = () => {
         setCurrentPage(page);
       }}
     />
-  </>;
+  </PageLayout.Content>;
 };
 
 export default PhotoGallery;

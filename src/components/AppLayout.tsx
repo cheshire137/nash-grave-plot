@@ -5,7 +5,7 @@ import { PageContext } from '../contexts/PageContext';
 import { useHref, Outlet, useLocation } from 'react-router-dom';
 
 const AppLayout = () => {
-  const { pageTitle, headerItems, padding } = useContext(PageContext);
+  const { pageTitle, headerItems } = useContext(PageContext);
   const { pathname } = useLocation();
 
   return <PageLayout containerWidth="full" padding="none" rowGap="none" columnGap="none">
@@ -34,7 +34,7 @@ const AppLayout = () => {
         {headerItems.map(headerItem => <Header.Item key={JSON.stringify(headerItem)}>{headerItem}</Header.Item>)}
       </Header>
     </PageLayout.Header>
-    <PageLayout.Content padding={padding} sx={{ fontSize: 2 }}><Outlet /></PageLayout.Content>
+    <Outlet />
     <PageLayout.Footer divider="line" padding="normal">
       <Footer />
     </PageLayout.Footer>

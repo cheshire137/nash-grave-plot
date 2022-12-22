@@ -26,7 +26,7 @@ import type IntermentField from '../types/IntermentField';
 import { useTable, useFilters, usePagination, Column } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
-import { Pagination } from '@primer/react';
+import { Pagination, PageLayout } from '@primer/react';
 import getPageTitleForResults from '../utils/getPageTitleForResults';
 import { WindowContext } from '../contexts/WindowContext';
 import { CemeteryDataContext } from '../contexts/CemeteryDataContext';
@@ -59,7 +59,7 @@ const IntermentList = () => {
   const { clientHeight: viewportHeight } = useContext(WindowContext);
   const { interments } = useContext(CemeteryDataContext);
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0);
-  const { setPageTitle, setHeaderItems, setPadding } = useContext(PageContext);
+  const { setPageTitle, setHeaderItems } = useContext(PageContext);
   const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields');
   const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns);
   const { initialPageNumberStr } = useParams();
@@ -150,8 +150,6 @@ const IntermentList = () => {
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length)), [rows.length, setPageTitle])
 
-  useEffect(() => setPadding('none'), [setPadding]);
-
   useEffect(() => {
     setHeaderItems([
       <SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />
@@ -213,7 +211,7 @@ const IntermentList = () => {
     }
   }, [tableBodyRef, paginationRef, viewportHeightAtLastPageSizeChange, viewportHeight, pageSize, setPageSize])
 
-  return <>
+  return <PageLayout.Content padding="none" sx={{ fontSize: 2 }}>
     <TableStyles>
       <table {...getTableProps()}>
         <thead>
@@ -253,7 +251,7 @@ const IntermentList = () => {
         }}
       />
     </div>}
-  </>;
+  </PageLayout.Content>;
 };
 
 export default IntermentList;
