@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, IconButton, Dialog, StyledOcticon, Text } from '@primer/react';
+import { Box, Dialog, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings';
 import LocalStorage from '../models/LocalStorage';

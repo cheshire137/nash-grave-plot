@@ -8,6 +8,7 @@ export const intermentFieldLabels: { [intermentField in IntermentField]: string 
   'address': 'Address',
   'graveyardType': 'Graveyard Type',
   'siteHistory': 'Site History',
+  'sitePhotos': 'Site Photos',
   'inscription': 'Inscription',
   'footstone': 'Footstone',
   'demarcation': 'Demarcation',

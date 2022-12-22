@@ -48,9 +48,9 @@ const filterColumns = (enabledFields: IntermentField[], relevantColumns: Column[
 };
 
 const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemeteryName', 'address',
-  'graveyardType', 'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration',
-  'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey', 'surveyUpdates',
-  'currentSurvey'];
+  'graveyardType', 'siteHistory', 'sitePhotos', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible',
+  'restoration', 'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey',
+  'surveyUpdates', 'currentSurvey'];
 
 const IntermentList = () => {
   const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
@@ -84,9 +84,12 @@ const IntermentList = () => {
       filter: 'fuzzyText', Filter: AddressFilter };
     const graveyardTypeColumn = { Header: intermentFieldLabels.graveyardType, accessor: 'graveyardType',
       filter: 'includes', Filter: SelectColumnFilter, Cell: GraveyardTypeDisplay };
-    const siteHistoryColumn = { Header: intermentFieldLabels.siteHistory, accessor: 'siteHistory', Cell: InfoDisplay };
+    const siteHistoryColumn = { Header: intermentFieldLabels.siteHistory, accessor: 'siteHistory',
+      Cell: InfoDisplay };
+    const sitePhotosColumn = { Header: intermentFieldLabels.sitePhotos, accessor: 'sitePhotos', Cell: PhotoList,
+      Filter: PhotoColumnFilter, filter: 'minArrayLength' };
     const locationColumnGroup = { Header: 'Location', columns: filterColumns(enabledFields, [cemeteryColumn,
-      addressColumn, graveyardTypeColumn, siteHistoryColumn]) };
+      addressColumn, graveyardTypeColumn, siteHistoryColumn, sitePhotosColumn]) };
 
     const inscriptionColumn = { Header: intermentFieldLabels.inscription, accessor: 'inscription',
       Cell: InscriptionDisplay };
@@ -99,10 +102,10 @@ const IntermentList = () => {
       Filter: SelectColumnFilter };
     const restorationColumn = { Header: intermentFieldLabels.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
-    const photosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList,
+    const gravePhotosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList,
       Filter: PhotoColumnFilter, filter: 'minArrayLength' };
     const markerColumnGroup = { Header: 'Marker/Plot', columns: filterColumns(enabledFields, [inscriptionColumn,
-      footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, photosColumn]) };
+      footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, gravePhotosColumn]) };
 
     const notesColumn = { Header: intermentFieldLabels.notes, accessor: 'notes', Cell: NotesDisplay };
     const otherColumnGroup = { Header: '', id: 'other', columns: filterColumns(enabledFields, [notesColumn]) };
