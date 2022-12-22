@@ -2,12 +2,7 @@ import React from 'react';
 import { Box, Link } from '@primer/react';
 
 const Footer = () => <Box
-  mt={4}
-  p={4}
   textAlign="center"
-  borderTopWidth={1}
-  borderColor="border.default"
-  borderTopStyle="solid"
   display="flex"
   alignItems="center"
   justifyContent="center"
