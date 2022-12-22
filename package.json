@@ -12,6 +12,7 @@
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
+    "react-detect-click-outside": "^1.1.7",
     "react-dom": "^18.2.0",
     "react-responsive-masonry": "^2.1.6",
     "react-router-dom": "^6.6.0",
