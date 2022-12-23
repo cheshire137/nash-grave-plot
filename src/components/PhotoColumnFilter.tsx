@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import type { FilterValue } from 'react-table'
 import { FormControl, Checkbox } from '@primer/react';
-import FilterPopover from './FilterPopover';
+import FilterModal from './FilterModal';
 import FilterButton from './FilterButton';
 import ClearFilterButton from './ClearFilterButton';
 
@@ -25,7 +25,7 @@ function PhotoColumnFilter({
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterPopover open={isOpen} sx={{ px: 3 }}>
+    <FilterModal isOpen={isOpen} id="photo-column-filter" onDismiss={() => setIsOpen(false)}>
       <FormControl sx={{ alignItems: 'center' }}>
         <Checkbox
           ref={inputRef}
@@ -36,7 +36,7 @@ function PhotoColumnFilter({
         />
         <FormControl.Label>Has photo</FormControl.Label>
       </FormControl>
-    </FilterPopover>
+    </FilterModal>
   </>;
 }
 

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import { TextInput, FormControl, Checkbox, Box } from '@primer/react';
-import FilterPopover from './FilterPopover';
+import FilterModal from './FilterModal';
 import FilterButton from './FilterButton';
 import ClearFilterButton from './ClearFilterButton';
 import type AddressFilterOption from '../types/AddressFilterOption';
@@ -62,7 +62,10 @@ function AddressFilter({
   return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterPopover open={isOpen} sx={{ p: 3 }}>
+    <FilterModal isOpen={isOpen} id="address-filter-modal" onDismiss={() => {
+      setFilter({ address, hasPhotos });
+      setIsOpen(false);
+    }}>
       <FormControl>
         <FormControl.Label>Address:</FormControl.Label>
         <TextInput
@@ -86,7 +89,7 @@ function AddressFilter({
         />
         <FormControl.Label>Has photo</FormControl.Label>
       </FormControl>
-    </FilterPopover>
+    </FilterModal>
   </Box>;
 }
 

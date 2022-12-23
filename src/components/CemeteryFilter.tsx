@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import titleCaseify from '../utils/titleCaseify';
 import type { IdType, Row } from 'react-table'
 import { FormControl, Select, TextInput, Box } from '@primer/react';
-import FilterPopover from './FilterPopover';
+import FilterModal from './FilterModal';
 import FilterButton from './FilterButton';
 import ClearFilterButton from './ClearFilterButton';
 import Cemetery from '../models/Cemetery';
@@ -60,7 +60,10 @@ function CemeteryFilter({
   return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterPopover open={isOpen} sx={{ p: 3 }}>
+    <FilterModal isOpen={isOpen} id="cemetery-filter-modal" onDismiss={() => {
+      setFilter({ name, graveyardType });
+      setIsOpen(false);
+    }}>
       <FormControl sx={{ display: 'inline-block' }}>
         <FormControl.Label>Graveyard type:</FormControl.Label>
         <Select ref={graveyardTypeSelectRef}
@@ -93,7 +96,7 @@ function CemeteryFilter({
           autoFocus={isOpen}
         />
       </FormControl>
-    </FilterPopover>
+    </FilterModal>
   </Box>;
 }
 

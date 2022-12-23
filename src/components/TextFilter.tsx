@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { TextInput, FormControl } from '@primer/react';
-import FilterPopover from './FilterPopover';
+import FilterModal from './FilterModal';
 import FilterButton from './FilterButton';
 import ClearFilterButton from './ClearFilterButton';
 import debounce from 'lodash.debounce';
@@ -36,7 +36,10 @@ function TextFilter({
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterPopover open={isOpen}>
+    <FilterModal isOpen={isOpen} id="text-filter-modal" onDismiss={() => {
+      setFilter(value);
+      setIsOpen(false);
+    }}>
       <FormControl>
         <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
         <TextInput
@@ -57,7 +60,7 @@ function TextFilter({
           autoFocus={isOpen}
         />
       </FormControl>
-    </FilterPopover>
+    </FilterModal>
   </>;
 }
 

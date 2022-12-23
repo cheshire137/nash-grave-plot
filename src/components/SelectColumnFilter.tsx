@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import titleCaseify from '../utils/titleCaseify';
 import type { FilterValue, IdType, Row } from 'react-table'
 import { FormControl, Select } from '@primer/react';
-import FilterPopover from './FilterPopover';
+import FilterModal from './FilterModal';
 import FilterButton from './FilterButton';
 import ClearFilterButton from './ClearFilterButton';
 
@@ -19,6 +19,7 @@ function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id }
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState(filterValue);
   const selectRef = useRef<HTMLSelectElement>(null);
   const options = useMemo(() => {
     return [...preFilteredRows.reduce((memo, row) => {
@@ -33,21 +34,30 @@ function SelectColumnFilter({
   useEffect(() => {
     if (isOpen && selectRef.current) selectRef.current.focus();
   }, [isOpen, selectRef]);
+  useEffect(() => setValue(filterValue), [filterValue]);
 
   return <>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {filterValue && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterPopover open={isOpen}>
+    <FilterModal isOpen={isOpen} id="select-column-filter" onDismiss={() => {
+      setFilter(value);
+      setIsOpen(false);
+    }}>
       <FormControl sx={{ width: '100%' }}>
-        <FormControl.Label visuallyHidden={true}>Filter rows:</FormControl.Label>
-        <Select ref={selectRef} onChange={e => setFilter(e.target.value)} onBlur={() => setIsOpen(false)}>
+        <FormControl.Label>Filter rows:</FormControl.Label>
+        <Select
+          value={value}
+          ref={selectRef}
+          onChange={e => setFilter(e.target.value)}
+          onBlur={() => setIsOpen(false)}
+        >
           <Select.Option value="">All</Select.Option>
           {options.map((option, i) => <Select.Option key={`${i}-${option}`} value={option}>
             {titleCaseify(option)}
           </Select.Option>)}
         </Select>
       </FormControl>
-    </FilterPopover>
+    </FilterModal>
   </>;
 }
 
