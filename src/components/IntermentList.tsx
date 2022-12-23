@@ -8,10 +8,7 @@ import CemeteryDisplay from './CemeteryDisplay';
 import InscriptionDisplay from './InscriptionDisplay';
 import LongTextBlock from './LongTextBlock';
 import SettingsDialog from './SettingsDialog';
-import SelectColumnFilter from './SelectColumnFilter';
-import PhotoColumnFilter from './PhotoColumnFilter';
 import AddressFilter from './AddressFilter';
-import TextFilter from './TextFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
 import NameDisplay from './NameDisplay';
@@ -24,7 +21,7 @@ import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import { intermentFieldLabels } from '../utils/intermentFieldLabels';
 import type IntermentField from '../types/IntermentField';
-import { useTable, useFilters, usePagination, Column, FilterValue } from 'react-table';
+import { useTable, useFilters, usePagination, Column } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
 import { addressMatchesFilter } from '../utils/addressMatchesFilter';
 import { cemeteryMatchesFilter } from '../utils/cemeteryMatchesFilter';
@@ -61,7 +58,6 @@ const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'ce
   'surveyUpdates', 'currentSurvey'];
 
 const IntermentList = () => {
-  const defaultColumn = useMemo(() => ({ Filter: TextFilter }), []);
   const tableBodyRef = useRef<HTMLTableSectionElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const { clientHeight: viewportHeight } = useContext(WindowContext);
@@ -74,7 +70,6 @@ const IntermentList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const filters = useMemo(() => getInitialFilters(searchParams), [searchParams]);
-  console.log('initial filters', filters);
   const initialPageIndex = initialPageNumberStr ? parseInt(initialPageNumberStr) - 1 : 0;
   const initialPageSize = searchParams.get('page_size') ? parseInt(searchParams.get('page_size')!) : 10;
 
@@ -103,12 +98,10 @@ const IntermentList = () => {
       Cell: DemarcationDisplay };
     const conditionColumn = { Header: intermentFieldLabels.condition, accessor: 'condition',
       Cell: DemarcationDisplay };
-    const accessibleColumn = { Header: intermentFieldLabels.accessible, accessor: 'accessible', filter: 'includes',
-      Filter: SelectColumnFilter };
+    const accessibleColumn = { Header: intermentFieldLabels.accessible, accessor: 'accessible', filter: 'includes' };
     const restorationColumn = { Header: intermentFieldLabels.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
-    const gravePhotosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList,
-      Filter: PhotoColumnFilter, filter: 'minArrayLength' };
+    const gravePhotosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList };
     const markerColumnGroup = { Header: 'Marker/Plot', columns: getColumnsToDisplay(enabledFields, [inscriptionColumn,
       footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, gravePhotosColumn]) };
 
@@ -150,7 +143,6 @@ const IntermentList = () => {
     columns,
     data: interments,
     initialState: { pageIndex: initialPageIndex, pageSize: initialPageSize, filters: filters || [] },
-    defaultColumn,
     filterTypes,
   }, useFilters, usePagination);
   const totalPages = pageOptions.length;
