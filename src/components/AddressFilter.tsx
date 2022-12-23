@@ -85,6 +85,7 @@ function AddressFilter({
       </FormControl>
       <FormControl sx={{ mt: 3 }}>
         <Checkbox ref={hasPhotosInputRef}
+          checked={hasPhotos || false}
           onChange={e => setFilter({ hasPhotos: e.target.checked, address })}
         />
         <FormControl.Label>Has photo</FormControl.Label>
