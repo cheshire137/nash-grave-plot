@@ -24,8 +24,9 @@ import NotesDisplay from './NotesDisplay';
 import ParcelNumberDisplay from './ParcelNumberDisplay';
 import { intermentFieldLabels } from '../utils/intermentFieldLabels';
 import type IntermentField from '../types/IntermentField';
-import { useTable, useFilters, usePagination, Column } from 'react-table';
+import { useTable, useFilters, usePagination, Column, FilterValue } from 'react-table';
 import { fuzzyTextFilter } from '../utils/fuzzyTextFilter';
+import { addressMatchesFilter } from '../utils/addressMatchesFilter';
 import { cemeteryMatchesFilter } from '../utils/cemeteryMatchesFilter';
 import { minArrayLengthFilter } from '../utils/minArrayLengthFilter';
 import { Pagination, PageLayout } from '@primer/react';
@@ -41,6 +42,7 @@ const filterTypes = {
   fuzzyText: fuzzyTextFilter,
   minArrayLength: minArrayLengthFilter,
   cemeteryMatches: cemeteryMatchesFilter,
+  addressMatches: addressMatchesFilter,
 };
 
 const getColumnsToDisplay = (enabledFields: IntermentField[], relevantColumns: Column[]) => {
@@ -72,6 +74,7 @@ const IntermentList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const filters = useMemo(() => getInitialFilters(searchParams), [searchParams]);
+  console.log('initial filters', filters);
   const initialPageIndex = initialPageNumberStr ? parseInt(initialPageNumberStr) - 1 : 0;
   const initialPageSize = searchParams.get('page_size') ? parseInt(searchParams.get('page_size')!) : 10;
 
@@ -87,7 +90,7 @@ const IntermentList = () => {
     const cemeteryColumn = { Header: intermentFieldLabels.cemetery, accessor: 'cemetery', filter: 'cemeteryMatches',
       Filter: CemeteryFilter, Cell: CemeteryDisplay, id: 'cemetery' };
     const addressColumn = { Header: intermentFieldLabels.address, accessor: 'cemetery',
-      Cell: AddressDisplay, filter: 'fuzzyText', Filter: AddressFilter, id: 'address' };
+      Cell: AddressDisplay, filter: 'addressMatches', Filter: AddressFilter, id: 'address' };
     const siteHistoryColumn = { Header: intermentFieldLabels.siteHistory, accessor: 'siteHistory',
       Cell: InfoDisplay };
     const locationColumnGroup = { Header: 'Location', columns: getColumnsToDisplay(enabledFields, [cemeteryColumn,

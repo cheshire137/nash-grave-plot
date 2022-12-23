@@ -8,6 +8,7 @@ interface Props {
   address: Address;
 }
 
+// Keep text shown here in sync with addressMatchesFilter:
 const AddressLines = ({ address }: Props) => <Box textAlign="left" minWidth="200px">
   <AddressMapLink address={address}>
     <TitleCase value={address.streetAddress} />
