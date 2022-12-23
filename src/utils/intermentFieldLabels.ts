@@ -1,12 +1,10 @@
 import type IntermentField from '../types/IntermentField';
 
 export const intermentFieldLabels: { [intermentField in IntermentField]: string } = {
-  'person': 'Name',
-  'deathDate': 'Died',
+  'person': 'Name and death date',
   'deceasedInfo': 'Info',
-  'cemetery': 'Cemetery',
-  'address': 'Address',
-  'graveyardType': 'Graveyard Type',
+  'cemetery': 'Cemetery name and type',
+  'address': 'Address and photos',
   'siteHistory': 'Site History',
   'inscription': 'Inscription',
   'footstone': 'Footstone',

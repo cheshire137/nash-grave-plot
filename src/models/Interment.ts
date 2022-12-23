@@ -5,14 +5,14 @@ import parseAccessible from '../utils/parseAccessible';
 import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
 import type PhotoLink from '../types/PhotoLink';
 import Cemetery from './Cemetery';
+import Person from './Person';
 
 class Interment {
-  person: string;
   key: string;
+  person: Person;
   currentSurvey: Date | string | null;
   surveyUpdates: Date | string | null;
   originalSurvey: Date | string | null;
-  deathDate: Date | string | null;
   gravePhotos: PhotoLink[];
   accessible: string;
   archaeologicalInfo: string | null;
@@ -22,7 +22,6 @@ class Interment {
   siteHistory: string | null;
   restoration: string | null;
   notes: string;
-  deceasedInfo: string | null;
   footstone: string | null;
   inscription: Inscription;
   knownBurials: string;
@@ -33,9 +32,9 @@ class Interment {
   address: Address;
 
   constructor(props: NashvilleCemeteryData) {
+    this.person = new Person(props);
     this.footstone = props.footstone || null;
     this.key = '_' + Math.random().toString(36).substr(2, 9);
-    this.person = props.interment;
     this.demarcation = props.demarcation || null;
     this.archaeologicalInfo = props.archaeological_information || null;
     this.condition = props.condition || null;
@@ -46,11 +45,9 @@ class Interment {
     this.restoration = props.restoration || null;
     this.notes = props.notes;
     this.knownBurials = props.known_burials;
-    this.deceasedInfo = props.deceased_info || null;
     this.currentSurvey = parseDateString(props.current_survey);
     this.surveyUpdates = parseDateString(props.survey_update_s);
     this.originalSurvey = parseDateString(props.original_survey);
-    this.deathDate = parseDateString(props.death_date);
     this.gravePhotos = [props.grave_photo_link, props.grave_photo_2, props.grave_photo_3]
       .filter(pl => pl).map(pl => pl as PhotoLink);
     this.accessible = parseAccessible(props.accessible);

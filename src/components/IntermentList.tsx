@@ -12,7 +12,6 @@ import AddressFilter from './AddressFilter';
 import DateCellFormatter from './DateCellFormatter';
 import PhotoList from './PhotoList';
 import NameDisplay from './NameDisplay';
-import DiedDateDisplay from './DiedDateDisplay';
 import InfoDisplay from './InfoDisplay';
 import CemeteryFilter from './CemeteryFilter';
 import DemarcationDisplay from './DemarcationDisplay';
@@ -52,8 +51,8 @@ const getColumnsToDisplay = (enabledFields: IntermentField[], relevantColumns: C
   });
 };
 
-const allColumns: IntermentField[] = ['person', 'deathDate', 'deceasedInfo', 'cemetery', 'address',
-  'graveyardType', 'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible',
+const allColumns: IntermentField[] = ['person', 'deceasedInfo', 'cemetery', 'address',
+  'siteHistory', 'inscription', 'footstone', 'demarcation', 'condition', 'accessible',
   'restoration', 'gravePhotos', 'notes', 'tractParcelNumber', 'cemeteryParcelNumber', 'originalSurvey',
   'surveyUpdates', 'currentSurvey'];
 
@@ -76,11 +75,10 @@ const IntermentList = () => {
   const columns = useMemo(() => {
     const nameColumn = { Header: intermentFieldLabels.person, accessor: 'person', filter: 'fuzzyText',
       Cell: NameDisplay };
-    const deathDateColumn = { Header: intermentFieldLabels.deathDate, accessor: 'deathDate', Cell: DiedDateDisplay };
     const deceasedInfoColumn = { Header: intermentFieldLabels.deceasedInfo, accessor: 'deceasedInfo',
       Cell: InfoDisplay, filter: 'fuzzyText' };
     const personColumnGroup = { Header: 'Person',
-      columns: getColumnsToDisplay(enabledFields, [nameColumn, deathDateColumn, deceasedInfoColumn]) };
+      columns: getColumnsToDisplay(enabledFields, [nameColumn, deceasedInfoColumn]) };
 
     const cemeteryColumn = { Header: intermentFieldLabels.cemetery, accessor: 'cemetery', filter: 'cemeteryMatches',
       Filter: CemeteryFilter, Cell: CemeteryDisplay, id: 'cemetery' };
