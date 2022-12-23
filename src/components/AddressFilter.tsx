@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import { TextInput, FormControl, Checkbox, Box } from '@primer/react';
@@ -28,18 +28,24 @@ function AddressFilter({
   const [address, setAddress] = useState<string | undefined>();
   const [hasPhotos, setHasPhotos] = useState<boolean | undefined>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const debouncedSetFilter = useMemo(() => {
-    const setFilterAndUpdateUrl = (newFilter?: AddressFilterOption) => {
-      const newAddress = newFilter?.address;
-      if (newAddress && newAddress.length > 0) {
-        setSearchParams({ address: newAddress });
-      } else {
-        setSearchParams({});
-      }
-      setFilter(newFilter);
+  const setFilterAndUpdateUrl = useCallback((newFilter?: AddressFilterOption) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    const newAddress = newFilter?.address;
+    const newHasPhotos = newFilter?.hasPhotos;
+    if (newAddress && newAddress.length > 0) {
+      newSearchParams.set('address', newAddress);
+    } else {
+      newSearchParams.delete('address');
     }
-    return debounce(setFilterAndUpdateUrl, 300);
-  }, [setFilter, setSearchParams]);
+    if (typeof newHasPhotos === 'boolean') {
+      newSearchParams.set('site_photos', newHasPhotos ? '1' : '0');
+    } else {
+      newSearchParams.delete('site_photos');
+    }
+    setSearchParams(newSearchParams);
+    setFilter(newFilter);
+  }, [setFilter, searchParams, setSearchParams]);
+  const debouncedSetFilterAndUpdateUrl = useMemo(() => debounce(setFilterAndUpdateUrl, 300), [setFilterAndUpdateUrl]);
   const hasPhotosFilterSet = filterValue && typeof filterValue.hasPhotos === 'boolean' && filterValue?.hasPhotos;
   const addressFilterSet = filterValue && typeof filterValue.address === 'string' &&
     filterValue?.address !== '';
@@ -55,15 +61,15 @@ function AddressFilter({
   // Stop the invocation of the debounced function after unmounting:
   useEffect(() => {
     return () => {
-      debouncedSetFilter.cancel();
+      debouncedSetFilterAndUpdateUrl.cancel();
     };
-  }, [debouncedSetFilter]);
+  }, [debouncedSetFilterAndUpdateUrl]);
 
   return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
     <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-    {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
+    {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
     <FilterModal isOpen={isOpen} id="address-filter-modal" onDismiss={() => {
-      setFilter({ address, hasPhotos });
+      setFilterAndUpdateUrl({ address, hasPhotos });
       setIsOpen(false);
     }}>
       <FormControl>
@@ -73,7 +79,7 @@ function AddressFilter({
           onChange={e => {
             const newAddress = e.target.value;
             setAddress(newAddress);
-            debouncedSetFilter({ hasPhotos, address: newAddress });
+            debouncedSetFilterAndUpdateUrl({ hasPhotos, address: newAddress });
           }}
           placeholder="Filter rows"
           variant="small"
@@ -86,7 +92,7 @@ function AddressFilter({
       <FormControl sx={{ mt: 3 }}>
         <Checkbox ref={hasPhotosInputRef}
           checked={hasPhotos || false}
-          onChange={e => setFilter({ hasPhotos: e.target.checked, address })}
+          onChange={e => setFilterAndUpdateUrl({ hasPhotos: e.target.checked, address })}
         />
         <FormControl.Label>Has photo</FormControl.Label>
       </FormControl>
