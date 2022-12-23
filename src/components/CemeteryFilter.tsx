@@ -43,8 +43,8 @@ function CemeteryFilter({
   const nameFilterSet = filterValue && typeof filterValue.name === 'string' &&
     filterValue?.name !== '';
 
-  useEffect(() => setName(filterValue?.name || ''), [filterValue?.name]);
-  useEffect(() => setGraveyardType(filterValue?.graveyardType || ''), [filterValue?.graveyardType]);
+  useEffect(() => setName(filterValue?.name), [filterValue?.name]);
+  useEffect(() => setGraveyardType(filterValue?.graveyardType), [filterValue?.graveyardType]);
 
   useEffect(() => {
     if (isOpen && nameInputRef.current) nameInputRef.current.focus();

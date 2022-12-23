@@ -44,8 +44,8 @@ function AddressFilter({
   const addressFilterSet = filterValue && typeof filterValue.address === 'string' &&
     filterValue?.address !== '';
 
-  useEffect(() => setAddress(filterValue?.address || ''), [filterValue?.address]);
-  useEffect(() => setHasPhotos(typeof filterValue?.hasPhotos === 'boolean' ? filterValue?.hasPhotos : false),
+  useEffect(() => setAddress(filterValue?.address), [filterValue?.address]);
+  useEffect(() => setHasPhotos(typeof filterValue?.hasPhotos === 'boolean' ? filterValue?.hasPhotos : undefined),
     [filterValue?.hasPhotos]);
 
   useEffect(() => {
