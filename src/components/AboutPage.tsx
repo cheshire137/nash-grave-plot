@@ -15,6 +15,16 @@ const AboutPage = () => {
           rel="noopener noreferrer"
           href="https://data.nashville.gov/Genealogy/Davidson-County-Cemetery-Survey/ttqg-mpiz"
         >Nashville Open Data Portal</Link> provides.</p>
+      <p>If you find any bugs or want to contribute, issues and pull requests are welcome on the <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/cheshire137/nash-grave-plot"
+      >GitHub repository</Link>. I'm also interested in your feature requests, though no guarantee I'll get to them. Thanks!</p>
+      <p>&mdash; <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://ruby.social/@cheshire137"
+      >@cheshire137</Link></p>
     </Box>
   </PageLayout.Content>;
 }
