@@ -1,7 +1,7 @@
 # NashGravePlot
 
 Web app to view cemetery information for Nashville, Tennessee. Data
-comes from [Davidson County Cemetery Survey](https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz).
+comes from [Davidson County Cemetery Survey](https://data.nashville.gov/datasets/Nashville::davidson-county-cemetery-survey-/about).
 
 ![Screenshot of the first page of NashGravePlot results shown in the browser. Shows a table of data about grave sites in Nashville, Tennessee, including names, dates of death, cemetery names, addresses, the type of graveyard, and tombstone inscriptions.](./screenshot.png)
 
