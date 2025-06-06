@@ -1,4 +1,20 @@
-type IntermentField = 'person' | 'deceasedInfo' | 'cemetery' | 'address' | 'siteHistory' | 'inscription' |
-  'footstone' | 'demarcation' | 'condition' | 'accessible' | 'restoration' | 'gravePhotos' | 'notes' |
-  'tractParcelNumber' | 'cemeteryParcelNumber' | 'originalSurvey' | 'surveyUpdates' | 'currentSurvey';
-export default IntermentField;
+type IntermentField =
+  | 'person'
+  | 'deceasedInfo'
+  | 'cemetery'
+  | 'address'
+  | 'siteHistory'
+  | 'inscription'
+  | 'footstone'
+  | 'demarcation'
+  | 'condition'
+  | 'accessible'
+  | 'restoration'
+  | 'gravePhotos'
+  | 'notes'
+  | 'tractParcelNumber'
+  | 'cemeteryParcelNumber'
+  | 'originalSurvey'
+  | 'surveyUpdates'
+  | 'currentSurvey'
+export default IntermentField

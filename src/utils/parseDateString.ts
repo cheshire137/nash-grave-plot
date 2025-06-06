@@ -1,7 +1,7 @@
-import parseYearMonthDayString from './parseYearMonthDayString';
-import parseMonthDayYearString from './parseMonthDayYearString';
-import parseMonthYearString from './parseMonthYearString';
-import parseYearMonthString from './parseYearMonthString';
+import parseYearMonthDayString from './parseYearMonthDayString'
+import parseMonthDayYearString from './parseMonthDayYearString'
+import parseMonthYearString from './parseMonthYearString'
+import parseYearMonthString from './parseYearMonthString'
 
 // Sample values:
 // - '1915'
@@ -11,24 +11,24 @@ import parseYearMonthString from './parseYearMonthString';
 // - '02/03/962
 // - '1852/3'
 const parseDateString = (maybeStr?: string | null) => {
-  if (typeof maybeStr !== 'string') return null;
+  if (typeof maybeStr !== 'string') return null
 
-  const str = maybeStr.trim();
-  if (str.length < 1) return null;
+  const str = maybeStr.trim()
+  if (str.length < 1) return null
 
-  let dateOrNormalizedStr = parseMonthDayYearString(str);
-  if (dateOrNormalizedStr) return dateOrNormalizedStr;
+  let dateOrNormalizedStr = parseMonthDayYearString(str)
+  if (dateOrNormalizedStr) return dateOrNormalizedStr
 
-  dateOrNormalizedStr = parseYearMonthDayString(str);
-  if (dateOrNormalizedStr) return dateOrNormalizedStr;
+  dateOrNormalizedStr = parseYearMonthDayString(str)
+  if (dateOrNormalizedStr) return dateOrNormalizedStr
 
-  dateOrNormalizedStr = parseMonthYearString(str);
-  if (dateOrNormalizedStr) return dateOrNormalizedStr;
+  dateOrNormalizedStr = parseMonthYearString(str)
+  if (dateOrNormalizedStr) return dateOrNormalizedStr
 
-  dateOrNormalizedStr = parseYearMonthString(str);
-  if (dateOrNormalizedStr) return dateOrNormalizedStr;
+  dateOrNormalizedStr = parseYearMonthString(str)
+  if (dateOrNormalizedStr) return dateOrNormalizedStr
 
-  return str;
-};
+  return str
+}
 
-export default parseDateString;
+export default parseDateString

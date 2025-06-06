@@ -1,14 +1,18 @@
-import React from 'react';
-import { Link } from '@primer/react';
-import Address from '../models/Address';
+import React from 'react'
+import {Link} from '@primer/react'
+import Address from '../models/Address'
 
 interface Props {
-  address: Address;
-  children: React.ReactNode;
+  address: Address
+  children: React.ReactNode
 }
 
-const AddressMapLink = ({ address, children }: Props) => {
-  return <Link href={address.getMapsUrl()} rel="noopener noreferrer" target="_blank">{children}</Link>;
+const AddressMapLink = ({address, children}: Props) => {
+  return (
+    <Link href={address.getMapsUrl()} rel="noopener noreferrer" target="_blank">
+      {children}
+    </Link>
+  )
 }
 
-export default AddressMapLink;
+export default AddressMapLink

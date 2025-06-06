@@ -1,5 +1,5 @@
-import { IconButton, type ButtonBaseProps } from '@primer/react';
-import { XIcon } from '@primer/octicons-react';
+import {IconButton, type ButtonBaseProps} from '@primer/react'
+import {XIcon} from '@primer/octicons-react'
 
 const ClearFilterButton = (props: Omit<ButtonBaseProps, 'aria-labelledby'>) => (
   <IconButton
@@ -10,6 +10,6 @@ const ClearFilterButton = (props: Omit<ButtonBaseProps, 'aria-labelledby'>) => (
     icon={XIcon}
     {...props}
   />
-);
+)
 
-export default ClearFilterButton;
+export default ClearFilterButton

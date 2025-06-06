@@ -1,14 +1,14 @@
-import React from 'react';
-import { Text } from '@primer/react';
-import titleCaseify from '../utils/titleCaseify';
+import React from 'react'
+import {Text} from '@primer/react'
+import titleCaseify from '../utils/titleCaseify'
 
 interface Props {
-  value?: string | null;
+  value?: string | null
 }
 
-const TitleCase = ({ value }: Props) => {
-  if (typeof value === 'string') return <Text>{titleCaseify(value)}</Text>;
-  return null;
-};
+const TitleCase = ({value}: Props) => {
+  if (typeof value === 'string') return <Text>{titleCaseify(value)}</Text>
+  return null
+}
 
-export default TitleCase;
+export default TitleCase

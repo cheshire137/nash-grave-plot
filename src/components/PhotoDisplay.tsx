@@ -1,17 +1,21 @@
-import React from 'react';
-import { Link } from '@primer/react';
+import React from 'react'
+import {Link} from '@primer/react'
 
 interface PhotoDisplayProps {
-  url: string;
-  description: string;
+  url: string
+  description: string
 }
 
-const PhotoDisplay = ({ url, description }: PhotoDisplayProps) => <div>
-  {description.trim().length > 0 && url !== description ? <Link
-    href={url}
-    target="_blank"
-    rel="noopener noreferrer"
-  >{description}</Link> : <span>{url}</span>}
-</div>;
+const PhotoDisplay = ({url, description}: PhotoDisplayProps) => (
+  <div>
+    {description.trim().length > 0 && url !== description ? (
+      <Link href={url} target="_blank" rel="noopener noreferrer">
+        {description}
+      </Link>
+    ) : (
+      <span>{url}</span>
+    )}
+  </div>
+)
 
-export default PhotoDisplay;
+export default PhotoDisplay

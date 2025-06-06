@@ -1,18 +1,18 @@
-import { FilterValue, IdType, Row } from 'react-table';
-import Interment from '../models/Interment';
+import {FilterValue, IdType, Row} from 'react-table'
+import Interment from '../models/Interment'
 
 export function minArrayLengthFilter(
   rows: Row<Interment>[],
   id: IdType<Interment>[],
   filterValue: FilterValue
 ): Row<Interment>[] {
-  return rows.filter(row => {
-    const rowValue = row.values[id[0]];
+  return rows.filter((row) => {
+    const rowValue = row.values[id[0]]
     if (typeof rowValue === 'object' && rowValue instanceof Array) {
-      return rowValue.length >= filterValue;
+      return rowValue.length >= filterValue
     }
-    return false;
-  });
-};
+    return false
+  })
+}
 
-minArrayLengthFilter.autoRemove = (val: any) => !val;
+minArrayLengthFilter.autoRemove = (val: any) => !val

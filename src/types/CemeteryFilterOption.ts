@@ -1,5 +1,5 @@
 type CemeteryFilterOption = {
-  graveyardType?: string;
-  name?: string;
-};
-export default CemeteryFilterOption;
+  graveyardType?: string
+  name?: string
+}
+export default CemeteryFilterOption

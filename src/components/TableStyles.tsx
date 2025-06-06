@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const TableStyles = styled.div`
   width: 100%;
@@ -7,6 +7,6 @@ const TableStyles = styled.div`
   tr:nth-child(even) {
     background-color: #f5f5f5;
   }
-`;
+`
 
-export default TableStyles;
+export default TableStyles

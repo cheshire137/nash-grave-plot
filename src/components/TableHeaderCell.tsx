@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Box } from '@primer/react';
+import styled from 'styled-components'
+import {Box} from '@primer/react'
 
 const TableHeaderCell = styled(Box).attrs({
   as: 'th',
@@ -9,6 +9,6 @@ const TableHeaderCell = styled(Box).attrs({
 })`
   background-color: #f5f5f5;
   white-space: nowrap;
-`;
+`
 
-export default TableHeaderCell;
+export default TableHeaderCell
