@@ -1,13 +1,12 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import LongTextBlock from './LongTextBlock'
 import type {CellProps} from 'react-table'
+import styles from './FootstoneDisplay.module.css'
 
 function FootstoneDisplay(props: CellProps<Record<string, unknown>>) {
   return (
-    <Box minWidth="150px">
+    <div className={styles.container}>
       <LongTextBlock {...props} />
-    </Box>
+    </div>
   )
 }
 
