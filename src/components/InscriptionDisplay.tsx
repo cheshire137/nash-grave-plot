@@ -1,14 +1,11 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import type {CellProps} from 'react-table'
 import InscriptionLines from './InscriptionLines'
+import styles from './InscriptionDisplay.module.css'
 
-function InscriptionDisplay({value}: CellProps<Record<string, unknown>>) {
+export function InscriptionDisplay({value}: CellProps<Record<string, unknown>>) {
   return (
-    <Box minWidth="200px">
+    <div className={styles.container}>
       <InscriptionLines {...value} />
-    </Box>
+    </div>
   )
 }
-
-export default InscriptionDisplay
