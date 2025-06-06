@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react'
-import {PageContext} from '../contexts/PageContext'
-import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
+import {useEffect, useMemo, useState} from 'react'
+import {usePage} from '../contexts/PageContext'
+import {useCemeteryData} from '../contexts/CemeteryDataContext'
 import Masonry from 'react-responsive-masonry'
 import {Pagination, PageLayout} from '@primer/react'
 import {getPageTitleForResults} from '../utils'
 
 function PhotoGallery() {
-  const {interments} = useContext(CemeteryDataContext)
-  const {setPageTitle} = useContext(PageContext)
+  const {interments} = useCemeteryData()
+  const {setPageTitle} = usePage()
   const imageData = useMemo(() => {
     const intermentsWithPhotos = interments.filter((interment) => interment.hasPhotos())
     let photoCaptionsByUrl: {[url: string]: string} = {}

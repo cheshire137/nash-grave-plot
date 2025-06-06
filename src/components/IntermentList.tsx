@@ -23,9 +23,9 @@ import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
 import {getColumnsToDisplay, getInitialFilters, getPageTitleForResults} from '../utils'
-import {WindowContext} from '../contexts/WindowContext'
-import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
-import {PageContext} from '../contexts/PageContext'
+import {useWindow} from '../contexts/WindowContext'
+import {useCemeteryData} from '../contexts/CemeteryDataContext'
+import {usePage} from '../contexts/PageContext'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 import {useSearchParams, useParams, useNavigate} from 'react-router-dom'
 import {PageNumber} from './PageNumber'
@@ -40,10 +40,10 @@ const filterTypes = {
 function IntermentList() {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null)
   const paginationRef = useRef<HTMLDivElement>(null)
-  const {clientHeight: viewportHeight} = useContext(WindowContext)
-  const {interments} = useContext(CemeteryDataContext)
+  const {clientHeight: viewportHeight} = useWindow()
+  const {interments} = useCemeteryData()
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0)
-  const {setPageTitle, setHeaderItems} = useContext(PageContext)
+  const {setPageTitle, setHeaderItems} = usePage()
   const {enabledFields} = useEnabledFields()
   const {initialPageNumberStr} = useParams()
   const [searchParams] = useSearchParams()

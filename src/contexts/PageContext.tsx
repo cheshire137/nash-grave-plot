@@ -1,4 +1,12 @@
-import React, {type PropsWithChildren, type ReactNode, useState, useCallback, useEffect} from 'react'
+import {
+  createContext,
+  type PropsWithChildren,
+  type ReactNode,
+  useState,
+  useCallback,
+  useContext,
+  useEffect,
+} from 'react'
 
 interface PageContextProps {
   pageTitle: string
@@ -7,12 +15,7 @@ interface PageContextProps {
   setHeaderItems: (headerItems: React.ReactNode[]) => void
 }
 
-export const PageContext = React.createContext<PageContextProps>({
-  pageTitle: '',
-  headerItems: [],
-  setPageTitle: () => {},
-  setHeaderItems: () => {},
-})
+const PageContext = createContext<PageContextProps | undefined>(undefined)
 
 export const PageContextProvider = ({children}: PropsWithChildren) => {
   const [pageTitle, _setPageTitle] = useState('')
@@ -34,4 +37,10 @@ export const PageContextProvider = ({children}: PropsWithChildren) => {
       {children}
     </PageContext.Provider>
   )
+}
+
+export function usePage() {
+  const context = useContext(PageContext)
+  if (!context) throw new Error('usePage must be used within a PageContextProvider')
+  return context
 }

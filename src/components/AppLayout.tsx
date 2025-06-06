@@ -1,11 +1,10 @@
-import React, {useContext} from 'react'
 import {Header, Heading, PageLayout} from '@primer/react'
 import Footer from './Footer'
-import {PageContext} from '../contexts/PageContext'
+import {usePage} from '../contexts/PageContext'
 import {useHref, Outlet, useLocation} from 'react-router-dom'
 
 function AppLayout() {
-  const {pageTitle, headerItems} = useContext(PageContext)
+  const {pageTitle, headerItems} = usePage()
   const {pathname} = useLocation()
 
   return (

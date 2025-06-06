@@ -1,11 +1,11 @@
-import React, {type PropsWithChildren, useCallback, useEffect, useState} from 'react'
+import {createContext, type PropsWithChildren, useCallback, useContext, useEffect, useState} from 'react'
 
 interface WindowContextProps {
   clientHeight: number
   clientWidth: number
 }
 
-export const WindowContext = React.createContext<WindowContextProps>({
+const WindowContext = createContext<WindowContextProps>({
   clientHeight: 0,
   clientWidth: 0,
 })
@@ -31,4 +31,8 @@ export const WindowContextProvider = ({children}: PropsWithChildren) => {
     }
   }, [getVh, getVw])
   return <WindowContext.Provider value={{clientHeight, clientWidth}}>{children}</WindowContext.Provider>
+}
+
+export function useWindow() {
+  return useContext(WindowContext)
 }

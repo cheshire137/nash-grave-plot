@@ -1,4 +1,4 @@
-import React, {type PropsWithChildren, useMemo} from 'react'
+import {createContext, type PropsWithChildren, useContext, useMemo} from 'react'
 import {NashvilleCemeteryData} from '../types'
 import cemeteryData from '../nashville-cemeteries.json'
 import Interment from '../models/Interment'
@@ -8,7 +8,7 @@ interface CemeteryDataContextProps {
   interments: Interment[]
 }
 
-export const CemeteryDataContext = React.createContext<CemeteryDataContextProps>({interments: []})
+const CemeteryDataContext = createContext<CemeteryDataContextProps>({interments: []})
 
 export const CemeteryDataContextProvider = ({children}: PropsWithChildren) => {
   const interments = useMemo(() => {
@@ -17,4 +17,8 @@ export const CemeteryDataContextProvider = ({children}: PropsWithChildren) => {
     return result
   }, [])
   return <CemeteryDataContext.Provider value={{interments}}>{children}</CemeteryDataContext.Provider>
+}
+
+export function useCemeteryData() {
+  return useContext(CemeteryDataContext)
 }

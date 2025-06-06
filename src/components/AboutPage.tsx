@@ -1,10 +1,10 @@
 import {useEffect, useContext} from 'react'
-import {PageContext} from '../contexts/PageContext'
+import {usePage} from '../contexts/PageContext'
 import {Link, PageLayout} from '@primer/react'
 import styles from './AboutPage.module.css'
 
 function AboutPage() {
-  const {setPageTitle} = useContext(PageContext)
+  const {setPageTitle} = usePage()
 
   useEffect(() => setPageTitle('About this site'), [setPageTitle])
 
