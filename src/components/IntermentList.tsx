@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useContext, useState} from 'react'
+import {useEffect, useMemo, useRef, useContext, useState} from 'react'
 import TableStyles from './TableStyles'
 import TableHeaderCell from './TableHeaderCell'
 import TableCell from './TableCell'
@@ -18,7 +18,7 @@ import DemarcationDisplay from './DemarcationDisplay'
 import FootstoneDisplay from './FootstoneDisplay'
 import NotesDisplay from './NotesDisplay'
 import ParcelNumberDisplay from './ParcelNumberDisplay'
-import {allColumns, intermentFieldLabels} from '../constants'
+import {intermentFieldLabels} from '../constants'
 import type {IntermentField} from '../types'
 import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
@@ -28,6 +28,7 @@ import {WindowContext} from '../contexts/WindowContext'
 import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
 import {PageContext} from '../contexts/PageContext'
 import LocalStorage from '../models/LocalStorage'
+import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 import {useSearchParams, useParams, useNavigate} from 'react-router-dom'
 
 const filterTypes = {
@@ -44,8 +45,7 @@ function IntermentList() {
   const {interments} = useContext(CemeteryDataContext)
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0)
   const {setPageTitle, setHeaderItems} = useContext(PageContext)
-  const savedEnabledFields: IntermentField[] = LocalStorage.get('enabledFields')
-  const [enabledFields, setEnabledFields] = useState<IntermentField[]>(savedEnabledFields || allColumns)
+  const {enabledFields} = useEnabledFields()
   const {initialPageNumberStr} = useParams()
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -232,8 +232,8 @@ function IntermentList() {
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
 
   useEffect(() => {
-    setHeaderItems([<SettingsDialog enabledFields={enabledFields} setEnabledFields={setEnabledFields} />])
-  }, [enabledFields, setEnabledFields, setHeaderItems])
+    setHeaderItems([<SettingsDialog />])
+  }, [enabledFields, setHeaderItems])
 
   useEffect(() => {
     if (!tableBodyRef || !tableBodyRef.current) return

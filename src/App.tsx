@@ -4,6 +4,7 @@ import PhotoGallery from './components/PhotoGallery'
 import {WindowContextProvider} from './contexts/WindowContext'
 import {CemeteryDataContextProvider} from './contexts/CemeteryDataContext'
 import {PageContextProvider} from './contexts/PageContext'
+import {EnabledFieldsProvider} from './contexts/EnabledFieldsContext'
 import {createHashRouter, RouterProvider, createRoutesFromElements, Route} from 'react-router-dom'
 import ErrorPage from './components/ErrorPage'
 import AppLayout from './components/AppLayout'
@@ -29,7 +30,9 @@ export function App() {
         <WindowContextProvider>
           <CemeteryDataContextProvider>
             <PageContextProvider>
-              <RouterProvider router={router} />
+              <EnabledFieldsProvider>
+                <RouterProvider router={router} />
+              </EnabledFieldsProvider>
             </PageContextProvider>
           </CemeteryDataContextProvider>
         </WindowContextProvider>
