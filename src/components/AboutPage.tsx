@@ -1,4 +1,4 @@
-import {useEffect, useContext} from 'react'
+import {useEffect} from 'react'
 import {usePage} from '../contexts/PageContext'
 import {Link, PageLayout} from '@primer/react'
 import styles from './AboutPage.module.css'

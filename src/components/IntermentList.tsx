@@ -23,7 +23,7 @@ import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
 import {getColumnsToDisplay, getInitialFilters, getPageTitleForResults} from '../utils'
-import {useWindow} from '../contexts/WindowContext'
+import {useWindowSize} from '../contexts/WindowSizeContext'
 import {useCemeteryData} from '../contexts/CemeteryDataContext'
 import {usePage} from '../contexts/PageContext'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
@@ -40,7 +40,7 @@ const filterTypes = {
 function IntermentList() {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null)
   const paginationRef = useRef<HTMLDivElement>(null)
-  const {clientHeight: viewportHeight} = useWindow()
+  const {clientHeight: viewportHeight} = useWindowSize()
   const {interments} = useCemeteryData()
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0)
   const {setPageTitle, setHeaderItems} = usePage()

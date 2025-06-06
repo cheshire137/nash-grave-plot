@@ -1,7 +1,7 @@
 import {BaseStyles, ThemeProvider} from '@primer/react'
 import IntermentList from './components/IntermentList'
 import PhotoGallery from './components/PhotoGallery'
-import {WindowContextProvider} from './contexts/WindowContext'
+import {WindowSizeContextProvider} from './contexts/WindowSizeContext'
 import {CemeteryDataContextProvider} from './contexts/CemeteryDataContext'
 import {PageContextProvider} from './contexts/PageContext'
 import {EnabledFieldsProvider} from './contexts/EnabledFieldsContext'
@@ -27,7 +27,7 @@ export function App() {
   return (
     <ThemeProvider>
       <BaseStyles>
-        <WindowContextProvider>
+        <WindowSizeContextProvider>
           <CemeteryDataContextProvider>
             <PageContextProvider>
               <EnabledFieldsProvider>
@@ -35,7 +35,7 @@ export function App() {
               </EnabledFieldsProvider>
             </PageContextProvider>
           </CemeteryDataContextProvider>
-        </WindowContextProvider>
+        </WindowSizeContextProvider>
       </BaseStyles>
     </ThemeProvider>
   )
