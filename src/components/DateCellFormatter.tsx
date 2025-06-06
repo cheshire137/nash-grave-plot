@@ -1,6 +1,6 @@
-import React from 'react'
-import {Box, Text} from '@primer/react'
+import {Text} from '@primer/react'
 import {prettyDateStr} from '../utils'
+import styles from './DateCellFormatter.module.css'
 
 interface DateCellFormatterProps {
   value: Date | string | null
@@ -8,9 +8,9 @@ interface DateCellFormatterProps {
 
 function DateCellFormatter({value}: DateCellFormatterProps) {
   return (
-    <Box minWidth="130px">
+    <div className={styles.container}>
       {value instanceof Date ? <Text whiteSpace="nowrap">{prettyDateStr(value)}</Text> : value}
-    </Box>
+    </div>
   )
 }
 
