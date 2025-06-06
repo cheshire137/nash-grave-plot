@@ -1,4 +1,3 @@
-import React from 'react'
 import {BaseStyles, ThemeProvider} from '@primer/react'
 import IntermentList from './components/IntermentList'
 import PhotoGallery from './components/PhotoGallery'
@@ -9,6 +8,7 @@ import {createHashRouter, RouterProvider, createRoutesFromElements, Route} from 
 import ErrorPage from './components/ErrorPage'
 import AppLayout from './components/AppLayout'
 import AboutPage from './components/AboutPage'
+import '@primer/primitives/dist/css/functional/themes/light.css'
 
 export function App() {
   const router = createHashRouter(
