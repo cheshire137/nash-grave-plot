@@ -18,7 +18,7 @@ import DemarcationDisplay from './DemarcationDisplay'
 import FootstoneDisplay from './FootstoneDisplay'
 import NotesDisplay from './NotesDisplay'
 import ParcelNumberDisplay from './ParcelNumberDisplay'
-import {intermentFieldLabels} from '../constants'
+import {allColumns, intermentFieldLabels} from '../constants'
 import type {IntermentField} from '../types'
 import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
@@ -36,27 +36,6 @@ const filterTypes = {
   cemeteryMatches: cemeteryMatchesFilter,
   addressMatches: addressMatchesFilter,
 }
-
-const allColumns: IntermentField[] = [
-  'person',
-  'deceasedInfo',
-  'cemetery',
-  'address',
-  'siteHistory',
-  'inscription',
-  'footstone',
-  'demarcation',
-  'condition',
-  'accessible',
-  'restoration',
-  'gravePhotos',
-  'notes',
-  'tractParcelNumber',
-  'cemeteryParcelNumber',
-  'originalSurvey',
-  'surveyUpdates',
-  'currentSurvey',
-]
 
 function IntermentList() {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null)
