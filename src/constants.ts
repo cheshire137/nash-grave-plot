@@ -44,10 +44,10 @@ export const intermentFieldsByGroup: {
 export const intermentFieldLabels: {
   [intermentField in IntermentField]: string
 } = {
-  person: 'Name and death date',
+  person: 'Name / Death date',
   deceasedInfo: 'Info',
-  cemetery: 'Cemetery name and type',
-  address: 'Address and photos',
+  cemetery: 'Cemetery',
+  address: 'Address / Photos',
   siteHistory: 'Site History',
   inscription: 'Inscription',
   footstone: 'Footstone',
