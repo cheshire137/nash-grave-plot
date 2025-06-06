@@ -3,32 +3,18 @@ import TableStyles from './TableStyles'
 import TableHeaderCell from './TableHeaderCell'
 import TableCell from './TableCell'
 import Interment from '../models/Interment'
-import AddressDisplay from './AddressDisplay'
-import CemeteryDisplay from './CemeteryDisplay'
-import {InscriptionDisplay} from './InscriptionDisplay'
-import LongTextBlock from './LongTextBlock'
 import {EnabledColumnsDialog} from './EnabledColumnsDialog'
-import AddressFilter from './AddressFilter'
-import DateCellFormatter from './DateCellFormatter'
-import {PhotoList} from './PhotoList'
-import {NameDisplay} from './NameDisplay'
-import {InfoDisplay} from './InfoDisplay'
-import CemeteryFilter from './CemeteryFilter'
-import DemarcationDisplay from './DemarcationDisplay'
-import FootstoneDisplay from './FootstoneDisplay'
-import {NotesDisplay} from './NotesDisplay'
-import {ParcelNumberDisplay} from './ParcelNumberDisplay'
-import {intermentFieldLabels} from '../constants'
 import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
-import {getColumnsToDisplay, getInitialFilters, getPageTitleForResults} from '../utils'
+import {getInitialFilters, getPageTitleForResults} from '../utils'
 import {useCemeteryData} from '../contexts/CemeteryDataContext'
 import {usePage} from '../contexts/PageContext'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 import {useSearchParams, useParams, useNavigate} from 'react-router-dom'
 import {PageNumber} from './PageNumber'
 import {useDynamicTablePageSize} from '../hooks/use-dynamic-table-page-size'
+import {useIntermentListColumns} from '../hooks/use-interment-list-columns'
 
 const filterTypes = {
   fuzzyText: fuzzyTextFilter,
@@ -50,154 +36,7 @@ function IntermentList() {
   const initialPageIndex = initialPageNumberStr ? parseInt(initialPageNumberStr) - 1 : 0
   const initialPageSize = searchParams.get('page_size') ? parseInt(searchParams.get('page_size')!) : 10
   const {pageSize: dynamicPageSize} = useDynamicTablePageSize({initialPageSize, paginationRef, tableBodyRef})
-
-  const columns = useMemo(() => {
-    const nameColumn = {
-      Header: intermentFieldLabels.person,
-      accessor: 'person',
-      filter: 'fuzzyText',
-      Cell: NameDisplay,
-    }
-    const deceasedInfoColumn = {
-      Header: intermentFieldLabels.deceasedInfo,
-      accessor: 'deceasedInfo',
-      Cell: InfoDisplay,
-      filter: 'fuzzyText',
-    }
-    const personColumnGroup = {
-      Header: 'Person',
-      columns: getColumnsToDisplay(enabledFields, [nameColumn, deceasedInfoColumn]),
-    }
-
-    const cemeteryColumn = {
-      Header: intermentFieldLabels.cemetery,
-      accessor: 'cemetery',
-      filter: 'cemeteryMatches',
-      Filter: CemeteryFilter,
-      Cell: CemeteryDisplay,
-      id: 'cemetery',
-    }
-    const addressColumn = {
-      Header: intermentFieldLabels.address,
-      accessor: 'cemetery',
-      Cell: AddressDisplay,
-      filter: 'addressMatches',
-      Filter: AddressFilter,
-      id: 'address',
-    }
-    const siteHistoryColumn = {
-      Header: intermentFieldLabels.siteHistory,
-      accessor: 'siteHistory',
-      Cell: InfoDisplay,
-    }
-    const locationColumnGroup = {
-      Header: 'Location',
-      columns: getColumnsToDisplay(enabledFields, [cemeteryColumn, addressColumn, siteHistoryColumn]),
-    }
-
-    const inscriptionColumn = {
-      Header: intermentFieldLabels.inscription,
-      accessor: 'inscription',
-      Cell: InscriptionDisplay,
-    }
-    const footstoneColumn = {
-      Header: intermentFieldLabels.footstone,
-      accessor: 'footstone',
-      Cell: FootstoneDisplay,
-    }
-    const demarcationColumn = {
-      Header: intermentFieldLabels.demarcation,
-      accessor: 'demarcation',
-      Cell: DemarcationDisplay,
-    }
-    const conditionColumn = {
-      Header: intermentFieldLabels.condition,
-      accessor: 'condition',
-      Cell: DemarcationDisplay,
-    }
-    const accessibleColumn = {
-      Header: intermentFieldLabels.accessible,
-      accessor: 'accessible',
-      filter: 'includes',
-    }
-    const restorationColumn = {
-      Header: intermentFieldLabels.restoration,
-      accessor: 'restoration',
-      Cell: LongTextBlock,
-    }
-    const gravePhotosColumn = {
-      Header: intermentFieldLabels.gravePhotos,
-      accessor: 'gravePhotoCaptionsByUrl',
-      Cell: PhotoList,
-    }
-    const markerColumnGroup = {
-      Header: 'Marker/Plot',
-      columns: getColumnsToDisplay(enabledFields, [
-        inscriptionColumn,
-        footstoneColumn,
-        demarcationColumn,
-        conditionColumn,
-        accessibleColumn,
-        restorationColumn,
-        gravePhotosColumn,
-      ]),
-    }
-
-    const notesColumn = {
-      Header: intermentFieldLabels.notes,
-      accessor: 'notes',
-      Cell: NotesDisplay,
-    }
-    const otherColumnGroup = {
-      Header: '',
-      id: 'other',
-      columns: getColumnsToDisplay(enabledFields, [notesColumn]),
-    }
-
-    const tractParcelNumberColumn = {
-      Header: intermentFieldLabels.tractParcelNumber,
-      accessor: 'tractParcelNumber',
-      Cell: ParcelNumberDisplay,
-    }
-    const cemeteryParcelNumberColumn = {
-      Header: intermentFieldLabels.cemeteryParcelNumber,
-      accessor: 'cemeteryParcelNumber',
-      Cell: ParcelNumberDisplay,
-    }
-    const parcelNumberColumnGroup = {
-      Header: 'Parcel Numbers',
-      columns: getColumnsToDisplay(enabledFields, [tractParcelNumberColumn, cemeteryParcelNumberColumn]),
-    }
-
-    const originalSurveyColumn = {
-      Header: intermentFieldLabels.originalSurvey,
-      accessor: 'originalSurvey',
-      Cell: DateCellFormatter,
-    }
-    const surveyUpdatesColumn = {
-      Header: intermentFieldLabels.surveyUpdates,
-      accessor: 'surveyUpdates',
-      Cell: DateCellFormatter,
-    }
-    const currentSurveyColumn = {
-      Header: intermentFieldLabels.currentSurvey,
-      accessor: 'currentSurvey',
-      Cell: DateCellFormatter,
-    }
-    const surveyColumnGroup = {
-      Header: 'Survey',
-      columns: getColumnsToDisplay(enabledFields, [originalSurveyColumn, surveyUpdatesColumn, currentSurveyColumn]),
-    }
-
-    return [
-      personColumnGroup,
-      locationColumnGroup,
-      markerColumnGroup,
-      otherColumnGroup,
-      parcelNumberColumnGroup,
-      surveyColumnGroup,
-    ]
-  }, [enabledFields])
+  const {columns} = useIntermentListColumns()
 
   const {
     getTableProps,
