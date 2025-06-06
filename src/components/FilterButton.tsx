@@ -7,11 +7,11 @@ interface Props {
   ref: RefObject<HTMLButtonElement>
 }
 
-const FilterButton = ({
+export function FilterButton({
   isOpen,
   ref,
   ...rest
-}: Props & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-labelledby' | 'ref'>) => {
+}: Props & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-labelledby' | 'ref'>) {
   return (
     <IconButton
       size="small"
@@ -24,5 +24,3 @@ const FilterButton = ({
     />
   )
 }
-
-export default FilterButton
