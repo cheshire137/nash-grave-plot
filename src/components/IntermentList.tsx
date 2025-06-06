@@ -7,7 +7,7 @@ import AddressDisplay from './AddressDisplay'
 import CemeteryDisplay from './CemeteryDisplay'
 import InscriptionDisplay from './InscriptionDisplay'
 import LongTextBlock from './LongTextBlock'
-import {SettingsDialog} from './SettingsDialog'
+import {EnabledColumnsDialog} from './EnabledColumnsDialog'
 import AddressFilter from './AddressFilter'
 import DateCellFormatter from './DateCellFormatter'
 import PhotoList from './PhotoList'
@@ -232,7 +232,7 @@ function IntermentList() {
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
 
   useEffect(() => {
-    setHeaderItems([<SettingsDialog />])
+    setHeaderItems([<EnabledColumnsDialog />])
   }, [enabledFields, setHeaderItems])
 
   useEffect(() => {

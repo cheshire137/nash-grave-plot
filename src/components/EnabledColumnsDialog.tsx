@@ -6,9 +6,8 @@ import {allIntermentFieldGroups} from '../constants'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 import {getEnabledColumns} from '../utils'
 import HeaderIconButton from './HeaderIconButton'
-import styles from './SettingsDialog.module.css'
 
-export function SettingsDialog() {
+export function EnabledColumnsDialog() {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const {enabledFields: persistedEnabledFields, saveEnabledFields} = useEnabledFields()
@@ -20,15 +19,19 @@ export function SettingsDialog() {
 
   return (
     <>
-      <HeaderIconButton ref={buttonRef} icon={GearIcon} onClick={() => setIsOpen(true)} aria-label="Settings" />
+      <HeaderIconButton
+        ref={buttonRef}
+        icon={GearIcon}
+        onClick={() => setIsOpen(true)}
+        aria-label="Visible columns"
+      />
       {isOpen && (
         <Dialog
           footerButtons={[{buttonType: 'primary', content: 'Save', onClick: onSave}]}
-          title="Settings"
+          title="Visible columns"
           returnFocusRef={buttonRef}
           onClose={() => setIsOpen(false)}
         >
-          <p className={styles.instructions}>Choose which columns to show:</p>
           {allIntermentFieldGroups.map((group) => (
             <IntermentFieldGroupSettings
               key={group}
