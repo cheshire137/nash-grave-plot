@@ -1,13 +1,12 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import DateCellFormatter from './DateCellFormatter'
 import type {CellProps} from 'react-table'
+import styles from './DiedDateDisplay.module.css'
 
 function DiedDateDisplay(props: CellProps<Record<string, unknown>>) {
   return (
-    <Box minWidth="130px">
+    <div className={styles.container}>
       <DateCellFormatter {...props} />
-    </Box>
+    </div>
   )
 }
 
