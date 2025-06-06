@@ -1,12 +1,11 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import TitleCase from './TitleCase'
 import type {CellProps} from 'react-table'
+import styles from './ParcelNumberDisplay.module.css'
 
-const ParcelNumberDisplay = ({value}: CellProps<Record<string, unknown>>) => (
-  <Box minWidth="150px">
-    <TitleCase value={value} />
-  </Box>
-)
-
-export default ParcelNumberDisplay
+export function ParcelNumberDisplay({value}: CellProps<Record<string, unknown>>) {
+  return (
+    <div className={styles.container}>
+      <TitleCase value={value} />
+    </div>
+  )
+}
