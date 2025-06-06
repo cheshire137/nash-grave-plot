@@ -1,14 +1,11 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import LongTextBlock from './LongTextBlock'
 import type {CellProps} from 'react-table'
+import styles from './InfoDisplay.module.css'
 
-function InfoDisplay(props: CellProps<Record<string, unknown>>) {
+export function InfoDisplay(props: CellProps<Record<string, unknown>>) {
   return (
-    <Box minWidth="180px" textAlign="left">
+    <div className={styles.container}>
       <LongTextBlock {...props} />
-    </Box>
+    </div>
   )
 }
-
-export default InfoDisplay
