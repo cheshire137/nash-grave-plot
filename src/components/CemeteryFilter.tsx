@@ -23,6 +23,7 @@ function CemeteryFilter({
   column: { filterValue, setFilter, preFilteredRows, id }
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useDetectClickOutside({ onTriggered: () => setIsOpen(false) });
   const graveyardTypeSelectRef = useRef<HTMLSelectElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
@@ -58,9 +59,9 @@ function CemeteryFilter({
   }, [debouncedSetFilter]);
 
   return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
-    <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
-    <FilterModal isOpen={isOpen} id="cemetery-filter-modal" onDismiss={() => {
+    <FilterModal isOpen={isOpen} id="cemetery-filter-modal" returnFocusRef={filterButtonRef} onClose={() => {
       setFilter({ name, graveyardType });
       setIsOpen(false);
     }}>

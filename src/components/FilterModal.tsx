@@ -4,11 +4,13 @@ interface Props {
   isOpen: boolean;
   children: React.ReactNode;
   id: string;
-  onDismiss: () => void;
+  onClose: () => void;
+  returnFocusRef: React.RefObject<HTMLElement>;
 }
 
-const FilterModal = ({ isOpen, id, children, onDismiss }: Props) => {
-  return <Dialog isOpen={isOpen} aria-labelledby={id} onDismiss={onDismiss}>
+const FilterModal = ({ isOpen, id, children, onClose, returnFocusRef }: Props) => {
+  if (!isOpen) return null;
+  return <Dialog returnFocusRef={returnFocusRef} aria-labelledby={id} onClose={onClose}>
     <Dialog.Header id={id}>Filter graves</Dialog.Header>
     <Box p="3">{children}</Box>
   </Dialog>;

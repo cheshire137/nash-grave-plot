@@ -21,6 +21,7 @@ interface Props {
 function AddressFilter({
   column: { filterValue, setFilter }
 }: Props) {
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useDetectClickOutside({ onTriggered: () => setIsOpen(false) });
   const [isOpen, setIsOpen] = useState(false);
   const addressInputRef = useRef<HTMLInputElement>(null);
@@ -66,9 +67,9 @@ function AddressFilter({
   }, [debouncedSetFilterAndUpdateUrl]);
 
   return <Box display="inline-block" ref={containerRef} sx={{ textAlign: 'left' }}>
-    <FilterButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+    <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
     {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
-    <FilterModal isOpen={isOpen} id="address-filter-modal" onDismiss={() => {
+    <FilterModal returnFocusRef={filterButtonRef} isOpen={isOpen} id="address-filter-modal" onClose={() => {
       setFilterAndUpdateUrl({ address, hasPhotos });
       setIsOpen(false);
     }}>

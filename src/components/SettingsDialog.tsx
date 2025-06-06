@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Dialog, Text } from '@primer/react';
 import { GearIcon } from '@primer/octicons-react';
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings';
@@ -22,26 +22,29 @@ interface Props {
 
 const SettingsDialog = ({ enabledFields, setEnabledFields }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   return <>
-    <HeaderIconButton icon={GearIcon} onClick={() => setIsOpen(true)} aria-label="Settings" />
-    <Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)} aria-labelledby="header-id">
-      <Dialog.Header id="header-id">Settings</Dialog.Header>
-      <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
-        <Text color="black" as="div">
-          <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
-          {allIntermentFieldGroups.map(group => <IntermentFieldGroupSettings
-            key={group}
-            group={group}
-            enabledFields={enabledFields}
-            toggleFieldEnabled={(intermentField, isEnabled) => {
-              const newEnabledFields = getEnabledColumns(enabledFields, intermentField, isEnabled);
-              LocalStorage.set('enabledFields', newEnabledFields);
-              setEnabledFields(newEnabledFields);
-            }}
-          />)}
-        </Text>
-      </Box>
-    </Dialog>
+    <HeaderIconButton ref={buttonRef} icon={GearIcon} onClick={() => setIsOpen(true)} aria-label="Settings" />
+    {isOpen && (
+      <Dialog returnFocusRef={buttonRef} onClose={() => setIsOpen(false)} aria-labelledby="header-id">
+        <Dialog.Header id="header-id">Settings</Dialog.Header>
+        <Box p={3} sx={{ overflow: 'auto', maxHeight: '70vh' }}>
+          <Text color="black" as="div">
+            <Box mt={0} mb={3} as="p">Choose which columns to show:</Box>
+            {allIntermentFieldGroups.map(group => <IntermentFieldGroupSettings
+              key={group}
+              group={group}
+              enabledFields={enabledFields}
+              toggleFieldEnabled={(intermentField, isEnabled) => {
+                const newEnabledFields = getEnabledColumns(enabledFields, intermentField, isEnabled);
+                LocalStorage.set('enabledFields', newEnabledFields);
+                setEnabledFields(newEnabledFields);
+              }}
+            />)}
+          </Text>
+        </Box>
+      </Dialog>
+    )}
   </>;
 };
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Text } from '@primer/react';
 
 const ConstrainedTextBlock = styled(Text).attrs({
