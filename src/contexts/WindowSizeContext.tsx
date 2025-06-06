@@ -4,22 +4,20 @@ import {getViewportHeight, getViewportWidth} from '../utils'
 interface WindowSizeContextProps {
   clientHeight: number
   clientWidth: number
+  handleResize: () => void
 }
 
-const WindowSizeContext = createContext<WindowSizeContextProps>({
-  clientHeight: 0,
-  clientWidth: 0,
-})
+const WindowSizeContext = createContext<WindowSizeContextProps | undefined>(undefined)
 
 // See https://medium.com/@christian_maehler/handle-window-resizing-with-a-react-context-4392b47285e4
 export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
   const [clientHeight, setClientHeight] = useState<number>(getViewportHeight())
   const [clientWidth, setClientWidth] = useState<number>(getViewportWidth())
-  const value = useMemo(() => ({clientHeight, clientWidth}), [clientHeight, clientWidth])
   const handleResize = useCallback(() => {
     setClientHeight(getViewportHeight())
     setClientWidth(getViewportWidth())
   }, [])
+  const value = useMemo(() => ({clientHeight, clientWidth, handleResize}), [clientHeight, clientWidth, handleResize])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
@@ -32,5 +30,7 @@ export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
 }
 
 export function useWindowSize() {
-  return useContext(WindowSizeContext)
+  const context = useContext(WindowSizeContext)
+  if (!context) throw new Error('useWindowSize must be used within a WindowSizeContextProvider')
+  return context
 }
