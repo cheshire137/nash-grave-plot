@@ -10,7 +10,7 @@ import ErrorPage from './components/ErrorPage'
 import AppLayout from './components/AppLayout'
 import AboutPage from './components/AboutPage'
 
-const App = () => {
+export function App() {
   const router = createHashRouter(
     createRoutesFromElements(
       <Route element={<AppLayout />}>
@@ -36,5 +36,3 @@ const App = () => {
     </ThemeProvider>
   )
 }
-
-export default App
