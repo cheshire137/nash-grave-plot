@@ -1,5 +1,4 @@
-import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
-import type Location from '../types/Location';
+import type {NashvilleCemeteryFeatureProperties} from '../types/NashvilleCemeteryData';
 
 class Address {
   locale: string;
@@ -11,24 +10,24 @@ class Address {
   latitude: string | null;
   longitude: string | null;
 
-  constructor(props: NashvilleCemeteryData) {
-    this.locale = props.locale;
-    this.latitude = props.latitude || null;
-    this.longitude = props.longitude || null;
-    if (props.mapped_location) {
-      if (props.mapped_location.latitude && !this.latitude) this.latitude = props.mapped_location.latitude;
-      if (props.mapped_location.longitude && !this.longitude) this.longitude = props.mapped_location.longitude;
+  constructor(props: NashvilleCemeteryFeatureProperties) {
+    this.locale = props.Locale;
+    this.latitude = props.Latitude;
+    this.longitude = props.Longitude;
+    if (props.Mapped_Location) {
+      if (props.Mapped_Location.latitude && !this.latitude) this.latitude = props.Mapped_Location.latitude;
+      if (props.Mapped_Location.longitude && !this.longitude) this.longitude = props.Mapped_Location.longitude;
     }
     this.geocode = null;
     if (this.latitude && this.longitude) {
       this.geocode = `${this.latitude}, ${this.longitude}`;
     }
     this.additionalLocationInfo = null;
-    if (props.additional_location_information && props.additional_location_information.trim().length > 0) {
-      this.additionalLocationInfo = props.additional_location_information.trim();
+    if (props.Additional_Location_Information && props.Additional_Location_Information.trim().length > 0) {
+      this.additionalLocationInfo = props.Additional_Location_Information.trim();
     }
-    this.street = props.street || '';
-    this.number = props.number || '';
+    this.street = props.Street || '';
+    this.number = props.Number || '';
     this.streetAddress = [this.number, this.street].filter(info => info.trim().length > 0)
       .map(info => info.trim()).join(' ');
   }

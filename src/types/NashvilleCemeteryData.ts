@@ -1,47 +1,61 @@
 import type Location from './Location';
-import type PhotoLink from './PhotoLink';
 
-// https://dev.socrata.com/foundry/data.nashville.gov/ttqg-mpiz
-type NashvilleCemeteryData = {
-  cemetery_name: string;
-  alternate_cemetery_name?: string;
-  map_id: string;
-  locale: string;
-  condition?: string;
-  demarcation?: string;
-  accessible?: string;
-  site_photo_link: PhotoLink;
-  site_photo_2?: PhotoLink;
-  site_photo_3?: PhotoLink;
-  site_photo_4?: PhotoLink;
-  site_photo_5?: PhotoLink;
-  site_photo_6?: PhotoLink;
-  known_burials: string;
-  interment: string;
-  grave_photo_link: PhotoLink;
-  grave_photo_2?: PhotoLink;
-  grave_photo_3?: PhotoLink;
-  inscription: string;
-  death_date: string;
-  footstone?: string;
-  deceased_info?: string;
-  original_survey: string;
-  survey_update_s: string;
-  current_survey: string;
-  graveyard_type: string;
-  notes: string;
-  restoration?: string;
-  site_history?: string;
-  site_contact_info?: string;
-  tract_parcel_number: string;
-  cemetery_parcel_number?: string;
-  number?: string;
-  street: string;
-  additional_location_information?: string;
-  latitude?: string;
-  longitude?: string;
-  archaeological_information?: string;
-  mapped_location?: Location;
-};
+// https://data.nashville.gov/datasets/829ba5846e704ffd86b339f1ede647f7_0/explore GeoJSON format
+export interface NashvilleCemeteryData {
+  crs: {
+    properties: {name: string};
+    type: string;
+  };
+  features: NashvilleCemeteryFeature[];
+  type: string;
+}
 
-export default NashvilleCemeteryData;
+export interface NashvilleCemeteryFeature {
+  geometry: null;
+  id: number;
+  properties: NashvilleCemeteryFeatureProperties;
+  type: string;
+}
+
+export interface NashvilleCemeteryFeatureProperties {
+  OBJECTID: number;
+  Cemetery_Name: string;
+  Alternate_Cemetery_Name: string | null;
+  Map_ID: string;
+  Locale: string;
+  Condition: string | null;
+  Demarcation: string | null;
+  Accessible: string | null;
+  Site_Photo_1: string | null;
+  Site_Photo_2: string | null;
+  Site_Photo_3: string | null;
+  Site_Photo_4: string | null;
+  Site_Photo_5: string | null;
+  Site_Photo_6: string | null;
+  Known_Burials: number;
+  Interment: string;
+  Grave_Photo_1: string | null;
+  Grave_Photo_2: string | null;
+  Grave_Photo_3: string | null;
+  Inscription: string;
+  Death_Date: string;
+  Footstone: string | null;
+  Deceased_Info: string | null;
+  Original_Survey: string;
+  Survey_Update_s_: string | null;
+  Current_Survey: string;
+  Graveyard_Type: string;
+  Notes: string;
+  Restoration: string | null;
+  Site_History: string | null;
+  Site_Contact_Info: string | null;
+  Tract_Parcel_Number: string | null;
+  Cemetery_Parcel_Number: string | null;
+  Number: string | null;
+  Street: string;
+  Additional_Location_Information: string | null;
+  Latitude: string | null;
+  Longitude: string | null;
+  Archaeological_Information: string | null;
+  Mapped_Location: Location | null;
+}

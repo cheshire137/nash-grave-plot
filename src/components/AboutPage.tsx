@@ -8,12 +8,12 @@ const AboutPage = () => {
   useEffect(() => setPageTitle('About this site'), [setPageTitle]);
 
   return <PageLayout.Content padding="normal" sx={{ fontSize: 2 }}>
-    <Box sx={{ maxWidth: '31em' }}>
+    <Box sx={{ maxWidth: '36em' }}>
       <p>Hi! I live in Nashville, Tennessee and have an interest in some of the local cemeteries. I wanted to build this
         app to explore the data that the <Link
           target="_blank"
           rel="noopener noreferrer"
-          href="https://data.nashville.gov/Genealogy/Davidson-County-Cemetery-Survey/ttqg-mpiz"
+          href="https://data.nashville.gov/maps/829ba5846e704ffd86b339f1ede647f7"
         >Nashville Open Data Portal</Link> provides.</p>
       <p>If you find any bugs or want to contribute, issues and pull requests are welcome on the <Link
         target="_blank"

@@ -1,4 +1,4 @@
-import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
+import type {NashvilleCemeteryFeatureProperties} from '../types/NashvilleCemeteryData';
 import parseDateString from '../utils/parseDateString';
 
 class Person {
@@ -6,10 +6,10 @@ class Person {
   deathDate: Date | string | null;
   deceasedInfo: string | null;
 
-  constructor(data: NashvilleCemeteryData) {
-    this.name = data.interment;
-    this.deceasedInfo = data.deceased_info || null;
-    this.deathDate = parseDateString(data.death_date);
+  constructor(data: NashvilleCemeteryFeatureProperties) {
+    this.name = data.Interment;
+    this.deceasedInfo = data.Deceased_Info;
+    this.deathDate = parseDateString(data.Death_Date);
   }
 }
 

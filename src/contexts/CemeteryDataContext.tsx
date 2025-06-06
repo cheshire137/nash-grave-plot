@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import NashvilleCemeteryData from '../types/NashvilleCemeteryData';
-import cemeteriesList from '../nashville-cemeteries.json';
+import {NashvilleCemeteryData} from '../types/NashvilleCemeteryData';
+import cemeteryData from '../nashville-cemeteries.json';
 import Interment from '../models/Interment';
 import IntermentSort from '../models/IntermentSort';
 
@@ -16,7 +16,7 @@ interface Props {
 
 export const CemeteryDataContextProvider = ({ children }: Props) => {
   const interments = useMemo(() => {
-    const result = (cemeteriesList as NashvilleCemeteryData[]).map(data => new Interment(data));
+    const result = (cemeteryData as NashvilleCemeteryData).features.map(data => new Interment(data));
     result.sort(IntermentSort);
     return result;
   }, []);

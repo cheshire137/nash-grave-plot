@@ -2,10 +2,10 @@ import Inscription from './Inscription';
 import Address from './Address';
 import parseDateString from '../utils/parseDateString';
 import parseAccessible from '../utils/parseAccessible';
-import type NashvilleCemeteryData from '../types/NashvilleCemeteryData';
-import type PhotoLink from '../types/PhotoLink';
+import type {NashvilleCemeteryFeature} from '../types/NashvilleCemeteryData';
 import Cemetery from './Cemetery';
 import Person from './Person';
+import {getPhotoCaptionsByUrl} from '../utils/get-photo-captions-by-url';
 
 class Interment {
   key: string;
@@ -13,60 +13,58 @@ class Interment {
   currentSurvey: Date | string | null;
   surveyUpdates: Date | string | null;
   originalSurvey: Date | string | null;
-  gravePhotos: PhotoLink[];
+  gravePhotos: string[];
+  gravePhotoCaptionsByUrl: { [url: string]: string };
   accessible: string;
   archaeologicalInfo: string | null;
   cemeteryParcelNumber: string | null;
-  tractParcelNumber: string;
+  tractParcelNumber: string | null;
   siteContactInfo: string | null;
   siteHistory: string | null;
   restoration: string | null;
   notes: string;
   footstone: string | null;
   inscription: Inscription;
-  knownBurials: string;
+  knownBurials: number;
   demarcation: string | null;
   condition: string | null;
   mapID: string;
   cemetery: Cemetery;
   address: Address;
 
-  constructor(props: NashvilleCemeteryData) {
+  constructor({properties: props}: NashvilleCemeteryFeature) {
     this.person = new Person(props);
-    this.footstone = props.footstone || null;
+    this.footstone = props.Footstone;
     this.key = '_' + Math.random().toString(36).substr(2, 9);
-    this.demarcation = props.demarcation || null;
-    this.archaeologicalInfo = props.archaeological_information || null;
-    this.condition = props.condition || null;
-    this.mapID = props.map_id;
-    this.siteContactInfo = props.site_contact_info || null;
-    this.tractParcelNumber = props.tract_parcel_number;
-    this.cemeteryParcelNumber = props.cemetery_parcel_number || null;
-    this.restoration = props.restoration || null;
-    this.notes = props.notes;
-    this.knownBurials = props.known_burials;
-    this.currentSurvey = parseDateString(props.current_survey);
-    this.surveyUpdates = parseDateString(props.survey_update_s);
-    this.originalSurvey = parseDateString(props.original_survey);
-    this.gravePhotos = [props.grave_photo_link, props.grave_photo_2, props.grave_photo_3]
-      .filter(pl => pl).map(pl => pl as PhotoLink);
-    this.accessible = parseAccessible(props.accessible);
+    this.demarcation = props.Demarcation;
+    this.archaeologicalInfo = props.Archaeological_Information;
+    this.condition = props.Condition;
+    this.mapID = props.Map_ID;
+    this.siteContactInfo = props.Site_Contact_Info;
+    this.tractParcelNumber = props.Tract_Parcel_Number;
+    this.cemeteryParcelNumber = props.Cemetery_Parcel_Number;
+    this.restoration = props.Restoration;
+    this.notes = props.Notes;
+    this.knownBurials = props.Known_Burials;
+    this.currentSurvey = parseDateString(props.Current_Survey);
+    this.surveyUpdates = parseDateString(props.Survey_Update_s_);
+    this.originalSurvey = parseDateString(props.Original_Survey);
+    this.gravePhotos = []
+    for (const text of [props.Grave_Photo_1, props.Grave_Photo_2, props.Grave_Photo_3]) {
+      if (text && text.trim().length > 0) {
+        this.gravePhotos.push(text.trim());
+      }
+    }
+    this.gravePhotoCaptionsByUrl = getPhotoCaptionsByUrl(this.gravePhotos);
+    this.accessible = parseAccessible(props.Accessible);
     this.cemetery = new Cemetery(props);
     this.siteHistory = this.cemetery.siteHistory;
     this.address = this.cemetery.address;
-    this.inscription = new Inscription(props.inscription);
+    this.inscription = new Inscription(props.Inscription);
   }
 
   hasPhotos() {
     return this.gravePhotos.length > 0 || this.cemetery.hasPhotos();
-  }
-
-  getPhotoCaptionsByUrl() {
-    const result: { [url: string]: string } = {};
-    for (const photoLink of this.gravePhotos) {
-      result[photoLink.url] = this.graveCaption();
-    }
-    return Object.assign(result, this.cemetery.getPhotoCaptionsByUrl());
   }
 
   graveCaption() {

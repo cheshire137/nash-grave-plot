@@ -9,7 +9,7 @@ const AddressDisplay = ({ value }: CellProps<Record<string, unknown>>) => {
   const cemetery = value as Cemetery;
   return <Box>
     <AddressLines address={cemetery.address} />
-    {cemetery.hasPhotos() && <PhotoList value={cemetery.sitePhotos} />}
+    {cemetery.hasPhotos() && <PhotoList value={cemetery.sitePhotoCaptionsByUrl} />}
   </Box>;
 };
 

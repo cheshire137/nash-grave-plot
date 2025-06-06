@@ -18,11 +18,11 @@ const Footer = () => <Box
       target="_blank"
       muted={true}
       rel="noopener noreferrer"
-      href="https://data.nashville.gov/Geneology/Davidson-County-Cemetery-Survey/ttqg-mpiz"
+      href="https://data.nashville.gov/maps/829ba5846e704ffd86b339f1ede647f7"
     >Davidson County Cemetery Survey</Link>
   </Box>
   <span>
-    Data last updated Dec 12, 2022
+    Data last updated Oct 17, 2023
   </span>
 </Box>
 

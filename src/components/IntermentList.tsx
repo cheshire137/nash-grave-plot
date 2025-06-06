@@ -99,7 +99,7 @@ const IntermentList = () => {
     const accessibleColumn = { Header: intermentFieldLabels.accessible, accessor: 'accessible', filter: 'includes' };
     const restorationColumn = { Header: intermentFieldLabels.restoration, accessor: 'restoration',
       Cell: LongTextBlock };
-    const gravePhotosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotos', Cell: PhotoList };
+    const gravePhotosColumn = { Header: intermentFieldLabels.gravePhotos, accessor: 'gravePhotoCaptionsByUrl', Cell: PhotoList };
     const markerColumnGroup = { Header: 'Marker/Plot', columns: getColumnsToDisplay(enabledFields, [inscriptionColumn,
       footstoneColumn, demarcationColumn, conditionColumn, accessibleColumn, restorationColumn, gravePhotosColumn]) };
 

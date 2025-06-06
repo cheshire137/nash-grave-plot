@@ -1,9 +1,13 @@
 import React from 'react';
-import type PhotoLink from '../types/PhotoLink';
 import { Link } from '@primer/react';
 
-const PhotoDisplay = ({ url, description }: PhotoLink) => <div>
-  {url && description ? <Link
+interface PhotoDisplayProps {
+  url: string;
+  description: string;
+}
+
+const PhotoDisplay = ({ url, description }: PhotoDisplayProps) => <div>
+  {description.trim().length > 0 && url !== description ? <Link
     href={url}
     target="_blank"
     rel="noopener noreferrer"

@@ -12,7 +12,7 @@ const PhotoGallery = () => {
     const intermentsWithPhotos = interments.filter(interment => interment.hasPhotos());
     let photoCaptionsByUrl: { [url: string]: string } = {};
     for (const interment of intermentsWithPhotos) {
-      photoCaptionsByUrl = Object.assign(photoCaptionsByUrl, interment.getPhotoCaptionsByUrl());
+      photoCaptionsByUrl = Object.assign(photoCaptionsByUrl, interment.gravePhotoCaptionsByUrl);
     }
     return Object.keys(photoCaptionsByUrl).map(src => {
       const caption = photoCaptionsByUrl[src];

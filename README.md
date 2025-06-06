@@ -7,7 +7,7 @@ comes from [Davidson County Cemetery Survey](https://data.nashville.gov/datasets
 
 ## How to develop
 
-I'm using node v19.1.0 and npm 8.19.3 on macOS.
+I'm using node v23.11.0 and npm 11.4.1 on macOS.
 
 ```bash
 npm install
