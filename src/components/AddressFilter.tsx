@@ -1,13 +1,14 @@
-import React, {useRef, useEffect, useState, useMemo, useCallback} from 'react'
+import {useRef, useEffect, useState, useMemo, useCallback} from 'react'
 import {useSearchParams} from 'react-router-dom'
 import debounce from 'lodash.debounce'
-import {TextInput, FormControl, Checkbox, Box} from '@primer/react'
+import {TextInput, FormControl, Checkbox} from '@primer/react'
 import FilterModal from './FilterModal'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
 import {useDetectClickOutside} from 'react-detect-click-outside'
+import styles from './AddressFilter.module.css'
 
 interface AddressFilterProps {
   column: {
@@ -71,7 +72,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   }, [debouncedSetFilterAndUpdateUrl])
 
   return (
-    <Box display="inline-block" ref={containerRef} sx={{textAlign: 'left'}}>
+    <div className={styles.container} ref={containerRef}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
       <FilterModal
@@ -112,7 +113,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
           <FormControl.Label>Has photo</FormControl.Label>
         </FormControl>
       </FilterModal>
-    </Box>
+    </div>
   )
 }
 
