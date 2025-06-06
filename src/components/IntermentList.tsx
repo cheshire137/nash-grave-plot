@@ -19,7 +19,6 @@ import FootstoneDisplay from './FootstoneDisplay'
 import NotesDisplay from './NotesDisplay'
 import ParcelNumberDisplay from './ParcelNumberDisplay'
 import {intermentFieldLabels} from '../constants'
-import type {IntermentField} from '../types'
 import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
@@ -27,9 +26,9 @@ import {getColumnsToDisplay, getInitialFilters, getPageTitleForResults} from '..
 import {WindowContext} from '../contexts/WindowContext'
 import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
 import {PageContext} from '../contexts/PageContext'
-import LocalStorage from '../models/LocalStorage'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 import {useSearchParams, useParams, useNavigate} from 'react-router-dom'
+import {PageNumber} from './PageNumber'
 
 const filterTypes = {
   fuzzyText: fuzzyTextFilter,
@@ -337,6 +336,7 @@ function IntermentList() {
               // Can't seem to use React Router's useHref in here, so preserve the base path manually:
               return `${window.location.pathname}#${getPagePath(page)}`
             }}
+            renderPage={PageNumber}
           />
         </div>
       )}
