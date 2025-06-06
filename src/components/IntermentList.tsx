@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo, useRef, useContext, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import TableStyles from './TableStyles'
 import TableHeaderCell from './TableHeaderCell'
 import TableCell from './TableCell'
@@ -230,6 +230,17 @@ function IntermentList() {
     (pageNumber: number) => (pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`),
     [pageSize]
   )
+  const onPageChange = useCallback(
+    (e: React.MouseEvent, page: number) => {
+      // Don't actually load the link on click, that does a full page load:
+      e.preventDefault()
+
+      const newPageIndex = page - 1
+      gotoPage(newPageIndex)
+      navigate(getPagePath(page))
+    },
+    [getPagePath]
+  )
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
 
@@ -327,14 +338,7 @@ function IntermentList() {
           <Pagination
             pageCount={totalPages}
             currentPage={pageIndex + 1}
-            onPageChange={(e, page) => {
-              // Don't actually load the link on click, that does a full page load:
-              e.preventDefault()
-
-              const newPageIndex = page - 1
-              gotoPage(newPageIndex)
-              navigate(getPagePath(page))
-            }}
+            onPageChange={onPageChange}
             hrefBuilder={(page) => {
               // Can't seem to use React Router's useHref in here, so preserve the base path manually:
               return `${window.location.pathname}#${getPagePath(page)}`
