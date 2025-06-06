@@ -1,4 +1,13 @@
-import type {IntermentField} from './types'
+import type {IntermentField, IntermentFieldGroup} from './types'
+
+export const allIntermentFieldGroups: IntermentFieldGroup[] = [
+  'Person',
+  'Location',
+  'Marker/Plot',
+  'Parcel Numbers',
+  'Survey',
+  'Other',
+]
 
 export const intermentFieldLabels: {
   [intermentField in IntermentField]: string

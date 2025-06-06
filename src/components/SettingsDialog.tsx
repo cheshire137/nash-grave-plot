@@ -3,29 +3,17 @@ import {Box, Dialog, Text} from '@primer/react'
 import {GearIcon} from '@primer/octicons-react'
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings'
 import LocalStorage from '../models/LocalStorage'
-import type {IntermentField, IntermentFieldGroup} from '../types'
+import {allIntermentFieldGroups} from '../constants'
+import type {IntermentField} from '../types'
+import {getEnabledColumns} from '../utils'
 import HeaderIconButton from './HeaderIconButton'
-
-const allIntermentFieldGroups: IntermentFieldGroup[] = [
-  'Person',
-  'Location',
-  'Marker/Plot',
-  'Parcel Numbers',
-  'Survey',
-  'Other',
-]
-
-const getEnabledColumns = (enabledFields: IntermentField[], intermentField: IntermentField, isEnabled: boolean) => {
-  if (isEnabled) return [...enabledFields, intermentField]
-  return enabledFields.filter((c) => c !== intermentField)
-}
 
 interface SettingsDialogProps {
   enabledFields: IntermentField[]
   setEnabledFields: (enabledFields: IntermentField[]) => void
 }
 
-function SettingsDialog({enabledFields, setEnabledFields}: SettingsDialogProps) {
+export function SettingsDialog({enabledFields, setEnabledFields}: SettingsDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
   return (
@@ -58,5 +46,3 @@ function SettingsDialog({enabledFields, setEnabledFields}: SettingsDialogProps) 
     </>
   )
 }
-
-export default SettingsDialog

@@ -1,4 +1,13 @@
-import type {AddressFilterOption} from './types'
+import type {AddressFilterOption, IntermentField} from './types'
+
+export function getEnabledColumns(
+  enabledFields: IntermentField[],
+  intermentField: IntermentField,
+  isEnabled: boolean
+) {
+  if (isEnabled) return [...enabledFields, intermentField]
+  return enabledFields.filter((c) => c !== intermentField)
+}
 
 export function getInitialFilters(searchParams: URLSearchParams) {
   const addressFilterValue: AddressFilterOption = {}
