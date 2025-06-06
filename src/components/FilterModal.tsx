@@ -1,4 +1,5 @@
-import {Dialog, Box} from '@primer/react'
+import {Dialog} from '@primer/react'
+import styles from './FilterModal.module.css'
 
 interface Props {
   isOpen: boolean
@@ -13,7 +14,7 @@ function FilterModal({isOpen, id, children, onClose, returnFocusRef}: Props) {
   return (
     <Dialog returnFocusRef={returnFocusRef} aria-labelledby={id} onClose={onClose}>
       <Dialog.Header id={id}>Filter graves</Dialog.Header>
-      <Box p="3">{children}</Box>
+      <div className={styles.innerContainer}>{children}</div>
     </Dialog>
   )
 }
