@@ -1,7 +1,7 @@
-import React, {useMemo, useRef, useState, useEffect} from 'react'
+import {useMemo, useRef, useState, useEffect} from 'react'
 import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
-import {FormControl, Select, TextInput, Box} from '@primer/react'
+import {FormControl, Select, TextInput} from '@primer/react'
 import FilterModal from './FilterModal'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
@@ -9,6 +9,7 @@ import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
 import debounce from 'lodash.debounce'
 import {useDetectClickOutside} from 'react-detect-click-outside'
+import styles from './CemeteryFilter.module.css'
 
 interface CemeteryFilterProps {
   column: {
@@ -62,7 +63,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
   }, [debouncedSetFilter])
 
   return (
-    <Box display="inline-block" ref={containerRef} sx={{textAlign: 'left'}}>
+    <div className={styles.container} ref={containerRef}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
       <FilterModal
@@ -109,7 +110,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
           />
         </FormControl>
       </FilterModal>
-    </Box>
+    </div>
   )
 }
 
