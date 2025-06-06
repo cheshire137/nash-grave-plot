@@ -1,4 +1,5 @@
 import {createContext, type PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {getViewportHeight, getViewportWidth} from '../utils'
 
 interface WindowSizeContextProps {
   clientHeight: number
@@ -12,26 +13,20 @@ const WindowSizeContext = createContext<WindowSizeContextProps>({
 
 // See https://medium.com/@christian_maehler/handle-window-resizing-with-a-react-context-4392b47285e4
 export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
-  const getVh = useCallback(() => {
-    return Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-  }, [])
-  const getVw = useCallback(() => {
-    return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-  }, [])
-  const [clientHeight, setVh] = useState<number>(getVh())
-  const [clientWidth, setVw] = useState<number>(getVw())
+  const [clientHeight, setClientHeight] = useState<number>(getViewportHeight())
+  const [clientWidth, setClientWidth] = useState<number>(getViewportWidth())
   const value = useMemo(() => ({clientHeight, clientWidth}), [clientHeight, clientWidth])
+  const handleResize = useCallback(() => {
+    setClientHeight(getViewportHeight())
+    setClientWidth(getViewportWidth())
+  }, [])
 
   useEffect(() => {
-    const handleResize = () => {
-      setVh(getVh())
-      setVw(getVw())
-    }
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [getVh, getVw])
+  }, [getViewportHeight, getViewportWidth])
 
   return <WindowSizeContext.Provider value={value}>{children}</WindowSizeContext.Provider>
 }
