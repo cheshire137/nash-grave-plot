@@ -1,4 +1,4 @@
-import {createContext, type PropsWithChildren, useCallback, useContext, useEffect, useState} from 'react'
+import {createContext, type PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState} from 'react'
 
 interface WindowSizeContextProps {
   clientHeight: number
@@ -20,6 +20,8 @@ export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
   }, [])
   const [clientHeight, setVh] = useState<number>(getVh())
   const [clientWidth, setVw] = useState<number>(getVw())
+  const value = useMemo(() => ({clientHeight, clientWidth}), [clientHeight, clientWidth])
+
   useEffect(() => {
     const handleResize = () => {
       setVh(getVh())
@@ -30,7 +32,8 @@ export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
       window.removeEventListener('resize', handleResize)
     }
   }, [getVh, getVw])
-  return <WindowSizeContext.Provider value={{clientHeight, clientWidth}}>{children}</WindowSizeContext.Provider>
+
+  return <WindowSizeContext.Provider value={value}>{children}</WindowSizeContext.Provider>
 }
 
 export function useWindowSize() {
