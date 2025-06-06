@@ -1,5 +1,5 @@
 import Address from './Address'
-import type {NashvilleCemeteryFeatureProperties} from '../types/NashvilleCemeteryData'
+import type {NashvilleCemeteryFeatureProperties} from '../types'
 import parseGraveyardType from '../utils/parseGraveyardType'
 import {getPhotoCaptionsByUrl} from '../utils/get-photo-captions-by-url'
 

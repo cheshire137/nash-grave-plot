@@ -6,7 +6,7 @@ import FilterModal from './FilterModal'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
-import type CemeteryFilterOption from '../types/CemeteryFilterOption'
+import type {CemeteryFilterOption} from '../types'
 import debounce from 'lodash.debounce'
 import {useDetectClickOutside} from 'react-detect-click-outside'
 

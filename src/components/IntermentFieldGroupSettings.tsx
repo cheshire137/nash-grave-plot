@@ -1,7 +1,6 @@
 import React from 'react'
 import {CheckboxGroup, FormControl, Checkbox} from '@primer/react'
-import type IntermentField from '../types/IntermentField'
-import type IntermentFieldGroup from '../types/IntermentFieldGroup'
+import type {IntermentField, IntermentFieldGroup} from '../types'
 import {intermentFieldLabels} from '../utils/intermentFieldLabels'
 
 const intermentFieldsByGroup: {

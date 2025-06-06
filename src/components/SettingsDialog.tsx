@@ -3,8 +3,7 @@ import {Box, Dialog, Text} from '@primer/react'
 import {GearIcon} from '@primer/octicons-react'
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings'
 import LocalStorage from '../models/LocalStorage'
-import type IntermentField from '../types/IntermentField'
-import type IntermentFieldGroup from '../types/IntermentFieldGroup'
+import type {IntermentField, IntermentFieldGroup} from '../types'
 import HeaderIconButton from './HeaderIconButton'
 
 const allIntermentFieldGroups: IntermentFieldGroup[] = [

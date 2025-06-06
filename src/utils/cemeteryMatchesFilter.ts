@@ -1,7 +1,7 @@
 import {IdType, Row} from 'react-table'
 import Interment from '../models/Interment'
 import Cemetery from '../models/Cemetery'
-import type CemeteryFilterOption from '../types/CemeteryFilterOption'
+import type {CemeteryFilterOption} from '../types'
 import {matchSorter} from 'match-sorter'
 
 export function cemeteryMatchesFilter(

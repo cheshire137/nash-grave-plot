@@ -1,4 +1,46 @@
-import type Location from './Location'
+export interface AddressFilterOption {
+  address?: string
+  hasPhotos?: boolean
+}
+
+export interface CemeteryFilterOption {
+  graveyardType?: string
+  name?: string
+}
+
+// https://dev.socrata.com/docs/datatypes/location.html#2.1
+export interface Location {
+  latitude: string | null
+  longitude: string | null
+  human_address: {
+    address: string
+    city: string
+    state: string
+    zip: string
+  } | null
+}
+
+export type IntermentFieldGroup = 'Person' | 'Location' | 'Marker/Plot' | 'Parcel Numbers' | 'Survey' | 'Other'
+
+export type IntermentField =
+  | 'person'
+  | 'deceasedInfo'
+  | 'cemetery'
+  | 'address'
+  | 'siteHistory'
+  | 'inscription'
+  | 'footstone'
+  | 'demarcation'
+  | 'condition'
+  | 'accessible'
+  | 'restoration'
+  | 'gravePhotos'
+  | 'notes'
+  | 'tractParcelNumber'
+  | 'cemeteryParcelNumber'
+  | 'originalSurvey'
+  | 'surveyUpdates'
+  | 'currentSurvey'
 
 // https://data.nashville.gov/datasets/829ba5846e704ffd86b339f1ede647f7_0/explore GeoJSON format
 export interface NashvilleCemeteryData {

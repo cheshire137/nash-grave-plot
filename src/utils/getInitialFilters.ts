@@ -1,4 +1,4 @@
-import type AddressFilterOption from '../types/AddressFilterOption'
+import type {AddressFilterOption} from '../types'
 
 const getInitialFilters = (searchParams: URLSearchParams) => {
   const addressFilterValue: AddressFilterOption = {}

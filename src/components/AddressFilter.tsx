@@ -5,7 +5,7 @@ import {TextInput, FormControl, Checkbox, Box} from '@primer/react'
 import FilterModal from './FilterModal'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
-import type AddressFilterOption from '../types/AddressFilterOption'
+import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
 import {useDetectClickOutside} from 'react-detect-click-outside'
 

@@ -1,5 +1,5 @@
 import React, {type PropsWithChildren, useMemo} from 'react'
-import {NashvilleCemeteryData} from '../types/NashvilleCemeteryData'
+import {NashvilleCemeteryData} from '../types'
 import cemeteryData from '../nashville-cemeteries.json'
 import Interment from '../models/Interment'
 import IntermentSort from '../models/IntermentSort'
