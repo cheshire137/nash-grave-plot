@@ -8,6 +8,7 @@ import {createHashRouter, RouterProvider, createRoutesFromElements, Route} from 
 import ErrorPage from './components/ErrorPage'
 import AppLayout from './components/AppLayout'
 import AboutPage from './components/AboutPage'
+import '@primer/primitives/dist/css/primitives.css'
 import '@primer/primitives/dist/css/functional/themes/light.css'
 
 export function App() {
