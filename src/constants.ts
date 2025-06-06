@@ -1,4 +1,4 @@
-import type {IntermentField} from '../types'
+import type {IntermentField} from './types'
 
 export const intermentFieldLabels: {
   [intermentField in IntermentField]: string

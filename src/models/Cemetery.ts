@@ -1,7 +1,6 @@
 import Address from './Address'
 import type {NashvilleCemeteryFeatureProperties} from '../types'
-import parseGraveyardType from '../utils/parseGraveyardType'
-import {getPhotoCaptionsByUrl} from '../utils/get-photo-captions-by-url'
+import {getPhotoCaptionsByUrl, parseGraveyardType} from '../utils'
 
 class Cemetery {
   name: string

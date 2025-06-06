@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text} from '@primer/react'
-import titleCaseify from '../utils/titleCaseify'
+import {titleCaseify} from '../utils'
 
 interface TitleCaseProps {
   value?: string | null

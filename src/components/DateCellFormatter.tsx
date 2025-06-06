@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, Text} from '@primer/react'
-import prettyDateStr from '../utils/prettyDateStr'
+import {prettyDateStr} from '../utils'
 
 interface DateCellFormatterProps {
   value: Date | string | null

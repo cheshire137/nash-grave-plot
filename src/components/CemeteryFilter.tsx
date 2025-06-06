@@ -1,5 +1,5 @@
 import React, {useMemo, useRef, useState, useEffect} from 'react'
-import titleCaseify from '../utils/titleCaseify'
+import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
 import {FormControl, Select, TextInput, Box} from '@primer/react'
 import FilterModal from './FilterModal'

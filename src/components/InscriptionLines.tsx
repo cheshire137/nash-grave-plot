@@ -1,5 +1,5 @@
 import React from 'react'
-import titleCaseify from '../utils/titleCaseify'
+import {titleCaseify} from '../utils'
 import ConstrainedTextBlock from './ConstrainedTextBlock'
 
 interface InscriptionLinesProps {

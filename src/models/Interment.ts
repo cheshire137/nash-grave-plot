@@ -1,11 +1,9 @@
 import Inscription from './Inscription'
 import Address from './Address'
-import parseDateString from '../utils/parseDateString'
-import parseAccessible from '../utils/parseAccessible'
+import {getPhotoCaptionsByUrl, parseAccessible, parseDateString} from '../utils'
 import type {NashvilleCemeteryFeature} from '../types'
 import Cemetery from './Cemetery'
 import Person from './Person'
-import {getPhotoCaptionsByUrl} from '../utils/get-photo-captions-by-url'
 
 class Interment {
   key: string

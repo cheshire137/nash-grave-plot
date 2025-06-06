@@ -1,5 +1,5 @@
 import type {NashvilleCemeteryFeatureProperties} from '../types'
-import parseDateString from '../utils/parseDateString'
+import {parseDateString} from '../utils'
 
 class Person {
   name: string

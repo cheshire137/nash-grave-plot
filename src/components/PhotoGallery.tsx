@@ -3,7 +3,7 @@ import {PageContext} from '../contexts/PageContext'
 import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
 import Masonry from 'react-responsive-masonry'
 import {Pagination, PageLayout} from '@primer/react'
-import getPageTitleForResults from '../utils/getPageTitleForResults'
+import {getPageTitleForResults} from '../utils'
 
 function PhotoGallery() {
   const {interments} = useContext(CemeteryDataContext)
