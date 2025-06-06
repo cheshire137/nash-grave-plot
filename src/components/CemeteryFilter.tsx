@@ -8,7 +8,6 @@ import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
 import debounce from 'lodash.debounce'
-import {useDetectClickOutside} from 'react-detect-click-outside'
 import styles from './CemeteryFilter.module.css'
 
 interface CemeteryFilterProps {
@@ -23,9 +22,6 @@ interface CemeteryFilterProps {
 function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}: CemeteryFilterProps) {
   const [isOpen, setIsOpen] = useState(false)
   const filterButtonRef = useRef<HTMLButtonElement>(null)
-  const containerRef = useDetectClickOutside({
-    onTriggered: () => setIsOpen(false),
-  })
   const graveyardTypeSelectRef = useRef<HTMLSelectElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const [name, setName] = useState<string | undefined>()
@@ -63,7 +59,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
   }, [debouncedSetFilter])
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
       <FilterDialog

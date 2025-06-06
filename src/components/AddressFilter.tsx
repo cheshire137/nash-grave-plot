@@ -7,7 +7,6 @@ import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
-import {useDetectClickOutside} from 'react-detect-click-outside'
 import styles from './AddressFilter.module.css'
 
 interface AddressFilterProps {
@@ -21,9 +20,6 @@ interface AddressFilterProps {
 
 function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   const filterButtonRef = useRef<HTMLButtonElement>(null)
-  const containerRef = useDetectClickOutside({
-    onTriggered: () => setIsOpen(false),
-  })
   const [isOpen, setIsOpen] = useState(false)
   const addressInputRef = useRef<HTMLInputElement>(null)
   const hasPhotosInputRef = useRef<HTMLInputElement>(null)
@@ -72,7 +68,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   }, [debouncedSetFilterAndUpdateUrl])
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
       <FilterDialog
