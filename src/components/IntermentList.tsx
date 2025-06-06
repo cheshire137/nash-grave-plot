@@ -20,10 +20,10 @@ import NotesDisplay from './NotesDisplay'
 import ParcelNumberDisplay from './ParcelNumberDisplay'
 import {intermentFieldLabels} from '../constants'
 import type {IntermentField} from '../types'
-import {useTable, useFilters, usePagination, Column} from 'react-table'
+import {useTable, useFilters, usePagination} from 'react-table'
 import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
-import {getInitialFilters, getPageTitleForResults} from '../utils'
+import {getColumnsToDisplay, getInitialFilters, getPageTitleForResults} from '../utils'
 import {WindowContext} from '../contexts/WindowContext'
 import {CemeteryDataContext} from '../contexts/CemeteryDataContext'
 import {PageContext} from '../contexts/PageContext'
@@ -35,16 +35,6 @@ const filterTypes = {
   minArrayLength: minArrayLengthFilter,
   cemeteryMatches: cemeteryMatchesFilter,
   addressMatches: addressMatchesFilter,
-}
-
-const getColumnsToDisplay = (enabledFields: IntermentField[], relevantColumns: Column[]) => {
-  const enabledPropStrs: string[] = enabledFields
-  return relevantColumns.filter((column) => {
-    if (typeof column.accessor === 'string') {
-      return enabledPropStrs.includes(column.accessor)
-    }
-    return false
-  })
 }
 
 const allColumns: IntermentField[] = [

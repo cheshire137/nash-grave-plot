@@ -1,4 +1,15 @@
+import type {Column} from 'react-table'
 import type {AddressFilterOption, IntermentField} from './types'
+
+export function getColumnsToDisplay(enabledFields: IntermentField[], relevantColumns: Column[]) {
+  const enabledPropStrs: string[] = enabledFields
+  return relevantColumns.filter((column) => {
+    if (typeof column.accessor === 'string') {
+      return enabledPropStrs.includes(column.accessor)
+    }
+    return false
+  })
+}
 
 export function getEnabledColumns(
   enabledFields: IntermentField[],
