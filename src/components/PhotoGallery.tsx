@@ -7,7 +7,7 @@ import {getPageTitleForResults} from '../utils'
 
 function PhotoGallery() {
   const {interments} = useCemeteryData()
-  const {setPageTitle} = usePage()
+  const {setHeaderItems, setPageTitle} = usePage()
   const imageData = useMemo(() => {
     const intermentsWithPhotos = interments.filter((interment) => interment.hasPhotos())
     let photoCaptionsByUrl: {[url: string]: string} = {}
@@ -27,6 +27,7 @@ function PhotoGallery() {
   const totalPages = Math.ceil(imageData.length / perPage)
 
   useEffect(() => setPageTitle(getPageTitleForResults(totalImages, 'photo', 'photos')), [setPageTitle, totalImages])
+  useEffect(() => setHeaderItems([]), [setHeaderItems])
 
   return (
     <PageLayout.Content padding="none" sx={{fontSize: 2}}>

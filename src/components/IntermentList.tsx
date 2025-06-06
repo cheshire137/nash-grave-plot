@@ -242,14 +242,8 @@ function IntermentList() {
   )
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
-
-  useEffect(() => {
-    setHeaderItems([<EnabledColumnsDialog />])
-  }, [enabledFields, setHeaderItems])
-
-  useEffect(() => {
-    setPageSize(dynamicPageSize)
-  }, [dynamicPageSize])
+  useEffect(() => setHeaderItems([<EnabledColumnsDialog />]), [enabledFields, setHeaderItems])
+  useEffect(() => setPageSize(dynamicPageSize), [dynamicPageSize])
 
   return (
     <PageLayout.Content padding="none" sx={{fontSize: 2}}>

@@ -4,9 +4,10 @@ import {Link, PageLayout} from '@primer/react'
 import styles from './AboutPage.module.css'
 
 function AboutPage() {
-  const {setPageTitle} = usePage()
+  const {setHeaderItems, setPageTitle} = usePage()
 
   useEffect(() => setPageTitle('About this site'), [setPageTitle])
+  useEffect(() => setHeaderItems([]), [setHeaderItems])
 
   return (
     <PageLayout.Content padding="normal" sx={{fontSize: 2}}>
