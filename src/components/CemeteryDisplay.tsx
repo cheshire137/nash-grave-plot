@@ -1,19 +1,19 @@
-import React from 'react'
-import {Box, Text} from '@primer/react'
+import {Text} from '@primer/react'
 import TitleCase from './TitleCase'
 import type {CellProps} from 'react-table'
 import Cemetery from '../models/Cemetery'
+import styles from './CemeteryDisplay.module.css'
 
 function CemeteryDisplay({value}: CellProps<Record<string, unknown>>) {
   const cemetery = value as Cemetery
   return (
-    <Box minWidth="200px">
+    <div className={styles.container}>
       <TitleCase value={cemetery.name} />
       <br />
       <Text color="fg.muted" fontSize="1">
         Type: {cemetery.graveyardType}
       </Text>
-    </Box>
+    </div>
   )
 }
 
