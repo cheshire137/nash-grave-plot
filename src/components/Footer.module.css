@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+  font-size: var(--base-size-12);
+}
+
+.dataSource {
+  display: inline-block;
+  margin-left: var(--base-size-24);
+  margin-right: var(--base-size-24);
+}

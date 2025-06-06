@@ -1,9 +1,9 @@
-import React from 'react'
-import {Box, Link} from '@primer/react'
+import {Link} from '@primer/react'
+import styles from './Footer.module.css'
 
 function Footer() {
   return (
-    <Box display="flex" alignItems="center" sx={{fontSize: 1}}>
+    <div className={styles.container}>
       <Link
         target="_blank"
         sx={{display: 'inline-block'}}
@@ -13,7 +13,7 @@ function Footer() {
       >
         View source
       </Link>
-      <Box display="inline-block" mx="4">
+      <div className={styles.dataSource}>
         Data from{' '}
         <Link
           target="_blank"
@@ -23,9 +23,9 @@ function Footer() {
         >
           Davidson County Cemetery Survey
         </Link>
-      </Box>
+      </div>
       <span>Data last updated Oct 17, 2023</span>
-    </Box>
+    </div>
   )
 }
 
