@@ -1,18 +1,6 @@
-import React from 'react'
 import {CheckboxGroup, FormControl, Checkbox} from '@primer/react'
 import type {IntermentField, IntermentFieldGroup} from '../types'
-import {intermentFieldLabels} from '../constants'
-
-const intermentFieldsByGroup: {
-  [group in IntermentFieldGroup]: IntermentField[]
-} = {
-  Person: ['person', 'deceasedInfo'],
-  Location: ['cemetery', 'address', 'siteHistory'],
-  'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration', 'gravePhotos'],
-  'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],
-  Survey: ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
-  Other: ['notes'],
-}
+import {intermentFieldsByGroup, intermentFieldLabels} from '../constants'
 
 interface IntermentFieldGroupSettingsProps {
   group: IntermentFieldGroup

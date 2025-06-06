@@ -9,6 +9,17 @@ export const allIntermentFieldGroups: IntermentFieldGroup[] = [
   'Other',
 ]
 
+export const intermentFieldsByGroup: {
+  [group in IntermentFieldGroup]: IntermentField[]
+} = {
+  Person: ['person', 'deceasedInfo'],
+  Location: ['cemetery', 'address', 'siteHistory'],
+  'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration', 'gravePhotos'],
+  'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],
+  Survey: ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
+  Other: ['notes'],
+}
+
 export const intermentFieldLabels: {
   [intermentField in IntermentField]: string
 } = {
