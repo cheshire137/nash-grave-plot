@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import {PageContext} from '../contexts/PageContext'
-import {Link, PageLayout, Box} from '@primer/react'
+import {Link, PageLayout} from '@primer/react'
+import styles from './AboutPage.module.css'
 
 function AboutPage() {
   const {setPageTitle} = useContext(PageContext)
@@ -9,7 +10,7 @@ function AboutPage() {
 
   return (
     <PageLayout.Content padding="normal" sx={{fontSize: 2}}>
-      <Box sx={{maxWidth: '36em'}}>
+      <div className={styles.container}>
         <p>
           Hi! I live in Nashville, Tennessee and have an interest in some of the local cemeteries. I wanted to build
           this app to explore the data that the{' '}
@@ -35,7 +36,7 @@ function AboutPage() {
             @cheshire137
           </Link>
         </p>
-      </Box>
+      </div>
     </PageLayout.Content>
   )
 }
