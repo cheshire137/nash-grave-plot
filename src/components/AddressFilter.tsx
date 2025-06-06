@@ -9,7 +9,7 @@ import type AddressFilterOption from '../types/AddressFilterOption'
 import type {IdType, Row} from 'react-table'
 import {useDetectClickOutside} from 'react-detect-click-outside'
 
-interface Props {
+interface AddressFilterProps {
   column: {
     filterValue: AddressFilterOption
     setFilter: (value?: AddressFilterOption) => void
@@ -18,7 +18,7 @@ interface Props {
   }
 }
 
-function AddressFilter({column: {filterValue, setFilter}}: Props) {
+function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   const filterButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useDetectClickOutside({
     onTriggered: () => setIsOpen(false),

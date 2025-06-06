@@ -6,16 +6,18 @@ interface PhotoDisplayProps {
   description: string
 }
 
-const PhotoDisplay = ({url, description}: PhotoDisplayProps) => (
-  <div>
-    {description.trim().length > 0 && url !== description ? (
-      <Link href={url} target="_blank" rel="noopener noreferrer">
-        {description}
-      </Link>
-    ) : (
-      <span>{url}</span>
-    )}
-  </div>
-)
+function PhotoDisplay({url, description}: PhotoDisplayProps) {
+  return (
+    <div>
+      {description.trim().length > 0 && url !== description ? (
+        <Link href={url} target="_blank" rel="noopener noreferrer">
+          {description}
+        </Link>
+      ) : (
+        <span>{url}</span>
+      )}
+    </div>
+  )
+}
 
 export default PhotoDisplay

@@ -5,7 +5,7 @@ import Masonry from 'react-responsive-masonry'
 import {Pagination, PageLayout} from '@primer/react'
 import getPageTitleForResults from '../utils/getPageTitleForResults'
 
-const PhotoGallery = () => {
+function PhotoGallery() {
   const {interments} = useContext(CemeteryDataContext)
   const {setPageTitle} = useContext(PageContext)
   const imageData = useMemo(() => {

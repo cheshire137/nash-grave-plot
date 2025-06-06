@@ -5,7 +5,7 @@ import Cemetery from '../models/Cemetery'
 import PhotoList from './PhotoList'
 import {Box} from '@primer/react'
 
-const AddressDisplay = ({value}: CellProps<Record<string, unknown>>) => {
+function AddressDisplay({value}: CellProps<Record<string, unknown>>) {
   const cemetery = value as Cemetery
   return (
     <Box>

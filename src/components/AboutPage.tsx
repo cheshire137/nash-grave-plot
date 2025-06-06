@@ -2,7 +2,7 @@ import React, {useEffect, useContext} from 'react'
 import {PageContext} from '../contexts/PageContext'
 import {Link, PageLayout, Box} from '@primer/react'
 
-const AboutPage = () => {
+function AboutPage() {
   const {setPageTitle} = useContext(PageContext)
 
   useEffect(() => setPageTitle('About this site'), [setPageTitle])

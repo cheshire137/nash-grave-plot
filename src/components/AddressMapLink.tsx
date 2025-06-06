@@ -2,12 +2,12 @@ import React from 'react'
 import {Link} from '@primer/react'
 import Address from '../models/Address'
 
-interface Props {
+interface AddressMapLinkProps {
   address: Address
   children: React.ReactNode
 }
 
-const AddressMapLink = ({address, children}: Props) => {
+function AddressMapLink({address, children}: AddressMapLinkProps) {
   return (
     <Link href={address.getMapsUrl()} rel="noopener noreferrer" target="_blank">
       {children}

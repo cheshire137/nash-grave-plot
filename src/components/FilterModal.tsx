@@ -8,7 +8,7 @@ interface Props {
   returnFocusRef: React.RefObject<HTMLElement>
 }
 
-const FilterModal = ({isOpen, id, children, onClose, returnFocusRef}: Props) => {
+function FilterModal({isOpen, id, children, onClose, returnFocusRef}: Props) {
   if (!isOpen) return null
   return (
     <Dialog returnFocusRef={returnFocusRef} aria-labelledby={id} onClose={onClose}>

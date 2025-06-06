@@ -8,7 +8,7 @@ const getErrorMessage = (err: any) => {
   return err?.message || 'Unknown error'
 }
 
-const ErrorPage = () => {
+function ErrorPage() {
   const error = useRouteError()
   const errorMessage = getErrorMessage(error)
   console.error(errorMessage)

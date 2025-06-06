@@ -2,16 +2,12 @@ import React, {ButtonHTMLAttributes, RefObject} from 'react'
 import {IconButton} from '@primer/react'
 import {FilterIcon} from '@primer/octicons-react'
 
-interface Props {
+interface FilterButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-labelledby' | 'ref'> {
   isOpen: boolean
   ref: RefObject<HTMLButtonElement>
 }
 
-export function FilterButton({
-  isOpen,
-  ref,
-  ...rest
-}: Props & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-labelledby' | 'ref'>) {
+export function FilterButton({isOpen, ref, ...rest}: FilterButtonProps) {
   return (
     <IconButton
       size="small"

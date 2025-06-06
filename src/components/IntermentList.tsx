@@ -72,7 +72,7 @@ const allColumns: IntermentField[] = [
   'currentSurvey',
 ]
 
-const IntermentList = () => {
+function IntermentList() {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null)
   const paginationRef = useRef<HTMLDivElement>(null)
   const {clientHeight: viewportHeight} = useContext(WindowContext)

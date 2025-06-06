@@ -4,7 +4,7 @@ import Footer from './Footer'
 import {PageContext} from '../contexts/PageContext'
 import {useHref, Outlet, useLocation} from 'react-router-dom'
 
-const AppLayout = () => {
+function AppLayout() {
   const {pageTitle, headerItems} = useContext(PageContext)
   const {pathname} = useLocation()
 

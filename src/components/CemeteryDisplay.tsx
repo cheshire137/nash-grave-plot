@@ -4,7 +4,7 @@ import TitleCase from './TitleCase'
 import type {CellProps} from 'react-table'
 import Cemetery from '../models/Cemetery'
 
-const CemeteryDisplay = ({value}: CellProps<Record<string, unknown>>) => {
+function CemeteryDisplay({value}: CellProps<Record<string, unknown>>) {
   const cemetery = value as Cemetery
   return (
     <Box minWidth="200px">

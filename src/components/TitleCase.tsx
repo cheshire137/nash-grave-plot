@@ -2,11 +2,11 @@ import React from 'react'
 import {Text} from '@primer/react'
 import titleCaseify from '../utils/titleCaseify'
 
-interface Props {
+interface TitleCaseProps {
   value?: string | null
 }
 
-const TitleCase = ({value}: Props) => {
+function TitleCase({value}: TitleCaseProps) {
   if (typeof value === 'string') return <Text>{titleCaseify(value)}</Text>
   return null
 }

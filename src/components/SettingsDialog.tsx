@@ -21,12 +21,12 @@ const getEnabledColumns = (enabledFields: IntermentField[], intermentField: Inte
   return enabledFields.filter((c) => c !== intermentField)
 }
 
-interface Props {
+interface SettingsDialogProps {
   enabledFields: IntermentField[]
   setEnabledFields: (enabledFields: IntermentField[]) => void
 }
 
-const SettingsDialog = ({enabledFields, setEnabledFields}: Props) => {
+function SettingsDialog({enabledFields, setEnabledFields}: SettingsDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
   return (

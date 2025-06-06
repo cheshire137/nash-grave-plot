@@ -10,7 +10,7 @@ import type CemeteryFilterOption from '../types/CemeteryFilterOption'
 import debounce from 'lodash.debounce'
 import {useDetectClickOutside} from 'react-detect-click-outside'
 
-interface Props {
+interface CemeteryFilterProps {
   column: {
     filterValue: CemeteryFilterOption
     setFilter: (value?: CemeteryFilterOption) => void
@@ -19,7 +19,7 @@ interface Props {
   }
 }
 
-function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}: Props) {
+function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}: CemeteryFilterProps) {
   const [isOpen, setIsOpen] = useState(false)
   const filterButtonRef = useRef<HTMLButtonElement>(null)
   const containerRef = useDetectClickOutside({
