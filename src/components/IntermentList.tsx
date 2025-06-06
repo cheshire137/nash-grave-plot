@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useContext, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useContext, useState} from 'react'
 import TableStyles from './TableStyles'
 import TableHeaderCell from './TableHeaderCell'
 import TableCell from './TableCell'
@@ -226,7 +226,10 @@ function IntermentList() {
     usePagination
   )
   const totalPages = pageOptions.length
-  const getPagePath = (pageNumber: number) => (pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`)
+  const getPagePath = useCallback(
+    (pageNumber: number) => (pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`),
+    [pageSize]
+  )
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
 
