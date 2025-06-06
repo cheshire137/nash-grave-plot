@@ -2,7 +2,7 @@ import {useRef, useEffect, useState, useMemo, useCallback} from 'react'
 import {useSearchParams} from 'react-router-dom'
 import debounce from 'lodash.debounce'
 import {TextInput, FormControl, Checkbox} from '@primer/react'
-import FilterModal from './FilterModal'
+import {FilterDialog} from './FilterDialog'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import type {AddressFilterOption} from '../types'
@@ -75,10 +75,9 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
     <div className={styles.container} ref={containerRef}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
-      <FilterModal
+      <FilterDialog
         returnFocusRef={filterButtonRef}
         isOpen={isOpen}
-        id="address-filter-modal"
         onClose={() => {
           setFilterAndUpdateUrl({address, hasPhotos})
           setIsOpen(false)
@@ -112,7 +111,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
           />
           <FormControl.Label>Has photo</FormControl.Label>
         </FormControl>
-      </FilterModal>
+      </FilterDialog>
     </div>
   )
 }

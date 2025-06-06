@@ -2,7 +2,7 @@ import {useMemo, useRef, useState, useEffect} from 'react'
 import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
 import {FormControl, Select, TextInput} from '@primer/react'
-import FilterModal from './FilterModal'
+import {FilterDialog} from './FilterDialog'
 import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
@@ -66,9 +66,8 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
     <div className={styles.container} ref={containerRef}>
       <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
       {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
-      <FilterModal
+      <FilterDialog
         isOpen={isOpen}
-        id="cemetery-filter-modal"
         returnFocusRef={filterButtonRef}
         onClose={() => {
           setFilter({name, graveyardType})
@@ -109,7 +108,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
             autoFocus={isOpen}
           />
         </FormControl>
-      </FilterModal>
+      </FilterDialog>
     </div>
   )
 }
