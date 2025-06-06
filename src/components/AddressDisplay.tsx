@@ -1,7 +1,7 @@
 import type {CellProps} from 'react-table'
 import AddressLines from './AddressLines'
 import Cemetery from '../models/Cemetery'
-import PhotoList from './PhotoList'
+import {PhotoList} from './PhotoList'
 
 function AddressDisplay({value}: CellProps<Record<string, unknown>>) {
   const cemetery = value as Cemetery

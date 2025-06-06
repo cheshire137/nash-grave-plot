@@ -1,19 +1,16 @@
-import React from 'react'
-import {Box} from '@primer/react'
 import PhotoDisplay from './PhotoDisplay'
+import styles from './PhotoList.module.css'
 
 interface PhotoListProps {
   value: {[url: string]: string}
 }
 
-function PhotoList({value}: PhotoListProps) {
+export function PhotoList({value}: PhotoListProps) {
   return (
-    <Box minWidth="120px">
+    <div className={styles.container}>
       {Object.keys(value).map((url) => (
         <PhotoDisplay url={url} description={value[url]} key={url} />
       ))}
-    </Box>
+    </div>
   )
 }
-
-export default PhotoList
