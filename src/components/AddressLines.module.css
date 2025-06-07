@@ -2,3 +2,11 @@
   min-width: 200px;
   text-align: left;
 }
+
+.filterButton {
+  visibility: hidden;
+}
+
+.container:hover .filterButton {
+  visibility: visible;
+}

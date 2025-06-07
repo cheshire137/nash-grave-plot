@@ -22,7 +22,12 @@ function AddressLines({address, setFilter}: AddressLinesProps) {
       <AddressMapLink address={address}>
         <TitleCase value={address.streetAddress} />
       </AddressMapLink>
-      <FilterButton title="Set filter" onClick={onApplyFilter} />
+      <FilterButton
+        tooltipDirection="e"
+        className={styles.filterButton}
+        title="Set address filter"
+        onClick={onApplyFilter}
+      />
       {typeof address.additionalLocationInfo === 'string' && (
         <div>
           <TitleCase value={address.additionalLocationInfo} />
