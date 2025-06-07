@@ -1,4 +1,4 @@
-import {useMemo, useRef, useState, useEffect} from 'react'
+import {useCallback, useMemo, useRef, useState, useEffect} from 'react'
 import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
 import {FormControl, Select, TextInput} from '@primer/react'
@@ -42,6 +42,10 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
   const graveyardTypeFilterSet =
     filterValue && typeof filterValue.graveyardType === 'string' && filterValue?.graveyardType !== ''
   const nameFilterSet = filterValue && typeof filterValue.name === 'string' && filterValue?.name !== ''
+  const onFilterDialogClose = useCallback(() => {
+    setFilter({name, graveyardType})
+    setIsOpen(false)
+  }, [name, graveyardType, setFilter])
 
   useEffect(() => setName(filterValue?.name), [filterValue?.name])
   useEffect(() => setGraveyardType(filterValue?.graveyardType), [filterValue?.graveyardType])
@@ -62,10 +66,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
       <FilterDialog
         isOpen={isOpen}
         onClear={() => setFilter()}
-        onClose={() => {
-          setFilter({name, graveyardType})
-          setIsOpen(false)
-        }}
+        onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={graveyardTypeFilterSet || nameFilterSet}
       >
