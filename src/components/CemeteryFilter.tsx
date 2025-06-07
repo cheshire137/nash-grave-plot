@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useRef, useState, useEffect} from 'react'
+import {type FormEvent, useCallback, useMemo, useRef, useState, useEffect} from 'react'
 import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
 import {FormControl, Select, TextInput} from '@primer/react'
@@ -6,7 +6,6 @@ import {FilterDialog} from './FilterDialog'
 import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
-import debounce from 'lodash.debounce'
 import styles from './CemeteryFilter.module.css'
 
 interface CemeteryFilterProps {
@@ -38,7 +37,6 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
     ],
     [id, preFilteredRows]
   )
-  const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter])
   const graveyardTypeFilterSet =
     filterValue && typeof filterValue.graveyardType === 'string' && filterValue?.graveyardType !== ''
   const nameFilterSet = filterValue && typeof filterValue.name === 'string' && filterValue?.name !== ''
@@ -46,6 +44,17 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
     setFilter({name, graveyardType})
     setIsOpen(false)
   }, [name, graveyardType, setFilter])
+  const onSave = useCallback(() => {
+    setFilter({name, graveyardType})
+    setIsOpen(false)
+  }, [name, graveyardType, setFilter])
+  const onFormSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      onSave()
+    },
+    [onSave]
+  )
 
   useEffect(() => setName(filterValue?.name), [filterValue?.name])
   useEffect(() => setGraveyardType(filterValue?.graveyardType), [filterValue?.graveyardType])
@@ -53,13 +62,6 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
   useEffect(() => {
     if (isOpen && nameInputRef.current) nameInputRef.current.focus()
   }, [isOpen, nameInputRef])
-
-  // Stop the invocation of the debounced function after unmounting:
-  useEffect(() => {
-    return () => {
-      debouncedSetFilter.cancel()
-    }
-  }, [debouncedSetFilter])
 
   return (
     <div className={styles.container}>
@@ -69,40 +71,38 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
         onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={graveyardTypeFilterSet || nameFilterSet}
+        footerButtons={[{type: 'submit', form: 'cemetery-filter-form', content: 'Save', buttonType: 'primary'}]}
       >
-        <FormControl className={styles.graveyardTypeControl}>
-          <FormControl.Label>Graveyard type:</FormControl.Label>
-          <Select
-            ref={graveyardTypeSelectRef}
-            onChange={(e) => setFilter({name, graveyardType: e.target.value})}
-            value={graveyardType || ''}
-          >
-            <Select.Option value="">All</Select.Option>
-            {graveyardTypes.map((graveyardType, i) => (
-              <Select.Option key={`${i}-${graveyardType}`} value={graveyardType}>
-                {titleCaseify(graveyardType)}
-              </Select.Option>
-            ))}
-          </Select>
-          {graveyardTypeFilterSet && <ClearFilterButton onClick={() => setFilter({name})} />}
-        </FormControl>
-        <FormControl className={styles.cemeteryNameControl}>
-          <FormControl.Label>Cemetery name:</FormControl.Label>
-          <TextInput
-            value={name || ''}
-            onChange={(e) => {
-              const newName = e.target.value
-              setName(newName)
-              debouncedSetFilter({name: newName, graveyardType})
-            }}
-            onBlur={() => setFilter({name, graveyardType})}
-            placeholder="Filter rows"
-            block
-            type="search"
-            ref={nameInputRef}
-            autoFocus={isOpen}
-          />
-        </FormControl>
+        <form id="cemetery-filter-form" onSubmit={onFormSubmit}>
+          <FormControl className={styles.graveyardTypeControl}>
+            <FormControl.Label>Graveyard type:</FormControl.Label>
+            <Select
+              ref={graveyardTypeSelectRef}
+              onChange={(e) => setGraveyardType(e.target.value)}
+              value={graveyardType ?? ''}
+            >
+              <Select.Option value="">All</Select.Option>
+              {graveyardTypes.map((graveyardType, i) => (
+                <Select.Option key={`${i}-${graveyardType}`} value={graveyardType}>
+                  {titleCaseify(graveyardType)}
+                </Select.Option>
+              ))}
+            </Select>
+            {graveyardTypeFilterSet && <ClearFilterButton onClick={() => setFilter({name})} />}
+          </FormControl>
+          <FormControl className={styles.cemeteryNameControl}>
+            <FormControl.Label>Cemetery name:</FormControl.Label>
+            <TextInput
+              value={name ?? ''}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Filter rows"
+              block
+              type="search"
+              ref={nameInputRef}
+              autoFocus={isOpen}
+            />
+          </FormControl>
+        </form>
       </FilterDialog>
     </div>
   )
