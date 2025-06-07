@@ -21,7 +21,7 @@ export function EnabledFieldsProvider({children}: PropsWithChildren) {
   }, [])
   const value = useMemo(
     () => ({enabledFields, saveEnabledFields}) satisfies EnabledFieldsContextProps,
-    [enabledFields]
+    [enabledFields, saveEnabledFields]
   )
   return <EnabledFieldsContext.Provider value={value}>{children}</EnabledFieldsContext.Provider>
 }

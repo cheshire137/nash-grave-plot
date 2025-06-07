@@ -24,7 +24,7 @@ export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [getViewportHeight, getViewportWidth])
+  }, [handleResize])
 
   return <WindowSizeContext.Provider value={value}>{children}</WindowSizeContext.Provider>
 }

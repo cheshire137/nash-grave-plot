@@ -77,12 +77,12 @@ function IntermentList() {
       gotoPage(newPageIndex)
       navigate(getPagePath(page))
     },
-    [getPagePath]
+    [getPagePath, gotoPage, navigate]
   )
 
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
   useEffect(() => setHeaderItems([<EnabledColumnsDialog />]), [enabledFields, setHeaderItems])
-  useEffect(() => setPageSize(dynamicPageSize), [dynamicPageSize])
+  useEffect(() => setPageSize(dynamicPageSize), [dynamicPageSize, setPageSize])
 
   return (
     <PageLayout.Content padding="none" sx={{fontSize: 2}}>
