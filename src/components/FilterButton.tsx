@@ -1,8 +1,8 @@
-import {type ButtonBaseProps, IconButton} from '@primer/react'
+import {IconButton, type IconButtonProps} from '@primer/react'
 import {FilterIcon} from '@primer/octicons-react'
 
 interface FilterButtonProps
-  extends Omit<ButtonBaseProps, 'aria-labelledby' | 'aria-label' | 'size' | 'title' | 'variant'> {
+  extends Omit<IconButtonProps, 'aria-labelledby' | 'aria-label' | 'icon' | 'size' | 'title' | 'variant'> {
   isOpen?: boolean
   title?: string
 }

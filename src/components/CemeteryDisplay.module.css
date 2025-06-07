@@ -6,3 +6,11 @@
   color: var(--fgColor-muted);
   font-size: var(--base-size-12);
 }
+
+.filterButton {
+  visibility: hidden;
+}
+
+.container:hover .filterButton {
+  visibility: visible;
+}
