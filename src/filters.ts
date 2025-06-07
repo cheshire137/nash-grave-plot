@@ -22,10 +22,13 @@ export function addressMatchesFilter(
       keys: [
         (row: Row<Interment>) => {
           const cemetery: Cemetery = row.values[id[0]]
-          const address = cemetery.address
-          return `${address.streetAddress} ${address.additionalLocationInfo}` // shown in AddressLines
+          const {
+            address: {streetAddress, additionalLocationInfo},
+          } = cemetery
+          return `${streetAddress} ${additionalLocationInfo}` // shown in AddressLines
         },
       ],
+      threshold: matchSorter.rankings.CONTAINS,
     })
   }
   return matchingRows
@@ -53,6 +56,7 @@ export function cemeteryMatchesFilter(
           return cemetery.name
         },
       ],
+      threshold: matchSorter.rankings.CONTAINS,
     })
   }
   return matchingRows
@@ -103,6 +107,7 @@ export function personMatchesFilter(
           return person.name
         },
       ],
+      threshold: matchSorter.rankings.WORD_STARTS_WITH,
     })
   }
   if (typeof filterValue?.deathDate === 'string' && filterValue.deathDate.length > 0) {
@@ -113,6 +118,7 @@ export function personMatchesFilter(
           return person.rawDeathDate ?? ''
         },
       ],
+      threshold: matchSorter.rankings.CONTAINS,
     })
   }
   return matchingRows
