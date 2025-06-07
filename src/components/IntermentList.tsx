@@ -40,6 +40,7 @@ function IntermentList() {
     pageOptions,
     state: {pageIndex, pageSize},
     gotoPage,
+    pageCount,
     setPageSize,
   } = useTable<Interment>(
     {
@@ -82,6 +83,9 @@ function IntermentList() {
   useEffect(() => setPageTitle(getPageTitleForResults(rows.length, 'grave', 'graves')), [rows.length, setPageTitle])
   useEffect(() => setHeaderItems([<EnabledColumnsDialog />]), [enabledFields, setHeaderItems])
   useEffect(() => setPageSize(dynamicPageSize), [dynamicPageSize, setPageSize])
+  useEffect(() => {
+    if (pageIndex >= pageCount) gotoPage(pageCount - 1)
+  }, [gotoPage, pageIndex, pageCount])
 
   return (
     <PageLayout.Content padding="none" sx={{fontSize: 2}}>
