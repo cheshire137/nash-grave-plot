@@ -35,7 +35,6 @@ function IntermentList() {
   const filters = useMemo(() => getInitialFilters(searchParams), [searchParams])
   const initialPageIndex = initialPageNumberStr ? parseInt(initialPageNumberStr) - 1 : 0
   const initialPageSize = searchParams.get('page_size') ? parseInt(searchParams.get('page_size')!) : 10
-  const {pageSize: dynamicPageSize} = useDynamicTablePageSize({initialPageSize, paginationRef, tableBodyRef})
   const {columns} = useIntermentListColumns()
 
   const {
@@ -63,6 +62,12 @@ function IntermentList() {
     useFilters,
     usePagination
   )
+  const {pageSize: dynamicPageSize} = useDynamicTablePageSize({
+    initialPageSize,
+    paginationRef,
+    rowCount: rows.length,
+    tableBodyRef,
+  })
   const totalPages = pageOptions.length
   const getPagePath = useCallback(
     (pageNumber: number) => (pageNumber < 2 ? '/' : `/page/${pageNumber}?page_size=${pageSize}`),

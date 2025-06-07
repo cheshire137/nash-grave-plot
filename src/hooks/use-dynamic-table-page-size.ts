@@ -4,10 +4,16 @@ import {useWindowSize} from '../contexts/WindowSizeContext'
 interface DynamicTablePageSizeProps {
   initialPageSize: number
   paginationRef: RefObject<HTMLDivElement>
+  rowCount: number
   tableBodyRef: RefObject<HTMLTableSectionElement>
 }
 
-export function useDynamicTablePageSize({initialPageSize, paginationRef, tableBodyRef}: DynamicTablePageSizeProps) {
+export function useDynamicTablePageSize({
+  initialPageSize,
+  paginationRef,
+  rowCount,
+  tableBodyRef,
+}: DynamicTablePageSizeProps) {
   const [pageSize, setPageSize] = useState<number>(initialPageSize)
   const {clientHeight: viewportHeight} = useWindowSize()
   const [viewportHeightAtLastPageSizeChange, setViewportHeightAtLastPageSizeChange] = useState<number>(0)
@@ -65,7 +71,15 @@ export function useDynamicTablePageSize({initialPageSize, paginationRef, tableBo
         setPageSize(pageSize + rowsToAdd)
       }
     }
-  }, [tableBodyRef, paginationRef, viewportHeightAtLastPageSizeChange, viewportHeight, pageSize, setPageSize])
+  }, [
+    tableBodyRef,
+    paginationRef,
+    viewportHeightAtLastPageSizeChange,
+    viewportHeight,
+    pageSize,
+    setPageSize,
+    rowCount,
+  ])
 
   return {pageSize}
 }

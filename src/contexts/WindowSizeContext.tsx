@@ -4,7 +4,6 @@ import {getViewportHeight, getViewportWidth} from '../utils'
 interface WindowSizeContextProps {
   clientHeight: number
   clientWidth: number
-  handleResize: () => void
 }
 
 const WindowSizeContext = createContext<WindowSizeContextProps | undefined>(undefined)
@@ -17,7 +16,7 @@ export const WindowSizeContextProvider = ({children}: PropsWithChildren) => {
     setClientHeight(getViewportHeight())
     setClientWidth(getViewportWidth())
   }, [])
-  const value = useMemo(() => ({clientHeight, clientWidth, handleResize}), [clientHeight, clientWidth, handleResize])
+  const value = useMemo(() => ({clientHeight, clientWidth}), [clientHeight, clientWidth])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
