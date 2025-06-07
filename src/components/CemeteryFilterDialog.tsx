@@ -8,7 +8,7 @@ import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
 import styles from './CemeteryFilter.module.css'
 
-interface CemeteryFilterProps {
+interface CemeteryFilterDialogProps {
   column: {
     filterValue: CemeteryFilterOption
     setFilter: (value?: CemeteryFilterOption) => void
@@ -17,7 +17,9 @@ interface CemeteryFilterProps {
   }
 }
 
-function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}: CemeteryFilterProps) {
+export function CemeteryFilterDialog({
+  column: {filterValue, setFilter, preFilteredRows, id},
+}: CemeteryFilterDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const graveyardTypeSelectRef = useRef<HTMLSelectElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
@@ -107,5 +109,3 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
     </div>
   )
 }
-
-export default CemeteryFilter

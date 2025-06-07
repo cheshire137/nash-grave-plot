@@ -8,7 +8,7 @@ import DateCellFormatter from '../components/DateCellFormatter'
 import {PhotoList} from '../components/PhotoList'
 import {NameDisplay} from '../components/NameDisplay'
 import {InfoDisplay} from '../components/InfoDisplay'
-import CemeteryFilter from '../components/CemeteryFilter'
+import {CemeteryFilterDialog} from '../components/CemeteryFilterDialog'
 import DemarcationDisplay from '../components/DemarcationDisplay'
 import FootstoneDisplay from '../components/FootstoneDisplay'
 import {NotesDisplay} from '../components/NotesDisplay'
@@ -41,7 +41,7 @@ export function useIntermentListColumns() {
       Header: intermentFieldLabels.cemetery,
       accessor: 'cemetery',
       filter: 'cemeteryMatches',
-      Filter: CemeteryFilter,
+      Filter: CemeteryFilterDialog,
       Cell: CemeteryDisplay,
       id: cemeteryColumnId,
     }
