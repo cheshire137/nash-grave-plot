@@ -77,6 +77,19 @@ export function fuzzyTextFilter(
 // Let the table remove the filter if the string is empty
 fuzzyTextFilter.autoRemove = (val: any) => !val
 
+export function exactTextFilter(
+  rows: Row<Interment>[],
+  id: IdType<Interment>[],
+  filterValue: string
+): Row<Interment>[] {
+  return matchSorter(rows, filterValue, {
+    keys: [(row: Row<Interment>) => row.values[id[0]]],
+  })
+}
+
+// Let the table remove the filter if the string is empty
+exactTextFilter.autoRemove = (val: any) => !val
+
 export function minArrayLengthFilter(
   rows: Row<Interment>[],
   id: IdType<Interment>[],
@@ -127,6 +140,7 @@ export function personMatchesFilter(
 personMatchesFilter.autoRemove = (val: any) => !val
 
 export const filterTypes = {
+  exactText: exactTextFilter,
   fuzzyText: fuzzyTextFilter,
   minArrayLength: minArrayLengthFilter,
   cemeteryMatches: cemeteryMatchesFilter,
