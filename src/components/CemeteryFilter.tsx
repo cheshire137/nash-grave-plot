@@ -70,7 +70,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
           setIsOpen(false)
         }}
       >
-        <FormControl sx={{display: 'inline-block'}}>
+        <FormControl className={styles.graveyardTypeControl}>
           <FormControl.Label>Graveyard type:</FormControl.Label>
           <Select
             ref={graveyardTypeSelectRef}
@@ -86,7 +86,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
           </Select>
           {graveyardTypeFilterSet && <ClearFilterButton onClick={() => setFilter({name})} />}
         </FormControl>
-        <FormControl sx={{mt: 3}}>
+        <FormControl className={styles.cemeteryNameControl}>
           <FormControl.Label>Cemetery name:</FormControl.Label>
           <TextInput
             value={name || ''}
@@ -97,7 +97,6 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
             }}
             onBlur={() => setFilter({name, graveyardType})}
             placeholder="Filter rows"
-            size="small"
             block
             type="search"
             ref={nameInputRef}
