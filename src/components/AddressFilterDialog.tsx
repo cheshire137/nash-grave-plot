@@ -72,9 +72,7 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
       onClose={onSave}
       setIsOpen={setIsOpen}
       showClearButton={hasPhotosFilterSet || addressFilterSet}
-      footerButtons={[
-        {type: 'submit', content: 'Apply', buttonType: 'primary', onClick: onSave, form: 'address-filter-form'},
-      ]}
+      footerButtons={[{type: 'submit', content: 'Apply', buttonType: 'primary', form: 'address-filter-form'}]}
     >
       <form id="address-filter-form" onSubmit={onFormSubmit}>
         <FormControl>
