@@ -1,6 +1,7 @@
 .container {
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: var(--base-size-12);
 }
 
@@ -8,4 +9,13 @@
   display: inline-block;
   margin-left: var(--base-size-24);
   margin-right: var(--base-size-24);
+}
+
+.link {
+  text-decoration: underline;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }

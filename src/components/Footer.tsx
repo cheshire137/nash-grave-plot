@@ -6,8 +6,8 @@ function Footer() {
     <div className={styles.container}>
       <Link
         target="_blank"
-        sx={{display: 'inline-block'}}
         muted={true}
+        className={styles.link}
         rel="noopener noreferrer"
         href="https://github.com/cheshire137/nash-grave-plot"
       >
@@ -18,6 +18,7 @@ function Footer() {
         <Link
           target="_blank"
           muted={true}
+          className={styles.link}
           rel="noopener noreferrer"
           href="https://data.nashville.gov/maps/829ba5846e704ffd86b339f1ede647f7"
         >
