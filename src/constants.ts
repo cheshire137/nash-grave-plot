@@ -1,9 +1,11 @@
 import type {IntermentField, IntermentFieldGroup} from './types'
 
+export const cemeteryColumnId = 'cemetery'
+
 export const allColumns: IntermentField[] = [
   'person',
   'deceasedInfo',
-  'cemetery',
+  cemeteryColumnId,
   'address',
   'siteHistory',
   'inscription',
@@ -34,7 +36,7 @@ export const intermentFieldsByGroup: {
   [group in IntermentFieldGroup]: IntermentField[]
 } = {
   Person: ['person', 'deceasedInfo'],
-  Location: ['cemetery', 'address', 'siteHistory'],
+  Location: [cemeteryColumnId, 'address', 'siteHistory'],
   'Marker/Plot': ['inscription', 'footstone', 'demarcation', 'condition', 'accessible', 'restoration', 'gravePhotos'],
   'Parcel Numbers': ['tractParcelNumber', 'cemeteryParcelNumber'],
   Survey: ['originalSurvey', 'surveyUpdates', 'currentSurvey'],
@@ -46,7 +48,7 @@ export const intermentFieldLabels: {
 } = {
   person: 'Name / Death date',
   deceasedInfo: 'Info',
-  cemetery: 'Cemetery',
+  [cemeteryColumnId]: 'Cemetery',
   address: 'Address / Photos',
   siteHistory: 'Site History',
   inscription: 'Inscription',

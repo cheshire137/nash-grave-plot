@@ -4,13 +4,14 @@ import {FilterButton} from './FilterButton'
 import type {CellProps} from 'react-table'
 import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
+import {cemeteryColumnId} from '../constants'
 import styles from './CemeteryDisplay.module.css'
 
 function CemeteryDisplay({setFilter, value}: CellProps<Record<string, unknown>>) {
   const cemetery = value as Cemetery
   const setCemeteryFilter = useCallback(
     (value?: CemeteryFilterOption) => {
-      setFilter('cemetery', value)
+      setFilter(cemeteryColumnId, value)
     },
     [setFilter]
   )
