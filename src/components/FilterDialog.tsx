@@ -1,17 +1,15 @@
-import {Dialog} from '@primer/react'
+import type {PropsWithChildren} from 'react'
+import {Dialog, type DialogProps} from '@primer/react'
 
-interface FilterDialogProps {
+interface FilterDialogProps extends Omit<DialogProps, 'title'> {
   isOpen: boolean
-  children: React.ReactNode
-  onClose: () => void
-  returnFocusRef: React.RefObject<HTMLElement>
 }
 
-export function FilterDialog({isOpen, children, onClose, returnFocusRef}: FilterDialogProps) {
+export function FilterDialog({isOpen, children, ...props}: PropsWithChildren<FilterDialogProps>) {
   if (!isOpen) return null
 
   return (
-    <Dialog title="Filter graves" returnFocusRef={returnFocusRef} onClose={onClose}>
+    <Dialog title="Filter graves" {...props}>
       {children}
     </Dialog>
   )

@@ -26,8 +26,8 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
   const nameInputRef = useRef<HTMLInputElement>(null)
   const [name, setName] = useState<string | undefined>()
   const [graveyardType, setGraveyardType] = useState<string | undefined>()
-  const graveyardTypes = useMemo(() => {
-    return [
+  const graveyardTypes = useMemo(
+    () => [
       ...preFilteredRows
         .reduce((memo, row) => {
           const cemetery: Cemetery = row.values[id]
@@ -37,8 +37,9 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
           return memo
         }, new Set<string>())
         .values(),
-    ]
-  }, [id, preFilteredRows])
+    ],
+    [id, preFilteredRows]
+  )
   const debouncedSetFilter = useMemo(() => debounce(setFilter, 300), [setFilter])
   const graveyardTypeFilterSet =
     filterValue && typeof filterValue.graveyardType === 'string' && filterValue?.graveyardType !== ''
