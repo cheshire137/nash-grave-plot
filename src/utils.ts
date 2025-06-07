@@ -1,5 +1,6 @@
 import type {Column} from 'react-table'
 import type {AddressFilterOption, IntermentField} from './types'
+import {addressColumnId} from './constants'
 
 export function getColumnsToDisplay(enabledFields: IntermentField[], relevantColumns: Column[]) {
   const enabledPropStrs: string[] = enabledFields
@@ -28,7 +29,7 @@ export function getInitialFilters(searchParams: URLSearchParams) {
   if (searchParams.has('site_photos')) {
     addressFilterValue.hasPhotos = searchParams.get('site_photos') === '1'
   }
-  const addressFilter = {id: 'address', value: addressFilterValue}
+  const addressFilter = {id: addressColumnId, value: addressFilterValue}
   return [addressFilter]
 }
 

@@ -13,7 +13,7 @@ import DemarcationDisplay from '../components/DemarcationDisplay'
 import FootstoneDisplay from '../components/FootstoneDisplay'
 import {NotesDisplay} from '../components/NotesDisplay'
 import {ParcelNumberDisplay} from '../components/ParcelNumberDisplay'
-import {intermentFieldLabels} from '../constants'
+import {addressColumnId, intermentFieldLabels} from '../constants'
 import {getColumnsToDisplay} from '../utils'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
 
@@ -51,7 +51,7 @@ export function useIntermentListColumns() {
       Cell: AddressDisplay,
       filter: 'addressMatches',
       Filter: AddressFilter,
-      id: 'address',
+      id: addressColumnId,
     }
     const siteHistoryColumn = {
       Header: intermentFieldLabels.siteHistory,
