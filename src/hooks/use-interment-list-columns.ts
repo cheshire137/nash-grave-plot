@@ -6,6 +6,7 @@ import LongTextBlock from '../components/LongTextBlock'
 import {AddressFilterDialog} from '../components/AddressFilterDialog'
 import DateCellFormatter from '../components/DateCellFormatter'
 import {PhotoList} from '../components/PhotoList'
+import {PersonFilterDialog} from '../components/PersonFilterDialog'
 import {NameDisplay} from '../components/NameDisplay'
 import {InfoDisplay} from '../components/InfoDisplay'
 import {CemeteryFilterDialog} from '../components/CemeteryFilterDialog'
@@ -23,7 +24,8 @@ export function useIntermentListColumns() {
     const nameColumn = {
       Header: intermentFieldLabels.person,
       accessor: 'person',
-      filter: 'fuzzyText',
+      filter: 'personMatches',
+      Filter: PersonFilterDialog,
       Cell: NameDisplay,
     }
     const deceasedInfoColumn = {

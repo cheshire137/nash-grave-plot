@@ -5,7 +5,7 @@ import TableCell from './TableCell'
 import Interment from '../models/Interment'
 import {EnabledColumnsDialog} from './EnabledColumnsDialog'
 import {useTable, useFilters, usePagination} from 'react-table'
-import {addressMatchesFilter, cemeteryMatchesFilter, fuzzyTextFilter, minArrayLengthFilter} from '../filters'
+import {filterTypes} from '../filters'
 import {Pagination, PageLayout} from '@primer/react'
 import {getInitialFilters, getPageTitleForResults} from '../utils'
 import {useCemeteryData} from '../contexts/CemeteryDataContext'
@@ -15,13 +15,6 @@ import {useSearchParams, useParams, useNavigate} from 'react-router-dom'
 import {PageNumber} from './PageNumber'
 import {useDynamicTablePageSize} from '../hooks/use-dynamic-table-page-size'
 import {useIntermentListColumns} from '../hooks/use-interment-list-columns'
-
-const filterTypes = {
-  fuzzyText: fuzzyTextFilter,
-  minArrayLength: minArrayLengthFilter,
-  cemeteryMatches: cemeteryMatchesFilter,
-  addressMatches: addressMatchesFilter,
-}
 
 function IntermentList() {
   const tableBodyRef = useRef<HTMLTableSectionElement>(null)

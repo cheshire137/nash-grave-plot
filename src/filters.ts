@@ -1,6 +1,7 @@
 import {FilterValue, IdType, Row} from 'react-table'
 import Interment from './models/Interment'
 import Cemetery from './models/Cemetery'
+import Person from './models/Person'
 import type {AddressFilterOption, CemeteryFilterOption} from './types'
 import {matchSorter} from 'match-sorter'
 
@@ -87,3 +88,32 @@ export function minArrayLengthFilter(
 }
 
 minArrayLengthFilter.autoRemove = (val: any) => !val
+
+export function personMatchesFilter(
+  rows: Row<Interment>[],
+  id: IdType<Interment>[],
+  filterValue: CemeteryFilterOption
+): Row<Interment>[] {
+  let matchingRows = rows
+  if (typeof filterValue?.name === 'string' && filterValue.name.length > 0) {
+    matchingRows = matchSorter(matchingRows, filterValue.name, {
+      keys: [
+        (row: Row<Interment>) => {
+          const person: Person = row.values[id[0]]
+          return person.name
+        },
+      ],
+    })
+  }
+  return matchingRows
+}
+
+personMatchesFilter.autoRemove = (val: any) => !val
+
+export const filterTypes = {
+  fuzzyText: fuzzyTextFilter,
+  minArrayLength: minArrayLengthFilter,
+  cemeteryMatches: cemeteryMatchesFilter,
+  addressMatches: addressMatchesFilter,
+  personMatches: personMatchesFilter,
+}
