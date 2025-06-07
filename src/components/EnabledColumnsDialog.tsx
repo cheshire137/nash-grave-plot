@@ -1,6 +1,6 @@
 import {useCallback, useRef, useState} from 'react'
 import {Dialog} from '@primer/react'
-import {GearIcon} from '@primer/octicons-react'
+import {TableIcon} from '@primer/octicons-react'
 import IntermentFieldGroupSettings from './IntermentFieldGroupSettings'
 import {allIntermentFieldGroups} from '../constants'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
@@ -21,7 +21,7 @@ export function EnabledColumnsDialog() {
     <>
       <HeaderIconButton
         ref={buttonRef}
-        icon={GearIcon}
+        icon={TableIcon}
         onClick={() => setIsOpen(true)}
         aria-label="Visible columns"
       />
