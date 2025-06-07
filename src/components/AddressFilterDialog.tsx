@@ -82,7 +82,7 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
           <TextInput
             value={address ?? ''}
             onChange={(e) => setAddress(e.target.value)}
-            placeholder="Filter rows"
+            placeholder="Filter rows by address"
             block
             type="search"
             ref={addressInputRef}

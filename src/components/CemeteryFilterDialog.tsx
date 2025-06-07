@@ -92,7 +92,7 @@ export function CemeteryFilterDialog({
           <TextInput
             value={name ?? ''}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Filter rows"
+            placeholder="Filter rows by cemetery name"
             block
             type="search"
             ref={nameInputRef}
