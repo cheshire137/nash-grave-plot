@@ -42,10 +42,6 @@ export function CemeteryFilterDialog({
   const graveyardTypeFilterSet =
     filterValue && typeof filterValue.graveyardType === 'string' && filterValue?.graveyardType !== ''
   const nameFilterSet = filterValue && typeof filterValue.name === 'string' && filterValue?.name !== ''
-  const onFilterDialogClose = useCallback(() => {
-    setFilter({name, graveyardType})
-    setIsOpen(false)
-  }, [name, graveyardType, setFilter])
   const onSave = useCallback(() => {
     setFilter({name, graveyardType})
     setIsOpen(false)
@@ -70,7 +66,7 @@ export function CemeteryFilterDialog({
       <FilterDialog
         isOpen={isOpen}
         onClear={setFilter}
-        onClose={onFilterDialogClose}
+        onClose={onSave}
         setIsOpen={setIsOpen}
         showClearButton={graveyardTypeFilterSet || nameFilterSet}
         footerButtons={[{type: 'submit', form: 'cemetery-filter-form', content: 'Save', buttonType: 'primary'}]}

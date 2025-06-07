@@ -44,10 +44,6 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
   )
   const hasPhotosFilterSet = filterValue && typeof filterValue.hasPhotos === 'boolean' && filterValue?.hasPhotos
   const addressFilterSet = filterValue && typeof filterValue.address === 'string' && filterValue?.address !== ''
-  const onFilterDialogClose = useCallback(() => {
-    setFilterAndUpdateUrl({address, hasPhotos})
-    setIsOpen(false)
-  }, [address, hasPhotos, setFilterAndUpdateUrl])
   const onSave = useCallback(() => {
     setFilterAndUpdateUrl({hasPhotos, address: address?.trim()})
     setIsOpen(false)
@@ -68,7 +64,7 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
       <FilterDialog
         isOpen={isOpen}
         onClear={setFilterAndUpdateUrl}
-        onClose={onFilterDialogClose}
+        onClose={onSave}
         setIsOpen={setIsOpen}
         showClearButton={hasPhotosFilterSet || addressFilterSet}
         footerButtons={[
