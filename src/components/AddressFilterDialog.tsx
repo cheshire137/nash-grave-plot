@@ -4,9 +4,9 @@ import {TextInput, FormControl, Checkbox} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
 import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
-import styles from './AddressFilter.module.css'
+import styles from './AddressFilterDialog.module.css'
 
-interface AddressFilterProps {
+interface AddressFilterDialogProps {
   column: {
     filterValue: AddressFilterOption
     setFilter: (value?: AddressFilterOption) => void
@@ -15,7 +15,7 @@ interface AddressFilterProps {
   }
 }
 
-function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
+export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressFilterDialogProps) {
   const [isOpen, setIsOpen] = useState(false)
   const addressInputRef = useRef<HTMLInputElement>(null)
   const hasPhotosInputRef = useRef<HTMLInputElement>(null)
@@ -101,5 +101,3 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
     </div>
   )
 }
-
-export default AddressFilter

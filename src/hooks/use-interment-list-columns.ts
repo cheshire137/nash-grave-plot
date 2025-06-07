@@ -3,7 +3,7 @@ import AddressDisplay from '../components/AddressDisplay'
 import CemeteryDisplay from '../components/CemeteryDisplay'
 import {InscriptionDisplay} from '../components/InscriptionDisplay'
 import LongTextBlock from '../components/LongTextBlock'
-import AddressFilter from '../components/AddressFilter'
+import {AddressFilterDialog} from '../components/AddressFilterDialog'
 import DateCellFormatter from '../components/DateCellFormatter'
 import {PhotoList} from '../components/PhotoList'
 import {NameDisplay} from '../components/NameDisplay'
@@ -50,7 +50,7 @@ export function useIntermentListColumns() {
       accessor: 'cemetery',
       Cell: AddressDisplay,
       filter: 'addressMatches',
-      Filter: AddressFilter,
+      Filter: AddressFilterDialog,
       id: addressColumnId,
     }
     const siteHistoryColumn = {

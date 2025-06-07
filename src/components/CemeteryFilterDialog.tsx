@@ -6,7 +6,7 @@ import {FilterDialog} from './FilterDialog'
 import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
-import styles from './CemeteryFilter.module.css'
+import styles from './CemeteryFilterDialog.module.css'
 
 interface CemeteryFilterDialogProps {
   column: {
