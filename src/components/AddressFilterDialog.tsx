@@ -4,7 +4,6 @@ import {TextInput, FormControl, Checkbox} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
 import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
-import styles from './AddressFilterDialog.module.css'
 
 interface AddressFilterDialogProps {
   column: {
@@ -67,40 +66,38 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
   }, [isOpen, addressInputRef])
 
   return (
-    <div className={styles.container}>
-      <FilterDialog
-        isOpen={isOpen}
-        onClear={setFilterAndUpdateUrl}
-        onClose={onSave}
-        setIsOpen={setIsOpen}
-        showClearButton={hasPhotosFilterSet || addressFilterSet}
-        footerButtons={[
-          {type: 'submit', content: 'Apply', buttonType: 'primary', onClick: onSave, form: 'address-filter-form'},
-        ]}
-      >
-        <form id="address-filter-form" onSubmit={onFormSubmit}>
-          <FormControl>
-            <FormControl.Label>Address:</FormControl.Label>
-            <TextInput
-              value={address ?? ''}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Filter rows"
-              block
-              type="search"
-              ref={addressInputRef}
-              autoFocus={isOpen}
-            />
-          </FormControl>
-          <FormControl sx={{mt: 3}}>
-            <Checkbox
-              ref={hasPhotosInputRef}
-              checked={hasPhotos ?? false}
-              onChange={(e) => setHasPhotos(e.target.checked)}
-            />
-            <FormControl.Label>Has photo</FormControl.Label>
-          </FormControl>
-        </form>
-      </FilterDialog>
-    </div>
+    <FilterDialog
+      isOpen={isOpen}
+      onClear={setFilterAndUpdateUrl}
+      onClose={onSave}
+      setIsOpen={setIsOpen}
+      showClearButton={hasPhotosFilterSet || addressFilterSet}
+      footerButtons={[
+        {type: 'submit', content: 'Apply', buttonType: 'primary', onClick: onSave, form: 'address-filter-form'},
+      ]}
+    >
+      <form id="address-filter-form" onSubmit={onFormSubmit}>
+        <FormControl>
+          <FormControl.Label>Address:</FormControl.Label>
+          <TextInput
+            value={address ?? ''}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Filter rows"
+            block
+            type="search"
+            ref={addressInputRef}
+            autoFocus={isOpen}
+          />
+        </FormControl>
+        <FormControl sx={{mt: 3}}>
+          <Checkbox
+            ref={hasPhotosInputRef}
+            checked={hasPhotos ?? false}
+            onChange={(e) => setHasPhotos(e.target.checked)}
+          />
+          <FormControl.Label>Has photo</FormControl.Label>
+        </FormControl>
+      </form>
+    </FilterDialog>
   )
 }
