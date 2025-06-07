@@ -46,6 +46,10 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   const debouncedSetFilterAndUpdateUrl = useMemo(() => debounce(setFilterAndUpdateUrl, 300), [setFilterAndUpdateUrl])
   const hasPhotosFilterSet = filterValue && typeof filterValue.hasPhotos === 'boolean' && filterValue?.hasPhotos
   const addressFilterSet = filterValue && typeof filterValue.address === 'string' && filterValue?.address !== ''
+  const onFilterDialogClose = useCallback(() => {
+    setFilterAndUpdateUrl({address, hasPhotos})
+    setIsOpen(false)
+  }, [address, hasPhotos, setFilterAndUpdateUrl])
 
   useEffect(() => setAddress(filterValue?.address), [filterValue?.address])
   useEffect(
@@ -69,10 +73,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
       <FilterDialog
         isOpen={isOpen}
         onClear={setFilterAndUpdateUrl}
-        onClose={() => {
-          setFilterAndUpdateUrl({address, hasPhotos})
-          setIsOpen(false)
-        }}
+        onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={hasPhotosFilterSet || addressFilterSet}
       >
