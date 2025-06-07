@@ -3,6 +3,7 @@ import type {IdType, Row} from 'react-table'
 import {FormControl, TextInput} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
 import type {PersonFilterOption} from '../types'
+import styles from './PersonFilterDialog.module.css'
 
 interface PersonFilterDialogProps {
   column: {
@@ -54,7 +55,7 @@ export function PersonFilterDialog({column: {filterValue, setFilter}}: PersonFil
             autoFocus={isOpen}
           />
         </FormControl>
-        <FormControl>
+        <FormControl className={styles.deathDateControl}>
           <FormControl.Label>Death date:</FormControl.Label>
           <TextInput
             value={deathDate ?? ''}
