@@ -3,8 +3,6 @@ import {useSearchParams} from 'react-router-dom'
 import debounce from 'lodash.debounce'
 import {TextInput, FormControl, Checkbox} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
-import {FilterButton} from './FilterButton'
-import {ClearFilterButton} from './ClearFilterButton'
 import type {AddressFilterOption} from '../types'
 import type {IdType, Row} from 'react-table'
 import styles from './AddressFilter.module.css'
@@ -19,7 +17,6 @@ interface AddressFilterProps {
 }
 
 function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
-  const filterButtonRef = useRef<HTMLButtonElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const addressInputRef = useRef<HTMLInputElement>(null)
   const hasPhotosInputRef = useRef<HTMLInputElement>(null)
@@ -69,15 +66,15 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
 
   return (
     <div className={styles.container}>
-      <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-      {(hasPhotosFilterSet || addressFilterSet) && <ClearFilterButton onClick={() => setFilterAndUpdateUrl()} />}
       <FilterDialog
-        returnFocusRef={filterButtonRef}
         isOpen={isOpen}
+        onClear={() => setFilterAndUpdateUrl()}
         onClose={() => {
           setFilterAndUpdateUrl({address, hasPhotos})
           setIsOpen(false)
         }}
+        setIsOpen={setIsOpen}
+        showClearButton={hasPhotosFilterSet || addressFilterSet}
       >
         <FormControl>
           <FormControl.Label>Address:</FormControl.Label>

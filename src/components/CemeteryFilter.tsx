@@ -3,7 +3,6 @@ import {titleCaseify} from '../utils'
 import type {IdType, Row} from 'react-table'
 import {FormControl, Select, TextInput} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
-import {FilterButton} from './FilterButton'
 import {ClearFilterButton} from './ClearFilterButton'
 import Cemetery from '../models/Cemetery'
 import type {CemeteryFilterOption} from '../types'
@@ -21,7 +20,6 @@ interface CemeteryFilterProps {
 
 function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}: CemeteryFilterProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const filterButtonRef = useRef<HTMLButtonElement>(null)
   const graveyardTypeSelectRef = useRef<HTMLSelectElement>(null)
   const nameInputRef = useRef<HTMLInputElement>(null)
   const [name, setName] = useState<string | undefined>()
@@ -61,15 +59,15 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
 
   return (
     <div className={styles.container}>
-      <FilterButton ref={filterButtonRef} isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-      {(graveyardTypeFilterSet || nameFilterSet) && <ClearFilterButton onClick={() => setFilter()} />}
       <FilterDialog
         isOpen={isOpen}
-        returnFocusRef={filterButtonRef}
+        onClear={() => setFilter()}
         onClose={() => {
           setFilter({name, graveyardType})
           setIsOpen(false)
         }}
+        setIsOpen={setIsOpen}
+        showClearButton={graveyardTypeFilterSet || nameFilterSet}
       >
         <FormControl className={styles.graveyardTypeControl}>
           <FormControl.Label>Graveyard type:</FormControl.Label>
