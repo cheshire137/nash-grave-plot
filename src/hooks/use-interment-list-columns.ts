@@ -14,6 +14,7 @@ import DemarcationDisplay from '../components/DemarcationDisplay'
 import FootstoneDisplay from '../components/FootstoneDisplay'
 import {NotesDisplay} from '../components/NotesDisplay'
 import {ParcelNumberDisplay} from '../components/ParcelNumberDisplay'
+import {TractParcelFilterDialog} from '../components/TractParcelFilterDialog'
 import {addressColumnId, cemeteryColumnId, intermentFieldLabels} from '../constants'
 import {getColumnsToDisplay} from '../utils'
 import {useEnabledFields} from '../contexts/EnabledFieldsContext'
@@ -127,6 +128,8 @@ export function useIntermentListColumns() {
     const tractParcelNumberColumn = {
       Header: intermentFieldLabels.tractParcelNumber,
       accessor: 'tractParcelNumber',
+      filter: 'exactText',
+      Filter: TractParcelFilterDialog,
       Cell: ParcelNumberDisplay,
     }
     const cemeteryParcelNumberColumn = {
