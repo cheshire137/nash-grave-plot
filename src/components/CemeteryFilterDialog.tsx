@@ -69,7 +69,7 @@ export function CemeteryFilterDialog({
         onClose={onSave}
         setIsOpen={setIsOpen}
         showClearButton={graveyardTypeFilterSet || nameFilterSet}
-        footerButtons={[{type: 'submit', form: 'cemetery-filter-form', content: 'Save', buttonType: 'primary'}]}
+        footerButtons={[{type: 'submit', form: 'cemetery-filter-form', content: 'Apply', buttonType: 'primary'}]}
       >
         <form id="cemetery-filter-form" onSubmit={onFormSubmit}>
           <FormControl className={styles.graveyardTypeControl}>
