@@ -71,28 +71,32 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
         onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={hasPhotosFilterSet || addressFilterSet}
-        footerButtons={[{content: 'Save', buttonType: 'primary', onClick: onSave}]}
+        footerButtons={[
+          {type: 'submit', content: 'Save', buttonType: 'primary', onClick: onSave, form: 'address-filter-form'},
+        ]}
       >
-        <FormControl>
-          <FormControl.Label>Address:</FormControl.Label>
-          <TextInput
-            value={address ?? ''}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Filter rows"
-            block
-            type="search"
-            ref={addressInputRef}
-            autoFocus={isOpen}
-          />
-        </FormControl>
-        <FormControl sx={{mt: 3}}>
-          <Checkbox
-            ref={hasPhotosInputRef}
-            checked={hasPhotos ?? false}
-            onChange={(e) => setHasPhotos(e.target.checked)}
-          />
-          <FormControl.Label>Has photo</FormControl.Label>
-        </FormControl>
+        <form id="address-filter-form">
+          <FormControl>
+            <FormControl.Label>Address:</FormControl.Label>
+            <TextInput
+              value={address ?? ''}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Filter rows"
+              block
+              type="search"
+              ref={addressInputRef}
+              autoFocus={isOpen}
+            />
+          </FormControl>
+          <FormControl sx={{mt: 3}}>
+            <Checkbox
+              ref={hasPhotosInputRef}
+              checked={hasPhotos ?? false}
+              onChange={(e) => setHasPhotos(e.target.checked)}
+            />
+            <FormControl.Label>Has photo</FormControl.Label>
+          </FormControl>
+        </form>
       </FilterDialog>
     </div>
   )
