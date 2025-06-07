@@ -11,7 +11,7 @@ export function addressMatchesFilter(
 ): Row<Interment>[] {
   let matchingRows = rows
   if (typeof filterValue?.hasPhotos === 'boolean') {
-    matchingRows = rows.filter((row) => {
+    matchingRows = matchingRows.filter((row) => {
       const cemetery: Cemetery = row.values[id[0]]
       return cemetery.hasPhotos() === filterValue.hasPhotos
     })
@@ -39,7 +39,7 @@ export function cemeteryMatchesFilter(
 ): Row<Interment>[] {
   let matchingRows = rows
   if (typeof filterValue?.graveyardType === 'string' && filterValue.graveyardType.length > 0) {
-    matchingRows = rows.filter((row) => {
+    matchingRows = matchingRows.filter((row) => {
       const cemetery: Cemetery = row.values[id[0]]
       return cemetery.graveyardType === filterValue.graveyardType
     })

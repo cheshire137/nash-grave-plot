@@ -1,6 +1,5 @@
-import {useRef, useEffect, useState, useMemo, useCallback} from 'react'
+import {useRef, useEffect, useState, useCallback} from 'react'
 import {useSearchParams} from 'react-router-dom'
-import debounce from 'lodash.debounce'
 import {TextInput, FormControl, Checkbox} from '@primer/react'
 import {FilterDialog} from './FilterDialog'
 import type {AddressFilterOption} from '../types'
@@ -43,13 +42,16 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
     },
     [setFilter, searchParams, setSearchParams]
   )
-  const debouncedSetFilterAndUpdateUrl = useMemo(() => debounce(setFilterAndUpdateUrl, 300), [setFilterAndUpdateUrl])
   const hasPhotosFilterSet = filterValue && typeof filterValue.hasPhotos === 'boolean' && filterValue?.hasPhotos
   const addressFilterSet = filterValue && typeof filterValue.address === 'string' && filterValue?.address !== ''
   const onFilterDialogClose = useCallback(() => {
     setFilterAndUpdateUrl({address, hasPhotos})
     setIsOpen(false)
   }, [address, hasPhotos, setFilterAndUpdateUrl])
+  const onSave = useCallback(() => {
+    setFilterAndUpdateUrl({hasPhotos, address: address?.trim()})
+    setIsOpen(false)
+  }, [address, setFilterAndUpdateUrl, hasPhotos])
 
   useEffect(() => setAddress(filterValue?.address), [filterValue?.address])
   useEffect(
@@ -58,15 +60,8 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
   )
 
   useEffect(() => {
-    if (isOpen && addressInputRef.current) addressInputRef.current.focus()
+    if (isOpen) addressInputRef.current?.focus()
   }, [isOpen, addressInputRef])
-
-  // Stop the invocation of the debounced function after unmounting:
-  useEffect(() => {
-    return () => {
-      debouncedSetFilterAndUpdateUrl.cancel()
-    }
-  }, [debouncedSetFilterAndUpdateUrl])
 
   return (
     <div className={styles.container}>
@@ -76,19 +71,13 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
         onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={hasPhotosFilterSet || addressFilterSet}
+        footerButtons={[{content: 'Save', buttonType: 'primary', onClick: onSave}]}
       >
         <FormControl>
           <FormControl.Label>Address:</FormControl.Label>
           <TextInput
-            value={address || ''}
-            onChange={(e) => {
-              const newAddress = e.target.value
-              setAddress(newAddress)
-              debouncedSetFilterAndUpdateUrl({
-                hasPhotos,
-                address: newAddress,
-              })
-            }}
+            value={address ?? ''}
+            onChange={(e) => setAddress(e.target.value)}
             placeholder="Filter rows"
             block
             type="search"
@@ -99,8 +88,8 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
         <FormControl sx={{mt: 3}}>
           <Checkbox
             ref={hasPhotosInputRef}
-            checked={hasPhotos || false}
-            onChange={(e) => setFilterAndUpdateUrl({hasPhotos: e.target.checked, address})}
+            checked={hasPhotos ?? false}
+            onChange={(e) => setHasPhotos(e.target.checked)}
           />
           <FormControl.Label>Has photo</FormControl.Label>
         </FormControl>
