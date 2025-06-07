@@ -92,7 +92,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
               })
             }}
             placeholder="Filter rows"
-            variant="small"
+            size="small"
             block
             type="search"
             ref={addressInputRef}

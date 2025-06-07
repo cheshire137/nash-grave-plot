@@ -97,7 +97,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
             }}
             onBlur={() => setFilter({name, graveyardType})}
             placeholder="Filter rows"
-            variant="small"
+            size="small"
             block
             type="search"
             ref={nameInputRef}
