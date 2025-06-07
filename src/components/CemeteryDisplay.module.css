@@ -1,3 +1,8 @@
 .container {
   min-width: 200px;
 }
+
+.cemeteryType {
+  color: var(--fgColor-muted);
+  font-size: var(--base-size-12);
+}

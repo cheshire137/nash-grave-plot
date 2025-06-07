@@ -1,4 +1,3 @@
-import {Text} from '@primer/react'
 import TitleCase from './TitleCase'
 import type {CellProps} from 'react-table'
 import Cemetery from '../models/Cemetery'
@@ -9,10 +8,7 @@ function CemeteryDisplay({value}: CellProps<Record<string, unknown>>) {
   return (
     <div className={styles.container}>
       <TitleCase value={cemetery.name} />
-      <br />
-      <Text color="fg.muted" fontSize="1">
-        Type: {cemetery.graveyardType}
-      </Text>
+      <div className={styles.cemeteryType}>Type: {cemetery.graveyardType}</div>
     </div>
   )
 }
