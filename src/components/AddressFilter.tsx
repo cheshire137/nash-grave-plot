@@ -68,7 +68,7 @@ function AddressFilter({column: {filterValue, setFilter}}: AddressFilterProps) {
     <div className={styles.container}>
       <FilterDialog
         isOpen={isOpen}
-        onClear={() => setFilterAndUpdateUrl()}
+        onClear={setFilterAndUpdateUrl}
         onClose={() => {
           setFilterAndUpdateUrl({address, hasPhotos})
           setIsOpen(false)

@@ -65,7 +65,7 @@ function CemeteryFilter({column: {filterValue, setFilter, preFilteredRows, id}}:
     <div className={styles.container}>
       <FilterDialog
         isOpen={isOpen}
-        onClear={() => setFilter()}
+        onClear={setFilter}
         onClose={onFilterDialogClose}
         setIsOpen={setIsOpen}
         showClearButton={graveyardTypeFilterSet || nameFilterSet}
