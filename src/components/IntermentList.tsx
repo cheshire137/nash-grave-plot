@@ -51,6 +51,7 @@ function IntermentList() {
         filters: filters || [],
       },
       filterTypes,
+      globalFilter: 'fuzzyText',
     },
     useFilters,
     usePagination
