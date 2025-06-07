@@ -48,6 +48,13 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
     setFilterAndUpdateUrl({hasPhotos, address: address?.trim()})
     setIsOpen(false)
   }, [address, setFilterAndUpdateUrl, hasPhotos])
+  const onFormSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      onSave()
+    },
+    [onSave]
+  )
 
   useEffect(() => setAddress(filterValue?.address), [filterValue?.address])
   useEffect(
@@ -71,7 +78,7 @@ export function AddressFilterDialog({column: {filterValue, setFilter}}: AddressF
           {type: 'submit', content: 'Save', buttonType: 'primary', onClick: onSave, form: 'address-filter-form'},
         ]}
       >
-        <form id="address-filter-form">
+        <form id="address-filter-form" onSubmit={onFormSubmit}>
           <FormControl>
             <FormControl.Label>Address:</FormControl.Label>
             <TextInput
