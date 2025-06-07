@@ -2,7 +2,7 @@ import {FilterValue, IdType, Row} from 'react-table'
 import Interment from './models/Interment'
 import Cemetery from './models/Cemetery'
 import Person from './models/Person'
-import type {AddressFilterOption, CemeteryFilterOption} from './types'
+import type {AddressFilterOption, CemeteryFilterOption, PersonFilterOption} from './types'
 import {matchSorter} from 'match-sorter'
 
 export function addressMatchesFilter(
@@ -92,7 +92,7 @@ minArrayLengthFilter.autoRemove = (val: any) => !val
 export function personMatchesFilter(
   rows: Row<Interment>[],
   id: IdType<Interment>[],
-  filterValue: CemeteryFilterOption
+  filterValue: PersonFilterOption
 ): Row<Interment>[] {
   let matchingRows = rows
   if (typeof filterValue?.name === 'string' && filterValue.name.length > 0) {
@@ -101,6 +101,16 @@ export function personMatchesFilter(
         (row: Row<Interment>) => {
           const person: Person = row.values[id[0]]
           return person.name
+        },
+      ],
+    })
+  }
+  if (typeof filterValue?.deathDate === 'string' && filterValue.deathDate.length > 0) {
+    matchingRows = matchSorter(matchingRows, filterValue.deathDate, {
+      keys: [
+        (row: Row<Interment>) => {
+          const person: Person = row.values[id[0]]
+          return person.rawDeathDate ?? ''
         },
       ],
     })

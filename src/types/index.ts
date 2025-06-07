@@ -8,6 +8,11 @@ export interface CemeteryFilterOption {
   name?: string
 }
 
+export interface PersonFilterOption {
+  name?: string
+  deathDate?: string
+}
+
 // https://dev.socrata.com/docs/datatypes/location.html#2.1
 export interface Location {
   latitude: string | null
