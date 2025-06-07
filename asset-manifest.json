@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/nash-grave-plot/static/css/main.922336a8.css",
-    "main.js": "/nash-grave-plot/static/js/main.c3c62ba6.js",
+    "main.css": "/nash-grave-plot/static/css/main.3afd0b2e.css",
+    "main.js": "/nash-grave-plot/static/js/main.0ec7366a.js",
     "index.html": "/nash-grave-plot/index.html",
-    "main.922336a8.css.map": "/nash-grave-plot/static/css/main.922336a8.css.map",
-    "main.c3c62ba6.js.map": "/nash-grave-plot/static/js/main.c3c62ba6.js.map"
+    "main.3afd0b2e.css.map": "/nash-grave-plot/static/css/main.3afd0b2e.css.map",
+    "main.0ec7366a.js.map": "/nash-grave-plot/static/js/main.0ec7366a.js.map"
   },
   "entrypoints": [
-    "static/css/main.922336a8.css",
-    "static/js/main.c3c62ba6.js"
+    "static/css/main.3afd0b2e.css",
+    "static/js/main.0ec7366a.js"
   ]
 }
